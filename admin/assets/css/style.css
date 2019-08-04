@@ -1,0 +1,348 @@
+
+- overall background color -
+background-color: #f2f7fb;
+
+
+- active menu -
+border-left: #ffc107;
+background-color: #0288d1;
+
+*/
+html {
+	background-color: #F2F7FB;
+}
+
+/* Login form css */
+.login-form {
+	text-align: center;
+	position: absolute;
+	width: 250px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* All Admin CSS */
+body {
+	/*background-color: #f2f7fb;*/
+	font-size: .9375rem;
+	overflow-x: hidden;
+	color: #333;
+	font-family: open sans,sans-serif;
+	background-image: linear-gradient(rgba(255,255,255,0.7) 240px,#f2f7fb 0%);
+}
+
+.wrapper {
+	overflow: none;
+}
+
+/* Admin Sidebar */
+
+.admin-sidebar {
+	height: 100%;
+	width: 17%;
+	position: fixed;
+	z-index: 1028;
+	top: 0;
+	left: 0;
+	background-color: #03a9f4;
+	overflow-x: hidden;
+}
+
+/* Admin Sidebar -> Short Profile */
+.admin-sidebar .short-profile {
+	text-align: center;
+	padding-top: 20px;
+	color: #fff;
+}
+
+.admin-sidebar .short-profile .profile-img {
+	border-radius: 3px;
+	-webkit-box-shadow: 0 0 5px 1px #0288d1;
+	box-shadow: 0 0 5px 1px #0288d1;
+}
+
+.admin-sidebar .short-profile .profile-name {
+	padding-top: 10px;
+	font-size: 18px;
+}
+
+.admin-sidebar .short-profile .profile-name a {
+	color: #fff;
+}
+
+.admin-sidebar .short-profile .profile-name a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.admin-sidebar .short-profile .profile-location {
+	color: #a7e1fb;
+	font-size: 14px;
+}
+
+.admin-sidebar .short-profile .profile-role {
+	padding-top: 10px;
+	font-size: 12px;
+}
+
+.admin-sidebar .short-profile .profile-role span {
+	border: .5px solid #fff;
+	padding: 4px 15px;
+	border-radius: 10px;
+}
+
+/* Admin Sidebar -> Sidebar Navigation Menu */
+.sidebar-navigation-menu {
+	padding-top: 20px;
+}
+
+.sidebar-navigation-menu .sidebar-nav li {
+	display: block;
+	list-style: outside none none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	/*border: .5px solid #000;*/
+}
+
+.sidebar-navigation-menu .sidebar-nav li a {
+	text-align: left;
+	display: block;
+	/* padding: top right bottom left; */
+	padding: 10px 10px 10px 10px;
+	margin: 5px 0 0;
+	border-radius: 0;
+	color: #fff;
+}
+
+.sidebar-navigation-menu .sidebar-nav li a i {
+	/*padding: 0px 25px 0 20px;*/
+	font-size: 22px;
+	text-align: center;
+}
+
+.sidebar-navigation-menu .sidebar-nav li a:hover {
+	text-decoration: none;
+}
+
+.sidebar-navigation-menu .sidebar-nav li a.active {
+	border-left: 4px solid #ffc107;
+	background-color: #0288d1;
+}
+
+.sidebar-navigation-menu .sidebar-nav li a.active i {
+	padding: 0 25px 0 16px;
+}
+
+
+/* Admin main container */
+.admin-main-container {
+	margin-left: 17%;
+}
+
+/* Admin header */
+.header-navbar {
+	height: 70px;
+	width: 100%;
+	background-color: #0288d1;
+	position: fixed;
+	top: 0;
+	z-index: 1025;
+	overflow-x: hidden;
+	display: block;
+	-webkit-box-shadow: 0 2px 4px 0 rgba(43,43,43,.1);
+	box-shadow: 0px 2px 4px 0 rgba(43,43,43,.1);
+	line-height: 70px;
+	padding: 0 25px;
+	color: #fff;
+}
+
+ul.navbar.nav.navbar-left {
+	padding: 0;
+}
+
+ul.navbar.nav.navbar-left li a {
+	color: #fff;
+	font-size: 18px;
+}
+
+ul.navbar.nav.navbar-left li a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+ul {
+	list-style-type: none;
+	padding-left: 0;
+	margin-bottom: 0;
+}
+
+/* Logout */
+.logout {
+	position: absolute;
+	display: inline-block;
+	bottom: 0px;
+	width: 100%;
+}
+
+
+/* Admin Main Container -> Main Content */
+.main-content {
+	background-color: #F2F7FB;
+	margin-top: 70px;
+	height: 90%;
+	padding-top: 20px;
+	overflow: none;
+	/*-webkit-box-shadow:inset 1px 1px 10px 1px #000000;
+	box-shadow:inset 1px 1px 10px 1px #000000;*/
+}
+
+/*=================================*/
+/* Blog */
+
+.blog-menu {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 90px;
+	background-color: #fff;
+	box-shadow: 0px 3px 6px #c3c3c3;
+	border: none;
+	border-radius: 4px;
+	padding: 10px;
+}
+.blog-menu ul li {
+	line-height: 30px;
+}
+.blog_active_menu {
+	color: #3D8DBC;
+	text-decoration: underline;
+}
+.blog-menu ul li a {
+	list-style: none;
+	text-decoration: none;
+	color: #4e4e4e;
+}
+.blog-menu-active {
+	color: #0288d1 !important;
+}
+.blog-main-container {
+	background-color: #FFFFFF;
+	height: 100%;
+	box-shadow: 0px 3px 6px #c3c3c3;
+	border: none;
+	border-radius: 4px;
+	padding: 10px;
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
+/* Blog Category */
+.blog-main-header {
+	z-index: 2;
+	background-color: #fff;
+}
+
+.blog-content {
+	z-index: 1;
+	height: 100%;
+	overflow-y: auto;
+}
+
+/* Add Post */
+.publish-button {
+	position: absolute;
+	right: 25px;
+	top: 6px;
+}
+
+.field-box {
+	/*box-shadow: 0 1px 1px #c3c3c3;*/
+	box-shadow: 0px 2px 4px #c3c3c3;
+	/*border: 1px solid #c3c3c3;*/
+	border-radius: 2px;
+	padding: 5px;
+}
+
+.add-post-form .col-9 {
+	padding-right: 5px;
+}
+.add-post-form .col-3 {
+	padding-left: 5px;
+}
+
+.post-tags p {
+	font-size: 11px;
+	margin-bottom: 0px;
+	color: red;
+}
+
+.thumb {
+	height: 100%;
+	width: 100%;
+}
+
+/*=================================*/
+
+
+/*=================================*/
+/* USERS */
+.view-all-users {
+	overflow-x: auto;
+}
+
+/*=================================*/
+
+
+/*=================================*/
+/* CKEditor CSS */
+.ck-editor__editable {
+    min-height: 412px;
+}
+
+/*=================================*/
+
+
+/*=================================*/
+/* CUSTOM SCROLBAR */
+
+/* width */
+::-webkit-scrollbar {
+	height: 8px;
+	width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey; 
+	border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #A9A2A1; 
+	border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #8A8382; 
+}
+/*=================================*/
+
+
+/*===================================================================================*/
+/* FRONT END */
+/*===================================================================================*/
+
+/*=================================*/
+/* Search Bar */
+#search-wrap {
+	margin-top: 56px;
+	background-color: #FFFFFF;
+}
+/*=================================*/
+
+/*=================================*/
+/* Navbar */
+/*=================================*/

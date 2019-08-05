@@ -55,7 +55,7 @@
 		$post_description    =  $_POST['post_description'];
 		$post_tags           =  $_POST['post_tags'];
 
-		move_uploaded_file($post_image_temp, "../images/featured/$post_image"); 
+		move_uploaded_file($post_image_temp, "../images/blog-images/$post_image"); 
 
 		if(empty($post_image)) {
 			// $query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
@@ -130,13 +130,13 @@
 				<!-- Title -->
 				<div class="form-group">
 					<label>Title</label>
-					<input type="text" name="post_title" class="form-control" value="<?php echo htmlspecialchars(stripslashes($post_title)); ?>" required>
+					<input type="text" name="post_title" class="form-control" value="<?php echo stripslashes($post_title); ?>" required>
 				</div>
 
 				<!-- Content -->
 				<div class="form-group">
 					<label>Content</label>
-					<textarea id="editor" class="form-control" name="post_content" required><?php echo $post_content; ?></textarea>
+					<textarea id="editor" class="form-control" name="post_content" required><?php echo stripslashes($post_content); ?></textarea>
 				</div>
 			</div>
 			<div class="col-3">
@@ -189,21 +189,21 @@
 				<!-- Post Tags -->
 				<div class="form-group field-box post-tags">
 					<label>Tags</label>
-					<input type="text" value="<?php echo $post_tags; ?>" name="post_tags" class="form-control" required>
+					<input type="text" value="<?php echo stripslashes($post_tags); ?>" name="post_tags" class="form-control" required>
 					<p>*Write at-most 5 comma separated tags*</p>
 				</div>
 
 				<!-- Description -->
 				<div class="form-group field-box">
 					<label>Short Description</label>
-					<textarea class="form-control" name="post_description" required><?php echo $post_description; ?></textarea>
+					<textarea class="form-control" name="post_description" required><?php echo stripslashes($post_description); ?></textarea>
 				</div>
 
 				<!-- Featured Image -->
 				<div class="form-group field-box featured-image">
-					<label>Featured Image</label>
-					<img src="../images/featured/<?php echo $post_image; ?>">
-					<input type="file" id="file-input" value="<?php echo $post_image; ?>" name="post_image" class="form-control" required>
+					<label>Featured Image</label><br>
+					<img height="160" width="247" src="../assets/images/blog-images/<?php echo $post_image; ?>">
+					<input type="file" id="file-input" value="<?php echo $post_image; ?>" name="post_image" class="form-control">
 					<div id="thumb-output"></div>
 				</div>
 			</div>

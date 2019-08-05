@@ -19,9 +19,26 @@
 #search-wrap {
 	margin-top: 56px;
 	background-color: #FFFFFF;
+	z-index: 1;
 }
+
 /*=================================*/
 
 /*=================================*/
 /* Navbar */
+
+.navbar-collapse {
+	background-color: #ffc107!important;
+}
+
+/*=================================*/
+
+/*=================================*/
+/* Main Front Page */
+.main-front-page {
+	margin-top: 160px;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
 /*=================================*/

@@ -5,14 +5,21 @@
 			<img class="img img-responsive" height="55px" style="padding-top: 0;" src="./assets/images/logo/logo-1.png" alt="Knowledge Sheer">
 		</a>
 
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
 		<!-- Links -->
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item">
-				<a class="nav-link" href="login.php">Login</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="registration.php">Register</a>
-			</li>
-		</ul>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent" style="z-index: 2;">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="login.php">Login</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="registration.php">Register</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </nav>

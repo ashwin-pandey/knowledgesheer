@@ -1,4 +1,4 @@
-<?php include 'partials/header.php'; ?>
+<?php $title = 'Home'; include 'partials/header.php'; ?>
 
 <div class="main-front-page">
 	<div class="row">

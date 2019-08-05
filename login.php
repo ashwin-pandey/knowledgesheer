@@ -1,4 +1,4 @@
-<?php include 'partials/header.php'; ?>
+<?php $title = 'Login'; include 'partials/header.php'; ?>
 
 <?php
 

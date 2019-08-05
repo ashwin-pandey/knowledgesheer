@@ -1,4 +1,4 @@
-<?php $title = 'Register'; include "partials/header.php"; ?>
+<?php $title = 'Sign Up'; include "partials/header.php"; ?>
  
 <?php
 
@@ -70,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
     
 <div class="row justify-content-md-center">
     <div class="login-form col-4 pm-3 border rounded">
-        <h2>Register</h2>
+        <h2>Sign Up</h2>
         <form raction="" method="post" autocomplete="off">
             <div class="form-group">
                 <label for="username" class="sr-only">username</label>
@@ -97,7 +97,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
             <input type="submit" name="resgister" class="form-control btn btn-sm btn-primary" value="Register">
         </form>
         <hr>
-        <p><a href="index.php">Back to Login</a></p>
+        <p><a href="login.php"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Back to Login</a></p>
     </div>
 </div>
 

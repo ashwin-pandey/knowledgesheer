@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title><?php echo $title; ?> | Knowledge Sheer</title>
 	<link rel="stylesheet" type="text/css" href="./admin/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./admin/assets/css/style.css">
 </head>

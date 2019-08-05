@@ -69,8 +69,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
     
 <div class="row justify-content-md-center">
-    <div class="login-form col-md-4 col-12 pm-3 border rounded">
-        <h2>Sign Up</h2>
+    <div class="login-form col-md-4 col-12 p-3 border rounded">
+        <h4>SIGN UP</h4>
         <form raction="" method="post" autocomplete="off">
             <div class="form-group">
                 <label for="username" class="sr-only">username</label>

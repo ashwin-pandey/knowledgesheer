@@ -11,34 +11,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="<?php echo $keywords ?>"/>
 	<meta name="description" content="<?php echo $keywords ?>"/>
-	<meta name="subject" content="">
-	<meta name="copyright"content="Knowledge Sheer">
 	<meta name="language" content="EN">
 	<meta name="robots" content="index,follow" />
-	<meta name="abstract" content="">
-	<meta name="topic" content="">
-	<meta name="summary" content="">
-	<meta name="Classification" content="Education">
-	<meta name="author" content="knowledgesheer, knowledgesheer@gmail.com">
-	<meta name="designer" content="">
-	<meta name="copyright" content="KnowledgeSheer">
-	<meta name="reply-to" content="knowledgesheer@gmail.com">
-	<meta name="owner" content="Knowledge Sheer">
-	<meta name="url" content="http://knowledgesheer.com">
-	<meta name="identifier-URL" content="http://knowledgesheer.com">
-	<meta name="directory" content="submission">
-	<meta name="category" content="Education">
-	<meta name="coverage" content="Worldwide">
-	<meta name="distribution" content="Global">
-	<meta name="rating" content="General">
 
-	<link rel="stylesheet" type="text/css" href="./admin/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<!-- Bootstrap core CSS -->
+	<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom fonts for this template -->
+	<link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+	<!-- Custom styles for this template -->
+	<link href="assets/css/clean-blog.min.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" type="text/css" href="./assets/css/style.css"> -->
 </head>
 <body>
 
-	<header>
-		<?php include 'navigation.php'; ?>
-	</header>
+	<?php include 'navigation.php'; ?>
 
 	<div class="container">

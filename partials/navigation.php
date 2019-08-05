@@ -1,25 +1,41 @@
-<nav class="navbar navbar-expand-md bg-warning navbar-light fixed-top" style="height: 60px; padding-top: 4px;">
-	<div class="container" style="margin-top: 0;">
-		<!-- Brand -->
-		<a class="navbar-brand" href="#" style="padding-top: 4px;top: 2px;">
-			<img class="img img-responsive" height="55px" style="padding-top: 0;" src="./assets/images/logo/logo-1.png" alt="Knowledge Sheer">
-		</a>
-
-		<!-- Toggler/collapsibe Button -->
-		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+	<div class="container">
+		<a class="navbar-brand" href="index.php">Knowledge Sheer</a>
+		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			Menu
+			<i class="fas fa-bars"></i>
 		</button>
-
-		<!-- Links -->
-		<div class="collapse navbar-collapse" id="navbarSupportedContent" style="z-index: 2;">
+		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="index.php">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="about.html">About</a>
+				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="login.php">Login</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="registration.php">Register</a>
+					<a class="nav-link" href="registration.php">Sign Up</a>
 				</li>
 			</ul>
 		</div>
 	</div>
 </nav>
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('./assets/images/page-headers/home-bg.jpg')">
+	<div class="overlay"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-md-10 mx-auto">
+				<div class="site-heading">
+					<h1>Clean Blog</h1>
+					<span class="subheading">A Blog Theme by Start Bootstrap</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>

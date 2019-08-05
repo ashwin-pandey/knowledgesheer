@@ -1,4 +1,4 @@
-<div id="search-wrap" class="fixed-top row justify-content-md-center">
+<div id="search-wrap" class="row justify-content-md-center">
 	<div class="search col-md-6 col-sm-8 ml-auto mr-auto col-11 p-3">
 		<form action="search.php" class="" method="POST">
 			<div class="input-group md-3">

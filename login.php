@@ -18,8 +18,8 @@ if (isset($_POST['login'])) {
 }
 
 ?>
-<div class="row justify-content-md-center">
-	<div class="login-form col-md-4 col-12 p-3 border rounded">
+<div class="justify-content-md-center">
+	<div class="login-form col-md-4 col-12 mx-auto p-3 border rounded">
 		<h4>LOGIN</h4>
 		<form class="" autocomplete="off" action="" method="POST">
 			<div class="form-group">

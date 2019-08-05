@@ -2,6 +2,11 @@
 /* FRONT END */
 /*===================================================================================*/
 
+html {
+	font-family: 'Source Sans Pro', san-serif, Aerial;
+}
+
+
 /*=================================*/
 /* Login form css */
 .login-form {
@@ -39,6 +44,11 @@
 	margin-top: 160px;
 	margin-left: 50px;
 	margin-right: 50px;
+}
+
+.card-horizontal {
+	display: flex;
+	flex: 1 1 auto;
 }
 
 /*=================================*/

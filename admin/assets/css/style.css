@@ -1,4 +1,4 @@
-
+/*
 - overall background color -
 background-color: #f2f7fb;
 
@@ -8,19 +8,6 @@ border-left: #ffc107;
 background-color: #0288d1;
 
 */
-html {
-	background-color: #F2F7FB;
-}
-
-/* Login form css */
-.login-form {
-	text-align: center;
-	position: absolute;
-	width: 250px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
 
 /* All Admin CSS */
 body {
@@ -328,21 +315,4 @@ ul {
 ::-webkit-scrollbar-thumb:hover {
 	background: #8A8382; 
 }
-/*=================================*/
-
-
-/*===================================================================================*/
-/* FRONT END */
-/*===================================================================================*/
-
-/*=================================*/
-/* Search Bar */
-#search-wrap {
-	margin-top: 56px;
-	background-color: #FFFFFF;
-}
-/*=================================*/
-
-/*=================================*/
-/* Navbar */
 /*=================================*/

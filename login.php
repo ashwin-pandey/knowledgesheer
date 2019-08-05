@@ -19,8 +19,8 @@ if (isset($_POST['login'])) {
 
 ?>
 <div class="row justify-content-md-center">
-	<div class="login-form col-md-4 col-12 pm-3 border rounded">
-		<h2>Login</h2>
+	<div class="login-form col-md-4 col-12 p-3 border rounded">
+		<h4>LOGIN</h4>
 		<form class="" autocomplete="off" action="" method="POST">
 			<div class="form-group">
 				<input type="text" name="username" placeholder="username" class="form-control" required>

@@ -16,7 +16,7 @@ if(isset($_POST['create_post'])) {
 	$post_image 		= escape($_FILES['post_image']['name']);
 	$post_image_temp	= escape($_FILES['post_image']['tmp_name']);
 
-	move_uploaded_file($post_image_temp, "../assets/images/featured/$post_image" );
+	move_uploaded_file($post_image_temp, "../assets/images/blog-images/$post_image" );
 
 	$post_date			= escape(date('d-m-y'));
 

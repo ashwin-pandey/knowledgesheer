@@ -30,7 +30,7 @@ if (isset($_POST['login'])) {
 			</div>
 			<input type="submit" name="login" value="Log In" class="form-control btn btn-sm btn-primary">
 		</form><hr>
-		<p><a href="registration.php">Register</a></p>
+		<p>New here: <a href="registration.php">Create Account</a></p>
 	</div>
 </div>
 

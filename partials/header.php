@@ -16,4 +16,3 @@
 	</header>
 
 	<div class="container">
-		<?php include './includes/search_bar.php'; ?>

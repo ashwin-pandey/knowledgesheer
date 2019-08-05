@@ -1,4 +1,5 @@
 <?php $title = 'Home'; include 'partials/header.php'; ?>
+<?php include './includes/search_bar.php'; ?>
 
 <div class="main-front-page">
 	<div class="row">

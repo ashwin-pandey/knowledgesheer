@@ -1,4 +1,9 @@
-<?php $title = 'Sign Up'; include "partials/header.php"; ?>
+<?php 
+
+$title = 'Sign Up'; 
+$page = 'register';
+$header_title = 'Sign Up';
+include "partials/header.php"; ?>
  
 <?php
 
@@ -69,7 +74,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 ?>
     
 <div class="row justify-content-md-center">
-    <div class="login-form col-md-4 col-12 p-3 border rounded">
+    <div class="col-lg-4 col-md-6 col-sm-8 col-12">
+        <div class="login-form">
         <h4>SIGN UP</h4>
         <form raction="" method="post" autocomplete="off">
             <div class="form-group">
@@ -95,9 +101,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
             </div>
 
             <input type="submit" name="resgister" class="form-control btn btn-sm btn-primary" value="Register">
+            <hr>
+			<div class="text-center">
+				<a href="login.php"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Back to Login</a>
+			</div>
         </form>
-        <hr>
-        <p><a href="login.php"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Back to Login</a></p>
+    </div>
     </div>
 </div>
 

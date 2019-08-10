@@ -20,6 +20,9 @@ if(isset($_SESSION['user_role'])) {
 <html>
 <head>
 	<title>Admin Panel</title>
+	
+	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 	<!-- bootstrap css -->
 	<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
@@ -31,11 +34,19 @@ if(isset($_SESSION['user_role'])) {
 	<!-- icons -->
 	<link rel="stylesheet" type="text/css" href="./assets/icons/all.css">
 
+	<link rel="stylesheet" href="./assets/css/extras.1.1.0.min.css">
+	<link rel="stylesheet" href="./assets/css/shards-dashboards.1.1.0.min.css">
+
 	<!-- custom css -->
-	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./assets/css/style.css"> -->
 </head>
 <body>
 
 <!-- complete page -->
-<div class="wrapper">
-	<?php include 'admin_navigation.php'; ?>
+<!-- <div class="wrapper">
+	<?php // include 'admin_navigation.php'; ?> -->
+
+<body class="h-100">
+    <div class="container-fluid">
+    	<div class="row">
+    		<?php include 'admin_navigation.php'; ?>

@@ -1,6 +1,10 @@
 
 	</div>
 
+<?php if ($page == 'blog_post') { ?>
+	</article>
+<?php } ?>
+
 	<hr>
 
 <!-- Footer -->
@@ -34,7 +38,7 @@
 						</a>
 					</li>
 				</ul>
-				<p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+				<p class="copyright text-muted">Copyright &copy; Knowledge Sheer</p>
 			</div>
 		</div>
 	</div>
@@ -52,7 +56,7 @@
 <!-- Custom scripts for this template -->
 <script src="assets/js/clean-blog.min.js"></script>
 
-<script type="text/javascript" src="./admin/assets/js/script.js"></script>
+<script type="text/javascript" src="./assets/js/script.js"></script>
 
 </body>
 </html>

@@ -1,7 +1,8 @@
-<div class="blog-main-header">
-	Blog Dashboard
-	<hr>
+<!-- Page Header -->
+<div class="page-header row no-gutters py-4">
+	<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+		<span class="text-uppercase page-subtitle">Dashboard</span>
+		<h3 class="page-title">Blog Overview</h3>
+	</div>
 </div>
-<div class="blog-content">
-	
-</div>
+<!-- End Page Header -->

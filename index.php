@@ -7,10 +7,9 @@ include 'partials/header.php';
 
 ?>
 
-<?php  // include './includes/search_bar.php'; ?>
+<!-- <?php  // include './includes/search_bar.php'; ?> -->
 
-<!-- <div class="main-front-page">
-	<div class="container"> -->
+		<!-- Main Content -->
 		<div class="row">
 			<div class="col-lg-8 col-md-8 col-12">
 
@@ -59,11 +58,9 @@ include 'partials/header.php';
 						// $user_lastname = $row['user_lastname'];
 
 				?>
-
-					<!-- Main Content -->
-					
+	
 				<div class="post-preview">
-					<a href="post.html">
+					<a href="blog_post.php?p_id=<?php echo $post_id; ?>">
 						<h2 class="post-title">
 						Man must explore, and this is exploration at its greatest
 						</h2>
@@ -73,24 +70,10 @@ include 'partials/header.php';
 					</a>
 					<p class="post-meta">Posted by
 						<a href="#"><?php echo $post_author; ?></a>
-						on <!-- September 24, 2019 --><?php echo date('F j, Y', strtotime($post_date)); ?>
+						on <?php echo date('F j, Y', strtotime($post_date)); ?>
 					</p>
 				</div>
 				<hr>
-
-
-					<!-- <div class="row border rounded">
-						<div class="col-md-4 col-12" style="padding: 0; margin: 0;">
-							<img class="img img-fluid" src="./assets/images/blog-images/<?php // echo $post_image; ?>" alt="">
-						</div>
-						<div class="col-md-8 col-12 p-2">
-							<h4 class=""><a href=""><?php // echo stripcslashes($post_title); ?></a></h4>
-							<p><?php // echo $post_date. " " .$post_author; ?></p>
-							<a href="#" class="">Read More</a>
-						</div>
-					</div>
-
-					<br> -->
 
 				<?php 
 					}

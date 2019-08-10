@@ -16,7 +16,7 @@ body {
 	overflow-x: hidden;
 	color: #333;
 	font-family: open sans,sans-serif;
-	background-image: linear-gradient(rgba(255,255,255,0.7) 240px,#f2f7fb 0%);
+	/*background-image: linear-gradient(rgba(255,255,255,0.7) 240px,#f2f7fb 0%);*/
 }
 
 .wrapper {
@@ -27,7 +27,7 @@ body {
 
 .admin-sidebar {
 	height: 100%;
-	width: 17%;
+	/*width: 17%;*/
 	position: fixed;
 	z-index: 1028;
 	top: 0;
@@ -177,8 +177,8 @@ ul {
 /* Admin Main Container -> Main Content */
 .main-content {
 	background-color: #F2F7FB;
-	margin-top: 70px;
-	height: 90%;
+	/*margin-top: 70px;*/
+	/*height: 90%;*/
 	padding-top: 20px;
 	overflow: none;
 	/*-webkit-box-shadow:inset 1px 1px 10px 1px #000000;

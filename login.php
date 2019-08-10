@@ -1,4 +1,11 @@
-<?php $title = 'Login'; include 'partials/header.php'; ?>
+<?php 
+
+$title = 'Login'; 
+$page = 'login'; 
+$header_title = 'Login';
+include 'partials/header.php'; 
+
+?>
 
 <?php
 
@@ -18,19 +25,27 @@ if (isset($_POST['login'])) {
 }
 
 ?>
-<div class="justify-content-md-center">
-	<div class="login-form col-md-4 col-12 mx-auto p-3 border rounded">
-		<h4>LOGIN</h4>
-		<form class="" autocomplete="off" action="" method="POST">
-			<div class="form-group">
-				<input type="text" name="username" placeholder="username" class="form-control" required>
-			</div>
-			<div class="form-group">
-				<input type="password" name="password" placeholder="********" class="form-control" required>
-			</div>
-			<input type="submit" name="login" value="Log In" class="form-control btn btn-sm btn-primary">
-		</form><hr>
-		<p>New here: <a href="registration.php">Create Account</a></p>
+<div class="row justify-content-md-center">
+	<div class="col-lg-4 col-md-6 col-sm-8 col-12">
+		<div class="login-form">
+			<h4>LOGIN</h4>
+			<form method="POST">
+				<div class="form-group">
+					<input type="text" name="username" placeholder="username" class="form-control" required>
+				</div>
+				<div class="form-group">
+					<input type="password" name="password" placeholder="********" class="form-control" required>
+				</div>
+				<input type="submit" name="login" value="Log In" class="form-control btn btn-sm btn-primary">
+
+				<hr>
+				<div class="text-center">
+					<a href="#">Forgot Password?</a>
+				</div>
+			</form>
+			<!-- <hr>
+			<p>New here: <a href="registration.php">Create Account</a></p> -->
+		</div>
 	</div>
 </div>
 

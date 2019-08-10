@@ -8,15 +8,43 @@ html {
 
 
 /*=================================*/
-/* Login form css */
+/* LOGIN AND SIGN UP CSS */
+
 .login-form {
-	text-align: center;
-	position: absolute;
-	width: 250px;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	background-color: #ffffff;
+	padding: 50px !important;
+	width: 100%;
+	border-radius: 6px;
+	box-shadow: 0 4px 8px  rgba(0, 0, 0, 0.14);
 }
+.login-form form {
+	padding-top: 40px;
+}
+
+.login-form h4 {
+	color: #333333;
+	text-align: center;
+	font-weight: 500;
+	font-size: 16px;
+	letter-spacing: 0.72px;
+}
+
+.login-form hr {
+	margin-bottom: 20px;
+	margin-top: 50px;
+}
+
+.login-form form input {
+	height: 44px;
+	width: 100%;
+	margin: 0 auto;
+	line-height: 1;
+}
+
+.login-form a {
+	font-size: 14px;
+}
+
 /*=================================*/
 
 /*=================================*/
@@ -32,9 +60,9 @@ html {
 /*=================================*/
 /* Navbar */
 
-.navbar-collapse {
+/*.navbar-collapse {
 	background-color: #ffc107!important;
-}
+}*/
 
 /*=================================*/
 

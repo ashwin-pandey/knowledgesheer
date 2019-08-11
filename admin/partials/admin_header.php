@@ -5,10 +5,10 @@
 
 <?php 
 
-if(isset($_SESSION['user_role'])) {
-	if (!is_admin($_SESSION['username'])) {
-		redirect("location: /knowledgesheer/index.php");
-	}
+if(isset($_SESSION['user_role']) != 'admin') {
+	// if (!is_admin($_SESSION['username'])) {
+	redirect("/knowledgesheer/index.php");
+	// }
 }
 // else {
 // 	header("location: ../index.php");

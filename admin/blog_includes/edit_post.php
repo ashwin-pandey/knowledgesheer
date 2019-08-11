@@ -23,190 +23,155 @@
 
 	}
 
-	// $stmt = mysqli_prepare($connection, "SELECT * FROM blog_posts WHERE post_id = ?");
-	// mysqli_stmt_bind_param($stmt, 'i', $the_post_id);
-	// mysqli_stmt_execute($stmt);
-
-	// $result = $stmt->get_result();
-
-	// while($row = $result->fetch_assoc()) {
-	// 	$post_id            = $row['post_id'];
-	// 	$post_author        = $row['post_author'];
-	// 	$post_title         = $row['post_title'];
-	// 	$post_category_id   = $row['post_category_id'];
-	// 	$post_status        = $row['post_status'];
-	// 	$post_image         = $row['post_image'];
-	// 	$post_content       = $row['post_content'];
-	// 	$post_description	= $row['post_description'];
-	// 	$post_tags          = $row['post_tags'];
-	// 	$post_comment_count = $row['post_comment_count'];
-	// 	$post_date          = $row['post_date'];
-
-	// }
-
 	if(isset($_POST['update_post'])) {
-		$post_user           =  $_POST['post_user'];
 		$post_title          =  $_POST['post_title'];
 		$post_category_id    =  $_POST['post_category'];
-		$post_status         =  $_POST['post_status'];
-		$post_image          =  $_FILES['post_image']['name'];
-		$post_image_temp     =  $_FILES['post_image']['tmp_name'];
 		$post_content        =  $_POST['post_content'];
 		$post_description    =  $_POST['post_description'];
 		$post_tags           =  $_POST['post_tags'];
 
-		move_uploaded_file($post_image_temp, "../images/blog-images/$post_image"); 
-
-		if(empty($post_image)) {
-			// $query = "SELECT * FROM posts WHERE post_id = $the_post_id ";
-			// $select_image = query($query);
-			$stmt = mysqli_prepare($connection, "SELECT * FROM blog_posts WHERE post_id = ?");
-			mysqli_stmt_bind_param($stmt, 'i', $the_post_id);
-			mysqli_stmt_execute($stmt);
-			$result = $stmt->get_result();
-			while($row = $result->fetch_array()) {
-				$post_image = $row['post_image'];
-			}
-		}
-		$post_title = mysqli_real_escape_string($connection, $post_title);
-
-		// $query  = "UPDATE blog_posts SET ";
-		// $query .= "post_title  = '{$post_title}', ";
-		// $query .= "post_category_id = '{$post_category_id}', ";
-		// $query .= "post_date   =  now(), ";
-		// $query .= "post_user = '{$post_user}', ";
-		// $query .= "post_status = '{$post_status}', ";
-		// $query .= "post_tags   = '{$post_tags}', ";
-		// $query .= "post_content= '{$post_content}', ";
-		// $query .= "post_image  = '{$post_image}' ";
-		// $query .= "WHERE post_id = {$the_post_id} ";
-
-		// $update_post = query($query);
-
-		// confirmQuery($update_post);
+		// $post_title = mysqli_real_escape_string($connection, $post_title);
 
 		$query  = "UPDATE blog_posts SET ";
 		$query .= "post_title  = ?, ";
 		$query .= "post_category_id = ?, ";
-		$query .= "post_date   =  now(), ";
-		$query .= "post_user = ?, ";
-		$query .= "post_status = ?, ";
-		$query .= "post_tags   = ?, ";
+		$query .= "post_tags = ?, ";
 		$query .= "post_content = ?, ";
-		$query .= "post_description = ?, ";
-		$query .= "post_image  = ? ";
+		$query .= "post_description = ? ";
 		$query .= "WHERE post_id = ? ";
 		
+		// $stmt = mysqli_prepare($connection, $query);
 		$stmt = mysqli_prepare($connection, $query);
-		mysqli_stmt_bind_param($stmt, 'ssssssssi', $post_title, $post_category_id, $post_user, $post_status, $post_tags, $post_content, $post_description, $post_image, $the_post_id);
+		if (!$stmt) {
+			die("Query Failed! - " . mysqli_error($connection));
+		}
+		mysqli_stmt_bind_param($stmt, 'sssssi', $post_title, $post_category_id, $post_tags, $post_content, $post_description, $the_post_id);
+
 		mysqli_stmt_execute($stmt);
 
-		// echo "<p class='bg-success'>Post Updated. <a href='../blog.php?p_id={$the_post_id}'>View Post </a> or <a href='posts.php'>Edit More Posts</a></p>";
+?>
 
+<!-- Page Header -->
+<div class="page-header row no-gutters py-4">
+	<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+		<span class="text-uppercase page-subtitle">Blog Posts</span>
+		<h3 class="page-title">Edit Post</h3>
+	</div>
+</div>
+
+<?php
 		echo 
 		"<div>
-		<p style='display: inline-block;' class=''>Post Created. 
-			<a class='btn btn-sm btn-info' href='../blog.php?p_id={$the_post_id}'>View Post </a> 
+		<p style='display: inline-block;' class=''>Post Updated. 
+			<a class='btn btn-sm btn-info' href='../blog_post.php?p_id={$the_post_id}'>View Post </a> 
 			or 
 			<a class='btn btn-sm btn-secondary' href='blog.php?source=view_all_posts'>Edit More Posts</a>
+			or
+			<a class='btn btn-sm btn-primary' href='blog.php?source=add_post'>Add New</a>
 		</p>
-		<hr>";
+		</div>";
 	}
 
 ?>
 
 
-<form action="" class="" method="POST" enctype="multipart/form-data">
-	<div class="add-post-form">
-		<!-- <div class="top-bar">
-			<h5>Edit Post</h5>
-			<div class="publish-button">
-				<input class="btn btn-md btn-primary" type="submit" name="update_post" value="Update"></input>
+
+
+
+<style>
+.ck-editor__editable {
+	min-height: 412px;
+}
+</style>
+
+
+<!-- End Page Header -->
+<form method="POST" enctype="multipart/form-data">
+	<div class="row">
+		<div class="col-lg-9 col-md-12">
+			<!-- Add New Post Form -->
+			<div class="card card-small mb-3">
+				<div class="card-body">
+					<div class="add-new-post">
+						<input type="text" name="post_title" class="form-control form-control-lg mb-3" value="<?php echo stripslashes($post_title); ?>" required>
+						<textarea id="editor" class="form-control form-control-lg mb-3" name="post_content" required><?php echo stripslashes($post_content); ?></textarea>
+					</div>
+				</div>
 			</div>
+			<!-- / Add New Post Form -->
 		</div>
-		<hr> -->
-		<div class="row">
-			<div class="col-9">
-				<!-- Title -->
-				<div class="form-group">
-					<label>Title</label>
-					<input type="text" name="post_title" class="form-control" value="<?php echo stripslashes($post_title); ?>" required>
+		<div class="col-lg-3 col-md-12">
+			<!-- Post Overview -->
+			<div class='card card-small mb-3'>
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Actions</h6>
 				</div>
-
-				<!-- Content -->
-				<div class="form-group">
-					<label>Content</label>
-					<textarea id="editor" class="form-control" name="post_content" required><?php echo stripslashes($post_content); ?></textarea>
+				<div class='card-body p-0'>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item d-flex px-3">
+							<button type="submit" name="update_post" class="btn btn-sm btn-accent ml-auto">
+							<i class="material-icons">file_copy</i> Update</button>
+						</li>
+					</ul>
 				</div>
 			</div>
-			<div class="col-3">
-				<!-- Post Status -->
-				<div class="form-group field-box">
-					<label>Post Status</label>
-					<select class="form-control" name="post_status" required>
-						<option value='<?php echo $post_status ?>'><?php echo $post_status; ?></option>
-						<?php
-
-						if($post_status == 'public' ) {
-							echo "<option value='draft'>Draft</option>";
-						} else {
-							echo "<option value='public'>Public</option>";
-						}
-
-						?>
-					</select>
-					<hr>
-					<input style="display: inline-block;" class="btn btn-sm btn-primary" type="submit" name="update_post" value="Update">
-					<input style="display: inline-block;float: right;" type="submit" name="moveToTrash" class="btn btn-sm btn-danger" value="Move to Trash">
+			<!-- / Post Overview -->
+			<!-- Post Overview -->
+			<div class='card card-small mb-3'>
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Categories</h6>
 				</div>
+				<div class='card-body p-0'>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item px-3 pb-2">
 
-				<!-- Category -->
-				<div class="form-group field-box post-categories">
-					<label>Category</label>
-					<select class="form-control" name="post_category" required>
-						<?php
+							<select class="form-control" name="post_category" required>
+							<?php
 
-						$query = "SELECT * FROM blog_categories ";
-						$select_categories = query($query);
+							$query = "SELECT * FROM sub_categories ";
+							$select_categories = query($query);
 
-						confirmQuery($select_categories);
+							confirmQuery($select_categories);
 
-						while($row = mysqli_fetch_assoc($select_categories )) {
-							$cat_id = $row['cat_id'];
-							$cat_title = $row['cat_title'];
+							while($row = mysqli_fetch_assoc($select_categories )) {
+								$sub_cat_id = $row['sub_cat_id'];
+								$sub_cat_title = $row['sub_cat_title'];
 
-							if($cat_id == $post_category_id) {
-								echo "<option selected value='{$cat_id}'>{$cat_title}</option>";
-							} else {
-								echo "<option value='{$cat_id}'>{$cat_title}</option>";
+								if($cat_id == $post_category_id) {
+									echo "<option selected value='{$sub_cat_id}'>{$sub_cat_title}</option>";
+								} else {
+									echo "<option value='{$sub_cat_id}'>{$sub_cat_title}</option>";
+								}
 							}
-						}
 
-						?>
-					</select>
-				</div>
-
-				<!-- Post Tags -->
-				<div class="form-group field-box post-tags">
-					<label>Tags</label>
-					<input type="text" value="<?php echo stripslashes($post_tags); ?>" name="post_tags" class="form-control" required>
-					<p>*Write at-most 5 comma separated tags*</p>
-				</div>
-
-				<!-- Description -->
-				<div class="form-group field-box">
-					<label>Short Description</label>
-					<textarea class="form-control" name="post_description" required><?php echo stripslashes($post_description); ?></textarea>
-				</div>
-
-				<!-- Featured Image -->
-				<div class="form-group field-box featured-image">
-					<label>Featured Image</label><br>
-					<img height="160" width="247" src="../assets/images/blog-images/<?php echo $post_image; ?>">
-					<input type="file" id="file-input" value="<?php echo $post_image; ?>" name="post_image" class="form-control">
-					<div id="thumb-output"></div>
+							?>
+							</select>
+							
+						</li>
+					</ul>
 				</div>
 			</div>
+			<!-- / Post Overview -->
+			<!-- Post Tags -->
+			<div class='card card-small mb-3'>
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Post Tags</h6>
+				</div>
+				<div class='card-body p-0'>
+					<input type="text" value="<?php echo stripslashes($post_tags); ?>" name="post_tags" class="form-control" required>
+				</div>
+			</div>
+			<!-- / Post tags -->
+			<!-- Post Description -->
+			<div class='card card-small mb-3'>
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Short Description</h6>
+				</div>
+				<div class='card-body p-0'>
+					<textarea class="form-control" name="post_description" cols="30" rows="10" required><?php echo stripslashes($post_description); ?></textarea>
+				</div>
+			</div>
+			<!-- / Post Description -->
 		</div>
 	</div>
 </form>

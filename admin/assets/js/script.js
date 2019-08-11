@@ -4,13 +4,13 @@ $(function () {
 });
 
 // CKEditor 5
-ClassicEditor.create(document.querySelector('#editor'))
-.catch(error => {
-console.error( error );
+ClassicEditor.create(document.querySelector('#editor')).catch(error => {
+	console.error( error );
 });
 
 // CKEditor 4
-// CKEDITOR.replace( 'editor' );
+// var editor = CKEDITOR.replace( 'editor' );
+
 
 // Blog Image Preview
 $(document).ready(function(){

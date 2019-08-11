@@ -20,15 +20,14 @@ if(isset($_POST['public'])) {
 
 	$post_date			= escape(date('d-m-y'));
 
-	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_title, post_author, post_date,post_content,post_tags,post_status, post_description) VALUES (?, ?, ?, now(), ?, ?, ?, ?)");
+	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_title, post_author, post_date, post_content, post_tags, post_status, post_description) VALUES (?, ?, ?, now(), ?, ?, ?, ?)");
 
-	mysqli_stmt_bind_param($stmt, 'ssssssss', $post_category_id, $post_title, $post_author, $post_image, $post_content, $post_tags, $post_status, $post_description);
+	mysqli_stmt_bind_param($stmt, 'sssssss', $post_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_description);
 	mysqli_stmt_execute($stmt);
-
 
 	$the_post_id = mysqli_insert_id($connection);
 
-	redirect('/knowledgesheer/admin/blog.php?source=edit_post&p_id={$the_post_id}');
+	// redirect('/knowledgesheer/admin/blog.php?source=edit_post&p_id={$the_post_id}');
 
 	echo 
 	"<div>
@@ -48,8 +47,11 @@ if(isset($_POST['public'])) {
 .ck-editor__editable {
 	min-height: 412px;
 }
+/*
+.cke_contents {
+	height: 430px !important;
+}*/
 </style>
-
 
 
 <!-- Page Header -->
@@ -59,6 +61,7 @@ if(isset($_POST['public'])) {
 		<h3 class="page-title">Add New Post</h3>
 	</div>
 </div>
+
 <!-- End Page Header -->
 <form method="POST" enctype="multipart/form-data">
 	<div class="row">

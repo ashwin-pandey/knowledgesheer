@@ -26,7 +26,7 @@
 	</div>
 </nav>
 
-<?php if ($page == 'blog_post') { ?>
+<?php if ($page == 'blog_post' || $page == 'login' || $page == 'register') { ?>
 
 <!-- <header class="masthead" style="background-image: url('./assets/images/page-headers/post-bg.jpg')">
 	<div class="overlay"></div>

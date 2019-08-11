@@ -4,12 +4,12 @@ $(function () {
 });
 
 // CKEditor 5
-ClassicEditor.create(document.querySelector('#editor')).catch(error => {
-	console.error( error );
-});
+// ClassicEditor.create(document.querySelector('#editor')).catch(error => {
+// 	console.error( error );
+// });
 
 // CKEditor 4
-// var editor = CKEDITOR.replace( 'editor' );
+// CKEDITOR.replace('editor');
 
 
 // Blog Image Preview

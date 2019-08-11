@@ -1,5 +1,5 @@
 {
-    "name": "edwin/cms",
+    "name": "ashwin-pandey/knowledgesheer",
     "require": {
         "phpmailer/phpmailer": "^5.2",
         "pusher/pusher-php-server": "^3.0",

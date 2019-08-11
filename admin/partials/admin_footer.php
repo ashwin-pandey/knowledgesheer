@@ -34,8 +34,11 @@
 <script type="text/javascript" src="./assets/js/popper.min.js"></script>
 <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
 <!-- CKEditor -->
-<script type="text/javascript" src="./assets/ckeditor5/ckeditor.js"></script>
-<!-- <script type="text/javascript" src="./assets/ckeditor4/ckeditor.js"></script> -->
+<!-- <script type="text/javascript" src="./assets/ckeditor5/ckeditor.js"></script> -->
+<script type="text/javascript" src="./assets/ckeditor4/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('editor');
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>

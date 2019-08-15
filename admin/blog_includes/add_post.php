@@ -40,7 +40,6 @@ if(isset($_POST['public'])) {
 		or 
 		<a class='btn btn-sm btn-secondary' href='blog.php?source=view_all_posts'>Edit More Posts</a>
 	</p>
-	<a style='display: inline-block; float: right;' href='blog.php?source=add_post' class='btn btn-sm btn-primary'>Add New</a>
 	</div>";
 
 }

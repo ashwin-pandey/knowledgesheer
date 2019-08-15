@@ -2,17 +2,19 @@
 
 if(isset($_POST['public'])) {
 
-	$post_title			= escape($_POST['post_title']);
-	$post_content		= escape($_POST['post_content']);
-	$post_description	= escape($_POST['post_description']);
+	$post_title			= $_POST['post_title'];
+	$post_content		= $_POST['post_content'];
+
+	$post_content		= str_ireplace("\r\n", '', $post_content);
+	$post_description	= $_POST['post_description'];
 
 	$author_name		= $_SESSION['username'];
 	$post_author		= $author_name;
 
 	$post_status		= 'public';
-	$post_category_id	= escape($_POST['post_category']);
-	$post_sub_category_id	= escape($_POST['post_sub_category']);
-	$post_tags			= escape($_POST['post_tags']);
+	$post_category_id	= $_POST['post_category'];
+	$post_sub_category_id	= $_POST['post_sub_category'];
+	$post_tags			= $_POST['post_tags'];
 
 	// $post_image 		= escape($_FILES['post_image']['name']);
 	// $post_image_temp	= escape($_FILES['post_image']['tmp_name']);
@@ -21,10 +23,11 @@ if(isset($_POST['public'])) {
 
 	$post_date			= escape(date('d-m-y'));
 
-	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_sub_category_id, post_title, post_author, post_date, post_content, post_tags, post_status, post_description) VALUES (?, ?, ?, ?, now(), ?, ?, ?, ?)");
+	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_sub_cat_id, post_title, post_author, post_date, post_content, post_tags, post_status, post_description) VALUES (?, ?, ?, ?, now(), ?, ?, ?, ?)");
 
 	mysqli_stmt_bind_param($stmt, 'ssssssss', $post_category_id, $post_sub_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_description);
 	mysqli_stmt_execute($stmt);
+	confirmQuery($stmt);
 
 	$the_post_id = mysqli_insert_id($connection);
 
@@ -161,7 +164,7 @@ if(isset($_POST['public'])) {
 								<option>Select category</option>
 								<?php 
 
-								$query = 'SELECT * FROM sub_categories WHERE parent_id';
+								$query = 'SELECT * FROM sub_categories';
 								$select_categories = query($query);
 								
 								confirmQuery($select_categories);

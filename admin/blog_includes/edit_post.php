@@ -13,7 +13,7 @@
 		$post_author        = $row['post_author'];
 		$post_title         = $row['post_title'];
 		$post_category_id   = $row['post_category_id'];
-		$post_sub_category_id   = $row['post_sub_category_id'];
+		$post_sub_category_id   = $row['post_sub_cat_id'];
 		$post_status        = $row['post_status'];
 		$post_image         = $row['post_image'];
 		$post_content       = $row['post_content'];
@@ -29,6 +29,7 @@
 		$post_category_id    	=  $_POST['post_category'];
 		$post_sub_category_id	=  $_POST['post_sub_category'];
 		$post_content        	=  $_POST['post_content'];
+		$post_content        	=  str_ireplace("\r\n", '', $post_content);
 		$post_description    	=  $_POST['post_description'];
 		$post_tags           	=  $_POST['post_tags'];
 
@@ -37,7 +38,7 @@
 		$query  = "UPDATE blog_posts SET ";
 		$query .= "post_title  = ?, ";
 		$query .= "post_category_id = ?, ";
-		$query .= "post_sub_category_id = ?, ";
+		$query .= "post_sub_cat_id = ?, ";
 		$query .= "post_tags = ?, ";
 		$query .= "post_content = ?, ";
 		$query .= "post_description = ? ";

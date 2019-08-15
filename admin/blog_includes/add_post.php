@@ -11,6 +11,7 @@ if(isset($_POST['public'])) {
 
 	$post_status		= 'public';
 	$post_category_id	= escape($_POST['post_category']);
+	$post_sub_category_id	= escape($_POST['post_sub_category']);
 	$post_tags			= escape($_POST['post_tags']);
 
 	// $post_image 		= escape($_FILES['post_image']['name']);
@@ -20,9 +21,9 @@ if(isset($_POST['public'])) {
 
 	$post_date			= escape(date('d-m-y'));
 
-	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_title, post_author, post_date, post_content, post_tags, post_status, post_description) VALUES (?, ?, ?, now(), ?, ?, ?, ?)");
+	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_sub_category_id, post_title, post_author, post_date, post_content, post_tags, post_status, post_description) VALUES (?, ?, ?, ?, now(), ?, ?, ?, ?)");
 
-	mysqli_stmt_bind_param($stmt, 'sssssss', $post_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_description);
+	mysqli_stmt_bind_param($stmt, 'ssssssss', $post_category_id, $post_sub_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_description);
 	mysqli_stmt_execute($stmt);
 
 	$the_post_id = mysqli_insert_id($connection);
@@ -131,7 +132,36 @@ if(isset($_POST['public'])) {
 								<option>Select category</option>
 								<?php 
 
-								$query = 'SELECT * FROM sub_categories';
+								$query = 'SELECT * FROM categories';
+								$select_categories = query($query);
+								
+								confirmQuery($select_categories);
+
+								while ($row = mysqli_fetch_assoc($select_categories)) {
+									$cat_id = $row['cat_id'];
+									$cat_title = $row['cat_title'];
+									echo "<option value='$cat_id'>{$cat_title}</option>";
+								}
+
+								?>
+							</select>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- / Post Overview -->
+			<div class="card card-small mb-3">
+				<div class="card-header border-bottom">
+					<div class="m-0">Sub Categories</div>
+				</div>
+				<div class="card-body p-0">
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item px-3 pb-2">
+							<select class="form-control" name="post_sub_category" required>
+								<option>Select category</option>
+								<?php 
+
+								$query = 'SELECT * FROM sub_categories WHERE parent_id';
 								$select_categories = query($query);
 								
 								confirmQuery($select_categories);
@@ -148,7 +178,6 @@ if(isset($_POST['public'])) {
 					</ul>
 				</div>
 			</div>
-			<!-- / Post Overview -->
 			<!-- Post Tags -->
 			<div class='card card-small mb-3'>
 				<div class="card-header border-bottom">

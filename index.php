@@ -2,7 +2,7 @@
 
 $title = 'Home'; 
 $page = 'home'; 
-$header_title = 'Clean Blog';
+$header_title = 'Knowledge Sheer';
 include 'partials/header.php'; 
 
 ?>

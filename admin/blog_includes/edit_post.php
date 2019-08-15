@@ -13,6 +13,7 @@
 		$post_author        = $row['post_author'];
 		$post_title         = $row['post_title'];
 		$post_category_id   = $row['post_category_id'];
+		$post_sub_category_id   = $row['post_sub_category_id'];
 		$post_status        = $row['post_status'];
 		$post_image         = $row['post_image'];
 		$post_content       = $row['post_content'];
@@ -24,17 +25,19 @@
 	}
 
 	if(isset($_POST['update_post'])) {
-		$post_title          =  $_POST['post_title'];
-		$post_category_id    =  $_POST['post_category'];
-		$post_content        =  $_POST['post_content'];
-		$post_description    =  $_POST['post_description'];
-		$post_tags           =  $_POST['post_tags'];
+		$post_title          	=  $_POST['post_title'];
+		$post_category_id    	=  $_POST['post_category'];
+		$post_sub_category_id	=  $_POST['post_sub_category'];
+		$post_content        	=  $_POST['post_content'];
+		$post_description    	=  $_POST['post_description'];
+		$post_tags           	=  $_POST['post_tags'];
 
 		// $post_title = mysqli_real_escape_string($connection, $post_title);
 
 		$query  = "UPDATE blog_posts SET ";
 		$query .= "post_title  = ?, ";
 		$query .= "post_category_id = ?, ";
+		$query .= "post_sub_category_id = ?, ";
 		$query .= "post_tags = ?, ";
 		$query .= "post_content = ?, ";
 		$query .= "post_description = ? ";
@@ -45,7 +48,7 @@
 		if (!$stmt) {
 			die("Query Failed! - " . mysqli_error($connection));
 		}
-		mysqli_stmt_bind_param($stmt, 'sssssi', $post_title, $post_category_id, $post_tags, $post_content, $post_description, $the_post_id);
+		mysqli_stmt_bind_param($stmt, 'ssssssi', $post_title, $post_category_id, $post_sub_category_id, $post_tags, $post_content, $post_description, $the_post_id);
 
 		mysqli_stmt_execute($stmt);
 
@@ -128,6 +131,42 @@
 							<select class="form-control" name="post_category" required>
 							<?php
 
+							$query = "SELECT * FROM categories ";
+							$select_categories = query($query);
+
+							confirmQuery($select_categories);
+
+							while($row = mysqli_fetch_assoc($select_categories )) {
+								$cat_id = $row['cat_id'];
+								$cat_title = $row['cat_title'];
+
+								if($cat_id == $post_category_id) {
+									echo "<option selected value='{$cat_id}'>{$cat_title}</option>";
+								} else {
+									echo "<option value='{$cat_id}'>{$cat_title}</option>";
+								}
+							}
+
+							?>
+							</select>
+							
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- / Post Overview -->
+
+			<div class='card card-small mb-3'>
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Sub Categories</h6>
+				</div>
+				<div class='card-body p-0'>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item px-3 pb-2">
+
+							<select class="form-control" name="post_sub_category" required>
+							<?php
+
 							$query = "SELECT * FROM sub_categories ";
 							$select_categories = query($query);
 
@@ -151,7 +190,6 @@
 					</ul>
 				</div>
 			</div>
-			<!-- / Post Overview -->
 			<!-- Post Tags -->
 			<div class='card card-small mb-3'>
 				<div class="card-header border-bottom">

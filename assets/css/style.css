@@ -51,10 +51,14 @@ html {
 
 /*=================================*/
 /* Search Bar */
-#search-wrap {
+
+/*#search-wrap {
 	margin-top: 56px;
 	background-color: #FFFFFF;
 	z-index: 1;
+}*/
+.search-bar .btn {
+	padding: .375rem .75rem !important;
 }
 
 /*=================================*/

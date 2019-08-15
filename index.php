@@ -113,16 +113,7 @@ include 'partials/header.php';
 
 			</div>
 			<div class="col-lg-4 col-md-4 col-12">
-				<div class="card flex-wrap">
-					<div class="card-header border-0 p-0">
-						<img src="//placehold.it/210x160" alt="">
-					</div>
-					<div class="card-block px-2 p-3">
-						<h4 class="card-title">Title</h4>
-						<p class="card-text">Description</p>
-						<a href="#" class="btn btn-primary">BUTTON</a>
-					</div>
-				</div>
+				<?php include 'partials/sidebar.php'; ?>
 			</div>
  		</div>
 <!--	</div>

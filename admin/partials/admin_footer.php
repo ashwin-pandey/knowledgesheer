@@ -29,13 +29,13 @@
 <!-- complete page -->
 
 <!-- jQuery -->
-<script type="text/javascript" src="./assets/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery-3.3.1.min.js"></script>
 <!-- popper js / bootstrap js -->
-<script type="text/javascript" src="./assets/js/popper.min.js"></script>
-<script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/popper.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 <!-- CKEditor -->
-<!-- <script type="text/javascript" src="./assets/ckeditor5/ckeditor.js"></script> -->
-<script type="text/javascript" src="./assets/ckeditor4/ckeditor.js"></script>
+<!-- <script type="text/javascript" src="assets/ckeditor5/ckeditor.js"></script> -->
+<script type="text/javascript" src="assets/ckeditor4/ckeditor.js"></script>
 <script>
 CKEDITOR.replace('editor');
 </script>
@@ -44,17 +44,17 @@ CKEDITOR.replace('editor');
 <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
 
-<script type="text/javascript" src="./assets/js/app-blog-new-post.1.1.0.min.js"></script>
-<script type="text/javascript" src="./assets/js/app-blog-overview.1.1.0.min.js"></script>
-<script type="text/javascript" src="./assets/js/app-components-overview.1.1.0.min.js"></script>
+<script type="text/javascript" src="assets/js/app-blog-new-post.1.1.0.min.js"></script>
+<script type="text/javascript" src="assets/js/app-blog-overview.1.1.0.min.js"></script>
+<script type="text/javascript" src="assets/js/app-components-overview.1.1.0.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script>
 
-<script type="text/javascript" src="./assets/js/extras.1.1.0.min.js"></script>
-<script type="text/javascript" src="./assets/js/shards-dashboards.1.1.0.min.js"></script>
+<script type="text/javascript" src="assets/js/extras.1.1.0.min.js"></script>
+<script type="text/javascript" src="assets/js/shards-dashboards.1.1.0.min.js"></script>
 
 <!-- custom js -->
-<script type="text/javascript" src="./assets/js/script.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>
 
 </body>
 </html>

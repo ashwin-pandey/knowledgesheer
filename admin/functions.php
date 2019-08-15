@@ -198,13 +198,31 @@ function insertCategory() {
 		if($cat_title == "" || empty($cat_title)) {
 			echo "This Field should not be empty";
 		} else {
-			$stmt = mysqli_prepare($connection, "INSERT INTO blog_categories(cat_title, parent_id) VALUES(?, ?) ");
-			mysqli_stmt_bind_param($stmt, 'si', $cat_title, $parent_id);
+			$stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES(?) ");
+			mysqli_stmt_bind_param($stmt, 's', $cat_title);
 			mysqli_stmt_execute($stmt);
 		}
 		mysqli_stmt_close($stmt);
 	}
-} 
+}
+
+function insertSubCategory() {
+	global $connection;
+
+	if(isset($_POST['create_sub_category'])){
+		$sub_cat_title = $_POST['sub_cat_title'];
+		$parent_id = $_POST['parent_id'];
+
+		if($cat_title == "" || empty($cat_title)) {
+			echo "This Field should not be empty";
+		} else {
+			$stmt = mysqli_prepare($connection, "INSERT INTO sub_categories(sub_cat_title, parent_cat_id) VALUES(?) ");
+			mysqli_stmt_bind_param($stmt, 'si', $sub_cat_title, $parent_id);
+			mysqli_stmt_execute($stmt);
+		}
+		mysqli_stmt_close($stmt);
+	}
+}
 
 function deleteCategories() {
 	global $connection;
@@ -212,24 +230,40 @@ function deleteCategories() {
 	// if (isset($_GET['source']) === 'blog_categories') {
 		if(isset($_GET['delete'])){
 			$the_cat_id = $_GET['delete'];
-			$query = "DELETE FROM blog_categories WHERE cat_id = {$the_cat_id} ";
-			$delete_query = mysqli_query($connection,$query);
-			header("Location: blog.php?source=blog_categories");
+			$query = 'SELECT * FROM sub_categories WHERE parent_cat_id = {$the_cat_id} ';
+			$sub_categories = query($query);
+			$count = mysqli_num_rows($sub_categories);
+
+			if ($count == 0) {
+				$query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
+				$delete_query = query($query);
+				header("Location: blog.php?source=blog_categories");
+			} else {
+				echo "This Category has Sub-Categories, Plaese delete them first or reorder them and then try again!";
+			}
 		}
 	// }
 }
 
-
-function categoryTree($parent_id = 0, $sub_mark = ''){
+function deleteSubCategories() {
 	global $connection;
-	$query = query("SELECT * FROM blog_categories WHERE parent_id = $parent_id ORDER BY name ASC");
 
-	if($query->num_rows > 0){
-		while($row = $query->fetch_assoc()){
-			echo '<option value="'.$row['cat_id'].'">'.$sub_mark.$row['cat_title'].'</option>';
-			categoryTree($row['cat_id'], $sub_mark.'---');
+	// if (isset($_GET['source']) === 'blog_categories') {
+		if(isset($_GET['delete'])){
+			$the_cat_id = $_GET['delete'];
+			$query = 'SELECT post_id FROM blog_posts WHERE post_sub_category_id = {$the_cat_id} ';
+			$sub_categories = query($query);
+			$count = mysqli_num_rows($sub_categories);
+
+			if ($count == 0) {
+				$query = "DELETE FROM sub_categories WHERE sub_cat_id = {$the_cat_id} ";
+				$delete_query = query($query);
+				header("Location: blog.php?source=blog_categories");
+			} else {
+				echo "This Category has Posts, Plaese delete them first or reorder them and then try again!";
+			}
 		}
-	}
+	// }
 }
 
 ?>

@@ -9,17 +9,37 @@ if(isset($_POST['add_user'])) {
 	$user_email        = escape($_POST['user_email']);
 	$user_password     = escape($_POST['user_password']);
 
-	$user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));
+	$query = 'SELECT randSalt FROM users';
+	$select_randsalt = query($query);
+	confirmQuery($select_randsalt);
+
+	$row = mysqli_fetch_assoc($select_randsalt);
+	$salt = $row['randSalt'];
+
+	$user_password = crypt($user_password, $salt);
 
 	$user_image 		= escape($_FILES['user_image']['name']);
 	$user_image_temp	= escape($_FILES['user_image']['tmp_name']);
 
 	move_uploaded_file($user_image_temp, "../assets/images/profile/$user_image" );
 
-	$query = "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password, user_image) ";
-	$query .= "VALUES('{$user_firstname}','{$user_lastname}','{$user_role}','{$username}','{$user_email}', '{$user_password}', '{$user_image}') "; 
-	$create_user_query = query($query);
-	confirmQuery($create_user_query); 
+	$query = 'SELECT * FROM user_roles';
+	$select_roles = query($query);
+
+	confirmQuery($select_roles);
+
+	while ($row = mysqli_fetch_assoc($select_roles)) {
+		$role_id = $row['role_id'];
+		$role_title = $row['role_title'];
+		if ($role_id == $user_role) {
+			$user_role = $role_title;
+		}
+	}
+
+	$stmt = mysqli_prepare($connection, "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password, user_image) VALUES (?, ?, ?, ?, ?, ?, ?)");
+	mysqli_stmt_bind_param($stmt, 'sssssss', $user_firstname, $user_lastname, $user_role, $username, $user_email, $user_password, $user_image);
+	mysqli_stmt_execute($stmt);
+	confirmQuery($stmt);
 
 	redirect("users.php?source=view_all_users");
 
@@ -27,11 +47,16 @@ if(isset($_POST['add_user'])) {
 
 ?>
 
-<form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
-	<h5>Add New User</h5>
-	<div class="publish-button">
-		<input class="btn btn-md btn-primary" type="submit" name="add_user" value="Add User"></input>
+<!-- Page Header -->
+<div class="page-header row no-gutters py-4">
+	<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+		<span class="text-uppercase page-subtitle">Users</span>
+		<h3 class="page-title">Add New User</h3>
 	</div>
+</div>
+<!-- End Page Header -->
+
+<form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
 	<hr>
 	<div class="add-new-user">
 		<div class="row">
@@ -55,8 +80,21 @@ if(isset($_POST['add_user'])) {
 				<div class="form-group">
 					<label>User Role</label>
 					<select class="form-control" name="user_role" required>
-						<option value="subscriber">Subscriber</option>
-						<option value="admin">Admin</option>
+						<option value="select">select</option>
+						<?php 
+
+						$query = 'SELECT * FROM user_roles';
+						$select_categories = query($query);
+
+						confirmQuery($select_categories);
+
+						while ($row = mysqli_fetch_assoc($select_categories)) {
+							$role_id = $row['role_id'];
+							$role_title = $row['role_title'];
+							echo "<option value='$role_id'>{$role_title}</option>";
+						}
+
+						?>
 					</select>
 				</div>
 			</div>
@@ -68,8 +106,11 @@ if(isset($_POST['add_user'])) {
 				<div class="form-group post-tags">
 					<label>Profile Image</label>
 					<p>*Preferable dimensions are 80x80*</p>
-					<input type="file" id="file-input" name="user_image" class="form-control" required>
+					<input type="file" id="file-input" name="user_image" class="form-control">
 					<div id="thumb-output"></div>
+				</div>
+				<div class="publish-button">
+					<input class="btn btn-md btn-primary" type="submit" name="add_user" value="Add User"></input>
 				</div>
 			</div>
 		</div>

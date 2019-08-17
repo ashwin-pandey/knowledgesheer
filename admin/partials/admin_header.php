@@ -19,7 +19,11 @@ if(isset($_SESSION['user_role']) != 'admin') {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin Panel</title>
+	<title><?php echo $title; ?> | Knowledge Sheer</title>
+
+	<meta name="robots" content="noindex, nofollow">
+
+	<link rel="icon" href="../assets/images/favicon/favicon.ico" type="image/x-icon">
 	
 	<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

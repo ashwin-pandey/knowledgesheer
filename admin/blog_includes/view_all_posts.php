@@ -99,16 +99,16 @@ if(isset($_POST['checkBoxArray'])) {
 				<table class="table table-striped table-bordered" style="width: 100%;" id="view_all_posts">
 					<thead class="bg-light">
 						<tr>
-							<th scope="col" class="">
+							<th>
 								<input id="selectAllBoxes" type="checkbox">
 							</th>
-							<th scope="col" class="">Author</th>
-							<th scope="col" class="">Title</th>
-							<th scope="col" class="">Category</th>
-							<th scope="col" class="">Sub Category</th>
-							<th scope="col" class="">Tags</th>
-							<th scope="col" class="">Date</th>
-							<th scope="col" class="">Delete</th>
+							<th>Author</th>
+							<th>Title</th>
+							<th>Category</th>
+							<th>Sub Category</th>
+							<th>Tags</th>
+							<th>Date</th>
+							<th>Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -184,16 +184,16 @@ if(isset($_POST['checkBoxArray'])) {
 					</tbody>
 					<tfoot>
 						<tr>
-							<th scope="col" class="border-0">
+							<th>
 								<input id="selectAllBoxes" type="checkbox">
 							</th>
-							<th scope="col" class="">Author</th>
-							<th scope="col" class="">Title</th>
-							<th scope="col" class="">Category</th>
-							<th scope="col" class="">Sub Category</th>
-							<th scope="col" class="">Tags</th>
-							<th scope="col" class="">Date</th>
-							<th scope="col" class="">Delete</th>
+							<th>Author</th>
+							<th>Title</th>
+							<th>Category</th>
+							<th>Sub Category</th>
+							<th>Tags</th>
+							<th>Date</th>
+							<th>Delete</th>
 						</tr>
 					</tfoot>
 				</table>

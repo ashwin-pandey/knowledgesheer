@@ -1,4 +1,7 @@
-<?php $current_page = 'index'; include 'partials/admin_header.php'; ?>
+<?php 
+$title = 'Dashboard';
+$current_page = 'index';
+include 'partials/admin_header.php'; ?>
 
 		<!-- main content container -->
 		<div class="main-content">

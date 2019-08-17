@@ -21,6 +21,7 @@ if ($page == 'blog_post') {
 	<meta name="description" content="<?php echo $keywords ?>"/>
 	<meta name="language" content="EN">
 	<meta name="robots" content="index,follow" />
+	<link rel="icon" href="assets/images/favicon/favicon.ico" type="image/x-icon">
 
 	<!-- Bootstrap core CSS -->
 	<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">

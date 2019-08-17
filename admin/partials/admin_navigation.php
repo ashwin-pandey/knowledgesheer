@@ -44,7 +44,6 @@
 					<a class="dropdown-item" href="comments.php">Comments</a>
 				</div>
 			</li>
-
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle <?php if($current_page == 'users') { echo 'active';} ?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
 					<i class="material-icons">people</i>
@@ -55,6 +54,12 @@
 					<a class="dropdown-item" href="users.php?source=view_all_users">View All Users</a>
 					<a class="dropdown-item" href="users.php?source=add_user">Add New</a>
 				</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link <?php if($current_page == 'categories') {echo 'active';} ?>" href="categories.php">
+					<i class="material-icons">category</i>
+					<span>Categories</span>
+				</a>
 			</li>
 		</ul>
 	</div>
@@ -74,7 +79,7 @@
 					<input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search">
 				</div>
 			</form>
-			<ul class="navbar-nav border-left flex-row ">
+			<ul class="navbar-nav border-left flex-row">
 				<li class="nav-item border-right dropdown notifications">
 					<a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<div class="nav-link-icon__wrapper">

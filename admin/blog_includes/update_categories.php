@@ -6,13 +6,12 @@
 
 		if(isset($_GET['edit'])){
 			$cat_id = escape($_GET['edit']);
-			$query = "SELECT * FROM blog_categories WHERE cat_id = $cat_id ";
+			$query = "SELECT * FROM categories WHERE cat_id = $cat_id ";
 			$select_category_id = query($query);
 
 			while($row = mysqli_fetch_assoc($select_category_id)) {
 				$cat_id = $row['cat_id'];
 				$cat_title = $row['cat_title'];
-				$parent_id = $row['parent_id'];
 
 		?>
 

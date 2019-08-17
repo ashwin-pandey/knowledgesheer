@@ -189,10 +189,9 @@ function is_admin($username) {
 
 function insertCategory() {
 	global $connection;
-
+	// Insert Parent Category
 	if(isset($_POST['create_category'])){
 		$cat_title = $_POST['cat_title'];
-		$parent_id = $_POST['parent_id'];
 
 		if($cat_title == "" || empty($cat_title)) {
 			echo "This Field should not be empty";
@@ -203,19 +202,15 @@ function insertCategory() {
 		}
 		mysqli_stmt_close($stmt);
 	}
-}
-
-function insertSubCategory() {
-	global $connection;
-
+	// Insert Sub Category
 	if(isset($_POST['create_sub_category'])){
 		$sub_cat_title = $_POST['sub_cat_title'];
 		$parent_id = $_POST['parent_id'];
 
-		if($cat_title == "" || empty($cat_title)) {
+		if($sub_cat_title == "" || empty($cat_title)) {
 			echo "This Field should not be empty";
 		} else {
-			$stmt = mysqli_prepare($connection, "INSERT INTO sub_categories(sub_cat_title, parent_cat_id) VALUES(?) ");
+			$stmt = mysqli_prepare($connection, "INSERT INTO sub_categories(sub_cat_title, parent_cat_id) VALUES(?, ?) ");
 			mysqli_stmt_bind_param($stmt, 'si', $sub_cat_title, $parent_id);
 			mysqli_stmt_execute($stmt);
 		}

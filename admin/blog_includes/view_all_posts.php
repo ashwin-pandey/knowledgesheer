@@ -137,9 +137,26 @@ if(isset($_POST['checkBoxArray'])) {
 
 							echo "<td>$post_author</td>";
 							echo "<td>
-							$post_title -- $post_status<br>
-							<a href='../blog_post.php?p_id={$post_id}' target='_blank'>View</a>&nbsp;
-							<a href='blog.php?source=edit_post&p_id={$post_id}'>Edit</a>
+							$post_title -- <b>$post_status</b><br>
+
+							<div class='blog-comments__actions'>
+								<div class='btn-group btn-group-sm'>
+									<button type='button' class='btn btn-white'>
+										<a href='../blog_post.php?p_id={$post_id}' target='_blank'>
+										<span class='text-light'>
+											<i class='material-icons'>remove_red_eye</i>
+										</span> View 
+										</a>
+									</button>
+									<button type='button' class='btn btn-white'>
+										<a href='blog.php?source=edit_post&p_id={$post_id}'>
+										<span class='text-light'>
+											<i class='material-icons'>edit</i>
+										</span> Edit 
+										</a>
+									</button>
+								</div>
+							</div>
 							</td>";
 
 							$query = "SELECT * FROM categories WHERE cat_id = {$post_category_id} ";

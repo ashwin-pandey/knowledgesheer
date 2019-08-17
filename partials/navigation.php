@@ -15,39 +15,28 @@
 				<li class="nav-item">
 					<a class="nav-link" href="about.html">About</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="login.php">Login</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="registration.php">Sign Up</a>
-				</li>
+				<?php if (isLoggedIn()) { ?>
+					<?php if (is_admin($_SESSION['username'])) { ?>
+					<li class="nav-item"><a class="nav-link" href="/knowledgesheer/admin/">Dashboard</a></li>
+					<?php } ?>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" style="text-transform: none;" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+							<?php echo $_SESSION['username']; ?>
+						</a>
+						<div class="dropdown-menu dropdown-menu-small">
+							<a class="dropdown-item" href="/knowledgesheer/includes/logout.php">Logout</a>
+						</div>
+					</li>
+				<?php } else { ?>
+				<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+				<li class="nav-item"><a class="nav-link" href="registration.php">Sign Up</a></li>
+				<?php } ?>
 			</ul>
 		</div>
 	</div>
 </nav>
-
 <?php if ($page == 'blog_post' || $page == 'login' || $page == 'register') { ?>
-
-<!-- <header class="masthead" style="background-image: url('./assets/images/page-headers/post-bg.jpg')">
-	<div class="overlay"></div>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 col-md-10 mx-auto">
-				<div class="post-heading">
-					<h1><?php // echo stripcslashes($post_title); ?></h1>
-					<h2 class="subheading"><?php // echo stripslashes($post_description); ?></h2>
-					<span class="meta">Posted by
-						<a href="#"><?php // echo stripcslashes($post_author); ?></a>
-						on <?php // echo date('F j, Y', strtotime($post_date)); ?>
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</header> -->
-
 <article>
-
 <?php } else { ?>
 <div class="top-margin"></div>
 <header class="masthead" style="background-image: url('./assets/images/page-headers/home-bg.jpg')">

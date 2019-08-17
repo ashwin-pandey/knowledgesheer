@@ -1,4 +1,8 @@
-<?php $current_page = 'blog'; include 'partials/admin_header.php'; ?>
+<?php 
+
+$title = 'Blog Dashboard';
+$current_page = 'blog';
+include 'partials/admin_header.php'; ?>
 
 <?php 
 

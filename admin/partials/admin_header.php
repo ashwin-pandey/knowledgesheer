@@ -5,8 +5,8 @@
 
 <?php 
 
-if(isset($_SESSION['user_role']) != 'admin') {
-	// if (!is_admin($_SESSION['username'])) {
+// if(isset($_SESSION['user_role']) != 'admin') {
+if (!is_admin($_SESSION['username'])) {
 	redirect("/knowledgesheer/index.php");
 	// }
 }

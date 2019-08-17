@@ -95,20 +95,20 @@ if(isset($_POST['checkBoxArray'])) {
 					</div>
 				</div>
 			</div>
-			<div class="card-body p-0 pb-3 text-left">
-				<table class="table mb-0">
+			<div class="card-body pb-3 text-left">
+				<table class="table table-striped table-bordered" style="width: 100%;" id="view_all_posts">
 					<thead class="bg-light">
 						<tr>
-							<th scope="col" class="border-0">
+							<th scope="col" class="">
 								<input id="selectAllBoxes" type="checkbox">
 							</th>
-							<th scope="col" class="border-0">Author</th>
-							<th scope="col" class="border-0">Title</th>
-							<th scope="col" class="border-0">Category</th>
-							<th scope="col" class="border-0">Sub Category</th>
-							<th scope="col" class="border-0">Tags</th>
-							<th scope="col" class="border-0">Date</th>
-							<th scope="col" class="border-0">Delete</th>
+							<th scope="col" class="">Author</th>
+							<th scope="col" class="">Title</th>
+							<th scope="col" class="">Category</th>
+							<th scope="col" class="">Sub Category</th>
+							<th scope="col" class="">Tags</th>
+							<th scope="col" class="">Date</th>
+							<th scope="col" class="">Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -138,7 +138,7 @@ if(isset($_POST['checkBoxArray'])) {
 							echo "<td>$post_author</td>";
 							echo "<td>
 							$post_title -- $post_status<br>
-							<a href='../blog_post.php?p_id={$post_id}'>View Post</a>&nbsp;
+							<a href='../blog_post.php?p_id={$post_id}' target='_blank'>View</a>&nbsp;
 							<a href='blog.php?source=edit_post&p_id={$post_id}'>Edit</a>
 							</td>";
 
@@ -182,6 +182,20 @@ if(isset($_POST['checkBoxArray'])) {
 						}
 						?>
 					</tbody>
+					<tfoot>
+						<tr>
+							<th scope="col" class="border-0">
+								<input id="selectAllBoxes" type="checkbox">
+							</th>
+							<th scope="col" class="">Author</th>
+							<th scope="col" class="">Title</th>
+							<th scope="col" class="">Category</th>
+							<th scope="col" class="">Sub Category</th>
+							<th scope="col" class="">Tags</th>
+							<th scope="col" class="">Date</th>
+							<th scope="col" class="">Delete</th>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 		</div>

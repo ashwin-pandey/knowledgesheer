@@ -36,9 +36,10 @@ if(isset($_SESSION['user_role']) != 'admin') {
 
 	<link rel="stylesheet" href="./assets/css/extras.1.1.0.min.css">
 	<link rel="stylesheet" href="./assets/css/shards-dashboards.1.1.0.min.css">
-
+	<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> -->
 	<!-- custom css -->
-	<!-- <link rel="stylesheet" type="text/css" href="./assets/css/style.css"> -->
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 <body>
 

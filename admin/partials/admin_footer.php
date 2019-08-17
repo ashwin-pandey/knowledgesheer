@@ -36,8 +36,16 @@
 <!-- CKEditor -->
 <!-- <script type="text/javascript" src="assets/ckeditor5/ckeditor.js"></script> -->
 <script type="text/javascript" src="assets/ckeditor4/ckeditor.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
 <script>
 CKEDITOR.replace('editor');
+
+$(document).ready(function() {
+	$('#view_all_posts').DataTable({});
+});
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>

@@ -45,41 +45,16 @@
 				</div>
 			</li>
 
-			<li class="nav-item">
-				<a class="nav-link " href="components-blog-posts.html">
-					<i class="material-icons">vertical_split</i>
-					<span>Blog Posts</span>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle <?php if($current_page == 'users') { echo 'active';} ?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+					<i class="material-icons">people</i>
+					<span>Users</span>
 				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link " href="add-new-post.html">
-					<i class="material-icons">note_add</i>
-					<span>Add New Post</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link " href="form-components.html">
-					<i class="material-icons">view_module</i>
-					<span>Forms &amp; Components</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link " href="tables.html">
-					<i class="material-icons">table_chart</i>
-					<span>Tables</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link " href="user-profile-lite.html">
-					<i class="material-icons">person</i>
-					<span>User Profile</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link " href="errors.html">
-					<i class="material-icons">error</i>
-					<span>Errors</span>
-				</a>
+				<div class="dropdown-menu dropdown-menu-small">
+					<a class="dropdown-item" href="users.php">Dashboard</a>
+					<a class="dropdown-item" href="users.php?source=view_all_users">View All Users</a>
+					<a class="dropdown-item" href="users.php?source=add_user">Add New</a>
+				</div>
 			</li>
 		</ul>
 	</div>

@@ -9,6 +9,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.uiColor = '#AADC6E';
 	// config.height = 430;
 	config.extraPlugins = 'wordcount,notification';
+	config.height = 500;
 	config.wordcount = {
 
 		// Whether or not you want to show the Paragraphs Count

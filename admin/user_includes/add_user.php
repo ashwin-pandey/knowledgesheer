@@ -55,64 +55,68 @@ if(isset($_POST['add_user'])) {
 	</div>
 </div>
 <!-- End Page Header -->
+<div class="row">
+	<div class="col-12">
+	<div class="card p-3">
+		<form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+			<div class="add-new-user">
+				<div class="row">
+					<div class="col-6">
+						<div class="form-group">
+							<label>Username</label>
+							<input type="text" name="username" class="form-control" placeholder="zap" autocomplete="false" required>
+						</div>
+						<div class="form-group">
+							<label>First Name</label>
+							<input type="text" name="user_firstname" class="form-control" placeholder="Jane" required>
+						</div>
+						<div class="form-group">
+							<label>Last Name</label>
+							<input type="text" name="user_lastname" class="form-control" placeholder="Doe" required>
+						</div>
+						<div class="form-group">
+							<label>Email</label>
+							<input type="email" name="user_email" class="form-control" autocomplete="false" placeholder="email@gmail.com" required>
+						</div>
+						<div class="form-group">
+							<label>User Role</label>
+							<select class="form-control" name="user_role" required>
+								<option value="select">select</option>
+								<?php 
 
-<form action="" method="POST" autocomplete="off" enctype="multipart/form-data">
-	<hr>
-	<div class="add-new-user">
-		<div class="row">
-			<div class="col-6">
-				<div class="form-group">
-					<label>Username</label>
-					<input type="text" name="username" class="form-control" placeholder="zap" autocomplete="false" required>
-				</div>
-				<div class="form-group">
-					<label>First Name</label>
-					<input type="text" name="user_firstname" class="form-control" placeholder="Jane" required>
-				</div>
-				<div class="form-group">
-					<label>Last Name</label>
-					<input type="text" name="user_lastname" class="form-control" placeholder="Doe" required>
-				</div>
-				<div class="form-group">
-					<label>Email</label>
-					<input type="email" name="user_email" class="form-control" autocomplete="false" placeholder="email@gmail.com" required>
-				</div>
-				<div class="form-group">
-					<label>User Role</label>
-					<select class="form-control" name="user_role" required>
-						<option value="select">select</option>
-						<?php 
+								$query = 'SELECT * FROM user_roles';
+								$select_categories = query($query);
 
-						$query = 'SELECT * FROM user_roles';
-						$select_categories = query($query);
+								confirmQuery($select_categories);
 
-						confirmQuery($select_categories);
+								while ($row = mysqli_fetch_assoc($select_categories)) {
+									$role_id = $row['role_id'];
+									$role_title = $row['role_title'];
+									echo "<option value='$role_id'>{$role_title}</option>";
+								}
 
-						while ($row = mysqli_fetch_assoc($select_categories)) {
-							$role_id = $row['role_id'];
-							$role_title = $row['role_title'];
-							echo "<option value='$role_id'>{$role_title}</option>";
-						}
-
-						?>
-					</select>
+								?>
+							</select>
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="form-group">
+							<label>Password</label>
+							<input type="password" name="user_password" class="form-control" autocomplete="false" placeholder="********" required>
+						</div>
+						<div class="form-group post-tags">
+							<label>Profile Image</label>
+							<p>*Preferable dimensions are 80x80*</p>
+							<input type="file" id="file-input" name="user_image" class="form-control">
+							<div id="thumb-output"></div>
+						</div>
+						<div class="publish-button">
+							<input class="btn btn-md btn-primary" type="submit" name="add_user" value="Add User"></input>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="col-6">
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" name="user_password" class="form-control" autocomplete="false" placeholder="********" required>
-				</div>
-				<div class="form-group post-tags">
-					<label>Profile Image</label>
-					<p>*Preferable dimensions are 80x80*</p>
-					<input type="file" id="file-input" name="user_image" class="form-control">
-					<div id="thumb-output"></div>
-				</div>
-				<div class="publish-button">
-					<input class="btn btn-md btn-primary" type="submit" name="add_user" value="Add User"></input>
-				</div>
-			</div>
-		</div>
+		</form>
 	</div>
-</form>
+</div>
+</div>

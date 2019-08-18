@@ -30,7 +30,7 @@ include 'partials/admin_header.php';
 				</div>
 			</form>
 		</div>
-		<div class="card p-3">
+		<div class="card p-3 mb-3">
 			<form class="" method="POST">
 				<div class="form-group">
 					<label class="card-title">Add Sub Category</label>
@@ -62,15 +62,18 @@ include 'partials/admin_header.php';
 
 		<?php
 		if(isset($_GET['edit'])) {
-			$cat_id = $_GET['edit'];
+			// $cat_id = $_GET['edit'];
 			include "blog_includes/update_categories.php";
+		}
+		if (isset($_GET['edit_sub'])) {
+			include "blog_includes/update_sub_categories.php";
 		}
 		?>
 	</div>
 
 	<div class="col-4">
 		<div class="card p-3">
-			<table class="table border-left border-right card-body table-striped">
+			<table class="table border-left border-right border-bottom card-body table-striped">
 				<thead>
 					<tr>
 						<th>#</th>
@@ -121,7 +124,7 @@ include 'partials/admin_header.php';
 
 	<div class="col-4">
 		<div class="card p-3">
-			<table class="table border-left border-right card-body table-striped">
+			<table class="table border-left border-right border-bottom card-body table-striped">
 				<thead>
 					<tr>
 						<th>#</th>
@@ -147,14 +150,14 @@ include 'partials/admin_header.php';
 						<div class='blog-comments__actions'>
 							<div class='btn-group btn-group-sm'>
 								<button type='button' class='btn btn-white'>
-									<a href='categories.php?edit={$cat_id}'>
+									<a href='categories.php?edit_sub={$sub_cat_id}'>
 									<span class='text-light'>
 										<i class='material-icons'>edit</i>
 									</span> Edit 
 									</a>
 								</button>
 								<button type='button' class='btn btn-white'>
-									<a href='categories.php?delete={$cat_id}'>
+									<a href='categories.php?delete_sub={$sub_cat_id}'>
 									<span class='text-danger'>
 										<i class='material-icons'>clear</i>
 									</span> Delete 

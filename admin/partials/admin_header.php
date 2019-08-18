@@ -28,8 +28,8 @@ if (!is_admin($_SESSION['username'])) {
 	<link href="assets/css/fontawesome-5.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
+	<link href="../assets/css/open-sans-font.css" rel="stylesheet">
+	<link href="assets/css/quicksand-font.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/extras.1.1.0.min.css">
 	<link rel="stylesheet" href="assets/css/shards-dashboards.1.1.0.min.css">
 	<link href="assets/css/datatables.bootstrap4.min.css" rel="stylesheet">

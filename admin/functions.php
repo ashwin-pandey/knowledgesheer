@@ -261,4 +261,26 @@ function deleteSubCategories() {
 	// }
 }
 
+function updateCategories() {
+	if(isset($_POST['update_category'])) {
+		$update_cat_title = escape($_POST['cat_title']);
+		$update_query = 'UPDATE categories SET cat_title = ?, cat_description = ? WHERE cat_id = ? ';
+		$stmt = mysqli_prepare($connection, $update_query);
+		confirmQuery($stmt);
+		mysqli_stmt_bind_param($stmt, 'ssi', $update_cat_title, $cat_description, $cat_id);
+		mysqli_stmt_execute($stmt);
+		redirect("categories.php");
+	}
+	if(isset($_POST['update_sub_category'])) {
+		$update_cat_title = escape($_POST['sub_cat_title']);
+		$parent_cat_id = escape($_POST['parent_id']);
+		$update_query = 'UPDATE sub_categories SET sub_cat_title = ?, parent_cat_id = ? WHERE sub_cat_id = ? ';
+		$stmt = mysqli_prepare($connection, $update_query);
+		confirmQuery($stmt);
+		mysqli_stmt_bind_param($stmt, 'ssi', $update_cat_title, $parent_cat_id, $sub_cat_id);
+		mysqli_stmt_execute($stmt);
+		redirect("categories.php");
+	}
+}
+
 ?>

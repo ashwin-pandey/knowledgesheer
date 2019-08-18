@@ -117,7 +117,7 @@
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-						<img class="user-avatar rounded-circle mr-2" src="../assets/images/profile/3.jpg">
+						<img class="user-avatar rounded-circle mr-2" src="../assets/images/profile/<?php echo $_SESSION['user_image']; ?>">
 						<span class="d-none d-md-inline-block">
 							
 						<?php  
@@ -131,7 +131,7 @@
 						</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-small">
-						<a class="dropdown-item" href="users.php?source=edit_user">
+						<a class="dropdown-item" href="users.php?source=edit_user&edit_user=<?php echo $_SESSION['user_id']; ?>">
 							<i class="material-icons">&#xE7FD;</i> Profile
 						</a>
 						<div class="dropdown-divider"></div>

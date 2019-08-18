@@ -1,69 +1,3 @@
-<?php
-
-
-include("delete_modal.php");
-
-if(isset($_POST['checkBoxArray'])) {
-	foreach($_POST['checkBoxArray'] as $postValueId ){
-
-		$bulk_options = $_POST['bulk_options'];
-
-		switch($bulk_options) {
-			// Public
-			case 'public':
-			$query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValueId}  ";
-			$update_to_published_status = mysqli_query($connection,$query);       
-			confirmQuery($update_to_published_status);
-			break;
-
-			// Draft
-			case 'draft':
-			$query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValueId}  ";
-			$update_to_draft_status = mysqli_query($connection,$query);
-			confirmQuery($update_to_draft_status);
-			break;
-
-			// Delete
-			case 'delete':
-			$query = "DELETE FROM posts WHERE post_id = {$postValueId}  ";
-			$update_to_delete_status = mysqli_query($connection,$query);
-			confirmQuery($update_to_delete_status);
-			break;
-
-			// Clone
-			// case 'clone':
-			// $query = "SELECT * FROM posts WHERE post_id = '{$postValueId}' ";
-			// $select_post_query = mysqli_query($connection, $query);
-
-			// while ($row = mysqli_fetch_array($select_post_query)) {
-			// 	$post_title         = $row['post_title'];
-			// 	$post_category_id   = $row['post_category_id'];
-			// 	$post_date          = $row['post_date']; 
-			// 	$post_author        = $row['post_author'];
-			// 	$post_status        = $row['post_status'];
-			// 	$post_image         = $row['post_image'] ; 
-			// 	$post_tags          = $row['post_tags']; 
-			// 	$post_content       = $row['post_content'];
-
-			// }
-
-			// $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date,post_image,post_content,post_tags,post_status) ";
-
-			// $query .= "VALUES({$post_category_id},'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content}','{$post_tags}', '{$post_status}') "; 
-
-			// $copy_query = mysqli_query($connection, $query);   
-
-			// if(!$copy_query ) {
-			// 	die("QUERY FAILED" . mysqli_error($connection));
-			// }   
-			// break;
-		}
-	}
-}
-
-?>
-
-
 <!-- Page Header -->
 <div class="page-header row no-gutters py-4">
 	<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
@@ -78,19 +12,9 @@ if(isset($_POST['checkBoxArray'])) {
 	<div class="col">
 		<div class="card card-small mb-4">
 			<div class="card-header border-bottom">
-				<!-- <h6 class="m-0">All Blog Posts</h6> -->
 				<div class="row">
-					<div id="bulkOptionContainer" class="col-2">
-						<select class="form-control" name="bulk_options" id="">
-							<option value="">Select Options</option>
-							<option value="public">Publish</option>
-							<option value="draft">Draft</option>
-							<option value="delete">Delete</option>
-							<!-- <option value="clone">Clone</option> -->
-						</select>
-					</div> 
-					<div class="col-10">
-						<input type="submit" name="submit" class="btn btn-success" value="Apply">
+					<div class="col-12">
+						<h5 class="card-title float-left">All Blog Posts</h5>
 						<a class="btn btn-primary float-right" href="posts.php?source=add_post">Add New</a>
 					</div>
 				</div>
@@ -99,9 +23,6 @@ if(isset($_POST['checkBoxArray'])) {
 				<table class="table table-striped table-bordered" style="width: 100%;" id="view_all_posts">
 					<thead class="bg-light">
 						<tr>
-							<th>
-								<input id="selectAllBoxes" type="checkbox">
-							</th>
 							<th>Author</th>
 							<th>Title</th>
 							<th>Category</th>
@@ -128,12 +49,6 @@ if(isset($_POST['checkBoxArray'])) {
 							$post_date          = $row['post_date'];
 
 							echo "<tr>";
-
-							?>
-
-							<td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
-
-							<?php 
 
 							echo "<td>$post_author</td>";
 							echo "<td>
@@ -201,9 +116,6 @@ if(isset($_POST['checkBoxArray'])) {
 					</tbody>
 					<tfoot>
 						<tr>
-							<th>
-								<input id="selectAllBoxes" type="checkbox">
-							</th>
 							<th>Author</th>
 							<th>Title</th>
 							<th>Category</th>

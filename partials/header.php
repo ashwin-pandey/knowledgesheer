@@ -1,8 +1,7 @@
 <?php session_start(); ?>
 <?php
+if ($page == 'blog_post' || $page == 'category') {
 
-if ($page == 'blog_post') {
-	
 } else {
 	include 'includes/db.php';
 	include './admin/functions.php';
@@ -18,7 +17,7 @@ if ($page == 'blog_post') {
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="<?php echo $keywords ?>"/>
-	<meta name="description" content="<?php echo $keywords ?>"/>
+	<meta name="description" content="<?php echo $description ?>"/>
 	<meta name="language" content="EN">
 	<meta name="robots" content="index,follow" />
 </head>

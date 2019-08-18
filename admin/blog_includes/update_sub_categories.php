@@ -41,23 +41,7 @@
 				</div>
 			<?php } } ?>
 
-			<?php
-
-			if(isset($_POST['update_sub_category'])) {
-
-				$update_cat_title = escape($_POST['sub_cat_title']);
-				$parent_cat_id = escape($_POST['parent_id']);
-				$update_query = 'UPDATE sub_categories SET sub_cat_title = ?, parent_cat_id = ? WHERE sub_cat_id = ? ';
-
-				$stmt = mysqli_prepare($connection, $update_query);
-				confirmQuery($stmt);
-				mysqli_stmt_bind_param($stmt, 'ssi', $update_cat_title, $parent_cat_id, $sub_cat_id);
-				mysqli_stmt_execute($stmt);
-				redirect("categories.php");
-
-			}
-
-			?>
+			<?php updateCategories(); ?>
 
 			<div class="form-group">
 				<input class="btn btn-primary btn-sm" name="update_sub_category" type="submit" value="Update"></input>

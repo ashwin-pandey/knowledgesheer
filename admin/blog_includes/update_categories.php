@@ -12,29 +12,17 @@
 				while($row = mysqli_fetch_assoc($select_category_id)) {
 					$cat_id = $row['cat_id'];
 					$cat_title = $row['cat_title'];
+					$cat_description = $row['cat_description'];
 
 					?>
 					<input value="<?php echo $cat_title; ?>" type="text" class="form-control" name="cat_title">
+					<textarea name="cat_description" class="form-control" cols="30" rows="10">
+						<?php echo stripslashes($cat_description); ?>
+					</textarea>
 				<?php } } ?>
 			</div>
 
-			<?php
-	// UPDATE QUERY
-
-			if(isset($_POST['update_category'])) {
-
-				$update_cat_title = escape($_POST['cat_title']);
-				$update_query = 'UPDATE categories SET cat_title = ? WHERE cat_id = ? ';
-
-				$stmt = mysqli_prepare($connection, $update_query);
-				confirmQuery($stmt);
-				mysqli_stmt_bind_param($stmt, 'si', $update_cat_title, $cat_id);
-				mysqli_stmt_execute($stmt);
-				redirect("categories.php");
-
-			}
-
-			?>
+			<?php updateCategories(); ?>
 
 			<div class="form-group">
 				<input class="btn btn-primary btn-sm" name="update_category" type="submit" value="Update"></input>

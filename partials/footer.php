@@ -1,7 +1,7 @@
 
 	</div>
 
-<?php if ($page == 'blog_post') { ?>
+<?php if ($page != 'home') { ?>
 	</article>
 <?php } ?>
 

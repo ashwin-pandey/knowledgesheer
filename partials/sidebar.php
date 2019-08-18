@@ -30,7 +30,7 @@
 			<div class="card mb-1">
 				<div class="card-header p-0">
 					<h5 class="mb-0">
-						<a href="categories.php?cat_id=<?php echo $cat_id; ?>" class="btn btn-link p-2">
+						<a href="category.php?category=<?php echo $cat_id; ?>" class="btn btn-link p-2">
 							<?php echo $cat_title; ?>
 						</a>
 					</h5>

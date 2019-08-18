@@ -12,9 +12,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="index.php">Home</a>
 				</li>
-				<li class="nav-item">
+				<!-- <li class="nav-item">
 					<a class="nav-link" href="about.html">About</a>
-				</li>
+				</li> -->
 				<?php if (isLoggedIn()) { ?>
 					<?php if (is_admin($_SESSION['username'])) { ?>
 					<li class="nav-item"><a class="nav-link" href="/knowledgesheer/admin/">Dashboard</a></li>
@@ -35,9 +35,8 @@
 		</div>
 	</div>
 </nav>
-<?php if ($page == 'blog_post' || $page == 'login' || $page == 'register') { ?>
-<article>
-<?php } else { ?>
+<!-- <?php // if ($page == 'blog_post' || $page == 'login' || $page == 'register') { ?> -->
+<?php if ($page == 'home') { ?>
 <div class="top-margin"></div>
 <header class="masthead" style="background-image: url('./assets/images/page-headers/home-bg.jpg')">
 	<div class="overlay"></div>
@@ -52,5 +51,8 @@
 		</div>
 	</div>
 </header>
+
+<?php } else { ?>
+<article>
 
 <?php } ?>

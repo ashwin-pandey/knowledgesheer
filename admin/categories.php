@@ -25,6 +25,9 @@ include 'partials/admin_header.php';
 						<input type="text" class="form-control" name="cat_title" placeholder="Category Title">
 					</div>
 					<div class="form-group">
+						<textarea name="cat_description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
+					</div>
+					<div class="form-group">
 						<input type="submit" name="create_category" class="btn btn-sm btn-success">
 					</div>
 				</div>

@@ -17,63 +17,25 @@
 <!-- Categories -->
 
 <div class="card card-small mb-3">
-	<div class="card-header border-bottom">
-		<div class="m-0">Categories</div>
-	</div>
-	<div class="card-body p-1">
-		<div id="accordion">
-
-			<?php 
-
-			$query = 'SELECT * FROM categories';
-			$categories = query($query);
-			confirmQuery($categories);
-
-			$query = 'SELECT * FROM sub_categories';
-			$sub_categories = query($query);
-			confirmQuery($sub_categories);
-
-			while ($row = mysqli_fetch_assoc($categories)) {
-				$cat_id = $row['cat_id'];
-				$cat_title = $row['cat_title'];
-
-				?>
-
-
-				<div class="card">
-					<div class="card-header p-0" id="<?php echo $cat_id ?>">
-						<h5 class="mb-0">
-							<button class="btn btn-link collapsed p-2" data-toggle="collapse" data-target="#<?php echo $cat_id ?>" aria-expanded="false" aria-controls="<?php echo $cat_id ?>">
-								<?php echo $cat_title; ?>
-							</button>
-						</h5>
-					</div>
-
-					<div id="<?php echo $cat_id ?>" class="collapse show" aria-labelledby="<?php echo $cat_id ?>" data-parent="#accordion">
-						<div class="card-body p-1">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item p-1"><a href="blog.php?cat_id={$cat_id}">All <?php echo $cat_title; ?> posts</a></li>
-								<?php  
-
-								$query = 'SELECT * FROM sub_categories WHERE parent_cat_id = '.$cat_id;
-								$sub_categories = query($query);
-								confirmQuery($sub_categories);
-
-								while ($row = mysqli_fetch_assoc($sub_categories)) {
-									$sub_cat_id = $row['sub_cat_id'];
-									$sub_cat_title = $row['sub_cat_title'];
-									$parent_id = $row['parent_cat_id'];
-									echo "<li class='list-group-item p-1'><a href='blog.php?cat_id={$cat_id}&sub_cat_id={$sub_cat_id}'>$sub_cat_title</a></li>";
-								}
-
-								?>
-							</ul>
-						</div>
-					</div>
+	<div class="m-0 p-2 card-title border-bottom">Categories</div>
+	<div class="card-body p-2">
+		<?php 
+		$query = 'SELECT * FROM categories';
+		$categories = query($query);
+		confirmQuery($categories);
+		while ($row = mysqli_fetch_assoc($categories)) {
+			$cat_id = $row['cat_id'];
+			$cat_title = $row['cat_title'];
+			?>
+			<div class="card mb-1">
+				<div class="card-header p-0">
+					<h5 class="mb-0">
+						<a href="categories.php?cat_id=<?php echo $cat_id; ?>" class="btn btn-link p-2">
+							<?php echo $cat_title; ?>
+						</a>
+					</h5>
 				</div>
-
-			<?php } ?>
-
-		</div>
+			</div>
+		<?php } ?>
 	</div>
 </div>

@@ -21,20 +21,14 @@ if ($page == 'blog_post') {
 	<meta name="description" content="<?php echo $keywords ?>"/>
 	<meta name="language" content="EN">
 	<meta name="robots" content="index,follow" />
-	<link rel="icon" href="assets/images/favicon/favicon.ico" type="image/x-icon">
-
-	<!-- Bootstrap core CSS -->
-	<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-	<!-- Custom fonts for this template -->
-	<link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-	<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-	<!-- Custom styles for this template -->
-	<link href="assets/css/clean-blog.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
+	<link href="assets/images/favicon/favicon.ico" rel="icon">
+	<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<link href='assets/css/lora-font.css' rel='stylesheet'>
+	<link href='assets/css/open-sans-font.css' rel='stylesheet'>
+	<link href="assets/css/clean-blog.min.css" rel="stylesheet">
+	<link href="./assets/css/style.css" rel="stylesheet" >
 <body>
 
 	<?php include 'navigation.php'; ?>

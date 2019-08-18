@@ -9,7 +9,12 @@ $(function () {
 // });
 
 // CKEditor 4
-// CKEDITOR.replace('editor');
+CKEDITOR.replace('editor');
+
+// Data Tables
+$(document).ready(function() {
+	$('#view_all_posts').DataTable({});
+});
 
 
 // Blog Image Preview
@@ -54,18 +59,3 @@ $(document).ready(function(){
 	});
 });
 
-
-// ==============================================================================
-// FRONT END
-
-// var wrap = $("#search-wrap");
-
-// wrap.on("scroll", function(e) {
-// 	if (this.scrollTop > 1) {
-// 	wrap.addClass("fix-search");
-// 	} else {
-// 	wrap.removeClass("fix-search");
-// 	}
-// });
-
-// ==============================================================================

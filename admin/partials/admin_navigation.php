@@ -117,13 +117,13 @@
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-						<img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg">
+						<img class="user-avatar rounded-circle mr-2" src="../assets/images/profile/3.jpg">
 						<span class="d-none d-md-inline-block">
 							
 						<?php  
 
 						if (isset($_SESSION['username'])) {
-							echo $_SESSION['firstname'] . ' ' . $_SESSION['lastname'];
+							echo $_SESSION['firstname'] . " " . $_SESSION['lastname'];
 						}
 
 						?>
@@ -133,12 +133,6 @@
 					<div class="dropdown-menu dropdown-menu-small">
 						<a class="dropdown-item" href="users.php?source=edit_user">
 							<i class="material-icons">&#xE7FD;</i> Profile
-						</a>
-						<a class="dropdown-item" href="components-blog-posts.html">
-							<i class="material-icons">vertical_split</i> Blog Posts
-						</a>
-						<a class="dropdown-item" href="add-new-post.html">
-							<i class="material-icons">note_add</i> Add New Post
 						</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item text-danger" href="../includes/logout.php">

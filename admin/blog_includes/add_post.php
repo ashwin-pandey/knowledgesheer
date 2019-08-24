@@ -16,16 +16,16 @@ if(isset($_POST['public'])) {
 	$post_sub_category_id	= $_POST['post_sub_category'];
 	$post_tags			= $_POST['post_tags'];
 
-	// $post_image 		= escape($_FILES['post_image']['name']);
-	// $post_image_temp	= escape($_FILES['post_image']['tmp_name']);
+	$post_image 		= escape($_FILES['post_image']['name']);
+	$post_image_temp	= escape($_FILES['post_image']['tmp_name']);
 
-	// move_uploaded_file($post_image_temp, "../assets/images/blog-images/$post_image" );
+	move_uploaded_file($post_image_temp, "../assets/images/blog-images/$post_image" );
 
 	$post_date			= escape(date('d-m-y'));
 
-	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_sub_cat_id, post_title, post_author, post_date, post_content, post_tags, post_status, post_description) VALUES (?, ?, ?, ?, now(), ?, ?, ?, ?)");
+	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_sub_cat_id, post_title, post_author, post_date, post_content, post_tags, post_status, post_image, post_description) VALUES (?, ?, ?, ?, now(), ?, ?, ?, ?, ?)");
 
-	mysqli_stmt_bind_param($stmt, 'ssssssss', $post_category_id, $post_sub_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_description);
+	mysqli_stmt_bind_param($stmt, 'sssssssss', $post_category_id, $post_sub_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_image, $post_description);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 
@@ -88,29 +88,6 @@ if(isset($_POST['public'])) {
 				</div>
 				<div class='card-body p-0'>
 					<ul class="list-group list-group-flush">
-						<!-- <li class="list-group-item p-3">
-							<span class="d-flex mb-2">
-								<i class="material-icons mr-1">flag</i>
-								<strong class="mr-1">Status:</strong> Draft
-								<a class="ml-auto" href="#">Edit</a>
-							</span>
-							<span class="d-flex mb-2">
-								<i class="material-icons mr-1">visibility</i>
-								<strong class="mr-1">Visibility:</strong>
-								<strong class="text-success">Public</strong>
-								<a class="ml-auto" href="#">Edit</a>
-							</span>
-							<span class="d-flex mb-2">
-								<i class="material-icons mr-1">calendar_today</i>
-								<strong class="mr-1">Schedule:</strong> Now
-								<a class="ml-auto" href="#">Edit</a>
-							</span>
-							<span class="d-flex">
-								<i class="material-icons mr-1">score</i>
-								<strong class="mr-1">Readability:</strong>
-								<strong class="text-warning">Ok</strong>
-							</span>
-						</li> -->
 						<li class="list-group-item d-flex px-3">
 							<button type="submit" name="draft" class="btn btn-sm btn-outline-accent">
 							<i class="material-icons">save</i> Save Draft</button>
@@ -200,6 +177,17 @@ if(isset($_POST['public'])) {
 				</div>
 			</div>
 			<!-- / Post Description -->
+			<!-- Post Image -->
+			<div class='card card-small mb-3'>
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Short Description</h6>
+				</div>
+				<div class='card-body p-0'>
+					<input  type="file" class="form-control" id="file-input" name="post_image" required>
+					<div id="thumb-output" style="width: 235px;"></div>
+				</div>
+			</div>
+			<!-- / Post Image -->
 		</div>
 	</div>
 </form>

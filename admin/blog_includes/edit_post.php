@@ -9,18 +9,18 @@
 	$select_posts_by_id = query($query);
 
 	while($row = mysqli_fetch_assoc($select_posts_by_id)) {
-		$post_id            = $row['post_id'];
-		$post_author        = $row['post_author'];
-		$post_title         = $row['post_title'];
-		$post_category_id   = $row['post_category_id'];
+		$post_id            	= $row['post_id'];
+		$post_author        	= $row['post_author'];
+		$post_title         	= $row['post_title'];
+		$post_category_id   	= $row['post_category_id'];
 		$post_sub_category_id   = $row['post_sub_cat_id'];
-		$post_status        = $row['post_status'];
-		$post_image         = $row['post_image'];
-		$post_content       = $row['post_content'];
-		$post_description	= $row['post_description'];
-		$post_tags          = $row['post_tags'];
-		$post_comment_count = $row['post_comment_count'];
-		$post_date          = $row['post_date'];
+		$post_status        	= $row['post_status'];
+		$post_image         	= $row['post_image'];
+		$post_content       	= $row['post_content'];
+		$post_description		= $row['post_description'];
+		$post_tags          	= $row['post_tags'];
+		$post_comment_count 	= $row['post_comment_count'];
+		$post_date          	= $row['post_date'];
 
 	}
 
@@ -33,23 +33,34 @@
 		$post_description    	=  $_POST['post_description'];
 		$post_tags           	=  $_POST['post_tags'];
 
-		// $post_title = mysqli_real_escape_string($connection, $post_title);
+		$post_image          	=  escape($_FILES['post_image']['name']);
+		$post_image_temp     	=  escape($_FILES['post_image']['tmp_name']);
+
+		move_uploaded_file($post_image_temp, "../assets/images/blog-images/$post_image"); 
+		if(empty($post_image)) {
+			$query = "SELECT * FROM blog_posts WHERE post_id = " . $the_post_id;
+			$select_image = query($query);
+			confirmQuery($select_image);
+			while($row = mysqli_fetch_array($select_image)) {
+				$post_image = $row['post_image'];
+			}
+		}
 
 		$query  = "UPDATE blog_posts SET ";
 		$query .= "post_title  = ?, ";
 		$query .= "post_category_id = ?, ";
 		$query .= "post_sub_cat_id = ?, ";
 		$query .= "post_tags = ?, ";
+		$query .= "post_image = ?, ";
 		$query .= "post_content = ?, ";
 		$query .= "post_description = ? ";
 		$query .= "WHERE post_id = ? ";
 		
-		// $stmt = mysqli_prepare($connection, $query);
 		$stmt = mysqli_prepare($connection, $query);
 		if (!$stmt) {
 			die("Query Failed! - " . mysqli_error($connection));
 		}
-		mysqli_stmt_bind_param($stmt, 'ssssssi', $post_title, $post_category_id, $post_sub_category_id, $post_tags, $post_content, $post_description, $the_post_id);
+		mysqli_stmt_bind_param($stmt, 'sssssssi', $post_title, $post_category_id, $post_sub_category_id, $post_tags, $post_image, $post_content, $post_description, $the_post_id);
 
 		mysqli_stmt_execute($stmt);
 
@@ -69,15 +80,8 @@
 	}
 
 ?>
-
-
-
-
-
 <style>
-.ck-editor__editable {
-	min-height: 412px;
-}
+.ck-editor__editable{min-height: 412px;}
 </style>
 
 <!-- Page Header -->
@@ -210,6 +214,20 @@
 				</div>
 			</div>
 			<!-- / Post Description -->
+			<!-- Post Image -->
+			<div class='card card-small mb-3'>
+				<div class="card-header border-bottom">
+					<h6 class="m-0">Short Description</h6>
+				</div>
+				<div class='card-body p-0 text-center'>
+					<label>Previous Image</label>
+					<img width="200" src="../assets/images/blog-images/<?php echo $post_image; ?>" alt="">
+					<label>Set a new one!</label>
+					<input  type="file" id="file-input" name="post_image" value="../assets/images/blog-images/<?php echo $post_image; ?>">
+					<div id="thumb-output" style="width: 235px;"></div>
+				</div>
+			</div>
+			<!-- / Post Image -->
 		</div>
 	</div>
 </form>

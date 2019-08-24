@@ -70,7 +70,7 @@
 		echo 
 		"<div>
 		<p style='display: inline-block;' class=''>Post Updated. 
-			<a class='btn btn-sm btn-info' href='../blog_post.php?p_id={$the_post_id}'>View Post </a> 
+			<a class='btn btn-sm btn-info' target='_blank' href='../blog_post.php?p_id={$the_post_id}'>View Post </a> 
 			or 
 			<a class='btn btn-sm btn-secondary' href='blog.php?source=view_all_posts'>Edit More Posts</a>
 			or

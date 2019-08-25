@@ -6,22 +6,24 @@ if(isset($_GET['edit_user'])){
 	$select_users_query = mysqli_query($connection,$query);  
 
 	while($row = mysqli_fetch_assoc($select_users_query)) {
-		$user_id        = $row['user_id'];
-		$username       = $row['username'];
-		$user_firstname = $row['user_firstname'];
-		$user_lastname  = $row['user_lastname'];
-		$user_email     = $row['user_email'];
-		$user_image     = $row['user_image'];
-		$user_role      = $row['user_role'];
+		$user_id        	= $row['user_id'];
+		$username       	= $row['username'];
+		$user_firstname 	= $row['user_firstname'];
+		$user_lastname  	= $row['user_lastname'];
+		$user_email     	= $row['user_email'];
+		$user_image     	= $row['user_image'];
+		$user_role      	= $row['user_role'];
+		$user_description   = $row['user_description'];
 	}
 
 
 	if(isset($_POST['edit_user'])) {
-		$user_firstname   = escape($_POST['user_firstname']);
-		$user_lastname    = escape($_POST['user_lastname']);
-		$user_role        = escape($_POST['user_role']);
-		$username      = escape($_POST['username']);
-		$user_email    = escape($_POST['user_email']);
+		$user_firstname   	= escape($_POST['user_firstname']);
+		$user_lastname    	= escape($_POST['user_lastname']);
+		$user_role        	= escape($_POST['user_role']);
+		$username      		= escape($_POST['username']);
+		$user_email    		= escape($_POST['user_email']);
+		$user_description   = escape($_POST['user_description']);
 
 		$user_image = $_FILES['user_image']['name'];
 		$user_image_temp = $_FILES['user_image']['tmp_name'];
@@ -55,17 +57,14 @@ if(isset($_GET['edit_user'])){
 		$query .="user_role   =  ?, ";
 		$query .="username = ?, ";
 		$query .="user_email = ?, ";
-		$query .="user_image = ? " ;
+		$query .="user_image = ?, " ;
+		$query .="user_description = ? " ;
 		$query .= "WHERE user_id = ? ";
-
 
 		$stmt = mysqli_prepare($connection, $query);
 		confirmQuery($stmt);
-		mysqli_stmt_bind_param($stmt, 'ssssssi', $user_firstname, $user_lastname, $user_role, $username, $user_email, $user_image, $the_user_id);
+		mysqli_stmt_bind_param($stmt, 'sssssssi', $user_firstname, $user_lastname, $user_role, $username, $user_email, $user_image, $user_description, $the_user_id);
 		mysqli_stmt_execute($stmt);
-
-
-		// echo "User Updated" . " <a href='users.php'>View Users?</a>";
 
 		echo "
 		<div class='alert alert-success alert-dismissible fade show mb-0' role='alert'>
@@ -96,6 +95,7 @@ if(isset($_GET['edit_user'])){
 				<h4 class="mb-0"><?php echo $user_firstname . " " . $user_lastname; ?></h4>
 				<span class="text-muted d-block mb-2"><?php echo $user_role; ?></span>
 				<span class="text-muted d-block mb-2"><?php echo $user_email; ?></span>
+				<span class="text-left d-block mb-2"><?php echo $user_description; ?></span>
 			</div>
 		</div>
 	</div>
@@ -153,6 +153,11 @@ if(isset($_GET['edit_user'])){
 									<div class="form-group col-md-6">
 										<label for="fePassword">Profile Image</label>
 										<input type="file" class="form-control" name="user_image" value="<?php echo($user_image) ?>"> 
+									</div>
+								</div>
+								<div class="form-row">
+									<div class="form-group col-12">
+										<textarea name="user_description" class="form-control" cols="30" rows="5"><?php echo $user_description; ?></textarea>
 									</div>
 								</div>
 								<button type="submit" name="edit_user" class="btn btn-accent">Update Account</button>

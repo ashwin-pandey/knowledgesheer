@@ -104,12 +104,32 @@ if (isset($_GET['p_id'])) {
 					<img class="img-fluid mr-3 rounded-circle float-left" src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $user_firstname . " " . $user_lastname; ?>">
 					<div class="align-self-center ml-5">
 						<p class="mt-0 mb-0 written-by">WRITTEN BY</p>
-						<a href="users.php?u_id=<?php echo $user_id ?>" class="mb-0 mt-0 user-name"><?php echo $user_firstname . " " . $user_lastname; ?></a>
+						<a href="user_posts.php?u_id=<?php echo $user_id ?>" class="mb-0 mt-0 user-name"><?php echo $user_firstname . " " . $user_lastname; ?></a>
 						<p class="mb-0 mt-0 user-description"><?php echo substr($user_description, 0, 50); ?> ...</p>
 					</div>
 				</li>
-			</ul>
+				<li class="mt-4">
+					<!-- <img class="img-fluid mr-3 rounded-circle float-left" src="assets/images/profile/<?php // echo $user_image; ?>" alt="<?php // echo $user_firstname . " " . $user_lastname; ?>"> -->
 
+					<?php 
+
+					$query = "SELECT cat_id, cat_title, cat_description FROM categories WHERE cat_id = ? ";
+					$cat_stmt = mysqli_prepare($connection, $query);
+					confirmQuery($cat_stmt);
+					mysqli_stmt_bind_param($cat_stmt, 'i', $post_category_id);
+					mysqli_stmt_execute($cat_stmt);
+					mysqli_stmt_store_result($cat_stmt);
+					mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description);
+					$cat_stmt->fetch();
+
+					?>
+					<div class="align-self-center ml-5">
+						<p class="mt-0 mb-0 written-by">Category</p>
+						<a href="category.php?category=<?php echo $cat_id ?>" class="mb-0 mt-0 user-name"><?php echo $cat_title; ?></a>
+						<p class="mb-0 mt-0 user-description"><?php echo substr($cat_description, 0, 50); ?> ...</p>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</div>
 <?php } include './partials/footer.php'; ?>

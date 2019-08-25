@@ -5,14 +5,19 @@ include './admin/functions.php';
 if (isset($_GET['category'])) {
 	$post_category_id = $_GET['category'];
 
-	$query = "SELECT * FROM categories WHERE cat_id = " . $post_category_id;
-	$cat_query = query($query);
-	confirmQuery($cat_query);
+	$query = "SELECT * FROM categories WHERE cat_id = ? ";
+	$cat_stmt = mysqli_prepare($connection, $query);
+	mysqli_stmt_bind_param($cat_stmt, "i", $post_category_id);
+	mysqli_stmt_execute($cat_stmt);
+	confirmQuery($cat_stmt);
+	mysqli_stmt_store_result($cat_stmt);
+	mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description);
+	mysqli_stmt_fetch($cat_stmt);
 
-	while ($row = mysqli_fetch_assoc($cat_query)) {
-		$cat_id = $row['cat_id'];
-		$cat_title = $row['cat_title'];
-	}
+	// while ($row = mysqli_fetch_assoc($cat_query)) {
+	// 	$cat_id = $row['cat_id'];
+	// 	$cat_title = $row['cat_title'];
+	// }
 
 $title = $cat_title; 
 $page = 'category';
@@ -53,7 +58,7 @@ include 'partials/header.php';
 				} else {
 					$count  = ceil($count /$per_page);
 
-					$query = 'SELECT * FROM blog_posts ORDER BY post_id DESC LIMIT ' .$page_1. ',' .$per_page;
+					$query = 'SELECT * FROM blog_posts WHERE post_category_id = ' .$post_category_id .' ORDER BY post_id DESC LIMIT ' .$page_1. ',' .$per_page;
 					$blog_posts = query($query);
 					confirmQuery($blog_posts);
 

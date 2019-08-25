@@ -60,7 +60,7 @@ html {
 /* Navbar */
 #mainNav {
 	background-color: #fff;
-	box-shadow: 0 4px 8px  rgba(0, 0, 0, 0.14);
+	box-shadow: 0 2px 4px  rgba(0, 0, 0, 0.14);
 	color: #000 !important;
 }
 #mainNav .navbar-brand,
@@ -167,6 +167,7 @@ blockquote {
 }
 
 .post-author {
+	font-family: 'Roboto', sans-serif;
 	margin-top: 20px;
 	font-size: 16px;
 	line-height: 20px;
@@ -177,6 +178,7 @@ blockquote {
 	width: 48px;
 }
 .post-author .user-name {
+	font-family: 'Roboto', sans-serif;
 	color: rgba(0, 0, 0, 0.84);
 }
 .post-author .date {
@@ -214,6 +216,7 @@ blockquote {
 }
 .more-from .card-body {
 	border-radius: 4px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .more-from h4 {
@@ -223,5 +226,32 @@ blockquote {
 .more-from p {
 	margin: 0;
 	font-size: 16px;
+	color: rgba(0, 0, 0, 0.54);
+}
+
+.blog-post .author-info {
+	font-family: 'Roboto', sans-serif;
+}
+.blog-post .author-info img {
+	height: 80px;
+	width: 80px;
+}
+.blog-post .author-info a:hover {
+	text-decoration: none;
+}
+.blog-post .author-info li {
+	position: relative;
+	list-style: none;
+}
+.blog-post .author-info .written-by {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: rgba(0, 0, 0, 0.54);
+}
+.blog-post .author-info .user-name {
+	font-size: 20px;
+}
+.blog-post .author-info .user-description {
+	font-size: 15px;
 	color: rgba(0, 0, 0, 0.54);
 }

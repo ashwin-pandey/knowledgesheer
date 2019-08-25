@@ -29,6 +29,7 @@ if ($page == 'blog_post' || $page == 'category') {
 	<link href='assets/css/open-sans-font.css' rel='stylesheet'>
 	<link href="assets/css/clean-blog.min.css" rel="stylesheet">
 	<link href="./assets/css/style.css" rel="stylesheet" >
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
 <body>
 
 	<?php include 'navigation.php'; ?>

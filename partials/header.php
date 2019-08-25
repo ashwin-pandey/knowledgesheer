@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <?php
-if ($page == 'blog_post' || $page == 'category') {
+if ($page == 'blog_post' || $page == 'category' || $page == 'user_posts') {
 } else {
 	include 'includes/db.php';
 	include './admin/functions.php';

@@ -283,4 +283,14 @@ function updateCategories() {
 	}
 }
 
+function read_time($post_content) {
+	$word_count = str_word_count($post_content);
+	$min = floor($word_count / 200);
+	if ($min < 1) {
+		return 1;
+	} else {
+		return $min;
+	}
+}
+
 ?>

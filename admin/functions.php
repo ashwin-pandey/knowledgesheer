@@ -283,6 +283,7 @@ function updateCategories() {
 	}
 }
 
+// Estimated Read Time 
 function read_time($post_content) {
 	$word_count = str_word_count($post_content);
 	$min = floor($word_count / 200);

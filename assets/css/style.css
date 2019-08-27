@@ -180,12 +180,15 @@ blockquote {
 	font-family: Georgia, Cambria, "Times New Roman", Times, serif;
 	margin-top: 0.78rem;
 }
-.post-title {
-	font-size: 24px !important;
+.blog-post .post-title h1 {
+	font-size: 34px !important;
 	line-height: 28px;
 	color: #252525;
 	font-weight: 600;
 	color: rgba(0,0,0,.84);
+}
+.post-title a {
+	font-weight: 600;
 }
 .post-title a:hover {
 	text-decoration: none;
@@ -230,6 +233,13 @@ blockquote {
 	.post-image {
 		margin-left: -15px;
 		margin-right: -15px;
+	}
+	.blog-post .post-title h1 {
+		font-size: 26px !important;
+	}
+	.post-content p {
+		margin: 10px 0;
+		font-size: 14px;
 	}
 }
 .post-content {

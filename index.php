@@ -11,7 +11,7 @@ include 'partials/header.php';
 
 		<!-- Main Content -->
 		<div class="row">
-			<div class="col-lg-8 col-md-8 col-12">
+			<div class="col-md-8 col-md-offset-2 col-xs-12 mx-auto col-12">
 
 				<?php
 
@@ -49,6 +49,9 @@ include 'partials/header.php';
 						$post_description = stripcslashes($row['post_description']);
 						$post_date = $row['post_date'];
 						$post_author = $row['post_author'];
+						$post_content = $row['post_content'];
+						$post_image = $row['post_image'];
+						$post_category_id = $row['post_category_id'];
 
 						// $query = 'SELECT user_firstname, user_lastname FROM users WHERE username='.$post_author;
 						// $select_author = query($query);
@@ -56,22 +59,46 @@ include 'partials/header.php';
 						// $row = mysqli_fetch_assoc($select_author);
 						// $user_firstname = $row['user_firstname'];
 						// $user_lastname = $row['user_lastname'];
+						$query = "SELECT user_id, user_firstname, user_lastname FROM users WHERE username = ? ";
+						$user_stmt = mysqli_prepare($connection, $query);
+						mysqli_stmt_bind_param($user_stmt, 's', $post_author);
+						mysqli_stmt_execute($user_stmt);
+						confirmQuery($user_stmt);
+						mysqli_stmt_store_result($user_stmt);
+						mysqli_stmt_bind_result($user_stmt, $user_id, $user_firstname, $user_lastname);
+						mysqli_stmt_fetch($user_stmt);
+						$user_full_name = $user_firstname . " " . $user_lastname;
 
 				?>
 	
-				<div class="post-preview">
-					<a href="blog_post.php?p_id=<?php echo $post_id; ?>">
-						<h2 class="post-title">
-						Man must explore, and this is exploration at its greatest
-						</h2>
+				<div class="post-preview media">
+					<div class="media-body post-body">
+						<div class="post-category"><?php echo findCategoryTitle($post_category_id); ?></div>
+						<a href="blog_post.php?p_id=<?php echo $post_id; ?>">
+							<h2 class="post-title">
+							<?php echo $post_title; ?>
+							</h2>
+						</a>
 						<h3 class="post-subtitle">
-						Problems look mighty small from 150 miles up
+						<?php echo substr($post_description, 0, 30) ?>
 						</h3>
-					</a>
-					<p class="post-meta">Posted by
-						<a href="#"><?php echo $post_author; ?></a>
-						on <?php echo date('F j, Y', strtotime($post_date)); ?>
-					</p>
+						<div class="user-post mt-3">
+							<div class="media post-author m-0 mb-3 align-self-center">
+								<div class="media-body align-self-center">
+									<div class="user-name">
+										<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $user_full_name; ?></a>
+									</div>
+									<div class="date">
+										<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
+											<?php echo read_time($post_content); ?> min read</small>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="blog-post-image align-self-start">
+						<img class="img-fluid" src="assets/images/blog-images/<?php echo $post_image; ?>" alt="">
+					</div>
 				</div>
 				<hr>
 

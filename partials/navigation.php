@@ -17,7 +17,7 @@
 				</li> -->
 				<?php if (isLoggedIn()) { ?>
 					<?php if (is_admin($_SESSION['username'])) { ?>
-					<li class="nav-item"><a class="nav-link" href="/knowledgesheer/admin/">Dashboard</a></li>
+						<li class="nav-item"><a class="nav-link" href="/knowledgesheer/admin/">Dashboard</a></li>
 					<?php } ?>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" style="text-transform: none;" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
@@ -28,8 +28,8 @@
 						</div>
 					</li>
 				<?php } else { ?>
-				<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
-				<li class="nav-item"><a class="nav-link" href="registration.php">Sign Up</a></li>
+					<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+					<li class="nav-item"><a class="nav-link" href="registration.php">Sign Up</a></li>
 				<?php } ?>
 			</ul>
 		</div>
@@ -37,22 +37,22 @@
 </nav>
 <!-- <?php // if ($page == 'blog_post' || $page == 'login' || $page == 'register') { ?> -->
 <?php if ($page == 'home') { ?>
-<div class="top-margin"></div>
-<header class="masthead" style="background-image: url('./assets/images/page-headers/home-bg.jpg')">
-	<div class="overlay"></div>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8 col-md-10 mx-auto">
-				<div class="site-heading">
-					<h1><?php echo $header_title; ?></h1>
-					<span class="subheading">A Simple Blog For Sharing Knowledge</span>
+	<div class="top-margin"></div>
+	<header class="masthead" style="background-image: url('./assets/images/page-headers/home-bg.jpg')">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-10 mx-auto">
+					<div class="site-heading">
+						<h1><?php echo $header_title; ?></h1>
+						<span class="subheading">A Simple Blog For Sharing Knowledge</span>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</header>
+	</header>
 
 <?php } else { ?>
-<article>
+	<article>
 
-<?php } ?>
+		<?php } ?>

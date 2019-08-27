@@ -43,17 +43,15 @@ if (isset($_GET['p_id'])) {
 			<div class="post-title">
 				<h1 class="m-0"><?php echo $post_title; ?></h1>
 			</div>
-			<div class="post-author align-self-center">
-				<div class="media">
-					<img src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $post_author; ?>" class="mr-3 mt-0 rounded-circle">
-					<div class="media-body align-self-center">
-						<div class="user-name">
-							<a href="#"><?php echo $user_firstname . " " . $user_lastname; ?></a>
-						</div>
-						<div class="date">
-							<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
-								<?php echo read_time($post_content); ?> min read</small>
-						</div>
+			<div class="media post-author align-self-center">
+				<img src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $post_author; ?>" class="mr-3 mt-0 rounded-circle">
+				<div class="media-body align-self-center">
+					<div class="user-name">
+						<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $user_firstname . " " . $user_lastname; ?></a>
+					</div>
+					<div class="date">
+						<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
+							<?php echo read_time($post_content); ?> min read</small>
 					</div>
 				</div>
 			</div>
@@ -100,33 +98,38 @@ if (isset($_GET['p_id'])) {
 			<hr>
 
 			<ul class="author-info p-0 mt-4">
-				<li>
-					<img class="img-fluid mr-3 rounded-circle float-left" src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $user_firstname . " " . $user_lastname; ?>">
-					<div class="align-self-center ml-5">
+				<li class="media">
+					<img class="img-fluid mr-3 rounded-circle" src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $user_firstname . " " . $user_lastname; ?>">
+					<div class="media-body align-self-center">
 						<p class="mt-0 mb-0 written-by">WRITTEN BY</p>
 						<a href="user_posts.php?u_id=<?php echo $user_id ?>" class="mb-0 mt-0 user-name"><?php echo $user_firstname . " " . $user_lastname; ?></a>
+						<?php if (!empty($user_description)) { ?>
 						<p class="mb-0 mt-0 user-description"><?php echo substr($user_description, 0, 50); ?> ...</p>
+						<?php } ?>
 					</div>
 				</li>
-				<li class="mt-4">
-					<!-- <img class="img-fluid mr-3 rounded-circle float-left" src="assets/images/profile/<?php // echo $user_image; ?>" alt="<?php // echo $user_firstname . " " . $user_lastname; ?>"> -->
-
+				<li class="mt-4 media">
 					<?php 
 
-					$query = "SELECT cat_id, cat_title, cat_description FROM categories WHERE cat_id = ? ";
+					$query = "SELECT cat_id, cat_title, cat_description, cat_image FROM categories WHERE cat_id = ? ";
 					$cat_stmt = mysqli_prepare($connection, $query);
 					confirmQuery($cat_stmt);
 					mysqli_stmt_bind_param($cat_stmt, 'i', $post_category_id);
 					mysqli_stmt_execute($cat_stmt);
 					mysqli_stmt_store_result($cat_stmt);
-					mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description);
+					mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description, $cat_image);
 					$cat_stmt->fetch();
 
 					?>
-					<div class="align-self-center ml-5">
+					<?php if(!empty($cat_image)) { ?>
+					<img src="assets/images/cat-images/<?php echo $cat_image; ?>" alt="<?php echo $cat_title; ?>">
+					<?php } ?>
+					<div class="media-body align-self-center">	
 						<p class="mt-0 mb-0 written-by">Category</p>
 						<a href="category.php?category=<?php echo $cat_id ?>" class="mb-0 mt-0 user-name"><?php echo $cat_title; ?></a>
+						<?php if (!empty($cat_description)) { ?>
 						<p class="mb-0 mt-0 user-description"><?php echo substr($cat_description, 0, 50); ?> ...</p>
+						<?php } ?>
 					</div>
 				</li>
 			</ul>

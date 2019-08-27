@@ -4,20 +4,14 @@ include './admin/functions.php';
 
 if (isset($_GET['category'])) {
 	$post_category_id = $_GET['category'];
-
 	$query = "SELECT * FROM categories WHERE cat_id = ? ";
 	$cat_stmt = mysqli_prepare($connection, $query);
 	mysqli_stmt_bind_param($cat_stmt, "i", $post_category_id);
 	mysqli_stmt_execute($cat_stmt);
 	confirmQuery($cat_stmt);
 	mysqli_stmt_store_result($cat_stmt);
-	mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description);
+	mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description, $cat_image);
 	mysqli_stmt_fetch($cat_stmt);
-
-	// while ($row = mysqli_fetch_assoc($cat_query)) {
-	// 	$cat_id = $row['cat_id'];
-	// 	$cat_title = $row['cat_title'];
-	// }
 
 $title = $cat_title; 
 $page = 'category';
@@ -83,10 +77,10 @@ include 'partials/header.php';
 						<h2 class="post-title">
 						Man must explore, and this is exploration at its greatest
 						</h2>
-						<h3 class="post-subtitle">
-						Problems look mighty small from 150 miles up
-						</h3>
 					</a>
+					<h3 class="post-subtitle">
+					Problems look mighty small from 150 miles up
+					</h3>
 					<p class="post-meta">Posted by
 						<a href="#"><?php echo $post_author; ?></a>
 						on <?php echo date('F j, Y', strtotime($post_date)); ?>

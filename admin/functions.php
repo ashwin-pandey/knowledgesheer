@@ -262,6 +262,7 @@ function deleteSubCategories() {
 }
 
 function updateCategories() {
+	global $connection;
 	if(isset($_POST['update_category'])) {
 		$update_cat_title = escape($_POST['cat_title']);
 		$update_query = 'UPDATE categories SET cat_title = ?, cat_description = ? WHERE cat_id = ? ';
@@ -281,6 +282,19 @@ function updateCategories() {
 		mysqli_stmt_execute($stmt);
 		redirect("categories.php");
 	}
+}
+
+function findCategoryTitle($post_category_id) {
+	global $connection;
+	$query = "SELECT * FROM categories WHERE cat_id = ? ";
+	$cat = mysqli_prepare($connection, $query);
+	mysqli_stmt_bind_param($cat, 'i', $post_category_id);
+	mysqli_stmt_execute($cat);
+	confirmQuery($cat);
+	mysqli_stmt_store_result($cat);
+	mysqli_stmt_bind_result($cat, $cat_id, $cat_title, $cat_description, $cat_image);
+	mysqli_stmt_fetch($cat);
+	return $cat_title;
 }
 
 // Estimated Read Time 

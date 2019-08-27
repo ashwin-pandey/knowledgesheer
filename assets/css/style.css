@@ -159,10 +159,17 @@ blockquote {
 	font-family: Georgia, Cambria, "Times New Roman", Times, serif;
 	margin-top: 0.78rem;
 }
-.post-title h1 {
-	font-size: 40px;
-	line-height: 48px;
+.post-title {
+	font-size: 24px !important;
+	line-height: 28px;
 	color: #252525;
+	font-weight: 600;
+	color: rgba(0,0,0,.84);
+}
+.post-subtitle {
+	font-size: 16px;
+	line-height: 20px;
+	color: rgba(0,0,0,0.54);
 	font-weight: 400;
 }
 
@@ -180,6 +187,7 @@ blockquote {
 .post-author .user-name {
 	font-family: 'Roboto', sans-serif;
 	color: rgba(0, 0, 0, 0.84);
+	font-size: 15px !important;
 }
 .post-author .date {
 	color: rgba(0, 0, 0, 0.54);
@@ -229,8 +237,8 @@ blockquote {
 	color: rgba(0, 0, 0, 0.54);
 }
 
-.blog-post .author-info {
-	font-family: 'Roboto', sans-serif;
+.blog-post {
+	font-family: 'Roboto', sans-serif !important;
 }
 .blog-post .author-info img {
 	height: 80px;
@@ -254,4 +262,131 @@ blockquote {
 .blog-post .author-info .user-description {
 	font-size: 15px;
 	color: rgba(0, 0, 0, 0.54);
+}
+.blog-post-image {
+	width: 152px !important;
+	height: 100%;
+	overflow: hidden;
+}
+.post-body {
+	margin-right: 24px;
+}
+.post-category {
+	font-family: 'Roboto', sans-serif;
+	text-transform: uppercase;
+	font-size: 15px;
+	letter-spacing: .03em;
+	font-weight: 400;
+	color: rgba(0,0,0,0.54);
+}
+@media (max-width: 551.98px) {
+	.post-title {
+		font-size: 18px !important;
+		line-height: 1.2;
+	}
+	.post-body {
+		margin-right: 16px;
+	}
+	.blog-post-image {
+		height: 80px !important;
+		width: 80px !important;
+		overflow: hidden;
+	}
+	.post-category {
+		font-size: 13px;
+	}
+}
+
+
+/* User Posts */
+.user-post {
+	font-family: 'Roboto', sans-serif;
+}
+.hero-profile {
+	padding: 20px 20px 30px;
+}
+.hero-profile li {
+	list-style: none;
+}
+.hero-profile li img {
+	height: 100px;
+	width: 100px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	display: flex;
+}
+.hero-profile h1 {
+	font-weight: 600;
+	font-size: 25px;
+	letter-spacing: -1px;
+	color: rgba(0, 0, 0, 0.84);
+	margin-bottom: 4px;
+}
+.hero-profile .description {
+	color: rgba(0, 0, 0, 0.76);
+	font-size: 16px;
+}
+@media (max-width: 551.98px) {
+	.hero-profile li img {
+		height: 80px;
+		width: 80px;
+	}
+	.hero-profile h1 {
+		font-size: 22px;
+	}
+	.hero-profile .description {
+		font-size: 14px;
+	}
+	.user-post-card-body .user-name a {
+		font-size: 15px;
+	}
+}
+.user-post .post-author .user-name {
+	font-size: 16px;
+}
+.user-post .post-author img {
+	height: 40px;
+	width: 40px;
+}
+.user-post .user-post-card-body {
+	padding: 10px 20px 15px;
+}
+.user-post .user-blog-posts .post-image {
+	height: 180px;
+	width: 100%;
+	overflow: hidden;
+	border-radius: 2px;
+}
+@media (max-width: 551.98px) {
+	.user-post .user-blog-posts .post-image {
+		height: 84px;
+	}
+	.user-post .user-post-card-body {
+		padding: 0;
+	}
+}
+.user-blog-posts .post-title h1 {
+	font-size: 26px;
+	line-height: 1.04;
+	letter-spacing: -.015em;
+	font-weight: 600;
+}
+.user-blog-posts .post-title h1:hover {
+	text-decoration: none;
+}
+.user-blog-posts .post-description {
+	margin-top: 5px;
+	margin-bottom: 7px;
+	color: rgba(0,0,0,.54);
+	font-size: 20px;
+	line-height: 1.22;
+	letter-spacing: -.012em;
+}
+.user-blog-posts .read-more a {
+	font-size: 12px;
+	color: rgba(0,0,0,.54);
+}
+.user-post-card-body {
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(0,0,0,.09);
 }

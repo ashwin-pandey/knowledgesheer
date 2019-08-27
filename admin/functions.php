@@ -197,9 +197,10 @@ function insertCategory() {
 		if($cat_title == "" || empty($cat_title)) {
 			echo "This Field should not be empty";
 		} else {
-			$stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title) VALUES(?) ");
-			mysqli_stmt_bind_param($stmt, 's', $cat_title);
+			$stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title, cat_description, cat_image) VALUES(?, ?, ?) ");
+			mysqli_stmt_bind_param($stmt, 'sss', $cat_title, $cat_description, $cat_image);
 			mysqli_stmt_execute($stmt);
+			confirmQuery($stmt);
 		}
 		mysqli_stmt_close($stmt);
 	}
@@ -259,29 +260,6 @@ function deleteSubCategories() {
 			}
 		}
 	// }
-}
-
-function updateCategories() {
-	global $connection;
-	if(isset($_POST['update_category'])) {
-		$update_cat_title = escape($_POST['cat_title']);
-		$update_query = 'UPDATE categories SET cat_title = ?, cat_description = ? WHERE cat_id = ? ';
-		$stmt = mysqli_prepare($connection, $update_query);
-		confirmQuery($stmt);
-		mysqli_stmt_bind_param($stmt, 'ssi', $update_cat_title, $cat_description, $cat_id);
-		mysqli_stmt_execute($stmt);
-		redirect("categories.php");
-	}
-	if(isset($_POST['update_sub_category'])) {
-		$update_cat_title = escape($_POST['sub_cat_title']);
-		$parent_cat_id = escape($_POST['parent_id']);
-		$update_query = 'UPDATE sub_categories SET sub_cat_title = ?, parent_cat_id = ? WHERE sub_cat_id = ? ';
-		$stmt = mysqli_prepare($connection, $update_query);
-		confirmQuery($stmt);
-		mysqli_stmt_bind_param($stmt, 'ssi', $update_cat_title, $parent_cat_id, $sub_cat_id);
-		mysqli_stmt_execute($stmt);
-		redirect("categories.php");
-	}
 }
 
 function findCategoryTitle($post_category_id) {

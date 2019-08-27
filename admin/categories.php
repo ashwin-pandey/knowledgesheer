@@ -9,7 +9,7 @@ include 'partials/admin_header.php';
 <div class="page-header row no-gutters py-4">
 	<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
 		<span class="text-uppercase page-subtitle">Dashboard</span>
-		<h3 class="page-title">Overview</h3>
+		<h3 class="page-title">Category</h3>
 	</div>
 </div>
 <!-- End Page Header -->
@@ -17,15 +17,28 @@ include 'partials/admin_header.php';
 	<div class="col-4">
 		<?php insertCategory(); ?>
 
+		<?php
+		if(isset($_GET['edit'])) {
+			// $cat_id = $_GET['edit'];
+			include "blog_includes/update_categories.php";
+		}
+		if (isset($_GET['edit_sub'])) {
+			include "blog_includes/update_sub_categories.php";
+		}
+		?>
+
 		<div class="card p-3 mb-3">
 			<form class="" method="POST">
 				<div class="form-group">
-					<label class="card-title">Add Parent Category</label>
+					<label class="card-title">Add New Category</label>
 					<div class="form-group">
-						<input type="text" class="form-control" name="cat_title" placeholder="Category Title">
+						<input type="text" class="form-control" name="cat_title" placeholder="Category Title" required>
 					</div>
 					<div class="form-group">
 						<textarea name="cat_description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
+					</div>
+					<div class="form-group">
+						<input type="file" class="form-control" name="cat_image">
 					</div>
 					<div class="form-group">
 						<input type="submit" name="create_category" class="btn btn-sm btn-success">
@@ -33,7 +46,7 @@ include 'partials/admin_header.php';
 				</div>
 			</form>
 		</div>
-		<div class="card p-3 mb-3">
+<!-- 		<div class="card p-3 mb-3">
 			<form class="" method="POST">
 				<div class="form-group">
 					<label class="card-title">Add Sub Category</label>
@@ -45,14 +58,14 @@ include 'partials/admin_header.php';
 						<select class="form-control" name="parent_id">
 							<option value="0">None</option>
 							<?php
-							$query = 'SELECT * FROM categories';
-							$categories = query($query);
-							confirmQuery($categories);
-							while ($row = mysqli_fetch_assoc($categories)) {
-								$cat_id = $row['cat_id'];
-								$cat_title = $row['cat_title'];
-								echo "<option value='$cat_id'>$cat_title</option>";
-							}
+							// $query = 'SELECT * FROM categories';
+							// $categories = query($query);
+							// confirmQuery($categories);
+							// while ($row = mysqli_fetch_assoc($categories)) {
+							// 	$cat_id = $row['cat_id'];
+							// 	$cat_title = $row['cat_title'];
+							// 	echo "<option value='$cat_id'>$cat_title</option>";
+							// }
 							?>
 						</select>
 					</div>
@@ -61,17 +74,7 @@ include 'partials/admin_header.php';
 					</div>
 				</div>
 			</form>
-		</div>
-
-		<?php
-		if(isset($_GET['edit'])) {
-			// $cat_id = $_GET['edit'];
-			include "blog_includes/update_categories.php";
-		}
-		if (isset($_GET['edit_sub'])) {
-			include "blog_includes/update_sub_categories.php";
-		}
-		?>
+		</div> -->
 	</div>
 
 	<div class="col-4">
@@ -81,6 +84,7 @@ include 'partials/admin_header.php';
 					<tr>
 						<th>#</th>
 						<th>Title</th>
+						<th>Description</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -93,6 +97,8 @@ include 'partials/admin_header.php';
 					while ($row = mysqli_fetch_assoc($categories)) {
 						$cat_id 	= $row['cat_id'];
 						$cat_title 	= $row['cat_title'];
+						$cat_image 	= $row['cat_image'];
+						$cat_description 	= $row['cat_description'];
 
 						echo "<tr>";
 						echo "<td>{$cat_id}</td>";
@@ -115,7 +121,8 @@ include 'partials/admin_header.php';
 								</button>
 							</div>
 						</div>
-						</td>";
+						</td>
+						<td><img class='img-fluid' style='height: 46px;' src='../assets/images/cat-images/{$cat_image}'></td>";
 						echo "</tr>";
 					}
 

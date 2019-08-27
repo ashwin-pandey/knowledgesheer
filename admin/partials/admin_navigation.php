@@ -52,7 +52,7 @@
 				<div class="dropdown-menu dropdown-menu-small">
 					<a class="dropdown-item" href="quotes.php">Dashboard</a>
 					<a class="dropdown-item" href="quotes.php?source=view_all_quotes">View All Quotes</a>
-					<a class="dropdown-item" href="users.php?source=add_quote">Add New</a>
+					<a class="dropdown-item" href="quotes.php?source=add_quote">Add New</a>
 				</div>
 			</li>
 			<li class="nav-item dropdown">

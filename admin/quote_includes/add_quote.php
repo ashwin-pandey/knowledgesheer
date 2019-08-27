@@ -9,6 +9,31 @@
 <!-- End Page Header -->
 <form method="POST" enctype="multipart/form-data">
 	<div class="row">
-		
+		<div class="col-md-6">
+			<div class="card card-small">
+				<div class="card-body">
+					<div class="form-group">
+						<input type="file" id="file-input" name="quote_image" class="form-control" required>
+						<div id="thumb-output"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="card card-small">
+				<div class="card-body">
+					<div class="form-group">
+						<select name="quote_category" class="form-control">
+							<option value="">select category</option>
+							<option value="">Option 1</option>
+							<option value="">Option 2</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<textarea name="quote_content" cols="30" rows="5" class="form-control" placeholder="Keep #calm and #write something..."></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </form>

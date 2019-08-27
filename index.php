@@ -73,12 +73,15 @@ include 'partials/header.php';
 	
 				<div class="post-preview media">
 					<div class="media-body post-body">
-						<div class="post-category"><?php echo findCategoryTitle($post_category_id); ?></div>
-						<a href="blog_post.php?p_id=<?php echo $post_id; ?>">
-							<h2 class="post-title">
+						<div class="post-category">
+							<?php echo findCategoryTitle($post_category_id); ?>		
+						</div>
+						<h2 class="post-title">
+							<a href="blog_post.php?p_id=<?php echo $post_id; ?>">
 							<?php echo $post_title; ?>
-							</h2>
-						</a>
+							</a>
+						</h2>
+						
 						<h3 class="post-subtitle">
 						<?php echo substr($post_description, 0, 30) ?>
 						</h3>
@@ -97,7 +100,7 @@ include 'partials/header.php';
 						</div>
 					</div>
 					<div class="blog-post-image align-self-start">
-						<img class="img-fluid" src="assets/images/blog-images/<?php echo $post_image; ?>" alt="">
+						<img class="img-fluid" src="assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
 					</div>
 				</div>
 				<hr>

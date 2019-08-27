@@ -53,6 +53,27 @@ html {
 .search-bar .btn {
 	padding: .375rem .75rem !important;
 }
+.search-bar {
+	font-style: 'Roboto', sans-serif;
+	box-shadow: 0px 1px 4px rgba(0,0,0,0.12);
+}
+
+/* Sidebar Categories */
+.sidebar-categories {
+	font-family: 'Roboto', sans-serif;
+	box-shadow: 0px 1px 4px rgba(0,0,0,0.12);
+}
+.sidebar-categories .cat-title {
+	color: rgba(0,0,0,0.84);
+	font-weight: 400;
+	font-size: 15px;
+	text-transform: uppercase;
+	letter-spacing: .05em;
+}
+.sidebar-categories .cat-title a:hover {
+	text-decoration: none;
+}
+
 
 /*=================================*/
 
@@ -166,6 +187,9 @@ blockquote {
 	font-weight: 600;
 	color: rgba(0,0,0,.84);
 }
+.post-title a:hover {
+	text-decoration: none;
+}
 .post-subtitle {
 	font-size: 16px;
 	line-height: 20px;
@@ -188,6 +212,9 @@ blockquote {
 	font-family: 'Roboto', sans-serif;
 	color: rgba(0, 0, 0, 0.84);
 	font-size: 15px !important;
+}
+.post-author .user-name a:hover {
+	text-decoration: none;
 }
 .post-author .date {
 	color: rgba(0, 0, 0, 0.54);
@@ -389,4 +416,28 @@ blockquote {
 .user-post-card-body {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 	border: 1px solid rgba(0,0,0,.09);
+}
+
+/* Category Page */
+.category-page {
+	font-family: 'Roboto', sans-serif;
+}
+.category-page .cat-title h2 {
+	font-size: 20px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: rgba(0,0,0,0.84);
+}
+.category-page .cat-desc {
+	font-size: 15px;
+	font-weight: 400;
+	color: rgba(0,0,0,0.54);
+}
+.category-page .cat-card {
+	box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+}
+.category-page .cat-card img {
+	height: 100px;
+	width: 100px;
+	border-radius: 10%;
 }

@@ -223,7 +223,7 @@
 					<label>Previous Image</label>
 					<img width="200" src="../assets/images/blog-images/<?php echo $post_image; ?>" alt="">
 					<label>Set a new one!</label>
-					<input  type="file" id="file-input" name="post_image" value="../assets/images/blog-images/<?php echo $post_image; ?>">
+					<input  type="file" id="file-input" name="post_image">
 					<div id="thumb-output" style="width: 235px;"></div>
 				</div>
 			</div>

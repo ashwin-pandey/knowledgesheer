@@ -122,7 +122,7 @@ include 'partials/admin_header.php';
 							</div>
 						</div>
 						</td>
-						<td><img class='img-fluid' style='height: 46px;' src='../assets/images/cat-images/{$cat_image}'></td>";
+						<td class='text-center'><img class='img-fluid' style='height: 46px;' src='../assets/images/cat-images/{$cat_image}'></td>";
 						echo "</tr>";
 					}
 

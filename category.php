@@ -26,9 +26,9 @@ include 'partials/header.php';
 		<div class="card cat-card border-1 mb-4">
 			<div class="card-body">
 				<?php if (!empty($cat_image)) { ?>
-					<img class="img-fluid rounded-circle mb-3" src="assets/images/cat-images/<?php echo $cat_image; ?>" alt="<?php $cat_title; ?>">
+					<img class="img-fluid rounded mb-3" src="assets/images/cat-images/<?php echo $cat_image; ?>" alt="<?php $cat_title; ?>">
 				<?php } else { ?>
-					<img class="img-fluid mb-3" src="assets/images/cat-images/ph-100x100.png" alt="<?php $cat_title; ?>">
+					<img class="img-fluid mb-3 rounded" src="assets/images/cat-images/ph-100x100.png" alt="<?php $cat_title; ?>">
 				<?php } ?>
 				<div class="cat-title">
 					<h2><?php echo $cat_title; ?></h2>

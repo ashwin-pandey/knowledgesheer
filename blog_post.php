@@ -123,6 +123,8 @@ if (isset($_GET['p_id'])) {
 					?>
 					<?php if(!empty($cat_image)) { ?>
 					<img src="assets/images/cat-images/<?php echo $cat_image; ?>" alt="<?php echo $cat_title; ?>">
+					<?php } else { ?>
+						<img class="mr-3 rounded" src="assets/images/cat-images/ph-100x100.png" alt="<?php echo $cat_title; ?>">
 					<?php } ?>
 					<div class="media-body align-self-center">	
 						<p class="mt-0 mb-0 written-by">Category</p>

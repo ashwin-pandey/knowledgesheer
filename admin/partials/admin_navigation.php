@@ -45,6 +45,17 @@
 				</div>
 			</li>
 			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle <?php if($current_page == 'quotes') { echo 'active';} ?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+					<i class="material-icons">format_quote</i>
+					<span>Quotes</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-small">
+					<a class="dropdown-item" href="quotes.php">Dashboard</a>
+					<a class="dropdown-item" href="quotes.php?source=view_all_quotes">View All Quotes</a>
+					<a class="dropdown-item" href="users.php?source=add_quote">Add New</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle <?php if($current_page == 'users') { echo 'active';} ?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
 					<i class="material-icons">people</i>
 					<span>Users</span>

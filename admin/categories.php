@@ -46,35 +46,6 @@ include 'partials/admin_header.php';
 				</div>
 			</form>
 		</div>
-<!-- 		<div class="card p-3 mb-3">
-			<form class="" method="POST">
-				<div class="form-group">
-					<label class="card-title">Add Sub Category</label>
-					<div class="form-group">
-						<input type="text" class="form-control" name="sub_cat_title" placeholder="Sub Category Title">
-					</div>
-					<div class="form-group">
-						<label>Parent</label>
-						<select class="form-control" name="parent_id">
-							<option value="0">None</option>
-							<?php
-							// $query = 'SELECT * FROM categories';
-							// $categories = query($query);
-							// confirmQuery($categories);
-							// while ($row = mysqli_fetch_assoc($categories)) {
-							// 	$cat_id = $row['cat_id'];
-							// 	$cat_title = $row['cat_title'];
-							// 	echo "<option value='$cat_id'>$cat_title</option>";
-							// }
-							?>
-						</select>
-					</div>
-					<div class="form-group">
-						<input type="submit" name="create_sub_category" class="btn btn-sm btn-success">
-					</div>
-				</div>
-			</form>
-		</div> -->
 	</div>
 
 	<div class="col-4">

@@ -49,39 +49,54 @@ include 'partials/header.php';
 				</div>
 			</li>
 		</ul>
-		<hr>
-		<?php while (mysqli_stmt_fetch($stmt1)) { ?>
-		<div class="card row user-post-card-body" style="margin-top: 20px;">
-			<div class="card-body">
-				<div class="media post-author m-0 mb-3 align-self-center">
-					<img src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $post_author; ?>" class="mr-3 mt-0 rounded-circle">
-					<div class="media-body align-self-center">
-						<div class="user-name">
-							<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $full_name; ?></a>
+		<hr class="mb-0">
+
+
+		<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active mr-60" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Blog Posts</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Quotes</a>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+				<?php while (mysqli_stmt_fetch($stmt1)) { ?>
+				<div class="card row user-post-card-body" style="margin-top: 20px;">
+					<div class="card-body">
+						<div class="media post-author m-0 mb-3 align-self-center">
+							<img src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $post_author; ?>" class="mr-3 mt-0 rounded-circle">
+							<div class="media-body align-self-center">
+								<div class="user-name">
+									<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $full_name; ?></a>
+								</div>
+								<div class="date">
+									<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
+										<?php echo read_time($post_content); ?> min read</small>
+								</div>
+							</div>
 						</div>
-						<div class="date">
-							<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
-								<?php echo read_time($post_content); ?> min read</small>
+						<div class="user-blog-posts">
+							<div class="post-image m-0">
+								<img class="img-fluid" src="assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
+							</div>
+							<div class="post-title mt-4">
+								<a href="blog_post.php?p_id=<?php echo $post_id; ?>"><h1 class="m-0"><?php echo $post_title; ?></h1></a>
+							</div>
+							<div class="post-description">
+								<?php echo substr($post_description, 0, 50); ?>
+							</div>
+							<div class="read-more">
+								<a href="blog_post.php?p_id=<?php echo $post_id; ?>">Read More...</a>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="user-blog-posts">
-					<div class="post-image m-0">
-						<img class="img-fluid" src="assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
-					</div>
-					<div class="post-title mt-4">
-						<a href="blog_post.php?p_id=<?php echo $post_id; ?>"><h1 class="m-0"><?php echo $post_title; ?></h1></a>
-					</div>
-					<div class="post-description">
-						<?php echo substr($post_description, 0, 50); ?>
-					</div>
-					<div class="read-more">
-						<a href="blog_post.php?p_id=<?php echo $post_id; ?>">Read More...</a>
-					</div>
-				</div>
+				<?php } ?>
 			</div>
+			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Profile</div>
 		</div>
-		<?php } ?>
 	</div>
 </div>
 

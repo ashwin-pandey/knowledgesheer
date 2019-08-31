@@ -12,9 +12,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="index.php">Home</a>
 				</li>
-				<!-- <li class="nav-item">
-					<a class="nav-link" href="about.html">About</a>
-				</li> -->
+				<li class="nav-item">
+					<a class="nav-link" href="quotes.php">Quotes</a>
+				</li>
 				<?php if (isLoggedIn()) { ?>
 					<?php if (is_admin($_SESSION['username'])) { ?>
 						<li class="nav-item"><a class="nav-link" href="/knowledgesheer/admin/">Dashboard</a></li>

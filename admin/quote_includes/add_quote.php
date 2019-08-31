@@ -4,20 +4,15 @@ if (isset($_POST['create_quote'])) {
 	// Quote image
 	$quote_image 		= escape($_FILES['quote_image']['name']);
 	$quote_image_temp	= escape($_FILES['quote_image']['tmp_name']);
-
 	move_uploaded_file($quote_image_temp, "../assets/images/quote-images/$quote_image" );
 
 	// Quote content & hashtags
 	$quote_content = $_POST['quote_content'];
-	$htag = "#";
-	$arr = explode(" ", $quote_content);
-	$arrc = count($arr);
-	$i = 0;
-
+	$htag = "#"; $arr = explode(" ", $quote_content); $arrc = count($arr); $i = 0;
 	while ($i < $arrc) {
 		if (substr($arr[$i], 0, 1) === $htag) {
-			$par = $arr[$i];
-			$par = preg_replace("#[^0-9a-z]#i", "", $par);
+			$par = $arr[$i]; $par = preg_replace("#[^0-9a-z]#i", "", $par);
+			$tags .= $par . ", ";
 			$arr[$i] = "<a target='_blamk' href='/knowledgesheer/search.php?hashtag={$par}'>" . $arr[$i] . "</a>";
 		}	
 		$i++;
@@ -27,9 +22,9 @@ if (isset($_POST['create_quote'])) {
 	$quote_category = $_POST['quote_category'];
 	$quote_author = $_SESSION['username'];
 
-	$query = "INSERT INTO quotes(quote_category, quote_image, quote_content, quote_author, quote_date) VALUES (?, ?, ?, ?, now())";
+	$query = "INSERT INTO quotes(quote_category, quote_image, quote_hashtags, quote_content, quote_author, quote_date) VALUES (?, ?, ?, ?, ?, now())";
 	$stmt = mysqli_prepare($connection, $query);
-	mysqli_stmt_bind_param($stmt, 'ssss', $quote_category, $quote_image, $quote_content, $quote_author);
+	mysqli_stmt_bind_param($stmt, 'sssss', $quote_category, $quote_image, $tags, $quote_content, $quote_author);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 	redirect("/knowledgesheer/admin/quotes.php?source=view_all_quotes");

@@ -481,3 +481,10 @@ blockquote {
 	height: 100px;
 	width: 100px;
 }
+
+/* Quotes Section */
+.quote-image {
+	width: 100%!important;
+	height: 100%!important;
+	object-fit: cover;
+}

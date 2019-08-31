@@ -22,6 +22,7 @@ if (isset($_GET['u_id'])) {
 
 	mysqli_stmt_bind_param($stmt1, "ss", $username, $published);
 	mysqli_stmt_execute($stmt1);
+	confirmQuery($stmt);
 	mysqli_stmt_store_result($stmt1);
 	mysqli_stmt_bind_result($stmt1, $post_id, $post_title, $post_author, $post_date, $post_category_id, $post_sub_cat_id, $post_image, $post_content, $post_tags, $post_description);
 
@@ -54,10 +55,10 @@ include 'partials/header.php';
 
 		<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
 			<li class="nav-item">
-				<a class="nav-link active mr-60" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Blog Posts</a>
+				<a class="nav-link active mr-4" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-table"></i> Blog Posts</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Quotes</a>
+				<a class="nav-link" id="quote-tab" data-toggle="tab" href="#quote" role="tab" aria-controls="quote" aria-selected="false"><i class="fas fa-quote-right"></i> Quotes</a>
 			</li>
 		</ul>
 		<div class="tab-content" id="myTabContent">
@@ -95,10 +96,36 @@ include 'partials/header.php';
 				</div>
 				<?php } ?>
 			</div>
-			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Profile</div>
+			<div class="tab-pane fade" id="quote" role="tabpanel" aria-labelledby="quote-tab">
+				<div class="row" style="margin-top: 20px;">
+					<section class="gallery-block grid-gallery">
+						<div class="container">
+							<div class="row">
+								<?php  
+
+								$query = "SELECT quote_id, quote_image, quote_content, quote_date FROM quotes WHERE quote_author = ? ORDER BY quote_id DESC ";
+								$user_quote = mysqli_prepare($connection, $query);
+								// confirmQuery($user_quote);
+								if($user_quote == false) {
+									die("<pre>".mysqli_error($connection).PHP_EOL.$query."</pre>");
+								}
+								mysqli_stmt_bind_param($user_quote, 's', $username);
+								mysqli_stmt_execute($user_quote);
+								mysqli_stmt_store_result($user_quote);
+								mysqli_stmt_bind_result($user_quote, $quote_id, $quote_image, $quote_content, $quote_date);
+								while (mysqli_stmt_fetch($user_quote)) {
+								?>
+								<div class="col-md-6 col-lg-4 item">
+									<img class="img-fluid image scale-on-hover" src="assets/images/quote-images/<?php echo $quote_image ?>">
+								</div>
+								<?php } ?>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-
 
 <?php } include 'partials/footer.php'; ?>

@@ -483,8 +483,17 @@ blockquote {
 }
 
 /* Quotes Section */
+.quote-posts {
+	font-family: 'Roboto', sans-serif;
+}
 .quote-image {
 	width: 100%!important;
 	height: 100%!important;
 	object-fit: cover;
+}
+.quote-content {
+	font-size: 15px;
+}
+.quote-content a {
+	color: #1c94e0;
 }

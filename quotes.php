@@ -12,7 +12,7 @@ include 'partials/header.php';
 		<div class="row pt-4">
 			<div class="col-md-8 col-12">
 				<?php
-				$query = "SELECT * FROM quotes";
+				$query = "SELECT * FROM quotes ORDER BY quote_id DESC";
 				$quote = query($query);
 				confirmQuery($quote);
 
@@ -36,9 +36,9 @@ include 'partials/header.php';
 
 				?>
 				<div class="card card-small mb-4">
-					<div class="card-header pb-0">
+					<div class="card-header border-0 pb-0">
 						<div class="media post-author m-0 mb-2 align-self-center">
-							<img style="height: 32px; width: 32px;" src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $post_author; ?>" class="img-fluid mr-3 mt-0 rounded-circle">
+							<img style="height: 40px; width: 40px;" src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $post_author; ?>" class="img-fluid mr-3 mt-0 rounded-circle">
 							<div class="media-body align-self-center">
 								<div class="user-name">
 									<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $full_name; ?></a>
@@ -52,7 +52,7 @@ include 'partials/header.php';
 					<div class="card-body text-center p-0">
 						<img src="assets/images/quote-images/<?php echo $quote_image; ?>" class="img-fluid quote-image" alt="">
 					</div>
-					<div class="card-footer">
+					<div class="card-footer border-0 quote-content">
 						<?php echo $quote_content; ?>
 					</div>
 				</div>

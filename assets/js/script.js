@@ -46,6 +46,7 @@ $(document).ready(function(){
   });
 });
 
+// Lazy Loading in quote section
 $(document).ready(function(){
 	$(window).scroll(function(){
 		var lastID = $('.load-more').attr('lastID');

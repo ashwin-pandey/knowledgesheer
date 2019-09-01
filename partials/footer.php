@@ -59,6 +59,8 @@
 <!-- Custom scripts for this template -->
 <script src="assets/js/clean-blog.min.js"></script>
 
+<script src="assets/js/owl.carousel.min.js"></script>
+
 <script type="text/javascript" src="./assets/js/script.js"></script>
 
 </body>

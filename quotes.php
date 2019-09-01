@@ -60,7 +60,7 @@ include 'partials/header.php';
 					</div>
 				</div>
 				<?php } ?>
-				<div class="load-more" lastID="<?php echo $quote_id; ?>" style="display: none;">
+				<div class="load-more text-center" lastID="<?php echo $quote_id; ?>" style="display: none;">
 					<img src="loading.gif"/>
 				</div>
 				<?php } ?>

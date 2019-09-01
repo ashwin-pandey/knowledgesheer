@@ -58,8 +58,8 @@ $(document).ready(function(){
 					$('.load-more').show();
 				},
 				success:function(html){
-			    $('.load-more').remove();
-			    $('#postList').append(html);
+					$('.load-more').remove();
+					$('#postList').append(html);
 				}
 			});
 		}

@@ -59,16 +59,18 @@ if(!empty($_POST["id"])){
         </div>
     <?php } ?>
     <?php if($allNumRows > $showLimit){ ?>
-        <div class="load-more" lastID="<?php echo $quote_id; ?>" style="display: none;">
+        <div class="load-more text-center" lastID="<?php echo $quote_id; ?>" style="display: none;">
             <img src="loading.gif"/>
         </div>
     <?php } else { ?>
-    <div class="load-more" lastID="0">
-        That's All!
+    <div class="load-more text-center" lastID="0">
+    	<hr>
+        End of the List!
     </div>
     <?php } } else { ?>
-    <div class="load-more" lastID="0">
-        That's All!
+    <div class="load-more text-center" lastID="0">
+    	<hr>
+        End of the List!
     </div>
 <?php } 
 } ?>

@@ -10,13 +10,17 @@ include 'partials/header.php';
 <div class="row quote-posts">
 	<div class="col-md-9 col-md-offset-2 col-sm-12 mx-auto col-12">
 		<div class="row pt-4">
-			<div class="col-md-8 col-12">
+			<div class="col-md-8 col-12" id="postList">
 				<?php
-				$query = "SELECT * FROM quotes ORDER BY quote_id DESC";
+				$query = "SELECT * FROM quotes ORDER BY quote_id DESC LIMIT 7 ";
 				$quote = query($query);
+				$num_rows = mysqli_num_rows($quote);
 				confirmQuery($quote);
 
+				if ($num_rows > 0) {
+
 				while ($row = mysqli_fetch_assoc($quote)) {
+				$quote_id = $row['quote_id'];
 				$quote_image = $row['quote_image'];
 				$quote_content = $row['quote_content'];
 				$quote_author = $row['quote_author'];
@@ -33,7 +37,6 @@ include 'partials/header.php';
 				mysqli_stmt_fetch($stmt);
 
 				$full_name = $user_firstname . " " . $user_lastname;
-
 				?>
 				<div class="card card-small mb-4">
 					<div class="card-header border-0 pb-0">
@@ -55,6 +58,10 @@ include 'partials/header.php';
 					<div class="card-footer border-0 quote-content">
 						<?php echo $quote_content; ?>
 					</div>
+				</div>
+				<?php } ?>
+				<div class="load-more" lastID="<?php echo $quote_id; ?>" style="display: none;">
+					<img src="loading.gif"/>
 				</div>
 				<?php } ?>
 			</div>

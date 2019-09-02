@@ -19,7 +19,6 @@ include 'partials/admin_header.php';
 
 		<?php
 		if(isset($_GET['edit'])) {
-			// $cat_id = $_GET['edit'];
 			include "blog_includes/update_categories.php";
 		}
 		if (isset($_GET['edit_sub'])) {
@@ -42,6 +41,43 @@ include 'partials/admin_header.php';
 					</div>
 					<div class="form-group">
 						<input type="submit" name="create_category" class="btn btn-sm btn-success">
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="card p-3 mb-3">
+			<form class="" method="POST">
+				<div class="form-group">
+					<label class="card-title">Add New Sub Category</label>
+					<div class="form-group">
+						<input type="text" class="form-control" name="sub_cat_title" placeholder="Category Title" required>
+					</div>
+					<div class="form-group">
+						<select name="parent_cat_id" class="form-control">
+							<option value="">-- select option --</option>
+							<?php  
+							$query = " SELECT cat_id, cat_title FROM categories";
+							$parent_query = query($query);
+							confirmQuery($parent_query);
+							while ($row = mysqli_fetch_assoc($parent_query)) {
+								$parent_cat_id = $row['cat_id'];
+								$parent_cat_title = $row['cat_title'];
+
+								echo "<option value='{$parent_cat_id}'>". $parent_cat_title ."</option>";
+							}
+
+							?>
+						</select>
+					</div>
+					<div class="form-group">
+						<textarea name="sub_cat_description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
+					</div>
+					<div class="form-group">
+						<input type="file" class="form-control" name="sub_cat_image">
+					</div>
+					<div class="form-group">
+						<input type="submit" name="create_sub_category" class="btn btn-sm btn-success">
 					</div>
 				</div>
 			</form>

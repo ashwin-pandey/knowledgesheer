@@ -32,7 +32,6 @@ $title = $full_name;
 $page = 'category';
 $header_title = 'Knowledge Sheer';
 include 'partials/header.php'; 
-
 ?>
 
 <div class="row">

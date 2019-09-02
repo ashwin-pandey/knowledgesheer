@@ -10,22 +10,20 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="index.php">Home</a>
+					<a class="nav-link <?php if($page == 'home'){ echo 'active-nav'; } else { echo ''; } ?>" href="index.php">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="quotes.php">Quotes</a>
+					<a class="nav-link <?php if($page == 'quotes'){ echo 'active-nav'; } else { echo ''; } ?>" href="quotes.php">Quotes</a>
 				</li>
 				<?php if (isLoggedIn()) { ?>
 					<?php if (is_admin($_SESSION['username'])) { ?>
 						<li class="nav-item"><a class="nav-link" href="/knowledgesheer/admin/">Dashboard</a></li>
 					<?php } ?>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" style="text-transform: none;" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-							<?php echo $_SESSION['username']; ?>
-						</a>
-						<div class="dropdown-menu dropdown-menu-small">
-							<a class="dropdown-item" href="/knowledgesheer/includes/logout.php">Logout</a>
-						</div>
+					<li class="nav-item">
+						<a class="nav-link" style="text-transform: none;" href="profile.php"><?php echo $_SESSION['username']; ?></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/knowledgesheer/includes/logout.php">Logout</a>
 					</li>
 				<?php } else { ?>
 					<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>

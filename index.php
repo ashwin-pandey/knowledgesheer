@@ -6,9 +6,6 @@ $header_title = 'Knowledge Sheer';
 include 'partials/header.php'; 
 
 ?>
-
-<!-- <?php  // include './includes/search_bar.php'; ?> -->
-
 		<!-- Main Content -->
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2 col-xs-12 mx-auto col-12">
@@ -31,9 +28,6 @@ include 'partials/header.php';
 				<hr>
 				<h4>Blog Posts</h4>
 				<hr>
-
-<!-- 				<div id="load_data"></div>
-				<div id="load_more_data"></div> -->
 
 				<?php
 
@@ -122,13 +116,13 @@ include 'partials/header.php';
 				<ul class="pagination justify-content-md-center">
 				<?php 
 				$number_list = array();
-				if ($page > 1 && $page <= $count) {
-					$p_page = $page - 1;
-					echo "<li class='page-item'><a class='page-link' href='index.php?page={$p_page}'><<</a></li>";
-				} else {
-					$p_page = $page;
-					echo "<li class='page-item disabled'><a class='page-link' href='index.php?page={$p_page}'><<</a></li>";
-				}
+				// if ($page > 1 && $page <= $count) {
+				// 	$p_page = $page - 1;
+				// 	echo "<li class='page-item'><a class='page-link' href='index.php?page={$p_page}'><<</a></li>";
+				// } else {
+				// 	$p_page = $page;
+				// 	echo "<li class='page-item disabled'><a class='page-link' href='index.php?page={$p_page}'><<</a></li>";
+				// }
 				
 				for($i = 1; $i <= $count; $i++) {
 					if($i == $page) {
@@ -138,13 +132,13 @@ include 'partials/header.php';
 					}
 				}
 
-				if ($page < $count && $page >= 1) {
-					$p_page = $page + 1;
-					echo "<li class='page-item'><a class='page-link' href='index.php?page={$p_page}'>>></a></li>";
-				} else {
-					$p_page = $page;
-					echo "<li class='page-item disabled'><a class='page-link' href='index.php?page={$p_page}'>>></a></li>";
-				}
+				// if ($page < $count && $page >= 1) {
+				// 	$p_page = $page + 1;
+				// 	echo "<li class='page-item'><a class='page-link' href='index.php?page={$p_page}'>>></a></li>";
+				// } else {
+				// 	$p_page = $page;
+				// 	echo "<li class='page-item disabled'><a class='page-link' href='index.php?page={$p_page}'>>></a></li>";
+				// }
 
 				?>
 				</ul>

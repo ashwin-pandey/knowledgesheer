@@ -2,7 +2,7 @@
 	<div class="card-body p-0">
 		<form action="search.php" class="search-bar" method="POST">
 			<div class="input-group md-3">
-				<input type="text" class="form-control border-0" placeholder="Search Knowledge Sheer">
+				<input type="text" class="form-control border-0" name="search_input" placeholder="Search Knowledge Sheer">
 				<div class="input-group-append">
 					<button class="btn btn-outline-secondary" name="search" type="submit"><i class="fa fa-search"></i></button>
 				</div>

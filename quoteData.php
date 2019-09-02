@@ -1,5 +1,5 @@
+<!-- For Lazy loading in quotes section! -->
 <?php
-
 include 'includes/db.php';
 include './admin/functions.php';
 
@@ -64,13 +64,11 @@ if(!empty($_POST["id"])){
         </div>
     <?php } else { ?>
     <div class="load-more text-center" lastID="0">
-    	<hr>
-        End of the List!
+
     </div>
     <?php } } else { ?>
     <div class="load-more text-center" lastID="0">
-    	<hr>
-        End of the List!
+
     </div>
 <?php } 
 } ?>

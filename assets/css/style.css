@@ -6,6 +6,28 @@ html {
 	font-family: 'Source Sans Pro', san-serif, Aerial;
 }
 
+/* Navigation Bar */
+#mainNav .navbar-nav>li.nav-item>a {
+	font-weight: 600;
+	padding: 10px;
+	margin-right: 10px;
+	text-decoration: none;
+}
+
+#mainNav .navbar-nav>li.nav-item>a:focus, 
+#mainNav .navbar-nav>li.nav-item>a:hover {
+	color: #0085a1;
+	background-color: #fff !important;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.active-nav {
+	color: #0085a1 !important;
+	border: 1px solid #000;
+	border-radius: 4px;
+}
+
 /*=================================*/
 /* LOGIN AND SIGN UP CSS */
 
@@ -334,7 +356,6 @@ blockquote {
 	}
 }
 
-
 /* User Posts */
 .user-post {
 	font-family: 'Roboto', sans-serif;
@@ -427,7 +448,6 @@ blockquote {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 	border: 1px solid rgba(0,0,0,.09);
 }
-
 .mr-60 {
 	margin-right: 60px !important;
 }
@@ -497,27 +517,34 @@ blockquote {
 .quote-content a {
 	color: #1c94e0;
 }
+.quote-posts .card {
+	box-shadow: 0px 1px 4px rgba(0,0,0,0.12);
+}
+.quote-posts .card .card-header, 
+.quote-posts .card .card-footer {
+	background-color: #fff;
+}
 
-
-
-
+/* Custom Scrollbar */
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1; 
 }
- 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 6px;
 }
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
+}
+
+/* Search Page */
+.search .search-header {
+	font-weight: 400;
 }

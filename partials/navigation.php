@@ -15,6 +15,9 @@
 				<li class="nav-item">
 					<a class="nav-link <?php if($page == 'quotes'){ echo 'active-nav'; } else { echo ''; } ?>" href="quotes.php">Quotes</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link <?php if($page == 'all_categories' || $page == 'category' || $page == 'sub_category'){ echo 'active-nav'; } else { echo ''; } ?>" href="all_categories.php">Categories</a>
+				</li>
 				<?php if (isLoggedIn()) { ?>
 					<?php if (is_admin($_SESSION['username'])) { ?>
 						<li class="nav-item"><a class="nav-link" href="/knowledgesheer/admin/">Dashboard</a></li>

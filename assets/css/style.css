@@ -361,6 +361,7 @@ blockquote {
 	}
 }
 
+/*=================================*/
 /* User Posts */
 .user-post {
 	font-family: 'Roboto', sans-serif;
@@ -484,6 +485,7 @@ blockquote {
 	border-right: none;
 }
 
+/*=================================*/
 /* Category Page */
 .category-page {
 	font-family: 'Roboto', sans-serif;
@@ -507,6 +509,7 @@ blockquote {
 	width: 100px;
 }
 
+/*=================================*/
 /* Quotes Section */
 .quote-posts {
 	font-family: 'Roboto', sans-serif;
@@ -530,6 +533,7 @@ blockquote {
 	background-color: #fff;
 }
 
+/*=================================*/
 /* Custom Scrollbar */
 /* width */
 ::-webkit-scrollbar {
@@ -549,7 +553,25 @@ blockquote {
   background: #555; 
 }
 
+/*=================================*/
 /* Search Page */
 .search .search-header {
 	font-weight: 400;
+}
+
+/*=================================*/
+/* All Categories */
+.all-categories {
+	font-family: 'Roboto', sans-serif;
+}
+.category-card {
+	background-repeat: no-repeat; 
+	background-position: center;
+	background-size: cover;
+}
+.category-card:hover {
+	-webkit-box-shadow: 2px 4px 8px rgba(0,0,0,0.12);
+	-moz-box-shadow: 2px 4px 8px rgba(0,0,0,0.12);
+	box-shadow: 2px 4px 8px rgba(0,0,0,0.12);
+	text-decoration: none;
 }

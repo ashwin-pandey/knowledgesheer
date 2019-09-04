@@ -74,6 +74,6 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 <body>
 	<?php include 'navigation.php'; ?>
 	<div class="container">
-		<a class="top-link hide" href="" id="js-top">
+		<a class="top-link hide" style="cursor: pointer;" id="js-top">
 			<svg viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>
 		</a>

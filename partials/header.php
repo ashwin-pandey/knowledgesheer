@@ -49,6 +49,13 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta property="og:url" content="http://knowledgesheer.com/category.php?sub_category=<?php echo $post_category_id; ?>" />
 	<meta property="og:description" content="<?php echo $sub_cat_description; ?>" />
 	<meta property="og:image" content="http://knowledgesheer.com/assets/images/cat-images/<?php echo $sub_cat_image; ?>" />
+	<?php } if ($page == 'all_categories') { ?>
+	<title>Categories | Knowledge Sheer</title>
+	<meta name="keywords" content="Knowledgesheer, knowledge, share, categories"/>
+	<meta name="description" content=""/>
+	<meta property="og:title" content="Categories | Knowledge Sheer">
+	<meta property="og:url" content="http://knowledgesheer.com/all_categories.php" />
+	<meta property="og:description" content="" />" />
 	<?php } ?>
 	<meta property="og:site_name" content="Knowledge Sheer" />
 	<meta name="language" content="EN">

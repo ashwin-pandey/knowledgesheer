@@ -211,6 +211,7 @@ blockquote {
 }
 .post-title a {
 	font-weight: 600;
+	font-size: 22px;
 }
 .post-title a:hover {
 	text-decoration: none;
@@ -328,20 +329,24 @@ blockquote {
 	overflow: hidden;
 }
 .post-body {
-	margin-right: 24px;
+	margin-right: 16px;
 }
 .post-category {
 	font-family: 'Roboto', sans-serif;
 	text-transform: uppercase;
-	font-size: 15px;
+	font-size: 14px;
 	letter-spacing: .03em;
 	font-weight: 400;
 	color: rgba(0,0,0,0.54);
 }
 @media (max-width: 551.98px) {
-	.post-title {
+	h2.post-title {
+		font-size: 18px;
+		line-height: 0;
+	}
+	.post-title a {
 		font-size: 18px !important;
-		line-height: 1.2;
+		line-height: 1.2 !important;
 	}
 	.post-body {
 		margin-right: 16px;
@@ -396,11 +401,11 @@ blockquote {
 		font-size: 14px;
 	}
 	.user-post-card-body .user-name a {
-		font-size: 15px;
+		font-size: 14px;
 	}
 }
-.user-post .post-author .user-name {
-	font-size: 16px;
+.user-post .post-author .user-name a {
+	font-size: 14px;
 }
 .user-post .post-author img {
 	height: 40px;

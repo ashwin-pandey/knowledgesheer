@@ -2,8 +2,9 @@
 include 'includes/db.php';
 include './admin/functions.php';
 
-if (isset($_GET['category'])) {
-	$post_category_id = $_GET['category'];
+if (isset($_POST['cat_search'])) {
+	$post_category_id = $_POST['category_id'];
+	$search = $_POST['search_input'];
 	$query = "SELECT * FROM categories WHERE cat_id = ? ";
 	$cat_stmt = mysqli_prepare($connection, $query);
 	mysqli_stmt_bind_param($cat_stmt, "i", $post_category_id);
@@ -38,29 +39,16 @@ include 'partials/header.php';
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-6 col-12">
+		<h5 style="font-weight: 500;">Search results for "<?php echo $search; ?>"</h5>
+		<hr>
 		<?php
-		$per_page = 10;
-		if (isset($_GET['page'])) {
-			$page = $_GET['page'];
-		} else {
-			$page = "";
-		}
-		if ($page == "" || $page == 1) {
-			$page_1 = 0;
-		} else {
-			$page_1 = ($page * $per_page) - $per_page;
-		}
-		$post_query_count = "SELECT * FROM blog_posts WHERE post_status = 'public' AND post_category_id = ".$post_category_id;
-		$find_count = query($post_query_count);
+		$query = "SELECT * FROM blog_posts WHERE post_category_id = " .$post_category_id . " AND post_tags LIKE '%$search%' ORDER BY post_id";
+		$find_count = query($query);
 		$count = mysqli_num_rows($find_count);
 		if($count < 1) {
-			echo "<h1 class='text-center'>No posts available</h1>";
+			echo "<h5 class='text-center'>No posts available!</h5>";
 		} else {
-			$count  = ceil($count /$per_page);
-			$query = 'SELECT * FROM blog_posts WHERE post_category_id = ' .$post_category_id .' ORDER BY post_id DESC LIMIT ' .$page_1. ',' .$per_page;
-			$blog_posts = query($query);
-			confirmQuery($blog_posts);
-			while ($row = mysqli_fetch_assoc($blog_posts)) {
+			while ($row = mysqli_fetch_assoc($find_count)) {
 				$post_id = $row['post_id'];
 				$post_title = $row['post_title'];
 				$post_description = stripcslashes($row['post_description']);
@@ -116,37 +104,8 @@ include 'partials/header.php';
 			<?php } ?>
 		</div>
 		<hr>
-		<?php } ?>
-		<!-- PAGINATION -->
-		<ul class="pagination justify-content-md-center">
-		<?php 
-		$number_list = array();
-		if ($page > 1 && $page <= $count) {
-			$p_page = $page - 1;
-			echo "<li class='page-item'><a class='page-link' href='index.php?page={$p_page}'><<</a></li>";
-		} else {
-			$p_page = $page;
-			echo "<li class='page-item disabled'><a class='page-link' href='index.php?page={$p_page}'><<</a></li>";
-		}
-		
-		for($i = 1; $i <= $count; $i++) {
-			if($i == $page) {
-				echo "<li class='page-item active'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
-			} else {
-				echo "<li class='page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
-			}
-		}
 
-		if ($page < $count && $page >= 1) {
-			$p_page = $page + 1;
-			echo "<li class='page-item'><a class='page-link' href='index.php?page={$p_page}'>>></a></li>";
-		} else {
-			$p_page = $page;
-			echo "<li class='page-item disabled'><a class='page-link' href='index.php?page={$p_page}'>>></a></li>";
-		}
-
-		?>
-		</ul>
+		<?php } } ?>
 
 	</div>
 	<div class="col-lg-3 col-md-3 col-12">
@@ -186,7 +145,7 @@ include 'partials/header.php';
 		</div>
 		<!-- Categories -->
 		<div class="card card-small sidebar-categories border-1 mb-3">
-			<div class="m-0 p-2 card-title border-bottom mb-2">Categories</div>
+			<div class="m-0 p-2 card-title border-bottom mb-2">All Categories</div>
 			<div class="card-body p-2">
 				<?php 
 				$query = 'SELECT * FROM categories';
@@ -205,16 +164,13 @@ include 'partials/header.php';
 				<?php } ?>
 			</div>
 		</div>
-	<?php } ?>
-	</div>
-</div>
-<?php 
-} 
-if (isset($_GET['sub_category'])) {
-	$post_sub_cat_id = $_GET['sub_category'];
+<?php } 
+if (isset($_POST['sub_cat_search'])) {
+	$post_category_id = $_POST['category_id'];
+	$search = $_POST['search_input'];
 	$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image, parent_cat_id FROM sub_categories WHERE sub_cat_id = ? ";
 	$cat_stmt = mysqli_prepare($connection, $query);
-	mysqli_stmt_bind_param($cat_stmt, "i", $post_sub_cat_id);
+	mysqli_stmt_bind_param($cat_stmt, "i", $post_category_id);
 	mysqli_stmt_execute($cat_stmt);
 	confirmQuery($cat_stmt);
 	mysqli_stmt_store_result($cat_stmt);
@@ -246,17 +202,16 @@ include 'partials/header.php';
 		</div>
 	</div>
 	<div class="col-lg-6 col-md-6 col-12">
+		<h5 style="font-weight: 500;">Search results for "<?php echo $search; ?>" in "<?php echo $sub_cat_title ?>"</h5>
+		<hr>
 		<?php
-		$post_query_count = "SELECT * FROM blog_posts WHERE post_status = 'public' AND post_sub_cat_id = ".$post_sub_cat_id;
-		$find_count = query($post_query_count);
+		$query = "SELECT * FROM blog_posts WHERE post_sub_cat_id = " .$post_category_id . " AND post_tags LIKE '%$search%' ORDER BY post_id";
+		$find_count = query($query);
 		$count = mysqli_num_rows($find_count);
 		if($count < 1) {
 			echo "<h5 class='text-center'>No posts available</h5>";
 		} else {
-			$query = 'SELECT * FROM blog_posts WHERE post_sub_cat_id = ' .$post_sub_cat_id .' ORDER BY post_id DESC';
-			$blog_posts = query($query);
-			confirmQuery($blog_posts);
-			while ($row = mysqli_fetch_assoc($blog_posts)) {
+			while ($row = mysqli_fetch_assoc($find_count)) {
 				$post_id = $row['post_id'];
 				$post_title = $row['post_title'];
 				$post_description = stripcslashes($row['post_description']);
@@ -313,7 +268,7 @@ include 'partials/header.php';
 		</div>
 		<hr>
 
-		<?php } ?>
+		<?php } } ?>
 
 	</div>
 	<div class="col-lg-3 col-md-3 col-12">
@@ -349,13 +304,13 @@ include 'partials/header.php';
 					$sub_id = $row['sub_cat_id'];
 					$sub_title = $row['sub_cat_title'];
 			?>
-				<h5 class="mb-2 cat-title">
-					<a href="category.php?sub_category=<?php echo $sub_id; ?>">
-						<?php echo $sub_title; ?>
-					</a>
-				</h5>
-				<hr class="mt-2">
-			<?php } ?>
+					<h5 class="mb-2 cat-title">
+						<a href="category.php?sub_category=<?php echo $sub_id; ?>">
+							<?php echo $sub_title; ?>
+						</a>
+					</h5>
+					<hr class="mt-2">
+				<?php } ?>
 			</div>
 		<?php } ?>
 		</div>
@@ -383,8 +338,7 @@ include 'partials/header.php';
 	<?php } ?>
 	</div>
 </div>
-
-<?php } ?>
-
+<!--	</div>
+</div> -->
 
 <?php include 'partials/footer.php'; ?>

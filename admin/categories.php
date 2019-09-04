@@ -27,7 +27,7 @@ include 'partials/admin_header.php';
 		?>
 
 		<div class="card p-3 mb-3">
-			<form class="" method="POST">
+			<form class="" method="POST" enctype="multipart/form-data">
 				<div class="form-group">
 					<label class="card-title">Add New Category</label>
 					<div class="form-group">
@@ -47,7 +47,7 @@ include 'partials/admin_header.php';
 		</div>
 
 		<div class="card p-3 mb-3">
-			<form class="" method="POST">
+			<form class="" method="POST" enctype="multipart/form-data">
 				<div class="form-group">
 					<label class="card-title">Add New Sub Category</label>
 					<div class="form-group">
@@ -74,7 +74,8 @@ include 'partials/admin_header.php';
 						<textarea name="sub_cat_description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
 					</div>
 					<div class="form-group">
-						<input type="file" class="form-control" name="sub_cat_image">
+						<input type="file" id="file-input" name="sub_cat_image" class="form-control">
+						<div id="thumb-output" style="width: 235px;"></div>
 					</div>
 					<div class="form-group">
 						<input type="submit" name="create_sub_category" class="btn btn-sm btn-success">
@@ -117,13 +118,6 @@ include 'partials/admin_header.php';
 									<span class='text-light'>
 										<i class='material-icons'>edit</i>
 									</span> Edit 
-									</a>
-								</button>
-								<button type='button' class='btn btn-white'>
-									<a href='categories.php?delete={$cat_id}'>
-									<span class='text-danger'>
-										<i class='material-icons'>clear</i>
-									</span> Delete 
 									</a>
 								</button>
 							</div>
@@ -173,13 +167,6 @@ include 'partials/admin_header.php';
 									</span> Edit 
 									</a>
 								</button>
-								<button type='button' class='btn btn-white'>
-									<a href='categories.php?delete_sub={$sub_cat_id}'>
-									<span class='text-danger'>
-										<i class='material-icons'>clear</i>
-									</span> Delete 
-									</a>
-								</button>
 							</div>
 						</div>
 						</td>";
@@ -195,6 +182,6 @@ include 'partials/admin_header.php';
 		</div>
 	</div>
 </div>
-<?php deleteCategories(); ?>
+<!-- <?php // deleteCategories(); ?> -->
 
 <?php include 'partials/admin_footer.php'; ?>

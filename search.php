@@ -10,14 +10,16 @@ include 'partials/header.php';
 		<div class="row pt-4 search">
 			<div class="col-md-8 col-md-offset-2 col-xs-12 mx-auto col-12">
 				<?php
-
 				if(isset($_POST['search'])){
 				$search = $_POST['search_input'];
 				$query = "SELECT * FROM blog_posts WHERE post_tags LIKE '%$search%' ";
 				$search_query = query($query);
 				confirmQuery($search_query);
 				$count = mysqli_num_rows($search_query);
-
+				?>
+				<h4 class="search-header">Search Results for "<?php echo $search; ?>"</h4>
+				<hr>
+				<?php
 				if($count < 1) {
 					echo "<h4 class='text-center'>No posts available</h4>";
 				} else {
@@ -43,8 +45,6 @@ include 'partials/header.php';
 						$user_full_name = $user_firstname . " " . $user_lastname;
 
 				?>
-				<h4 class="search-header">Search Results for "<?php echo $search; ?>"</h4>
-				<hr>
 				<div class="post-preview media">
 					<div class="media-body post-body">
 						<div class="post-category">

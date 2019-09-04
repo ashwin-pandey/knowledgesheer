@@ -122,15 +122,41 @@ if (isset($_GET['p_id'])) {
 
 					?>
 					<?php if(!empty($cat_image)) { ?>
-					<img src="assets/images/cat-images/<?php echo $cat_image; ?>" alt="<?php echo $cat_title; ?>">
+					<img class="mr-3 rounded" src="assets/images/cat-images/<?php echo $cat_image; ?>" alt="<?php echo $cat_title; ?>">
 					<?php } else { ?>
-						<img class="mr-3 rounded" src="assets/images/cat-images/ph-100x100.png" alt="<?php echo $cat_title; ?>">
+					<img class="mr-3 rounded" src="assets/images/cat-images/ph-100x100.png" alt="<?php echo $cat_title; ?>">
 					<?php } ?>
 					<div class="media-body align-self-center">	
 						<p class="mt-0 mb-0 written-by">Category</p>
 						<a href="category.php?category=<?php echo $cat_id ?>" class="mb-0 mt-0 user-name"><?php echo $cat_title; ?></a>
 						<?php if (!empty($cat_description)) { ?>
 						<p class="mb-0 mt-0 user-description"><?php echo substr($cat_description, 0, 50); ?> ...</p>
+						<?php } ?>
+					</div>
+				</li>
+				<li class="mt-4 media">
+					<?php 
+
+					$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image FROM sub_categories WHERE parent_cat_id = ? ";
+					$cat_stmt = mysqli_prepare($connection, $query);
+					confirmQuery($cat_stmt);
+					mysqli_stmt_bind_param($cat_stmt, 'i', $post_sub_cat_id);
+					mysqli_stmt_execute($cat_stmt);
+					mysqli_stmt_store_result($cat_stmt);
+					mysqli_stmt_bind_result($cat_stmt, $sub_cat_id, $sub_cat_title, $sub_cat_description, $sub_cat_image);
+					$cat_stmt->fetch();
+
+					?>
+					<?php if(!empty($sub_cat_image)) { ?>
+					<img class="mr-3 rounded" src="assets/images/cat-images/<?php echo $sub_cat_image; ?>" alt="<?php echo $sub_cat_title; ?>">
+					<?php } else { ?>
+					<img class="mr-3 rounded" src="assets/images/cat-images/ph-100x100.png" alt="<?php echo $cat_title; ?>">
+					<?php } ?>
+					<div class="media-body align-self-center">	
+						<p class="mt-0 mb-0 written-by">Sub Category</p>
+						<a href="category.php?sub_category=<?php echo $sub_cat_id ?>" class="mb-0 mt-0 user-name"><?php echo $sub_cat_title; ?></a>
+						<?php if (!empty($sub_cat_description)) { ?>
+						<p class="mb-0 mt-0 user-description"><?php echo substr($sub_cat_description, 0, 50); ?> ...</p>
 						<?php } ?>
 					</div>
 				</li>

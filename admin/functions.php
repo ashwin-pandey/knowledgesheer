@@ -33,6 +33,17 @@ function ifItIsMethod($method=null){
     return false;
 }
 
+// Estimated Reading Time 
+function read_time($post_content) {
+	$word_count = str_word_count($post_content);
+	$min = floor($word_count / 200);
+	if ($min < 1) {
+		return 1;
+	} else {
+		return $min;
+	}
+}
+
 /*======================================================*/
 /* CHECK DUPLICATE USERS BY USERNAME AND EMAIL */
 /*======================================================*/
@@ -213,58 +224,15 @@ function insertCategory() {
 		$sub_cat_title 			= $_POST['sub_cat_title'];
 		$parent_id 				= $_POST['parent_cat_id'];
 		$sub_cat_description 	= $_POST['sub_cat_description'];
-		$sub_cat_image 			= $_POST['sub_cat_image'];
 		$sub_cat_image          = $_FILES['sub_cat_image']['name'];
 		$sub_cat_image_temp     = $_FILES['sub_cat_image']['tmp_name'];
-		move_uploaded_file($cat_image_temp, "../assets/images/cat-images/$sub_cat_image");
+		move_uploaded_file($sub_cat_image_temp, "../assets/images/cat-images/$sub_cat_image");
 
 		$stmt = mysqli_prepare($connection, "INSERT INTO sub_categories(sub_cat_title, parent_cat_id, sub_cat_description, sub_cat_image) VALUES(?, ?, ?, ?) ");
 		mysqli_stmt_bind_param($stmt, 'siss', $sub_cat_title, $parent_id, $sub_cat_description, $sub_cat_image);
 		mysqli_stmt_execute($stmt);
 		mysqli_stmt_close($stmt);
 	}
-}
-
-function deleteCategories() {
-	global $connection;
-
-	// if (isset($_GET['source']) === 'blog_categories') {
-		if(isset($_GET['delete'])){
-			$the_cat_id = $_GET['delete'];
-			$query = 'SELECT * FROM sub_categories WHERE parent_cat_id = {$the_cat_id} ';
-			$sub_categories = query($query);
-			$count = mysqli_num_rows($sub_categories);
-
-			if ($count == 0) {
-				$query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
-				$delete_query = query($query);
-				header("Location: blog.php?source=blog_categories");
-			} else {
-				echo "This Category has Sub-Categories, Plaese delete them first or reorder them and then try again!";
-			}
-		}
-	// }
-}
-
-function deleteSubCategories() {
-	global $connection;
-
-	// if (isset($_GET['source']) === 'blog_categories') {
-		if(isset($_GET['delete'])){
-			$the_cat_id = $_GET['delete'];
-			$query = 'SELECT post_id FROM blog_posts WHERE post_sub_category_id = {$the_cat_id} ';
-			$sub_categories = query($query);
-			$count = mysqli_num_rows($sub_categories);
-
-			if ($count == 0) {
-				$query = "DELETE FROM sub_categories WHERE sub_cat_id = {$the_cat_id} ";
-				$delete_query = query($query);
-				header("Location: blog.php?source=blog_categories");
-			} else {
-				echo "This Category has Posts, Plaese delete them first or reorder them and then try again!";
-			}
-		}
-	// }
 }
 
 function findCategoryTitle($post_category_id) {
@@ -280,15 +248,53 @@ function findCategoryTitle($post_category_id) {
 	return $cat_title;
 }
 
-// Estimated Read Time 
-function read_time($post_content) {
-	$word_count = str_word_count($post_content);
-	$min = floor($word_count / 200);
-	if ($min < 1) {
-		return 1;
-	} else {
-		return $min;
-	}
+function findSubCategoryTitle($post_sub_cat_id) {
+	global $connection;
+	$query = "SELECT * FROM sub_categories WHERE sub_cat_id = ? ";
+	$cat = mysqli_prepare($connection, $query);
+	mysqli_stmt_bind_param($cat, 'i', $post_sub_cat_id);
+	mysqli_stmt_execute($cat);
+	confirmQuery($cat);
+	mysqli_stmt_store_result($cat);
+	mysqli_stmt_bind_result($cat, $sub_cat_id, $sub_cat_title, $sub_cat_description, $sub_cat_image);
+	mysqli_stmt_fetch($cat);
+	return $cat_title;
 }
+
+// function deleteCategories() {
+// 	global $connection;
+// 	if(isset($_GET['delete'])){
+// 		$the_cat_id = $_GET['delete'];
+// 		$query = 'SELECT * FROM sub_categories WHERE parent_cat_id = {$the_cat_id} ';
+// 		$sub_categories = query($query);
+// 		$count = mysqli_num_rows($sub_categories);
+
+// 		if ($count == 0) {
+// 			$query = "DELETE FROM categories WHERE cat_id = {$the_cat_id} ";
+// 			$delete_query = query($query);
+// 			header("Location: blog.php?source=blog_categories");
+// 		} else {
+// 			echo "This Category has Sub-Categories, Plaese delete them first or reorder them and then try again!";
+// 		}
+// 	}
+// }
+
+// function deleteSubCategories() {
+// 	global $connection;
+// 	if(isset($_GET['delete'])){
+// 		$the_cat_id = $_GET['delete'];
+// 		$query = 'SELECT post_id FROM blog_posts WHERE post_sub_category_id = {$the_cat_id} ';
+// 		$sub_categories = query($query);
+// 		$count = mysqli_num_rows($sub_categories);
+
+// 		if ($count == 0) {
+// 			$query = "DELETE FROM sub_categories WHERE sub_cat_id = {$the_cat_id} ";
+// 			$delete_query = query($query);
+// 			header("Location: blog.php?source=blog_categories");
+// 		} else {
+// 			echo "This Category has Posts, Plaese delete them first or reorder them and then try again!";
+// 		}
+// 	}
+// }
 
 ?>

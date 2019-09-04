@@ -10,9 +10,7 @@
 		</form>
 	</div>
 </div>
-
 <!-- Categories -->
-
 <div class="card card-small sidebar-categories border-1 mb-3">
 	<div class="m-0 p-2 card-title border-bottom mb-2">All Categories</div>
 	<div class="card-body p-2">

@@ -31,7 +31,7 @@ if(isset($_POST['update_sub_category'])) {
 	mysqli_stmt_bind_param($stmt, 'sssii', $sub_cat_title, $sub_cat_description, $sub_cat_image, $parent_cat_id, $the_cat_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
-	// redirect("categories.php");
+	redirect("categories.php");
 }
 ?>
 <div class="card p-3 mb-3">
@@ -63,7 +63,7 @@ if(isset($_POST['update_sub_category'])) {
 		</div>
 		<div class="form-group">
 			<img width="200" src="../assets/images/cat-images/<?php echo $sub_cat_image; ?>">
-			<input type="file" id="file-input" name="sub_cat_image">
+			<input type="file" id="file-input" class="form-control" name="sub_cat_image">
 			<div id="thumb-output" style="width: 235px;"></div>
 		</div>
 		<div class="form-group">

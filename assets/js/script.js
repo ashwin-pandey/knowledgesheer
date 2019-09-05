@@ -44,11 +44,9 @@ $(document).ready(function(){
         }
     }
   });
-});
 
-// Lazy Loading in quote section
-$(document).ready(function(){
-	$(window).scroll(function(){
+	// Lazy Loading in quote section
+  $(window).scroll(function(){
 		var lastID = $('.load-more').attr('lastID');
 		if(($(window).scrollTop() == $(document).height() - $(window).height()) && (lastID != 0)){
 			$.ajax({
@@ -64,5 +62,53 @@ $(document).ready(function(){
 				}
 			});
 		}
+	});
+
+});
+
+/*=======================================*/
+/* LIKES / DISLIKES */
+
+$(document).ready(function(){
+	// when the user clicks on like
+	$('.like').on('click', function(){
+		var user_id = $(this).data('user-id');
+		var quote_id = $(this).data('id');
+		    $post = $(this);
+
+		$.ajax({
+			url: 'quote_likes.php',
+			type: 'post',
+			data: {
+				'liked': 1,
+				'quote_id': quote_id,
+				'user_id': user_id
+			},
+			success: function(response){
+				$post.parent().find('span.likes_count').text(response + " likes");
+				$post.addClass('hide');
+				$post.siblings().removeClass('hide');
+			}
+		});
+	});
+
+	// when the user clicks on unlike
+	$('.unlike').on('click', function(){
+		var postid = $(this).data('id');
+	    $post = $(this);
+
+		$.ajax({
+			url: 'quote_likes.php',
+			type: 'post',
+			data: {
+				'unliked': 1,
+				'postid': postid
+			},
+			success: function(response){
+				$post.parent().find('span.likes_count').text(response + " likes");
+				$post.addClass('hide');
+				$post.siblings().removeClass('hide');
+			}
+		});
 	});
 });

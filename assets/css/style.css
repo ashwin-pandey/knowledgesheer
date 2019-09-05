@@ -533,6 +533,12 @@ blockquote {
 	background-color: #fff;
 }
 
+/* Likes / Dislikes */
+.quote-like-dislike {
+	margin: 10px auto 0px;
+	padding: 5px;
+}
+
 /*=================================*/
 /* Custom Scrollbar */
 /* width */

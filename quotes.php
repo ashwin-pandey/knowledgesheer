@@ -41,7 +41,7 @@ include 'partials/header.php';
 				<div class="card card-small mb-4">
 					<div class="card-header border-0 pb-0">
 						<div class="media post-author m-0 mb-2 align-self-center">
-							<img style="height: 40px; width: 40px;" src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $post_author; ?>" class="img-fluid mr-3 mt-0 rounded-circle">
+							<img style="height: 40px; width: 40px;" src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $full_name; ?>" class="img-fluid mr-3 mt-0 rounded-circle">
 							<div class="media-body align-self-center">
 								<div class="user-name">
 									<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $full_name; ?></a>
@@ -56,6 +56,38 @@ include 'partials/header.php';
 						<img src="assets/images/quote-images/<?php echo $quote_image; ?>" class="img-fluid quote-image" alt="">
 					</div>
 					<div class="card-footer border-0 quote-content">
+						<div class="card-body p-0">
+							<?php if (isLoggedIn()) { 
+							$current_user_id = $_SESSION['user_id'];
+							?>
+							<div class="quote-like-dislike pl-0 mt-0">
+							<?php 
+							// determine if user has already liked this post
+							$results = query("SELECT * FROM likes WHERE user_id=" . $current_user_id . " AND quote_id=".$quote_id."");
+
+							if (mysqli_num_rows($results) == 1 ): ?>
+								<!-- user already likes post -->
+								<span class="unlike fa fa-thumbs-up" data-id="<?php echo $row['id']; ?>"></span> 
+								<span class="like hide fa fa-thumbs-o-up" data-id="<?php echo $row['id']; ?>"></span> 
+							<?php else: ?>
+								<!-- user has not yet liked post -->
+								<span class="like fa fa-thumbs-o-up" data-id="<?php echo $row['id']; ?>"></span> 
+								<span class="unlike hide fa fa-thumbs-up" data-id="<?php echo $row['id']; ?>"></span> 
+							<?php endif ?>
+
+							<span class="likes_count"><?php echo $row['likes']; ?> likes</span>
+
+
+
+							</div>
+							<?php } else { ?>
+							<div class="default-login-msg">
+								Please <a href="login.php">Login</a> to like & share.
+							</div>
+							<?php } ?>
+							<div class="quote-dislike"></div>
+							<div class="quote-share"></div>
+						</div>
 						<?php echo $quote_content; ?>
 					</div>
 				</div>

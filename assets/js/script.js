@@ -70,11 +70,10 @@ $(document).ready(function(){
 /* LIKES / DISLIKES */
 
 $(document).ready(function(){
-	// when the user clicks on like
 	$('.like').on('click', function(){
-		var user_id = $(this).data('user-id');
 		var quote_id = $(this).data('id');
-		    $post = $(this);
+		var user_id = $(this).data('user-id');
+		var $post = $(this);
 
 		$.ajax({
 			url: 'quote_likes.php',
@@ -92,17 +91,18 @@ $(document).ready(function(){
 		});
 	});
 
-	// when the user clicks on unlike
 	$('.unlike').on('click', function(){
-		var postid = $(this).data('id');
-	    $post = $(this);
+		var quote_id = $(this).data('id');
+		var user_id = $(this).data('user-id');
+	  var $post = $(this);
 
 		$.ajax({
 			url: 'quote_likes.php',
 			type: 'post',
 			data: {
 				'unliked': 1,
-				'postid': postid
+				'quote_id': quote_id,
+				'user_id': user_id
 			},
 			success: function(response){
 				$post.parent().find('span.likes_count').text(response + " likes");

@@ -542,6 +542,13 @@ blockquote {
 .hide {
 	display: none;
 }
+/*.like, .unlike, .likes_count {
+	color: blue;
+}
+.fa-thumbs-up, .fa-thumbs-o-up {
+	transform: rotateY(-180deg);
+	font-size: 1.3em;
+}*/
 /*=================================*/
 /* Custom Scrollbar */
 /* width */

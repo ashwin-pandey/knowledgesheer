@@ -5,6 +5,7 @@ include './admin/functions.php';
 $title = 'Quotes'; 
 $page = 'quotes';
 include 'partials/header.php'; 
+
 ?>
 
 <div class="row quote-posts">
@@ -59,30 +60,28 @@ include 'partials/header.php';
 						<div class="card-body p-0">
 							<?php if (isLoggedIn()) { 
 							$current_user_id = $_SESSION['user_id'];
+							// echo $quote_id;
 							?>
-							<div class="quote-like-dislike pl-0 mt-0">
-								<?php 
-								// determine if user has already liked this post
-								$results = query("SELECT * FROM quote_likes WHERE user_id=".$current_user_id." AND quote_id=".$quote_id."");
-								if (mysqli_num_rows($results) == 1 ): ?>
-									<!-- user already likes post -->
-									<span class="unlike fas fa-thumbs-up" data-id="<?php echo $quote_id; ?>"></span> 
-									<span class="like hide far fa-thumbs-up" data-id="<?php echo $quote_id; ?>"></span> 
-								<?php else: ?>
-									<!-- user has not yet liked post -->
-									<span class="like far fa-thumbs-up" data-id="<?php echo $quote_id; ?>"></span> 
-									<span class="unlike hide fa fa-thumbs-up" data-id="<?php echo $quote_id; ?>"></span> 
-								<?php endif ?>
+							<?php 
+							// determine if user has already liked this post
+							$results = query("SELECT * FROM quote_likes WHERE user_id=$current_user_id AND quote_id=".$quote_id."");
 
-								<span class="likes_count"><?php echo $row['likes']; ?> likes</span>
-							</div>
+							if (mysqli_num_rows($results) == 1 ): ?>
+								<!-- user already likes post -->
+								<span style="cursor: pointer;" class="unlike fas fa-thumbs-up" data-id="<?php echo $quote_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
+								<span style="cursor: pointer;" class="like hide far fa-thumbs-up" data-id="<?php echo $quote_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
+							<?php else: ?>
+								<!-- user has not yet liked post -->
+								<span style="cursor: pointer;" class="like far fa-thumbs-up" data-id="<?php echo $quote_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
+								<span style="cursor: pointer;" class="unlike hide fas fa-thumbs-up" data-id="<?php echo $quote_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
+							<?php endif ?>
+
+							<span class="likes_count"><?php echo $row['likes']; ?> likes</span>
 							<?php } else { ?>
 							<div class="default-login-msg">
 								Please <a href="login.php">Login</a> to like & share.
 							</div>
 							<?php } ?>
-							<div class="quote-dislike"></div>
-							<div class="quote-share"></div>
 						</div>
 						<?php echo $quote_content; ?>
 					</div>

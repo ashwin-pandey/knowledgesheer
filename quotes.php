@@ -61,24 +61,20 @@ include 'partials/header.php';
 							$current_user_id = $_SESSION['user_id'];
 							?>
 							<div class="quote-like-dislike pl-0 mt-0">
-							<?php 
-							// determine if user has already liked this post
-							$results = query("SELECT * FROM likes WHERE user_id=" . $current_user_id . " AND quote_id=".$quote_id."");
+								<?php 
+								// determine if user has already liked this post
+								$results = query("SELECT * FROM quote_likes WHERE user_id=".$current_user_id." AND quote_id=".$quote_id."");
+								if (mysqli_num_rows($results) == 1 ): ?>
+									<!-- user already likes post -->
+									<span class="unlike fas fa-thumbs-up" data-id="<?php echo $quote_id; ?>"></span> 
+									<span class="like hide far fa-thumbs-up" data-id="<?php echo $quote_id; ?>"></span> 
+								<?php else: ?>
+									<!-- user has not yet liked post -->
+									<span class="like far fa-thumbs-up" data-id="<?php echo $quote_id; ?>"></span> 
+									<span class="unlike hide fa fa-thumbs-up" data-id="<?php echo $quote_id; ?>"></span> 
+								<?php endif ?>
 
-							if (mysqli_num_rows($results) == 1 ): ?>
-								<!-- user already likes post -->
-								<span class="unlike fa fa-thumbs-up" data-id="<?php echo $row['id']; ?>"></span> 
-								<span class="like hide fa fa-thumbs-o-up" data-id="<?php echo $row['id']; ?>"></span> 
-							<?php else: ?>
-								<!-- user has not yet liked post -->
-								<span class="like fa fa-thumbs-o-up" data-id="<?php echo $row['id']; ?>"></span> 
-								<span class="unlike hide fa fa-thumbs-up" data-id="<?php echo $row['id']; ?>"></span> 
-							<?php endif ?>
-
-							<span class="likes_count"><?php echo $row['likes']; ?> likes</span>
-
-
-
+								<span class="likes_count"><?php echo $row['likes']; ?> likes</span>
 							</div>
 							<?php } else { ?>
 							<div class="default-login-msg">

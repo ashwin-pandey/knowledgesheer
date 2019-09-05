@@ -539,6 +539,9 @@ blockquote {
 	padding: 5px;
 }
 
+.hide {
+	display: none;
+}
 /*=================================*/
 /* Custom Scrollbar */
 /* width */

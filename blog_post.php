@@ -61,7 +61,7 @@ if (isset($_GET['p_id'])) {
 			</div>
 			<?php } ?>
 
-			<div class="post-content">
+			<div class="post-content pt-4">
 				<?php echo stripcslashes($post_content); ?>
 			</div>
 			<hr>

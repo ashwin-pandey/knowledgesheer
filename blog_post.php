@@ -137,7 +137,7 @@ if (isset($_GET['p_id'])) {
 				<li class="mt-4 media">
 					<?php 
 
-					$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image FROM sub_categories WHERE parent_cat_id = ? ";
+					$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image FROM sub_categories WHERE sub_cat_id = ? ";
 					$cat_stmt = mysqli_prepare($connection, $query);
 					confirmQuery($cat_stmt);
 					mysqli_stmt_bind_param($cat_stmt, 'i', $post_sub_cat_id);

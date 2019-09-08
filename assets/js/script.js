@@ -1,4 +1,6 @@
-// Scroll To Top
+/*=======================================*/
+/* SCROLL TO TOP */
+
 const scrollToTopButton = document.getElementById('js-top');
 const scrollFunc = () => {
   let y = window.scrollY;
@@ -20,6 +22,9 @@ scrollToTopButton.onclick = function(e) {
   e.preventDefault();
   scrollToTop();
 }
+
+/*=======================================*/
+/* OWL CAROUSEL */
 
 $(document).ready(function(){
   // OWL Carousel
@@ -67,21 +72,21 @@ $(document).ready(function(){
 });
 
 /*=======================================*/
-/* LIKES / DISLIKES */
+/* BLOG LIKES / DISLIKES */
 
 $(document).ready(function(){
 	$('.like').on('click', function(){
-		var quote_id = $(this).data('id');
+		var post_id = $(this).data('id');
 		var user_id = $(this).data('user-id');
 		var $post = $(this);
-
+		// console.log("Like - post_id = " + post_id + ", user_id = " + user_id);
 		$.ajax({
-			url: 'quote_likes.php',
+			url: 'likes.php',
 			type: 'post',
 			data: {
-				'liked': 1,
-				'quote_id': quote_id,
-				'user_id': user_id
+				liked: 1,
+				post_id: post_id,
+				user_id: user_id
 			},
 			success: function(response){
 				$post.parent().find('span.likes_count').text(response + " likes");
@@ -92,17 +97,17 @@ $(document).ready(function(){
 	});
 
 	$('.unlike').on('click', function(){
-		var quote_id = $(this).data('id');
+		var post_id = $(this).data('id');
 		var user_id = $(this).data('user-id');
 	  var $post = $(this);
-
+	  // console.log("Dislike - post_id = " + post_id + ", user_id = " + user_id);
 		$.ajax({
-			url: 'quote_likes.php',
+			url: 'likes.php',
 			type: 'post',
 			data: {
-				'unliked': 1,
-				'quote_id': quote_id,
-				'user_id': user_id
+				unliked: 1,
+				post_id: post_id,
+				user_id: user_id
 			},
 			success: function(response){
 				$post.parent().find('span.likes_count').text(response + " likes");
@@ -112,3 +117,5 @@ $(document).ready(function(){
 		});
 	});
 });
+
+/*=======================================*/

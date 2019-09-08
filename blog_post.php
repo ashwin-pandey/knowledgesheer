@@ -6,14 +6,14 @@ if (isset($_GET['p_id'])) {
 	$the_post_id = $_GET['p_id'];
 
 	// Post query
-	$query = "SELECT post_title, post_author, post_date, post_category_id, post_sub_cat_id, post_image, post_content, post_tags, post_description FROM blog_posts WHERE post_id = ? AND post_status = ? ";
+	$query = "SELECT post_title, post_author, post_date, post_category_id, post_sub_cat_id, post_image, post_content, post_tags, post_description, likes FROM blog_posts WHERE post_id = ? AND post_status = ? ";
 	$stmt1 = mysqli_prepare($connection , $query);
 	$published = 'public';
 
 	mysqli_stmt_bind_param($stmt1, "is", $the_post_id, $published);
 	mysqli_stmt_execute($stmt1);
 	mysqli_stmt_store_result($stmt1);
-	mysqli_stmt_bind_result($stmt1, $post_title, $post_author, $post_date, $post_category_id, $post_sub_cat_id, $post_image, $post_content, $post_tags, $post_description);
+	mysqli_stmt_bind_result($stmt1, $post_title, $post_author, $post_date, $post_category_id, $post_sub_cat_id, $post_image, $post_content, $post_tags, $post_description, $likes);
 	$stmt = $stmt1;
 	$stmt->fetch();
 	
@@ -26,13 +26,7 @@ if (isset($_GET['p_id'])) {
 	mysqli_stmt_store_result($user_stmt);
 	mysqli_stmt_bind_result($user_stmt, $user_id, $username, $user_firstname, $user_lastname, $user_email, $user_image, $user_role, $user_description);
 	mysqli_stmt_fetch($user_stmt);
-	
-	?>
 
-
-	<?php 
-
-	$title = $post_title; 
 	$page = 'blog_post';
 	include 'partials/header.php'; 
 
@@ -64,6 +58,31 @@ if (isset($_GET['p_id'])) {
 			<div class="post-content pt-4">
 				<?php echo stripcslashes($post_content); ?>
 			</div>
+
+			<div class="blog-likes m-0">
+				<?php if (isLoggedIn()) { 
+				$current_user_id = $_SESSION['user_id'];
+				// determine if user has already liked this post
+				$results = query("SELECT id FROM blog_likes WHERE user_id = $current_user_id AND post_id = " . $the_post_id . "");
+
+				if (mysqli_num_rows($results) == 0 ): ?>
+					<!-- user has not yet liked post -->
+					<span style="cursor: pointer;" class="like far fa-thumbs-up" data-id="<?php echo $the_post_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
+					<span style="cursor: pointer;" class="unlike hide fas fa-thumbs-up" data-id="<?php echo $the_post_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
+				<?php else: ?>
+					<!-- user already likes post -->
+					<span style="cursor: pointer;" class="unlike fas fa-thumbs-up" data-id="<?php echo $the_post_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
+					<span style="cursor: pointer;" class="like hide far fa-thumbs-up" data-id="<?php echo $the_post_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span>
+				<?php endif ?>
+
+				<span class="likes_count"><?php echo $likes ?> likes</span>
+				<?php } else { ?>
+				<div class="default-login-msg">
+					Please <a href="login.php">Login</a> to like.
+				</div>
+				<?php } ?>
+			</div>
+
 			<hr>
 
 			<div class="more-from">

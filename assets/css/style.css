@@ -360,6 +360,15 @@ blockquote {
 		font-size: 13px;
 	}
 }
+.hide {
+	display: none;
+}
+.blog-likes .unlike {
+	color: blue;
+}
+.blog-likes .likes_count {
+	font-size: 14px;
+}
 
 /*=================================*/
 /* User Posts */
@@ -533,22 +542,6 @@ blockquote {
 	background-color: #fff;
 }
 
-/* Likes / Dislikes */
-.quote-like-dislike {
-	margin: 10px auto 0px;
-	padding: 5px;
-}
-
-.hide {
-	display: none;
-}
-/*.like, .unlike, .likes_count {
-	color: blue;
-}
-.fa-thumbs-up, .fa-thumbs-o-up {
-	transform: rotateY(-180deg);
-	font-size: 1.3em;
-}*/
 /*=================================*/
 /* Custom Scrollbar */
 /* width */

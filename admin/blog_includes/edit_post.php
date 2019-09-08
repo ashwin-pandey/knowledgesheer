@@ -3,8 +3,7 @@
 	if(isset($_GET['p_id'])){
 		$the_post_id =  escape($_GET['p_id']);
 	}
-
-
+	
 	$query = "SELECT * FROM blog_posts WHERE post_id = $the_post_id  ";
 	$select_posts_by_id = query($query);
 
@@ -61,12 +60,8 @@
 			die("Query Failed! - " . mysqli_error($connection));
 		}
 		mysqli_stmt_bind_param($stmt, 'sssssssi', $post_title, $post_category_id, $post_sub_category_id, $post_tags, $post_image, $post_content, $post_description, $the_post_id);
-
 		mysqli_stmt_execute($stmt);
 
-?>
-
-<?php
 		echo 
 		"<div>
 		<p style='display: inline-block;' class=''>Post Updated. 

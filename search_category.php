@@ -164,6 +164,8 @@ include 'partials/header.php';
 				<?php } ?>
 			</div>
 		</div>
+	</div>
+</div>
 <?php } 
 if (isset($_POST['sub_cat_search'])) {
 	$post_category_id = $_POST['category_id'];
@@ -304,13 +306,13 @@ include 'partials/header.php';
 					$sub_id = $row['sub_cat_id'];
 					$sub_title = $row['sub_cat_title'];
 			?>
-					<h5 class="mb-2 cat-title">
-						<a href="category.php?sub_category=<?php echo $sub_id; ?>">
-							<?php echo $sub_title; ?>
-						</a>
-					</h5>
-					<hr class="mt-2">
-				<?php } ?>
+				<h5 class="mb-2 cat-title">
+					<a href="category.php?sub_category=<?php echo $sub_id; ?>">
+						<?php echo $sub_title; ?>
+					</a>
+				</h5>
+				<hr class="mt-2">
+			<?php } ?>
 			</div>
 		<?php } ?>
 		</div>

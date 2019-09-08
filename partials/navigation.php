@@ -46,7 +46,7 @@
 				<div class="col-lg-8 col-md-10 mx-auto">
 					<div class="site-heading">
 						<h1><?php echo $header_title; ?></h1>
-						<span class="subheading">A Simple Blog For Sharing Knowledge</span>
+						<span class="subheading">A Place For Sharing Knowledge</span>
 					</div>
 				</div>
 			</div>

@@ -13,20 +13,18 @@ include 'partials/header.php';
 		<div class="row pt-4">
 			<div class="col-md-8 col-12" id="postList">
 				<?php
-				$query = "SELECT * FROM quotes ORDER BY quote_id DESC LIMIT 7 ";
-				$quote = query($query);
-				$num_rows = mysqli_num_rows($quote);
-				confirmQuery($quote);
+				$query = "SELECT quote_id, quote_image, quote_content, quote_author, quote_date, likes FROM quotes ORDER BY quote_id DESC LIMIT 7 ";
+				$quote_stmt = mysqli_prepare($connection, $query);
+				mysqli_stmt_execute($quote_stmt);
+				confirmQuery($quote_stmt);
+				mysqli_stmt_store_result($quote_stmt);
+				mysqli_stmt_bind_result($quote_stmt, $quote_id, $quote_image, $quote_content, $quote_author, $quote_date, $likes);
+				$num_rows = mysqli_stmt_num_rows($quote_stmt);
 
 				if ($num_rows > 0) {
 
-				while ($row = mysqli_fetch_assoc($quote)) {
-				$quote_id = $row['quote_id'];
-				$quote_image = $row['quote_image'];
-				$quote_content = $row['quote_content'];
-				$quote_author = $row['quote_author'];
-				$quote_date = $row['quote_date'];
-
+				while (mysqli_stmt_fetch($quote_stmt)) {
+				
 				// User Query
 				$query = "SELECT user_id, username, user_firstname, user_lastname, user_image FROM users WHERE username = ? ";
 				$stmt = mysqli_prepare($connection, $query);
@@ -57,32 +55,6 @@ include 'partials/header.php';
 						<img src="assets/images/quote-images/<?php echo $quote_image; ?>" class="img-fluid quote-image" alt="">
 					</div>
 					<div class="card-footer border-0 quote-content">
-						<div class="card-body p-0">
-							<?php if (isLoggedIn()) { 
-							$current_user_id = $_SESSION['user_id'];
-							// echo $quote_id;
-							?>
-							<?php 
-							// determine if user has already liked this post
-							$results = query("SELECT * FROM quote_likes WHERE user_id=$current_user_id AND quote_id=".$quote_id."");
-
-							if (mysqli_num_rows($results) == 1 ): ?>
-								<!-- user already likes post -->
-								<span style="cursor: pointer;" class="unlike fas fa-thumbs-up" data-id="<?php echo $quote_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
-								<span style="cursor: pointer;" class="like hide far fa-thumbs-up" data-id="<?php echo $quote_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
-							<?php else: ?>
-								<!-- user has not yet liked post -->
-								<span style="cursor: pointer;" class="like far fa-thumbs-up" data-id="<?php echo $quote_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
-								<span style="cursor: pointer;" class="unlike hide fas fa-thumbs-up" data-id="<?php echo $quote_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
-							<?php endif ?>
-
-							<span class="likes_count"><?php echo $row['likes']; ?> likes</span>
-							<?php } else { ?>
-							<div class="default-login-msg">
-								Please <a href="login.php">Login</a> to like & share.
-							</div>
-							<?php } ?>
-						</div>
 						<?php echo $quote_content; ?>
 					</div>
 				</div>

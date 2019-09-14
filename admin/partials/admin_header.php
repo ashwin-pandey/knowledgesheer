@@ -5,14 +5,15 @@
 
 <?php 
 
-// if(isset($_SESSION['user_role']) != 'admin') {
-if (!is_admin($_SESSION['username'])) {
-	redirect("/knowledgesheer/index.php");
-	// }
-}
-// else {
-// 	header("location: ../index.php");
+// if (!is_admin($_SESSION['username'])) {
+// 	redirect("/knowledgesheer/index.php");
 // }
+
+if (is_admin($_SESSION['username']) || is_editor($_SESSION['username'])) {
+	
+} else {
+	redirect("/knowledgesheer/index.php");
+}
 
 ?>
 

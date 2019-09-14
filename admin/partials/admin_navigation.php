@@ -132,15 +132,16 @@
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-						<img class="user-avatar rounded-circle mr-2" src="../assets/images/profile/<?php echo $_SESSION['user_image']; ?>">
-						<span class="d-none d-md-inline-block">
-							
-						<?php  
-
-						if (isset($_SESSION['username'])) {
-							echo $_SESSION['firstname'] . " " . $_SESSION['lastname'];
-						}
-
+						<?php if (empty($_SESSION['user_image'])) { ?>
+							<img class="user-avatar rounded-circle mr-2" src="../assets/images/profile/user.png" alt="">
+						<?php } else { ?>
+							<img class="user-avatar rounded-circle mr-2" src="../assets/images/profile/<?php echo $_SESSION['user_image']; ?>">
+						<?php } ?>
+						<span class="d-none d-md-inline-block">	
+						<?php 
+							if (isset($_SESSION['username'])) {
+								echo $_SESSION['firstname'] . " " . $_SESSION['lastname'];
+							}
 						?>
 
 						</span>

@@ -90,7 +90,11 @@ if(isset($_GET['edit_user'])){
 		<div class="card card-small mb-4 pt-3">
 			<div class="card-body text-center">
 				<div class="mb-3 mx-auto">
-					<img class="rounded-circle" src="../assets/images/profile/<?php echo($user_image); ?>" alt="User Avatar" width="110">
+				<?php if (empty($user_image)) { ?>
+					<img class="rounded-circle" src="../assets/images/profile/user.png" alt="<?php echo $user_firstname . " " . $user_lastname; ?>" width="110">
+				<?php } else { ?>
+					<img class="rounded-circle" src="../assets/images/profile/<?php echo($user_image); ?>" alt="<?php echo $user_firstname . " " . $user_lastname; ?>" width="110">
+				<?php } ?>
 				</div>
 				<h4 class="mb-0"><?php echo $user_firstname . " " . $user_lastname; ?></h4>
 				<span class="text-muted d-block mb-2"><?php echo $user_role; ?></span>

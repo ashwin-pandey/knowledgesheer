@@ -180,15 +180,50 @@ function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
 	}
 }
 
-function is_admin($username) {
-	global $connection; 
+function getUserRole($username) {
+	global $connection;
 	$query = "SELECT user_role FROM users WHERE username = '$username'";
 	$result = mysqli_query($connection, $query);
 	confirmQuery($result);
-
 	$row = mysqli_fetch_array($result);
+	return $row['user_role'];
+}
 
-	if($row['user_role'] == 'admin'){
+/* 	Old Version
+ *	Check if user is admin
+ *	@param $username
+ */
+// function is_admin($username) {
+// 	global $connection; 
+// 	$query = "SELECT user_role FROM users WHERE username = '$username'";
+// 	$result = mysqli_query($connection, $query);
+// 	confirmQuery($result);
+
+// 	$row = mysqli_fetch_array($result);
+
+// 	if($row['user_role'] == 'admin'){
+// 		return true;
+// 	} else {
+// 		return false;
+// 	}
+// }
+
+/* 	Check if user is an admin
+ *	@param $username
+ */
+function is_admin($username) {
+	if(getUserRole($username) == 'admin'){
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/* 	Check if user is an editor
+ *	@param $username
+ */
+function is_editor($username) {
+	if(getUserRole($username) == 'editor'){
 		return true;
 	} else {
 		return false;

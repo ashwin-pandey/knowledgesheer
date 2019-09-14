@@ -3,6 +3,10 @@ $title = 'Users';
 $current_page = 'users';
 include 'partials/admin_header.php'; 
 
+if (!is_admin($_SESSION['username'])) {
+	redirect("/knowledgesheer/admin/index.php");
+} else {
+
 if (isset($_GET['source'])) {
 	$source = $_GET['source'];
 } else {
@@ -35,4 +39,6 @@ if (isset($_GET['source'])) {
 	?>
 </div>
 
-<?php include 'partials/admin_footer.php'; ?>
+<?php include 'partials/admin_footer.php'; 
+}
+?>

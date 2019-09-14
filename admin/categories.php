@@ -1,8 +1,13 @@
-<?php 
+<?php
 
 $title = 'Categories';
 $current_page = 'categories';
 include 'partials/admin_header.php'; 
+
+if (!is_admin($_SESSION['username'])) {
+	redirect("/knowledgesheer/admin/index.php");
+} else {
+
 ?>
 
 <!-- Page Header -->
@@ -195,4 +200,6 @@ include 'partials/admin_header.php';
 </div>
 <!-- <?php // deleteCategories(); ?> -->
 
-<?php include 'partials/admin_footer.php'; ?>
+<?php include 'partials/admin_footer.php'; 
+}
+?>

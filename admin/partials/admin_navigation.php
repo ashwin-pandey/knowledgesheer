@@ -41,7 +41,7 @@
 					<a class="dropdown-item" href="blog.php">Dashboard</a>
 					<a class="dropdown-item" href="blog.php?source=view_all_posts">View All Posts</a>
 					<a class="dropdown-item" href="blog.php?source=add_post">Add New Post</a>
-					<a class="dropdown-item" href="comments.php">Comments</a>
+					<!-- <a class="dropdown-item" href="comments.php">Comments</a> -->
 				</div>
 			</li>
 			<li class="nav-item dropdown">
@@ -55,27 +55,29 @@
 					<a class="dropdown-item" href="quotes.php?source=add_quote">Add New</a>
 				</div>
 			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle <?php if($current_page == 'users') { echo 'active';} ?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-					<i class="material-icons">people</i>
-					<span>Users</span>
-				</a>
-				<div class="dropdown-menu dropdown-menu-small">
-					<a class="dropdown-item" href="users.php">Dashboard</a>
-					<a class="dropdown-item" href="users.php?source=view_all_users">View All Users</a>
-					<a class="dropdown-item" href="users.php?source=add_user">Add New</a>
-				</div>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle <?php if($current_page == 'categories') {echo 'active';} ?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-					<i class="material-icons">category</i>
-					<span>Categories</span>
-				</a>
-				<div class="dropdown-menu dropdown-menu-small">
-					<a class="dropdown-item" href="categories.php">Blog Categories</a>
-					<a class="dropdown-item" href="quote_categories.php">Quote Categories</a>
-				</div>
-			</li>
+			<?php if (is_admin($_SESSION['username'])) { ?>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle <?php if($current_page == 'users') { echo 'active';} ?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+						<i class="material-icons">people</i>
+						<span>Users</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-small">
+						<a class="dropdown-item" href="users.php">Dashboard</a>
+						<a class="dropdown-item" href="users.php?source=view_all_users">View All Users</a>
+						<a class="dropdown-item" href="users.php?source=add_user">Add New</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle <?php if($current_page == 'categories') {echo 'active';} ?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
+						<i class="material-icons">category</i>
+						<span>Categories</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-small">
+						<a class="dropdown-item" href="categories.php">Blog Categories</a>
+						<a class="dropdown-item" href="quote_categories.php">Quote Categories</a>
+					</div>
+				</li>
+			<?php } ?>
 		</ul>
 	</div>
 </aside>
@@ -137,7 +139,7 @@
 						<?php } else { ?>
 							<img class="user-avatar rounded-circle mr-2" src="../assets/images/profile/<?php echo $_SESSION['user_image']; ?>">
 						<?php } ?>
-						<span class="d-none d-md-inline-block">	
+						<span class="d-none d-md-inline-block">
 						<?php 
 							if (isset($_SESSION['username'])) {
 								echo $_SESSION['firstname'] . " " . $_SESSION['lastname'];

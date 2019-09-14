@@ -38,3 +38,13 @@ $(document).ready(function(){
 		}
 	});
 });
+
+// Slug
+function convertToSlug(title, page) {
+	var slug = title.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+	if (page == "blog_post") {
+		document.getElementById('slug').value = slug;
+	} else if (page == "category") {
+		document.getElementById('cat-slug').value = slug;
+	}
+}

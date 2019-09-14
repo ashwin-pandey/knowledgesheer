@@ -61,17 +61,22 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta name="language" content="EN">
 	<meta name="robots" content="index,follow" />
 	<link href="assets/images/favicon/favicon.ico" rel="icon">
+	<link href="assets/css/clean-blog.min.css" rel="stylesheet">
 	<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/css/bootstrap-social.css" rel="stylesheet">
 	<link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet">
 	<link href='assets/css/lora-font.css' rel='stylesheet'>
 	<link href='assets/css/open-sans-font.css' rel='stylesheet'>
-	<link href="assets/css/clean-blog.min.css" rel="stylesheet">
 	<link href="assets/css/owl.carousel.css" rel="stylesheet">
 	<link href="assets/css/owl.theme.default.css" rel="stylesheet">
 	<link href="./assets/css/style.css" rel="stylesheet" >
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v4.0"></script>
+
 	<?php include 'navigation.php'; ?>
 	<div class="container">
 		<a class="top-link hide" style="cursor: pointer;" id="js-top">

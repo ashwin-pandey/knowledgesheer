@@ -4,26 +4,25 @@ include './admin/functions.php';
 
 $title = 'Quotes'; 
 $page = 'quotes';
-include 'partials/header.php'; 
+include 'partials/header.php';
 
 ?>
 
 <div class="row quote-posts">
 	<div class="col-md-9 col-md-offset-2 col-sm-12 mx-auto col-12">
 		<div class="row pt-4">
-			<div class="col-md-8 col-12" id="postList">
+			<div class="col-md-8 col-12">
 				<?php
-				$query = "SELECT quote_id, quote_image, quote_content, quote_author, quote_date, quote_hashtags FROM quotes ORDER BY quote_id DESC LIMIT 7 ";
+                if(isset($_GET['q_id'])) {
+                $the_quote_id = $_GET['q_id'];
+                
+				$query = "SELECT quote_id, quote_image, quote_content, quote_author, quote_date, likes FROM quotes WHERE quote_id = " . $the_quote_id . "";
 				$quote_stmt = mysqli_prepare($connection, $query);
 				mysqli_stmt_execute($quote_stmt);
 				confirmQuery($quote_stmt);
 				mysqli_stmt_store_result($quote_stmt);
-				mysqli_stmt_bind_result($quote_stmt, $quote_id, $quote_image, $quote_content, $quote_author, $quote_date, $quote_hashtags);
-				$num_rows = mysqli_stmt_num_rows($quote_stmt);
-
-				if ($num_rows > 0) {
-
-				while (mysqli_stmt_fetch($quote_stmt)) {
+				mysqli_stmt_bind_result($quote_stmt, $quote_id, $quote_image, $quote_content, $quote_author, $quote_date, $likes);
+				mysqli_stmt_fetch($quote_stmt);
 				
 				// User Query
 				$query = "SELECT user_id, username, user_firstname, user_lastname, user_image FROM users WHERE username = ? ";
@@ -52,31 +51,25 @@ include 'partials/header.php';
 						</div>
 					</div>
 					<div class="card-body text-center p-0">
-						<a style="cursor: pointer;" href="quote_page.php?q_id=<?php echo $quote_id; ?>"><img src="assets/images/quote-images/<?php echo $quote_image; ?>" class="img-fluid quote-image" alt="<?php echo $quote_hashtags; ?>"></a>
+						<img src="assets/images/quote-images/<?php echo $quote_image; ?>" class="img-fluid quote-image" alt="">
 					</div>
 					<div class="card-footer border-0 quote-content">
-						<a style="cursor: pointer;" class="btn btn-md btn-social-icon btn-facebook" style="background-color: #ccc;">
+						<a style="cursor: pointer;" class="btn btn-social-icon btn-facebook" style="background-color: #ccc;">
 							<i class="fab fa-facebook-f" style="color: #fff;"></i>
 						</a>
-						<a style="cursor: pointer;" class="btn btn-md btn-social-icon btn-twitter" style="background-color: #ccc;">
+						<a style="cursor: pointer;" class="btn btn-social-icon btn-twitter" style="background-color: #ccc;">
 							<i class="fab fa-twitter" style="color: #fff;"></i>
 						</a>
-						<a style="cursor: pointer;" class="btn btn-md btn-social-icon btn-instagram" style="background-color: #ccc;">
+						<a style="cursor: pointer;" class="btn btn-social-icon btn-instagram" style="background-color: #ccc;">
 							<i class="fab fa-instagram" style="color: #fff;"></i>
 						</a>
-						<a style="cursor: pointer;" class="btn btn-md btn-social-icon btn-linkedin" style="background-color: #ccc;">
+						<a style="cursor: pointer;" class="btn btn-social-icon btn-linkedin" style="background-color: #ccc;">
 							<i class="fab fa-linkedin-in" style="color: #fff;"></i>
 						</a>
-						<a href="assets/images/quote-images/<?php echo $quote_image; ?>" style="color: #fff;" class="btn btn-md btn-success" download><i class="fa fa-arrow-down"></i></a>
-						<a href="quote_page.php?q_id=<?php echo $quote_id; ?>" style="color: #fff;" class="btn btn-md btn-primary"><i class="fa fa-arrow-right"></i></a>
-						<br>
+						<a href="assets/images/quote-images/<?php echo $quote_image; ?>" style="color: #fff;" class="btn btn-md btn-success" download><i class="fa fa-arrow-down"></i></a><br>
 						<br>
 						<?php echo $quote_content; ?>
 					</div>
-				</div>
-				<?php } ?>
-				<div class="load-more text-center" lastID="<?php echo $quote_id; ?>" style="display: none;">
-					<img src="loading.gif"/>
 				</div>
 				<?php } ?>
 			</div>

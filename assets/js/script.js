@@ -117,3 +117,50 @@ $(document).ready(function(){
 		});
 	});
 });
+
+/*=======================================*/
+/* QUOTES LIKES / DISLIKES */
+
+$(document).ready(function(){
+	$('#quote-like').on('click', function(){
+		var quote_id = $(this).data('id');
+		var user_id = $(this).data('user-id');
+		var $post = $(this);
+		console.log("Like - quote_id = " + quote_id + ", user_id = " + user_id);
+		$.ajax({
+			url: 'likes.php',
+			type: 'post',
+			data: {
+				quote_liked: 1,
+				quote_id: quote_id,
+				user_id: user_id
+			},
+			success: function(response){
+				$post.parent().find('span.quote_likes_count').text(response + " likes");
+				$post.addClass('hide');
+				$post.siblings().removeClass('hide');
+			}
+		});
+	});
+
+	$('#quote-unlike').on('click', function(){
+		var quote_id = $(this).data('id');
+		var user_id = $(this).data('user-id');
+		var $post = $(this);
+		console.log("Dislike - quote_id = " + quote_id + ", user_id = " + user_id);
+		$.ajax({
+			url: 'likes.php',
+			type: 'post',
+			data: {
+				quote_unliked: 1,
+				quote_id: quote_id,
+				user_id: user_id
+			},
+			success: function(response){
+				$post.parent().find('span.quote_likes_count').text(response + " likes");
+				$post.addClass('hide');
+				$post.siblings().removeClass('hide');
+			}
+		});
+	});
+});

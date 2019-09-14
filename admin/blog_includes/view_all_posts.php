@@ -33,33 +33,27 @@
 							<th>Sub Category</th>
 							<th>Tags</th>
 							<th>Date</th>
+							<th>Likes</th>
+							<th>Slug</th>
 							<th>Delete</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php 
 						if (is_editor($_SESSION['username'])) {
-							$query = "SELECT post_id, post_author, post_title, post_category_id, post_sub_cat_id, post_status, post_tags, post_date FROM blog_posts WHERE post_author = ? ORDER BY post_id DESC";
+							$query = "SELECT post_id, post_author, post_title, post_category_id, post_sub_cat_id, post_status, post_tags, post_date, likes, post_slug FROM blog_posts WHERE post_author = ? ORDER BY post_id DESC";
 							$stmt = mysqli_prepare($connection, $query);
 							mysqli_stmt_bind_param($stmt, 's', $_SESSION['username']);
 						} else {
-							$query = "SELECT post_id, post_author, post_title, post_category_id, post_sub_cat_id, post_status, post_tags, post_date FROM blog_posts ORDER BY post_id DESC ";
+							$query = "SELECT post_id, post_author, post_title, post_category_id, post_sub_cat_id, post_status, post_tags, post_date, likes, post_slug FROM blog_posts ORDER BY post_id DESC ";
 							$stmt = mysqli_prepare($connection, $query);
 						}
 						mysqli_stmt_execute($stmt);
 						confirmQuery($stmt);
 						mysqli_stmt_store_result($stmt);
-						mysqli_stmt_bind_result($stmt, $post_id, $post_author, $post_title, $post_category_id, $post_sub_cat_id, $post_status, $post_tags, $post_date);
+						mysqli_stmt_bind_result($stmt, $post_id, $post_author, $post_title, $post_category_id, $post_sub_cat_id, $post_status, $post_tags, $post_date, $likes, $post_slug);
 						
 						while(mysqli_stmt_fetch($stmt)) {
-							// $post_id            = $row['post_id'];
-							// $post_author        = $row['post_author'];
-							// $post_title         = $row['post_title'];
-							// $post_category_id   = $row['post_category_id'];
-							// $post_sub_cat_id   	= $row['post_sub_cat_id'];
-							// $post_status        = $row['post_status'];
-							// $post_tags          = $row['post_tags'];
-							// $post_date          = $row['post_date'];
 
 							echo "<tr>";
 
@@ -111,6 +105,8 @@
 
 							echo "<td>$post_tags</td>";
 							echo "<td>$post_date </td>";
+							echo "<td>$likes</td>";
+							echo "<td>$post_slug</td>";
 
 							?>
 
@@ -135,6 +131,8 @@
 							<th>Sub Category</th>
 							<th>Tags</th>
 							<th>Date</th>
+							<th>Likes</th>
+							<th>Slug</th>
 							<th>Delete</th>
 						</tr>
 					</tfoot>

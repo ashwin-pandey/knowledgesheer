@@ -33,7 +33,7 @@ if (isset($_GET['p_id'])) {
 	?>
 
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2 col-xs-12 mx-auto blog-post">
+		<div class="col-md-8 col-md-offset-2 col-12 mx-auto blog-post">
 			<div class="post-title">
 				<h1 class="m-0"><?php echo $post_title; ?></h1>
 			</div>

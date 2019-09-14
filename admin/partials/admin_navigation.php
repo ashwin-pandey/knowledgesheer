@@ -76,12 +76,6 @@
 					<a class="dropdown-item" href="quote_categories.php">Quote Categories</a>
 				</div>
 			</li>
-			<!-- <li class="nav-item">
-				<a class="nav-link <?php if($current_page == 'categories') {echo 'active';} ?>" href="categories.php">
-					<i class="material-icons">category</i>
-					<span>Categories</span>
-				</a>
-			</li> -->
 		</ul>
 	</div>
 </aside>

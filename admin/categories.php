@@ -31,13 +31,17 @@ include 'partials/admin_header.php';
 				<div class="form-group">
 					<label class="card-title">Add New Category</label>
 					<div class="form-group">
-						<input type="text" class="form-control" name="cat_title" placeholder="Category Title" required>
+						<input type="text" class="form-control" oninput="convertToSlug(this.value, 'category');" name="cat_title" placeholder="Category Title" required>
+					</div>
+					<div class="form-group">
+						<input type="text" id="cat-slug" class="form-control" name="cat_slug" placeholder="category-title" required>
 					</div>
 					<div class="form-group">
 						<textarea name="cat_description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
 					</div>
 					<div class="form-group">
-						<input type="file" class="form-control" name="cat_image">
+						<input type="file" id="file-input" class="form-control" name="cat_image">
+						<div id="thumb-output" style="width: 200px;"></div>
 					</div>
 					<div class="form-group">
 						<input type="submit" name="create_category" class="btn btn-sm btn-success">
@@ -51,7 +55,10 @@ include 'partials/admin_header.php';
 				<div class="form-group">
 					<label class="card-title">Add New Sub Category</label>
 					<div class="form-group">
-						<input type="text" class="form-control" name="sub_cat_title" placeholder="Category Title" required>
+						<input type="text" class="form-control" oninput="convertToSlug(this.value, 'sub-category');" name="sub_cat_title" placeholder="Category Title" required>
+					</div>
+					<div class="form-group">
+						<input type="text" id="sub-cat-slug" class="form-control" name="sub_cat_slug" placeholder="sub-category-title" required>
 					</div>
 					<div class="form-group">
 						<select name="parent_cat_id" class="form-control">
@@ -87,6 +94,7 @@ include 'partials/admin_header.php';
 
 	<div class="col-4">
 		<div class="card p-3">
+			<h6>Categories</h6>
 			<table class="table border-left border-right border-bottom card-body table-striped">
 				<thead>
 					<tr>
@@ -135,6 +143,7 @@ include 'partials/admin_header.php';
 
 	<div class="col-4">
 		<div class="card p-3">
+			<h6>Sub-Categories</h6>
 			<table class="table border-left border-right border-bottom card-body table-striped">
 				<thead>
 					<tr>
@@ -155,6 +164,8 @@ include 'partials/admin_header.php';
 						$sub_cat_title 	= $row['sub_cat_title'];
 						$parent_cat_id 	= $row['parent_cat_id'];
 
+						$parent_title = findCategoryTitle($parent_cat_id);
+
 						echo "<tr>";
 						echo "<td>{$sub_cat_id}</td>";
 						echo "<td>{$sub_cat_title}<br>
@@ -170,7 +181,7 @@ include 'partials/admin_header.php';
 							</div>
 						</div>
 						</td>";
-						echo "<td>{$parent_cat_id}</td>";
+						echo "<td>{$parent_title}</td>";
 						echo "</tr>";
 
 					}

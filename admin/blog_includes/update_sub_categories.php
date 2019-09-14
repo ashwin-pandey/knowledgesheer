@@ -1,13 +1,13 @@
 <?php
 if(isset($_GET['edit_sub'])){
 	$the_cat_id = escape($_GET['edit_sub']);
-	$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image, parent_cat_id FROM sub_categories WHERE sub_cat_id = ? ";
+	$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image, sub_cat_slug, parent_cat_id FROM sub_categories WHERE sub_cat_id = ? ";
 	$cat = mysqli_prepare($connection, $query);
 	mysqli_stmt_bind_param($cat, 'i', $the_cat_id);
 	mysqli_stmt_execute($cat);
 	confirmQuery($cat);
 	mysqli_stmt_store_result($cat);
-	mysqli_stmt_bind_result($cat, $sub_cat_id, $sub_cat_title, $sub_cat_description, $sub_cat_image, $parent_cat_id);
+	mysqli_stmt_bind_result($cat, $sub_cat_id, $sub_cat_title, $sub_cat_description, $sub_cat_image, $sub_cat_slug, $parent_cat_id);
 	mysqli_stmt_fetch($cat);
 	$select_category_id = query($query);
 }
@@ -15,6 +15,7 @@ if(isset($_POST['update_sub_category'])) {
 	$sub_cat_title 			= $_POST['sub_cat_title'];
 	$sub_cat_description 	= $_POST['sub_cat_description'];
 	$parent_cat_id			= $_POST['parent_id'];
+	$sub_cat_slug			= $_POST['sub_cat_slug'];
 	$sub_cat_image          = $_FILES['sub_cat_image']['name'];
 	$sub_cat_image_temp     = $_FILES['sub_cat_image']['tmp_name'];
 	move_uploaded_file($sub_cat_image_temp, "../assets/images/cat-images/$sub_cat_image");
@@ -26,9 +27,9 @@ if(isset($_POST['update_sub_category'])) {
 			$sub_cat_image = $row['sub_cat_image'];
 		}
 	}
-	$update_query = "UPDATE sub_categories SET sub_cat_title = ?, sub_cat_description = ?, sub_cat_image = ?, parent_cat_id = ? WHERE sub_cat_id = ? ";
+	$update_query = "UPDATE sub_categories SET sub_cat_title = ?, sub_cat_description = ?, sub_cat_image = ?, sub_cat_slug = ?, parent_cat_id = ? WHERE sub_cat_id = ? ";
 	$stmt = mysqli_prepare($connection, $update_query);
-	mysqli_stmt_bind_param($stmt, 'sssii', $sub_cat_title, $sub_cat_description, $sub_cat_image, $parent_cat_id, $the_cat_id);
+	mysqli_stmt_bind_param($stmt, 'ssssii', $sub_cat_title, $sub_cat_description, $sub_cat_image, $sub_cat_slug, $parent_cat_id, $the_cat_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 	redirect("categories.php");
@@ -38,7 +39,10 @@ if(isset($_POST['update_sub_category'])) {
 	<form method="POST" enctype="multipart/form-data" action="">
 		<div class="form-group">
 			<label>Edit Sub Category</label>
-			<input value="<?php echo $sub_cat_title; ?>" type="text" class="form-control" name="sub_cat_title">
+			<input value="<?php echo $sub_cat_title; ?>" oninput="convertToSlug(this.value, 'sub-category');" type="text" class="form-control" name="sub_cat_title">
+		</div>
+		<div class="form-group">
+			<input type="text" id="sub-cat-slug" class="form-control" name="sub_cat_slug" value="<?php echo $sub_cat_slug; ?>" required>
 		</div>
 		<div class="form-group">
 			<label>Sub Category</label>

@@ -8,6 +8,8 @@ if(isset($_POST['public'])) {
 	$post_content		= str_ireplace("\r\n", '', $post_content);
 	$post_description	= $_POST['post_description'];
 
+	$post_slug			= trim($_POST['post_slug']);
+
 	$author_name		= $_SESSION['username'];
 	$post_author		= $author_name;
 
@@ -23,9 +25,9 @@ if(isset($_POST['public'])) {
 
 	$post_date			= escape(date('d-m-y'));
 
-	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_sub_cat_id, post_title, post_author, post_date, post_content, post_tags, post_status, post_image, post_description) VALUES (?, ?, ?, ?, now(), ?, ?, ?, ?, ?)");
+	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_sub_cat_id, post_title, post_author, post_date, post_content, post_tags, post_status, post_image, post_description, post_slug) VALUES (?, ?, ?, ?, now(), ?, ?, ?, ?, ?, ?)");
 
-	mysqli_stmt_bind_param($stmt, 'sssssssss', $post_category_id, $post_sub_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_image, $post_description);
+	mysqli_stmt_bind_param($stmt, 'ssssssssss', $post_category_id, $post_sub_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_image, $post_description, $post_slug);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 
@@ -67,8 +69,15 @@ if(isset($_POST['public'])) {
 			<div class="card card-small mb-3">
 				<div class="card-body">
 					<div class="add-new-post">
-						<input name="post_title" class="form-control form-control-lg mb-3" type="text" placeholder="Your Post Title">
-						<textarea id="editor" class="form-control" name="post_content" placeholder="Keep calm and write something..."></textarea>
+						<div class="form-group">
+							<input name="post_title" oninput="convertToSlug(this.value, 'blog_post');" class="form-control form-control-lg" type="text" placeholder="Your Post Title">
+						</div>
+						<div class="form-group">
+							<input type="text" id="slug" name="post_slug" class="form-control" placeholder="your-slug-url">
+						</div>
+						<div class="form-group">
+							<textarea id="editor" class="form-control" name="post_content" placeholder="Keep calm and write something..."></textarea>
+						</div>
 					</div>
 				</div>
 			</div>

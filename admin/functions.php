@@ -203,8 +203,9 @@ function insertCategory() {
 	global $connection;
 	// Insert Parent Category
 	if(isset($_POST['create_category'])){
-		$cat_title = $_POST['cat_title'];
-		$cat_description = $_POST['cat_description'];
+		$cat_title 			= $_POST['cat_title'];
+		$cat_description 	= $_POST['cat_description'];
+		$cat_slug			= trim($_POST['cat_slug']);
 		$cat_image          = escape($_FILES['cat_image']['name']);
 		$cat_image_temp     = escape($_FILES['cat_image']['tmp_name']);
 		move_uploaded_file($cat_image_temp, "../assets/images/cat-images/$cat_image");
@@ -212,8 +213,8 @@ function insertCategory() {
 		if($cat_title == "" || empty($cat_title)) {
 			echo "This Field should not be empty";
 		} else {
-			$stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title, cat_description, cat_image) VALUES(?, ?, ?) ");
-			mysqli_stmt_bind_param($stmt, 'sss', $cat_title, $cat_description, $cat_image);
+			$stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title, cat_description, cat_image, cat_slug) VALUES(?, ?, ?, ?) ");
+			mysqli_stmt_bind_param($stmt, 'ssss', $cat_title, $cat_description, $cat_image, $cat_slug);
 			mysqli_stmt_execute($stmt);
 			confirmQuery($stmt);
 		}
@@ -224,12 +225,13 @@ function insertCategory() {
 		$sub_cat_title 			= $_POST['sub_cat_title'];
 		$parent_id 				= $_POST['parent_cat_id'];
 		$sub_cat_description 	= $_POST['sub_cat_description'];
+		$sub_cat_slug			= $_POST['sub_cat_slug'];
 		$sub_cat_image          = $_FILES['sub_cat_image']['name'];
 		$sub_cat_image_temp     = $_FILES['sub_cat_image']['tmp_name'];
 		move_uploaded_file($sub_cat_image_temp, "../assets/images/cat-images/$sub_cat_image");
 
-		$stmt = mysqli_prepare($connection, "INSERT INTO sub_categories(sub_cat_title, parent_cat_id, sub_cat_description, sub_cat_image) VALUES(?, ?, ?, ?) ");
-		mysqli_stmt_bind_param($stmt, 'siss', $sub_cat_title, $parent_id, $sub_cat_description, $sub_cat_image);
+		$stmt = mysqli_prepare($connection, "INSERT INTO sub_categories(sub_cat_title, parent_cat_id, sub_cat_description, sub_cat_image, sub_cat_slug) VALUES(?, ?, ?, ?, ?) ");
+		mysqli_stmt_bind_param($stmt, 'sisss', $sub_cat_title, $parent_id, $sub_cat_description, $sub_cat_image, $sub_cat_slug);
 		mysqli_stmt_execute($stmt);
 		mysqli_stmt_close($stmt);
 	}
@@ -237,13 +239,13 @@ function insertCategory() {
 
 function findCategoryTitle($post_category_id) {
 	global $connection;
-	$query = "SELECT * FROM categories WHERE cat_id = ? ";
+	$query = "SELECT cat_title FROM categories WHERE cat_id = ? ";
 	$cat = mysqli_prepare($connection, $query);
 	mysqli_stmt_bind_param($cat, 'i', $post_category_id);
 	mysqli_stmt_execute($cat);
 	confirmQuery($cat);
 	mysqli_stmt_store_result($cat);
-	mysqli_stmt_bind_result($cat, $cat_id, $cat_title, $cat_description, $cat_image);
+	mysqli_stmt_bind_result($cat, $cat_title);
 	mysqli_stmt_fetch($cat);
 	return $cat_title;
 }

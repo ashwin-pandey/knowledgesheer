@@ -46,5 +46,7 @@ function convertToSlug(title, page) {
 		document.getElementById('slug').value = slug;
 	} else if (page == "category") {
 		document.getElementById('cat-slug').value = slug;
+	} else if (page == "sub-category") {
+		document.getElementById('sub-cat-slug').value = slug;
 	}
 }

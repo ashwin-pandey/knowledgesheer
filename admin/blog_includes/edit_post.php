@@ -17,6 +17,7 @@
 		$post_image         	= $row['post_image'];
 		$post_content       	= $row['post_content'];
 		$post_description		= $row['post_description'];
+		$post_slug				= $row['post_slug'];
 		$post_tags          	= $row['post_tags'];
 		$post_comment_count 	= $row['post_comment_count'];
 		$post_date          	= $row['post_date'];
@@ -31,6 +32,7 @@
 		$post_content        	=  str_ireplace("\r\n", '', $post_content);
 		$post_description    	=  $_POST['post_description'];
 		$post_tags           	=  $_POST['post_tags'];
+		$post_slug				=  trim($_POST['post_slug']);
 
 		$post_image          	=  escape($_FILES['post_image']['name']);
 		$post_image_temp     	=  escape($_FILES['post_image']['tmp_name']);
@@ -52,6 +54,7 @@
 		$query .= "post_tags = ?, ";
 		$query .= "post_image = ?, ";
 		$query .= "post_content = ?, ";
+		$query .= "post_slug = ?, ";
 		$query .= "post_description = ? ";
 		$query .= "WHERE post_id = ? ";
 		
@@ -59,7 +62,7 @@
 		if (!$stmt) {
 			die("Query Failed! - " . mysqli_error($connection));
 		}
-		mysqli_stmt_bind_param($stmt, 'sssssssi', $post_title, $post_category_id, $post_sub_category_id, $post_tags, $post_image, $post_content, $post_description, $the_post_id);
+		mysqli_stmt_bind_param($stmt, 'ssssssssi', $post_title, $post_category_id, $post_sub_category_id, $post_tags, $post_image, $post_content, $post_slug, $post_description, $the_post_id);
 		mysqli_stmt_execute($stmt);
 
 		echo 
@@ -95,8 +98,15 @@
 			<div class="card card-small mb-3">
 				<div class="card-body">
 					<div class="add-new-post">
-						<input type="text" name="post_title" class="form-control form-control-lg mb-3" value="<?php echo stripslashes($post_title); ?>" required>
-						<textarea id="editor" class="form-control form-control-lg mb-3" name="post_content" required><?php echo stripslashes($post_content); ?></textarea>
+						<div class="form-group">
+							<input type="text" oninput="convertToSlug(this.value, 'blog_post');" name="post_title" class="form-control form-control-lg mb-3" value="<?php echo stripslashes($post_title); ?>" required>
+						</div>
+						<div class="form-group">
+							<input type="text" id="slug" name="post_slug" class="form-control" value="<?php echo $post_slug; ?>">
+						</div>
+						<div class="form-group">
+							<textarea id="editor" class="form-control form-control-lg mb-3" name="post_content" required><?php echo stripslashes($post_content); ?></textarea>
+						</div>
 					</div>
 				</div>
 			</div>

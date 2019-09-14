@@ -25,7 +25,7 @@ $(document).ready(function(){
 					var fRead = new FileReader(); //new filereader
 					fRead.onload = (function(file){ //trigger function on successful read
 						return function(e) {
-						var img = $('<img/>').addClass('thumb').attr('src', e.target.result); //create image element 
+						var img = $('<img/>').addClass('thumb img-fluid').attr('src', e.target.result); //create image element 
 						$('#thumb-output').append(img); //append image to output element
 					};
 				})(file);

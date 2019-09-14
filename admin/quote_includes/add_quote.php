@@ -9,11 +9,13 @@ if (isset($_POST['create_quote'])) {
 	// Quote content & hashtags
 	$quote_content = $_POST['quote_content'];
 	$htag = "#"; $arr = explode(" ", $quote_content); $arrc = count($arr); $i = 0;
+	$tags = "";
 	while ($i < $arrc) {
 		if (substr($arr[$i], 0, 1) === $htag) {
-			$par = $arr[$i]; $par = preg_replace("#[^0-9a-z]#i", "", $par);
+			$par = $arr[$i]; 
+			$par = preg_replace("#[^0-9a-z]#i", "", $par);
 			$tags .= $par . ", ";
-			$arr[$i] = "<a target='_blamk' href='/knowledgesheer/search.php?hashtag={$par}'>" . $arr[$i] . "</a>";
+			$arr[$i] = "<a target='_blamk' href='search.php?hashtag={$par}'>" . $arr[$i] . "</a>";
 		}	
 		$i++;
 	}
@@ -59,8 +61,20 @@ if (isset($_POST['create_quote'])) {
 					<div class="form-group">
 						<select name="quote_category" class="form-control">
 							<option value="">select category</option>
-							<option value="">Option 1</option>
-							<option value="">Option 2</option>
+							<?php 
+
+								$query = 'SELECT quote_cat_id, quote_cat_title FROM quote_categories';
+								$select_categories = query($query);
+								
+								confirmQuery($select_categories);
+
+								while ($row = mysqli_fetch_assoc($select_categories)) {
+									$quote_cat_id = $row['quote_cat_id'];
+									$quote_cat_title = $row['quote_cat_title'];
+									echo "<option value='$quote_cat_id'>{$quote_cat_title}</option>";
+								}
+
+							?>
 						</select>
 					</div>
 					<div class="form-group">

@@ -2,7 +2,11 @@
 <div class="page-header row no-gutters py-4">
 	<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
 		<span class="text-uppercase page-subtitle">Blog Posts</span>
-		<h3 class="page-title">View All Posts</h3>
+		<?php if (is_editor($_SESSION['username'])) { ?>
+			<h3 class="page-title"><i><?php echo $_SESSION['firstname']; ?>'s</i> Posts </h3>
+		<?php } else { ?>
+			<h3 class="page-title">View All Posts</h3>
+		<?php } ?>
 	</div>
 </div>
 <!-- End Page Header -->
@@ -34,19 +38,28 @@
 					</thead>
 					<tbody>
 						<?php 
-
-						$query = "SELECT * FROM blog_posts ORDER BY post_id DESC ";
-						$select_posts = mysqli_query($connection,$query);  
-
-						while($row = mysqli_fetch_assoc($select_posts )) {
-							$post_id            = $row['post_id'];
-							$post_author        = $row['post_author'];
-							$post_title         = $row['post_title'];
-							$post_category_id   = $row['post_category_id'];
-							$post_sub_cat_id   	= $row['post_sub_cat_id'];
-							$post_status        = $row['post_status'];
-							$post_tags          = $row['post_tags'];
-							$post_date          = $row['post_date'];
+						if (is_editor($_SESSION['username'])) {
+							$query = "SELECT post_id, post_author, post_title, post_category_id, post_sub_cat_id, post_status, post_tags, post_date FROM blog_posts WHERE post_author = ? ORDER BY post_id DESC";
+							$stmt = mysqli_prepare($connection, $query);
+							mysqli_stmt_bind_param($stmt, 's', $_SESSION['username']);
+						} else {
+							$query = "SELECT post_id, post_author, post_title, post_category_id, post_sub_cat_id, post_status, post_tags, post_date FROM blog_posts ORDER BY post_id DESC ";
+							$stmt = mysqli_prepare($connection, $query);
+						}
+						mysqli_stmt_execute($stmt);
+						confirmQuery($stmt);
+						mysqli_stmt_store_result($stmt);
+						mysqli_stmt_bind_result($stmt, $post_id, $post_author, $post_title, $post_category_id, $post_sub_cat_id, $post_status, $post_tags, $post_date);
+						
+						while(mysqli_stmt_fetch($stmt)) {
+							// $post_id            = $row['post_id'];
+							// $post_author        = $row['post_author'];
+							// $post_title         = $row['post_title'];
+							// $post_category_id   = $row['post_category_id'];
+							// $post_sub_cat_id   	= $row['post_sub_cat_id'];
+							// $post_status        = $row['post_status'];
+							// $post_tags          = $row['post_tags'];
+							// $post_date          = $row['post_date'];
 
 							echo "<tr>";
 
@@ -141,20 +154,4 @@ if(isset($_POST['delete'])){
 	header("Location: /knowledgesheer/admin/blog.php?source=view_all_posts");
 }
 
-?> 
-
-<script>
-	$(document).ready(function(){
-		$(".delete_link").on('click', function(){
-			var id = $(this).attr("rel");
-			var delete_url = "posts.php?delete="+ id +" ";
-			$(".modal_delete_link").attr("href", delete_url);
-			$("#myModal").modal('show');
-		});
-	});
-
-	<?php if(isset($_SESSION['message'])){
-		unset($_SESSION['message']);
-	}
-	?>
-</script>
+?>

@@ -2,7 +2,11 @@
 <div class="page-header row no-gutters py-4">
 	<div class="col-12 col-sm-4 text-center text-sm-left mb-0">
 		<span class="text-uppercase page-subtitle">Quotes</span>
-		<h3 class="page-title">View All Quotes</h3>
+		<?php if (is_editor($_SESSION['username'])) { ?>
+			<h3 class="page-title"><i><?php echo $_SESSION['firstname']; ?>'s</i> Quotes </h3>
+		<?php } else { ?>
+			<h3 class="page-title">View All Quotes</h3>
+		<?php } ?>
 	</div>
 </div>
 <!-- End Page Header -->
@@ -35,10 +39,15 @@
 					<tbody>
 						<?php 
 
-						$query = "SELECT * FROM quotes ORDER BY quote_id DESC";
+						if (is_editor($_SESSION['username'])) {
+							$query = "SELECT * FROM quotes WHERE quote_author = '" . $_SESSION['username'] . "' ORDER BY quote_id DESC";
+						} else {
+							$query = "SELECT * FROM quotes ORDER BY quote_id DESC";
+						}
+
 						$select_posts = mysqli_query($connection,$query);  
                         confirmQuery($select_posts);
-						while($row = mysqli_fetch_assoc($select_posts )) {
+						while($row = mysqli_fetch_assoc($select_posts)) {
 							$quote_id           = $row['quote_id'];
 							$quote_author       = $row['quote_author'];
 							$quote_category   	= $row['quote_category'];

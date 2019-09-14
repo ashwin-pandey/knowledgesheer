@@ -6,14 +6,14 @@ if (isset($_GET['p_id'])) {
 	$the_post_id = $_GET['p_id'];
 
 	// Post query
-	$query = "SELECT post_title, post_author, post_date, post_category_id, post_sub_cat_id, post_image, post_content, post_tags, post_description, likes FROM blog_posts WHERE post_id = ? AND post_status = ? ";
+	$query = "SELECT post_id, post_title, post_author, post_date, post_category_id, post_sub_cat_id, post_image, post_content, post_tags, post_description, likes FROM blog_posts WHERE post_id = ? AND post_status = ? ";
 	$stmt1 = mysqli_prepare($connection , $query);
 	$published = 'public';
 
 	mysqli_stmt_bind_param($stmt1, "is", $the_post_id, $published);
 	mysqli_stmt_execute($stmt1);
 	mysqli_stmt_store_result($stmt1);
-	mysqli_stmt_bind_result($stmt1, $post_title, $post_author, $post_date, $post_category_id, $post_sub_cat_id, $post_image, $post_content, $post_tags, $post_description, $likes);
+	mysqli_stmt_bind_result($stmt1, $post_id, $post_title, $post_author, $post_date, $post_category_id, $post_sub_cat_id, $post_image, $post_content, $post_tags, $post_description, $likes);
 	$stmt = $stmt1;
 	$stmt->fetch();
 	
@@ -33,7 +33,29 @@ if (isset($_GET['p_id'])) {
 	?>
 
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2 col-12 mx-auto blog-post">
+		<div class="col-md-2">
+			<div id="social-icon">
+				<div class="heading mb-1">Share this Article</div> <hr class="mb-2 mt-1">
+				<ul>
+					<li>
+						<a target="_blank" class="social-link facebook-social-link" href="https://www.facebook.com/sharer/sharer.php?u=http://knowledgesheer.com/blog_post.php?p_id=<?php echo $post_id; ?>/" title="Share on Facebook">
+							<span class="facebook-social-img">Share</span>
+						</a>
+					</li>
+					<li>
+						<a target="_blank" class="social-link twitter-social-link" href="https://twitter.com/intent/tweet?original_referer=http://knowledgesheer.com&amp;source=tweetbutton&amp;text=<?php echo $post_title; ?>;url=http://knowledgesheer.com/blog_post.php?p_id=<?php echo $post_id; ?>/&amp;via=Knowledge Sheer" title="Share on Twitter">
+							<span class="twitter-social-img">Share</span>
+						</a>
+					</li>
+					<li>
+						<a target="_blank" class="social-link linkedin-social-link" href="https://www.linkedin.com/shareArticle?mini=true&url=http://knowledgesheer.com/blog_post.php?p_id=<?php echo $post_id; ?>/&media=<?php echo $post_title; ?>" title="Share on Linkedin">
+							<span class="linkedin-social-img">Share</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-8 col-md-offset-2 col-12 blog-post">
 			<div class="post-title">
 				<h1 class="m-0"><?php echo $post_title; ?></h1>
 			</div>
@@ -81,13 +103,33 @@ if (isset($_GET['p_id'])) {
 					Please <a href="login.php">Login</a> to like.
 				</div>
 				<?php } ?>
+				<!-- <div id="social-icon">
+					<div class="heading">Share this Article</div>
+					<ul>
+						<li>
+							<a class="social-link facebook-social-link" href="https://www.facebook.comsharer/sharer.php?u=<?php // echo $post_link; ?>/" title="Share on Facebook">
+								<span class="facebook-social-img">Share</span>
+							</a>
+						</li>
+						<li>
+							<a class="social-link twitter-social-link" href="https://twitter.com/intent/tweet?original_referer=https://example.com&amp;source=tweetbutton&amp;text=Title of the Post;url=<?php // echo $post_link; ?>/&amp;via=example" title="Share on Twitter">
+								<span class="twitter-social-img">Tweet</span>
+							</a>
+						</li>
+						<li>
+							<a class="social-link linkedin-social-link" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php // echo $post_link; ?>/&media=Title of the Post" title="Share on Linkedin">
+								<span class="linkedin-social-img">Share</span>
+							</a>
+						</li>
+					</ul>
+				</div> -->
 			</div>
 
 			<hr>
 
 			<div class="more-from">
-				<h2 class="mb-4">More from <?php echo $user_firstname . " " . $user_lastname; ?>:</h2>
-
+				<!-- <h2 class="mb-4">More from <?php // echo $user_firstname . " " . $user_lastname; ?>:</h2> -->
+				<h2 class="mb-4">More from me</h2>
 				<?php  
 
 				$query = "SELECT post_id, post_title, post_description, post_image FROM blog_posts WHERE post_author = ? ORDER BY post_id DESC LIMIT 3";

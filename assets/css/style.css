@@ -3,7 +3,9 @@
 /*===================================================================================*/
 
 html {
-	font-family: 'Source Sans Pro', san-serif, Aerial;
+	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Source Sans Pro', sans-serif, Aerial; */
+	/* font-family: 'Roboto', sans-serif; */
 }
 
 /* Navigation Bar */
@@ -26,6 +28,16 @@ html {
 	color: #0085a1 !important;
 	border: 1px solid #000;
 	border-radius: 4px;
+}
+
+h2 {
+	font-size: 28px;
+}
+h3 {
+	font-size: 24px;
+}
+h4 {
+	font-size: 20px;
 }
 
 /*=================================*/
@@ -583,4 +595,95 @@ blockquote {
 	-moz-box-shadow: 2px 4px 8px rgba(0,0,0,0.12);
 	box-shadow: 2px 4px 8px rgba(0,0,0,0.12);
 	text-decoration: none;
+}
+
+
+/* Social Sharing Buttons */
+#social-icon {
+	font-family: 'Roboto', sans-serif;
+	padding-top: 20px;
+	/* width: 210px; */
+	text-align: right;
+	position: sticky;
+	top: 45px;
+	display: inline-block;
+	/* float: right; */
+}
+#social-icon .heading {
+	font-size: .9em;
+	border: 0;
+	margin-bottom: 15px;
+	font-weight: bold;
+	color: #474747;
+}
+#social-icon ul {
+	padding: 0;
+	margin: 0;
+}
+#social-icon li {
+	list-style: none;
+	/* display: inline-block; */
+	line-height: 1.45;
+}
+.social-link:visited {
+	color: #9800e4;
+}
+.social-link {
+	color: #FFF !important;
+	padding: 0 !important;
+	font-size: .9em;
+	border-radius: 20px;
+	margin: 0 0 20px 0;
+	display: inline-block;
+	text-decoration: none;
+}
+.social-link span {
+	line-height: 1.35em;
+	display: inline-block;
+	position: relative;
+	padding: 2px 12px 2px 35px;
+}
+.facebook-social-link {
+	background: #4267b2;
+}
+.facebook-social-img:before {
+	background: url(../images/sprite.png?v=301118) no-repeat -0 -24px;
+	height: 24px;
+	width: 24px;
+	display: inline-flex;
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+}
+.twitter-social-link {
+	background: #1da1f2;
+}
+.twitter-social-img:before {
+	background: url(../images/sprite.png?v=301118) no-repeat -24px -24px;
+	height: 24px;
+	width: 24px;
+	display: inline-flex;
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+}
+.linkedin-social-link {
+	background: #0077b5;
+}
+.linkedin-social-img:before {
+	background: url(../images/sprite.png?v=301118) no-repeat -48px -24px;
+	height: 24px;
+	width: 24px;
+	display: inline-flex;
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+}
+@media screen and (max-width: 960px) {
+	#social-icon {
+		display: none;
+	}
 }

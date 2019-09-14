@@ -28,7 +28,7 @@ if(isset($_POST['update_category'])) {
 	}
 	$update_query = "UPDATE categories SET cat_title = ?, cat_description = ?, cat_image = ?, cat_slug = ? WHERE cat_id = ? ";
 	$stmt = mysqli_prepare($connection, $update_query);
-	mysqli_stmt_bind_param($stmt, 'sssi', $cat_title, $cat_description, $cat_image, $cat_slug, $the_cat_id);
+	mysqli_stmt_bind_param($stmt, 'ssssi', $cat_title, $cat_description, $cat_image, $cat_slug, $the_cat_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 	redirect("categories.php");

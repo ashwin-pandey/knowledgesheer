@@ -264,8 +264,26 @@ function findSubCategoryTitle($post_sub_cat_id) {
 }
 
 /*======================================================*/
-/* QUOTE LIKE / DISLIKE */
+/* QUOTE CATEGORIES */
 /*======================================================*/
 
+function insertQuoteCategory() {
+	global $connection;
+	// Insert Parent Category
+	if(isset($_POST['create_quote_category'])){
+		$quote_cat_title 		= $_POST['quote_cat_title'];
+		$quote_cat_desc 		= $_POST['quote_cat_desc'];
+		$quote_cat_slug			= trim($_POST['quote_cat_slug']);
+		$quote_cat_image        = escape($_FILES['quote_cat_image']['name']);
+		$quote_cat_image_temp   = escape($_FILES['quote_cat_image']['tmp_name']);
+		move_uploaded_file($quote_cat_image_temp, "../assets/images/quote-cat-images/$quote_cat_image");
+
+		$stmt = mysqli_prepare($connection, "INSERT INTO quote_categories(quote_cat_title, quote_cat_desc, quote_cat_image, quote_cat_slug) VALUES(?, ?, ?, ?) ");
+		mysqli_stmt_bind_param($stmt, 'ssss', $quote_cat_title, $quote_cat_desc, $quote_cat_image, $quote_cat_slug);
+		mysqli_stmt_execute($stmt);
+		confirmQuery($stmt);
+		mysqli_stmt_close($stmt);
+	}
+}
 
 ?>

@@ -2,27 +2,34 @@
 
 if(isset($_GET['edit_user'])){
 	$the_user_id =  escape($_GET['edit_user']);
-	$query = "SELECT * FROM users WHERE user_id = $the_user_id ";
-	$select_users_query = mysqli_query($connection,$query);  
+	// $query = "SELECT * FROM users WHERE user_id = $the_user_id ";
+	// $select_users_query = mysqli_query($connection,$query);  
 
-	while($row = mysqli_fetch_assoc($select_users_query)) {
-		$user_id        	= $row['user_id'];
-		$username       	= $row['username'];
-		$user_firstname 	= $row['user_firstname'];
-		$user_lastname  	= $row['user_lastname'];
-		$user_email     	= $row['user_email'];
-		$user_image     	= $row['user_image'];
-		$user_role      	= $row['user_role'];
-		$user_description   = $row['user_description'];
-	}
+	// while($row = mysqli_fetch_assoc($select_users_query)) {
+	// 	$user_id        	= $row['user_id'];
+	// 	$username       	= $row['username'];
+	// 	$user_firstname 	= $row['user_firstname'];
+	// 	$user_lastname  	= $row['user_lastname'];
+	// 	$user_email     	= $row['user_email'];
+	// 	$user_image     	= $row['user_image'];
+	// 	$user_role      	= $row['user_role'];
+	// 	$user_description   = $row['user_description'];
+	// }
+
+	$query = "SELECT user_id, username, user_firstname, user_lastname, user_email, user_image, user_role, user_description FROM users WHERE user_id = ? ";
+	$stmt = mysqli_prepare($connection, $query);
+	mysqli_stmt_bind_param($stmt, 's', $the_user_id);
+	mysqli_stmt_execute($stmt);
+	mysqli_stmt_store_result($stmt);
+	mysqli_stmt_bind_result($stmt, $user_id, $username, $user_firstname, $user_lastname, $user_email, $user_image, $user_role, $user_description);
+	confirmQuery($stmt);
+	mysqli_stmt_fetch($stmt);
 
 
 	if(isset($_POST['edit_user'])) {
 		$user_firstname   	= escape($_POST['user_firstname']);
 		$user_lastname    	= escape($_POST['user_lastname']);
 		$user_role        	= escape($_POST['user_role']);
-		$username      		= escape($_POST['username']);
-		$user_email    		= escape($_POST['user_email']);
 		$user_description   = escape($_POST['user_description']);
 
 		$user_image = $_FILES['user_image']['name'];

@@ -264,6 +264,11 @@ blockquote {
 	vertical-align: middle;
 	margin-top: 30px;
 }
+.post-image img {
+	min-width: 100%;
+	max-width: 100%;
+	height: auto;
+}
 @media (max-width: 551.98px) {
 	.post-image {
 		margin-left: -15px;

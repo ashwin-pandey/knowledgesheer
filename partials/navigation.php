@@ -23,7 +23,7 @@
 						<li class="nav-item"><a class="nav-link" href="/knowledgesheer/admin/">Dashboard</a></li>
 					<?php } ?>
 					<li class="nav-item">
-						<a class="nav-link" style="text-transform: none;" href="profile.php"><?php echo $_SESSION['username']; ?></a>
+						<a class="nav-link" style="text-transform: none;" href="#"><?php echo $_SESSION['username']; ?></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/knowledgesheer/includes/logout.php">Logout</a>

@@ -52,6 +52,9 @@ if(isset($_POST['public'])) {
 .ck-editor__editable {
 	min-height: 412px;
 }
+.hide {
+	display: none;
+}
 </style>
 
 <div class="page-header row no-gutters py-4">
@@ -110,21 +113,20 @@ if(isset($_POST['public'])) {
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item px-3 pb-2">
 
-							<select class="form-control" name="post_category" required>
+							<select class="form-control" id="post_category" name="post_category" required>
 								<option>Select category</option>
 								<?php 
+								$query = 'SELECT cat_id, cat_title FROM categories';
+								$cat_stmt = mysqli_prepare($connection, $query);
+								mysqli_stmt_execute($cat_stmt);
+								mysqli_stmt_store_result($cat_stmt);
+								mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title);
+								// $select_categories = query($query);
+								confirmQuery($cat_stmt);
 
-								$query = 'SELECT * FROM categories';
-								$select_categories = query($query);
-								
-								confirmQuery($select_categories);
-
-								while ($row = mysqli_fetch_assoc($select_categories)) {
-									$cat_id = $row['cat_id'];
-									$cat_title = $row['cat_title'];
+								while (mysqli_stmt_fetch($cat_stmt)) {
 									echo "<option value='$cat_id'>{$cat_title}</option>";
 								}
-
 								?>
 							</select>
 						</li>
@@ -132,7 +134,7 @@ if(isset($_POST['public'])) {
 				</div>
 			</div>
 			<!-- / Post Overview -->
-			<div class="card card-small mb-3">
+			<div class="card card-small sub-category mb-3">
 				<div class="card-header border-bottom">
 					<div class="m-0">Sub Categories</div>
 				</div>
@@ -140,20 +142,16 @@ if(isset($_POST['public'])) {
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item px-3 pb-2">
 							<select class="form-control" name="post_sub_category" required>
-								<option>Select category</option>
+								<option>Select sub category</option>
 								<?php 
-
-								$query = 'SELECT * FROM sub_categories';
-								$select_categories = query($query);
-								
-								confirmQuery($select_categories);
-
-								while ($row = mysqli_fetch_assoc($select_categories)) {
-									$sub_cat_id = $row['sub_cat_id'];
-									$sub_cat_title = $row['sub_cat_title'];
+								$query = "SELECT sub_cat_id, sub_cat_title FROM sub_categories";
+								$sub_cat_stmt = mysqli_prepare($connection, $query);
+								mysqli_stmt_execute($sub_cat_stmt);
+								mysqli_stmt_store_result($sub_cat_stmt);
+								mysqli_stmt_bind_result($sub_cat_stmt, $sub_cat_id, $sub_cat_title);
+								while(mysqli_stmt_fetch($sub_cat_stmt)) {
 									echo "<option value='$sub_cat_id'>{$sub_cat_title}</option>";
 								}
-
 								?>
 							</select>
 						</li>

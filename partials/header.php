@@ -18,6 +18,13 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta property="og:title" content="Knowledge Sheer">
 	<meta property="og:url" content="http://knowledgesheer.com" />
 	<meta property="og:description" content="" />
+	<?php } if($page == 'profile') { ?>
+	<title>Profile | Knowledge Sheer</title>
+	<meta name="keywords" content="Knowledgesheer, knowledge, share"/>
+	<meta name="description" content=""/>
+	<meta property="og:title" content="Knowledge Sheer">
+	<meta property="og:url" content="http://knowledgesheer.com" />
+	<meta property="og:description" content="" />
 	<?php } if ($page == 'quotes') { ?>
 	<title>Quotes | Knowledge Sheer</title>
 	<meta name="keywords" content="Knowledgesheer, knowledge, share, quotes"/>
@@ -73,10 +80,6 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v4.0"></script>
-
 	<?php include 'navigation.php'; ?>
 	<div class="container">
 		<a class="top-link hide" style="cursor: pointer;" id="js-top">

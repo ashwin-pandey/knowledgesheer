@@ -10,7 +10,7 @@ if (isset($_GET['category'])) {
 	mysqli_stmt_execute($cat_stmt);
 	confirmQuery($cat_stmt);
 	mysqli_stmt_store_result($cat_stmt);
-	mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description, $cat_image);
+	mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description, $cat_image, $cat_slug);
 	mysqli_stmt_fetch($cat_stmt);
 
 $page = 'category';

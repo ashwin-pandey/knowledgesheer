@@ -38,7 +38,7 @@ if (isset($_POST['update_quote'])) {
 			$par = $arr[$i]; 
 			$par = preg_replace("#[^0-9a-z]#i", "", $par);
 			$tags .= $par . ", ";
-			$arr[$i] = "<a target='_blamk' href='search.php?hashtag={$par}'>" . $arr[$i] . "</a>";
+			$arr[$i] = "<a target='_blamk' href='quote_search.php?q_search={$par}'>" . $arr[$i] . "</a>";
 		}	
 		$i++;
 	}

@@ -41,6 +41,7 @@
 						</a>
 					</li>
 				</ul>
+				<br>
 				<p class="copyright text-muted">Copyright &copy; Knowledge Sheer</p>
 			</div>
 		</div>

@@ -12,13 +12,21 @@ include 'partials/header.php';
 	<div class="col-md-9 col-md-offset-2 col-sm-12 mx-auto col-12">
 		<div class="row pt-4">
 			<div class="col-md-8 col-12">
-                <?php
+				<?php
                 if(isset($_GET['q_search'])){
                 $q_search = $_GET['q_search'];
-                } else if ($_POST['search']) {
-                $q_search = $_POST['search_name'];
-                }
-
+				} else {
+					$q_search = '';
+				}
+				if (isset($_POST['search'])) {
+                $q_search = $_POST['search_input'];
+                } else {
+					$q_search = '';
+				}
+				?>
+				<h5 class="mb-0">Search results for <b>"#<?php echo $q_search; ?>"</b></h5>
+				<hr>
+				<?php
 				$query = "SELECT quote_id, quote_image, quote_content, quote_author, quote_date, quote_hashtags FROM quotes WHERE quote_hashtags LIKE '%$q_search%' ORDER BY quote_id DESC ";
 				$quote_stmt = mysqli_prepare($connection, $query);
 				mysqli_stmt_execute($quote_stmt);
@@ -83,11 +91,7 @@ include 'partials/header.php';
                 <?php } } ?>
 			</div>
 			<div class="col-md-4 col-12">
-				<div class="card">
-					<div class="card-body">
-						
-					</div>
-				</div>
+				<?php include "partials/quote_sidebar.php"; ?>
 			</div>
 		</div>
 	</div>

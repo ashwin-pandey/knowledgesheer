@@ -5,7 +5,7 @@ include './admin/functions.php';
 if (isset($_POST['cat_search'])) {
 	$post_category_id = $_POST['category_id'];
 	$search = $_POST['search_input'];
-	$query = "SELECT * FROM categories WHERE cat_id = ? ";
+	$query = "SELECT cat_id, cat_title, cat_description, cat_image FROM categories WHERE cat_id = ? ";
 	$cat_stmt = mysqli_prepare($connection, $query);
 	mysqli_stmt_bind_param($cat_stmt, "i", $post_category_id);
 	mysqli_stmt_execute($cat_stmt);
@@ -166,7 +166,7 @@ include 'partials/header.php';
 		</div>
 	</div>
 </div>
-<?php } 
+<?php  }
 if (isset($_POST['sub_cat_search'])) {
 	$post_category_id = $_POST['category_id'];
 	$search = $_POST['search_input'];

@@ -27,7 +27,7 @@
 	if(isset($_POST['update_post'])) {
 		$post_title          	=  $_POST['post_title'];
 		$post_category_id    	=  $_POST['post_category'];
-		$post_sub_category_id	=  $_POST['post_sub_category'];
+		$post_sub_cat_id	=  $_POST['post_sub_category'];
 		$post_content        	=  $_POST['post_content'];
 		$post_content        	=  str_ireplace("\r\n", '', $post_content);
 		$post_description    	=  $_POST['post_description'];

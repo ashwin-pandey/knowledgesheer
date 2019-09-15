@@ -75,16 +75,7 @@
 		mysqli_stmt_bind_param($stmt, 'ssssssssi', $post_title, $post_category_id, $post_sub_category_id, $post_tags, $full_img_name, $post_content, $post_slug, $post_description, $the_post_id);
 		mysqli_stmt_execute($stmt);
 
-		echo 
-		"<div>
-		<p style='display: inline-block;' class=''>Post Updated. 
-			<a class='btn btn-sm btn-info' target='_blank' href='../blog_post.php?p_id={$the_post_id}'>View Post </a> 
-			or 
-			<a class='btn btn-sm btn-secondary' href='blog.php?source=view_all_posts'>Edit More Posts</a>
-			or
-			<a class='btn btn-sm btn-primary' href='blog.php?source=add_post'>Add New</a>
-		</p>
-		</div>";
+		echo "<meta http-equiv='refresh' content='0'>";
 	}
 
 ?>
@@ -195,7 +186,7 @@
 								$sub_cat_id = $row['sub_cat_id'];
 								$sub_cat_title = $row['sub_cat_title'];
 
-								if($cat_id == $post_category_id) {
+								if($sub_cat_id == $post_sub_cat_id) {
 									echo "<option selected value='{$sub_cat_id}'>{$sub_cat_title}</option>";
 								} else {
 									echo "<option value='{$sub_cat_id}'>{$sub_cat_title}</option>";

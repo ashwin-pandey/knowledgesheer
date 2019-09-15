@@ -42,17 +42,8 @@ if(isset($_POST['public'])) {
 
 	$the_post_id = mysqli_insert_id($connection);
 
-	// redirect('/knowledgesheer/admin/blog.php?source=edit_post&p_id={$the_post_id}');
-
-	echo 
-	"<div>
-	<p style='display: inline-block;' class=''>Post Created. 
-		<a class='btn btn-sm btn-info' href='../blog_post.php?p_id={$the_post_id}'>View Post </a> 
-		or 
-		<a class='btn btn-sm btn-secondary' href='blog.php?source=view_all_posts'>Edit More Posts</a>
-	</p>
-	</div>";
-
+	// redirect('/blog.php?source=edit_post&p_id={$the_post_id}');
+	echo "<meta http-equiv='refresh' content='0'>";
 }
   
 ?>

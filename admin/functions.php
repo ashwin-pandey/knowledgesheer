@@ -317,7 +317,7 @@ function findSubCategoryTitle($post_sub_cat_id) {
 	mysqli_stmt_store_result($cat);
 	mysqli_stmt_bind_result($cat, $sub_cat_id, $sub_cat_title, $sub_cat_description, $sub_cat_image);
 	mysqli_stmt_fetch($cat);
-	return $cat_title;
+	return $sub_cat_title;
 }
 
 /*======================================================*/

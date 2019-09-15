@@ -26,7 +26,7 @@ if(isset($_GET['edit_user'])){
 	mysqli_stmt_fetch($stmt);
 
 
-	if(isset($_POST['edit_user'])) {
+	if(isset($_POST['update_user'])) {
 		$user_firstname   	= escape($_POST['user_firstname']);
 		$user_lastname    	= escape($_POST['user_lastname']);
 		$user_role        	= escape($_POST['user_role']);
@@ -73,32 +73,31 @@ if(isset($_GET['edit_user'])){
 		$query .="user_firstname  = ?, ";
 		$query .="user_lastname = ?, ";
 		$query .="user_role   =  ?, ";
-		$query .="username = ?, ";
-		$query .="user_email = ?, ";
 		$query .="user_image = ?, " ;
 		$query .="user_description = ? " ;
 		$query .= "WHERE user_id = ? ";
 
 		$stmt = mysqli_prepare($connection, $query);
 		confirmQuery($stmt);
-		mysqli_stmt_bind_param($stmt, 'sssssssi', $user_firstname, $user_lastname, $user_role, $username, $user_email, $full_img_name, $user_description, $the_user_id);
+		mysqli_stmt_bind_param($stmt, 'sssssi', $user_firstname, $user_lastname, $user_role, $full_img_name, $user_description, $the_user_id);
 		mysqli_stmt_execute($stmt);
 
-		echo "
-		<div class='alert alert-success alert-dismissible fade show mb-0' role='alert'>
-			<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-				<span aria-hidden='true'>×</span>
-			</button>
-			<i class='fa fa-check mx-2'></i>
-			<strong>Success!</strong> Your profile has been updated!
-			<a href='users.php?source=view_all_users' class='float-right btn btn-primary'>View All Users</a> 
-		</div>
-		";
+		// echo "
+		// <div class='alert alert-success alert-dismissible fade show mb-0' role='alert'>
+		// 	<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+		// 		<span aria-hidden='true'>×</span>
+		// 	</button>
+		// 	<i class='fa fa-check mx-2'></i>
+		// 	<strong>Success!</strong> Your profile has been updated!
+		// 	<a href='users.php?source=view_all_users' class='btn btn-primary'>View All Users</a> 
+		// </div>
+		// ";
+		echo "<meta http-equiv='refresh' content='0'>";
 	}
 
 } else {  // If the user id is not present in the URL we redirect to the home page
 	header("Location: index.php");
-	}
+}
 
 ?>
 
@@ -182,7 +181,7 @@ if(isset($_GET['edit_user'])){
 										<textarea name="user_description" class="form-control" cols="30" rows="5"><?php echo $user_description; ?></textarea>
 									</div>
 								</div>
-								<button type="submit" name="edit_user" class="btn btn-accent">Update Account</button>
+								<button type="submit" name="update_user" class="btn btn-accent">Update Account</button>
 							</form>
 						</div>
 					</div>

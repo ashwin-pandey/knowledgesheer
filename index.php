@@ -14,13 +14,13 @@ include 'partials/header.php';
 				$count_query = query($query);
 				$quote_count = mysqli_num_rows($count_query);
 				
-				if ($quote_count > 0) {
+				if ($quote_count > 5) {
 				?>
 				<h4>Quotes <small class="float-right"><a style="font-size: 15px;" href="quotes.php">(View All)</a></small></h4>
 				<hr>
 				<div class="owl-carousel owl-theme">
 					<?php  
-					$query = "SELECT quote_id, quote_author, quote_image, quote_hashtags FROM quotes ORDER BY quote_id DESC LIMIT 10 ";
+					$query = "SELECT quote_id, quote_author, quote_image, quote_hashtags FROM quotes ORDER BY quote_id DESC LIMIT 5 ";
 					$quote_query = query($query);
 					confirmQuery($quote_query);
 					while ($row = mysqli_fetch_assoc($quote_query)) {

@@ -66,7 +66,7 @@ include 'partials/header.php';
 						<a style="cursor: pointer;" class="btn btn-social-icon btn-linkedin" style="background-color: #ccc;">
 							<i class="fab fa-linkedin-in" style="color: #fff;"></i>
 						</a>
-						<a href="assets/images/quote-images/<?php echo $quote_image; ?>" style="color: #fff;" class="btn btn-md btn-success" download><i class="fa fa-arrow-down"></i></a><br>
+						<a href="assets/images/quote-images/<?php echo $quote_image; ?>" style="color: #fff;" class="btn btn-md btn-success" download><i class="fas fa-download"></i></a><br>
 						<br>
 						<?php echo $quote_content; ?>
 					</div>

@@ -20,13 +20,13 @@
 				</li>
 				<?php if (isLoggedIn()) { ?>
 					<?php if (is_admin($_SESSION['username'])) { ?>
-						<li class="nav-item"><a class="nav-link" href="/knowledgesheer/admin/">Dashboard</a></li>
+						<li class="nav-item"><a class="nav-link" href="/admin/">Dashboard</a></li>
 					<?php } ?>
 					<li class="nav-item">
 						<a class="nav-link" style="text-transform: none;" href="profile.php"><?php echo $_SESSION['username']; ?></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/knowledgesheer/includes/logout.php">Logout</a>
+						<a class="nav-link" href="/includes/logout.php">Logout</a>
 					</li>
 				<?php } else { ?>
 					<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>

@@ -18,14 +18,26 @@ if (isset($_POST['update_quote'])) {
 	// Quote image
 	$quote_image 		= escape($_FILES['quote_image']['name']);
 	$quote_image_temp	= escape($_FILES['quote_image']['tmp_name']);
-    move_uploaded_file($quote_image_temp, "../assets/images/quote-images/$quote_image" );
+
+	$date = date('m-d-Y');
+	$microtime = round(microtime(true));
+	$actual_name = pathinfo($quote_image, PATHINFO_FILENAME);
+	$ext = pathinfo($quote_image, PATHINFO_EXTENSION);
+	$image_path = "../assets/images/quote-images/";
+	$prepend_name = 'Img_quote_' . $date . "_" . $microtime;
+	$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+	$dest_file = $image_path . $full_img_name;
+
+	move_uploaded_file($quote_image_temp, $dest_file);
+
+    // move_uploaded_file($quote_image_temp, "../assets/images/quote-images/$quote_image" );
     
     if (empty($quote_image)) {
         $query = "SELECT quote_image FROM quotes WHERE quote_id = " . $the_quote_id;
         $select_image = query($query);
         confirmQuery($select_image);
         while($row = mysqli_fetch_array($select_image)) {
-        	$quote_image = $row['quote_image'];
+        	$full_img_name = $row['quote_image'];
         }
     }
 
@@ -57,10 +69,10 @@ if (isset($_POST['update_quote'])) {
 	if (!$stmt) {
 		die("Query Failed! - " . mysqli_error($connection));
 	}
-	mysqli_stmt_bind_param($stmt, 'ssisi', $quote_image, $quote_content, $quote_category, $tags, $the_quote_id);
+	mysqli_stmt_bind_param($stmt, 'ssisi', $full_img_name, $quote_content, $quote_category, $tags, $the_quote_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
-	redirect("/knowledgesheer/admin/quotes.php?source=view_all_quotes");
+	redirect("/admin/quotes.php?source=view_all_quotes");
 }
 
 ?>

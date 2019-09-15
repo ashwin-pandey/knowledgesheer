@@ -17,7 +17,18 @@ if(isset($_POST['update_category'])) {
 	$cat_slug			= $_POST['cat_slug'];
 	$cat_image          = escape($_FILES['cat_image']['name']);
 	$cat_image_temp     = escape($_FILES['cat_image']['tmp_name']);
-	move_uploaded_file($cat_image_temp, "../assets/images/cat-images/$cat_image");
+
+	$date = date('m-d-Y');
+	$microtime = round(microtime(true));
+	$actual_name = pathinfo($cat_image, PATHINFO_FILENAME);
+	$ext = pathinfo($cat_image, PATHINFO_EXTENSION);
+	$image_path = "../assets/images/cat-images/";
+	$prepend_name = 'Img_cat_' . $date . "_" . $microtime;
+	$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+	$dest_file = $image_path . $full_img_name;
+
+	move_uploaded_file($cat_image_temp, $dest_file);
+	
 	if(empty($cat_image)) {
 		$query = "SELECT cat_image FROM categories WHERE cat_id = " . $the_cat_id;
 		$select_image = query($query);
@@ -28,7 +39,7 @@ if(isset($_POST['update_category'])) {
 	}
 	$update_query = "UPDATE categories SET cat_title = ?, cat_description = ?, cat_image = ?, cat_slug = ? WHERE cat_id = ? ";
 	$stmt = mysqli_prepare($connection, $update_query);
-	mysqli_stmt_bind_param($stmt, 'ssssi', $cat_title, $cat_description, $cat_image, $cat_slug, $the_cat_id);
+	mysqli_stmt_bind_param($stmt, 'ssssi', $cat_title, $cat_description, $full_img_name, $cat_slug, $the_cat_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 	redirect("categories.php");

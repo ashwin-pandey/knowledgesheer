@@ -5,22 +5,42 @@ $page = 'profile';
 $header_title = 'Profile';
 include 'partials/header.php'; 
 
+$query = "SELECT user_id, username, user_firstname, user_lastname, user_email, user_image, user_role, user_description FROM users WHERE user_id = ? ";
+$stmt = mysqli_prepare($connection, $query);
+mysqli_stmt_bind_param($stmt, 's', $_SESSION['user_id']);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_store_result($stmt);
+mysqli_stmt_bind_result($stmt, $user_id, $username, $user_firstname, $user_lastname, $user_email, $user_image, $user_role, $user_description);
+confirmQuery($stmt);
+mysqli_stmt_fetch($stmt);
+
+
 if(isset($_POST['edit_user'])) {
-    $username           = $_POST['username'];
     $user_firstname   	= $_POST['user_firstname'];
     $user_lastname    	= $_POST['user_lastname'];
     $user_description   = $_POST['user_description'];
 
     $user_image = $_FILES['user_image']['name'];
-    $user_image_temp = $_FILES['user_image']['tmp_name'];
+	$user_image_temp = $_FILES['user_image']['tmp_name'];
+	
+	$date = date('m-d-Y');
+	$microtime = round(microtime(true));
+	$actual_name = pathinfo($user_image, PATHINFO_FILENAME);
+	$ext = pathinfo($user_image, PATHINFO_EXTENSION);
+	$image_path = "./assets/images/profile/";
+	$prepend_name = 'Img_profile_' . $date . "_" . $microtime;
+	$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+	$dest_file = $image_path . $full_img_name;
 
-    move_uploaded_file($user_image_temp, "../assets/images/profile/$user_image");
+	move_uploaded_file($user_image_temp, $dest_file);
+
+    // move_uploaded_file($user_image_temp, "./assets/images/profile/$user_image");
 
     if(empty($user_image)) {
-        $query = "SELECT user_image FROM users WHERE user_id = $the_user_id ";
+        $query = "SELECT user_image FROM users WHERE user_id = " . $user_id . "";
         $select_image = mysqli_query($connection,$query);
         while($row = mysqli_fetch_array($select_image)) {
-            $user_image = $row['user_image'];
+            $full_img_name = $row['user_image'];
         }
     }
 
@@ -29,23 +49,18 @@ if(isset($_POST['edit_user'])) {
     $query .="user_lastname = ?, ";
     $query .="user_image = ?, ";
     $query .="user_description = ? " ;
-    $query .= "WHERE username = ? ";
+    $query .= "WHERE user_id = ? ";
 
     $stmt = mysqli_prepare($connection, $query);
     confirmQuery($stmt);
-    mysqli_stmt_bind_param($stmt, 'sssss', $user_firstname, $user_lastname, $user_image, $user_description, $username);
+    mysqli_stmt_bind_param($stmt, 'sssss', $user_firstname, $user_lastname, $full_img_name, $user_description, $_SESSION['user_id']);
     mysqli_stmt_execute($stmt);
+
+    redirect("profile.php");
+
 
 }
 
-$query = "SELECT username, user_firstname, user_lastname, user_email, user_image, user_role, user_description FROM users WHERE username = ? ";
-$stmt = mysqli_prepare($connection, $query);
-mysqli_stmt_bind_param($stmt, 's', $_SESSION['username']);
-mysqli_stmt_execute($stmt);
-mysqli_stmt_store_result($stmt);
-mysqli_stmt_bind_result($stmt, $username, $user_firstname, $user_lastname, $user_email, $user_image, $user_role, $user_description);
-confirmQuery($stmt);
-while(mysqli_stmt_fetch($stmt)) {
 ?>
 
 <div class="row pt-3">
@@ -82,7 +97,7 @@ while(mysqli_stmt_fetch($stmt)) {
 										<input type="text" class="form-control" name="username" id="feFirstName" value="<?php echo $username; ?>" disabled> 
 									</div>
 									<div class="form-group col-md-6">
-										<label for="feLastName">User Role</label>
+										<label for="fe	LastName">User Role</label>
 										<?php 
                                         $query = 'SELECT * FROM user_roles';
                                         $select_categories = query($query);
@@ -133,4 +148,4 @@ while(mysqli_stmt_fetch($stmt)) {
 	</div>
 </div>
 
-<?php } include 'partials/footer.php'; ?>
+<?php include 'partials/footer.php'; ?>

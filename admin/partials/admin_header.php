@@ -6,13 +6,13 @@
 <?php 
 
 // if (!is_admin($_SESSION['username'])) {
-// 	redirect("/knowledgesheer/index.php");
+// 	redirect("/index.php");
 // }
 
 if (is_admin($_SESSION['username']) || is_editor($_SESSION['username'])) {
 	
 } else {
-	redirect("/knowledgesheer/index.php");
+	redirect("../index.php");
 }
 
 ?>

@@ -5,7 +5,7 @@ $current_page = 'categories';
 include 'partials/admin_header.php'; 
 
 if (!is_admin($_SESSION['username'])) {
-	redirect("/knowledgesheer/admin/index.php");
+	redirect("/admin/index.php");
 } else {
 
 ?>

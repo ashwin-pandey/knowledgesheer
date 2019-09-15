@@ -28,13 +28,24 @@ if(isset($_GET['edit_user'])){
 		$user_image = $_FILES['user_image']['name'];
 		$user_image_temp = $_FILES['user_image']['tmp_name'];
 
-		move_uploaded_file($user_image_temp, "../assets/images/profile/$user_image");
+		$date = date('m-d-Y');
+		$microtime = round(microtime(true));
+		$actual_name = pathinfo($user_image, PATHINFO_FILENAME);
+		$ext = pathinfo($user_image, PATHINFO_EXTENSION);
+		$image_path = "../assets/images/profile/";
+		$prepend_name = 'Img_profile_' . $date . "_" . $microtime;
+		$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+		$dest_file = $image_path . $full_img_name;
+
+		move_uploaded_file($user_image_temp, $dest_file);
+
+		// move_uploaded_file($user_image_temp, "../assets/images/profile/$user_image");
 
 		if(empty($user_image)) {
 			$query = "SELECT user_image FROM users WHERE user_id = $the_user_id ";
 			$select_image = mysqli_query($connection,$query);
 			while($row = mysqli_fetch_array($select_image)) {
-				$user_image = $row['user_image'];
+				$full_img_name = $row['user_image'];
 			}
 		}
 
@@ -63,7 +74,7 @@ if(isset($_GET['edit_user'])){
 
 		$stmt = mysqli_prepare($connection, $query);
 		confirmQuery($stmt);
-		mysqli_stmt_bind_param($stmt, 'sssssssi', $user_firstname, $user_lastname, $user_role, $username, $user_email, $user_image, $user_description, $the_user_id);
+		mysqli_stmt_bind_param($stmt, 'sssssssi', $user_firstname, $user_lastname, $user_role, $username, $user_email, $full_img_name, $user_description, $the_user_id);
 		mysqli_stmt_execute($stmt);
 
 		echo "
@@ -93,7 +104,7 @@ if(isset($_GET['edit_user'])){
 				<?php if (empty($user_image)) { ?>
 					<img class="rounded-circle" src="../assets/images/profile/user.png" alt="<?php echo $user_firstname . " " . $user_lastname; ?>" width="110">
 				<?php } else { ?>
-					<img class="rounded-circle" src="../assets/images/profile/<?php echo($user_image); ?>" alt="<?php echo $user_firstname . " " . $user_lastname; ?>" width="110">
+					<img class="rounded-circle" src="../assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $user_firstname . " " . $user_lastname; ?>" width="110">
 				<?php } ?>
 				</div>
 				<h4 class="mb-0"><?php echo $user_firstname . " " . $user_lastname; ?></h4>
@@ -112,7 +123,7 @@ if(isset($_GET['edit_user'])){
 				<li class="list-group-item p-3">
 					<div class="row">
 						<div class="col">
-							<form method="post" enctype="multipart/form-data">
+							<form method="post" action="" enctype="multipart/form-data">
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="feFirstName">Username</label>

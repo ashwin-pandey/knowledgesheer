@@ -18,7 +18,19 @@ if(isset($_POST['update_sub_category'])) {
 	$sub_cat_slug			= $_POST['sub_cat_slug'];
 	$sub_cat_image          = $_FILES['sub_cat_image']['name'];
 	$sub_cat_image_temp     = $_FILES['sub_cat_image']['tmp_name'];
-	move_uploaded_file($sub_cat_image_temp, "../assets/images/cat-images/$sub_cat_image");
+
+	$date = date('m-d-Y');
+	$microtime = round(microtime(true));
+	$actual_name = pathinfo($sub_cat_image, PATHINFO_FILENAME);
+	$ext = pathinfo($sub_cat_image, PATHINFO_EXTENSION);
+	$image_path = "../assets/images/cat-images/";
+	$prepend_name = 'Img_sub_cat_' . $date . "_" . $microtime;
+	$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+	$dest_file = $image_path . $full_img_name;
+
+	move_uploaded_file($sub_cat_image_temp, $dest_file);
+
+	// move_uploaded_file($sub_cat_image_temp, "../assets/images/cat-images/$sub_cat_image");
 	if(empty($sub_cat_image)) {
 		$query = "SELECT sub_cat_image FROM sub_categories WHERE sub_cat_id = " . $the_cat_id;
 		$select_image = query($query);
@@ -29,7 +41,7 @@ if(isset($_POST['update_sub_category'])) {
 	}
 	$update_query = "UPDATE sub_categories SET sub_cat_title = ?, sub_cat_description = ?, sub_cat_image = ?, sub_cat_slug = ?, parent_cat_id = ? WHERE sub_cat_id = ? ";
 	$stmt = mysqli_prepare($connection, $update_query);
-	mysqli_stmt_bind_param($stmt, 'ssssii', $sub_cat_title, $sub_cat_description, $sub_cat_image, $sub_cat_slug, $parent_cat_id, $the_cat_id);
+	mysqli_stmt_bind_param($stmt, 'ssssii', $sub_cat_title, $sub_cat_description, $full_img_name, $sub_cat_slug, $parent_cat_id, $the_cat_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 	redirect("categories.php");

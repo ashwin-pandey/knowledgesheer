@@ -22,7 +22,18 @@ if(isset($_POST['add_user'])) {
 	$user_image 		= escape($_FILES['user_image']['name']);
 	$user_image_temp	= escape($_FILES['user_image']['tmp_name']);
 
-	move_uploaded_file($user_image_temp, "../assets/images/profile/$user_image" );
+	$date = date('m-d-Y');
+	$microtime = round(microtime(true));
+	$actual_name = pathinfo($user_image, PATHINFO_FILENAME);
+	$ext = pathinfo($user_image, PATHINFO_EXTENSION);
+	$image_path = "../assets/images/profile/";
+	$prepend_name = 'Img_profile_' . $date . "_" . $microtime;
+	$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+	$dest_file = $image_path . $full_img_name;
+
+	move_uploaded_file($user_image_temp, $dest_file);
+
+	// move_uploaded_file($user_image_temp, "../assets/images/profile/$user_image" );
 
 	$query = 'SELECT * FROM user_roles';
 	$select_roles = query($query);
@@ -38,7 +49,7 @@ if(isset($_POST['add_user'])) {
 	}
 
 	$stmt = mysqli_prepare($connection, "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password, user_image, user_description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-	mysqli_stmt_bind_param($stmt, 'ssssssss', $user_firstname, $user_lastname, $user_role, $username, $user_email, $user_password, $user_image, $user_description);
+	mysqli_stmt_bind_param($stmt, 'ssssssss', $user_firstname, $user_lastname, $user_role, $username, $user_email, $user_password, $full_img_name, $user_description);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 

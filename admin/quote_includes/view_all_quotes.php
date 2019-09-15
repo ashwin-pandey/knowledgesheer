@@ -130,7 +130,7 @@ if(isset($_POST['delete'])){
 	$the_quote_id = escape($_POST['quote_id']);
 	$query = "DELETE FROM quotes WHERE quote_id = {$the_quote_id} ";
 	$delete_query = mysqli_query($connection, $query);
-	header("Location: /knowledgesheer/admin/quotes.php?source=view_all_quotes");
+	header("Location: /admin/quotes.php?source=view_all_quotes");
 }
 
 ?>

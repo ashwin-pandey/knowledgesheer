@@ -149,7 +149,7 @@ if(isset($_POST['delete'])){
 	$the_post_id = escape($_POST['post_id']);
 	$query = "DELETE FROM blog_posts WHERE post_id = {$the_post_id} ";
 	$delete_query = mysqli_query($connection, $query);
-	header("Location: /knowledgesheer/admin/blog.php?source=view_all_posts");
+	header("Location: /admin/blog.php?source=view_all_posts");
 }
 
 ?>

@@ -37,13 +37,23 @@
 		$post_image          	=  escape($_FILES['post_image']['name']);
 		$post_image_temp     	=  escape($_FILES['post_image']['tmp_name']);
 
-		move_uploaded_file($post_image_temp, "../assets/images/blog-images/$post_image"); 
+		$date = date('m-d-Y');
+		$microtime = round(microtime(true));
+		$actual_name = pathinfo($post_image, PATHINFO_FILENAME);
+		$ext = pathinfo($post_image, PATHINFO_EXTENSION);
+		$image_path = "../assets/images/blog-images/";
+		$prepend_name = 'Img_' . $date . "_" . $microtime;
+		$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+		$dest_file = $image_path . $full_img_name;
+
+		move_uploaded_file($post_image_temp, $dest_file); 
+		
 		if(empty($post_image)) {
 			$query = "SELECT * FROM blog_posts WHERE post_id = " . $the_post_id;
 			$select_image = query($query);
 			confirmQuery($select_image);
 			while($row = mysqli_fetch_array($select_image)) {
-				$post_image = $row['post_image'];
+				$full_img_name = $row['post_image'];
 			}
 		}
 
@@ -62,7 +72,7 @@
 		if (!$stmt) {
 			die("Query Failed! - " . mysqli_error($connection));
 		}
-		mysqli_stmt_bind_param($stmt, 'ssssssssi', $post_title, $post_category_id, $post_sub_category_id, $post_tags, $post_image, $post_content, $post_slug, $post_description, $the_post_id);
+		mysqli_stmt_bind_param($stmt, 'ssssssssi', $post_title, $post_category_id, $post_sub_category_id, $post_tags, $full_img_name, $post_content, $post_slug, $post_description, $the_post_id);
 		mysqli_stmt_execute($stmt);
 
 		echo 

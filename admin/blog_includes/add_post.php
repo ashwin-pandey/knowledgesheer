@@ -21,13 +21,22 @@ if(isset($_POST['public'])) {
 	$post_image 		= escape($_FILES['post_image']['name']);
 	$post_image_temp	= escape($_FILES['post_image']['tmp_name']);
 
-	move_uploaded_file($post_image_temp, "../assets/images/blog-images/$post_image" );
+	$date = date('m-d-Y');
+	$microtime = round(microtime(true));
+	$actual_name = pathinfo($post_image, PATHINFO_FILENAME);
+	$ext = pathinfo($post_image, PATHINFO_EXTENSION);
+	$image_path = "../assets/images/blog-images/";
+	$prepend_name = 'Img_' . $date . "_" . $microtime;
+	$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+	$dest_file = $image_path . $full_img_name;
+
+	move_uploaded_file($post_image_temp, $dest_file);
 
 	$post_date			= escape(date('d-m-y'));
 
 	$stmt = mysqli_prepare($connection, "INSERT INTO blog_posts(post_category_id, post_sub_cat_id, post_title, post_author, post_date, post_content, post_tags, post_status, post_image, post_description, post_slug) VALUES (?, ?, ?, ?, now(), ?, ?, ?, ?, ?, ?)");
 
-	mysqli_stmt_bind_param($stmt, 'ssssssssss', $post_category_id, $post_sub_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $post_image, $post_description, $post_slug);
+	mysqli_stmt_bind_param($stmt, 'ssssssssss', $post_category_id, $post_sub_category_id, $post_title, $post_author, $post_content, $post_tags, $post_status, $full_img_name, $post_description, $post_slug);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 

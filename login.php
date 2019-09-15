@@ -9,7 +9,7 @@ include 'partials/header.php';
 
 <?php
 
-checkIfUserIsLoggedInAndRedirect('/knowledgesheer/admin/');
+checkIfUserIsLoggedInAndRedirect('/admin/');
 
 // if(ifItIsMethod('POST')){
 

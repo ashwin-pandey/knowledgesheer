@@ -104,7 +104,7 @@ function register_user($username, $email, $password){
 
 	confirmQuery($register_user_query);
 
-	redirect("/knowledgesheer/index.php");
+	redirect("/index.php");
 
 }
 
@@ -140,7 +140,7 @@ function login_user($username, $password) {
 	$password = crypt($password, $db_user_password);
 
 	if ($username !== $db_username && $password !== $db_user_password) {
-		redirect("/knowledgesheer/index.php");
+		redirect("/index.php");
 	} else if ($username === $db_username && $password === $db_user_password) {
 		$_SESSION['user_id'] = $db_user_id;
 		$_SESSION['username'] = $db_username;
@@ -149,9 +149,9 @@ function login_user($username, $password) {
 		$_SESSION['user_role'] = $db_user_role;
 		$_SESSION['user_image'] = $db_user_image;
 
-		redirect("/knowledgesheer/admin/");
+		redirect("/admin/");
 	} else {
-		redirect("/knowledgesheer/index.php");
+		redirect("/index.php");
 	}
 }
 
@@ -243,13 +243,23 @@ function insertCategory() {
 		$cat_slug			= trim($_POST['cat_slug']);
 		$cat_image          = escape($_FILES['cat_image']['name']);
 		$cat_image_temp     = escape($_FILES['cat_image']['tmp_name']);
-		move_uploaded_file($cat_image_temp, "../assets/images/cat-images/$cat_image");
+
+		$date = date('m-d-Y');
+		$microtime = round(microtime(true));
+		$actual_name = pathinfo($cat_image, PATHINFO_FILENAME);
+		$ext = pathinfo($cat_image, PATHINFO_EXTENSION);
+		$image_path = "../assets/images/cat-images/";
+		$prepend_name = 'Img_cat_' . $date . "_" . $microtime;
+		$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+		$dest_file = $image_path . $full_img_name;
+
+		move_uploaded_file($cat_image_temp, $dest_file);
 
 		if($cat_title == "" || empty($cat_title)) {
 			echo "This Field should not be empty";
 		} else {
 			$stmt = mysqli_prepare($connection, "INSERT INTO categories(cat_title, cat_description, cat_image, cat_slug) VALUES(?, ?, ?, ?) ");
-			mysqli_stmt_bind_param($stmt, 'ssss', $cat_title, $cat_description, $cat_image, $cat_slug);
+			mysqli_stmt_bind_param($stmt, 'ssss', $cat_title, $cat_description, $full_img_name, $cat_slug);
 			mysqli_stmt_execute($stmt);
 			confirmQuery($stmt);
 		}
@@ -263,10 +273,22 @@ function insertCategory() {
 		$sub_cat_slug			= $_POST['sub_cat_slug'];
 		$sub_cat_image          = $_FILES['sub_cat_image']['name'];
 		$sub_cat_image_temp     = $_FILES['sub_cat_image']['tmp_name'];
-		move_uploaded_file($sub_cat_image_temp, "../assets/images/cat-images/$sub_cat_image");
+
+		$date = date('m-d-Y');
+		$microtime = round(microtime(true));
+		$actual_name = pathinfo($sub_cat_image, PATHINFO_FILENAME);
+		$ext = pathinfo($sub_cat_image, PATHINFO_EXTENSION);
+		$image_path = "../assets/images/cat-images/";
+		$prepend_name = 'Img_sub_cat_' . $date . "_" . $microtime;
+		$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+		$dest_file = $image_path . $full_img_name;
+
+		move_uploaded_file($sub_cat_image_temp, $dest_file);
+
+		// move_uploaded_file($sub_cat_image_temp, "../assets/images/cat-images/$sub_cat_image");
 
 		$stmt = mysqli_prepare($connection, "INSERT INTO sub_categories(sub_cat_title, parent_cat_id, sub_cat_description, sub_cat_image, sub_cat_slug) VALUES(?, ?, ?, ?, ?) ");
-		mysqli_stmt_bind_param($stmt, 'sisss', $sub_cat_title, $parent_id, $sub_cat_description, $sub_cat_image, $sub_cat_slug);
+		mysqli_stmt_bind_param($stmt, 'sisss', $sub_cat_title, $parent_id, $sub_cat_description, $full_img_name, $sub_cat_slug);
 		mysqli_stmt_execute($stmt);
 		mysqli_stmt_close($stmt);
 	}

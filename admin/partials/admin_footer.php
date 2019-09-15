@@ -2,7 +2,7 @@
 			<footer class="main-footer d-flex p-2 px-3 bg-white border-top">
 				<ul class="nav">
 					<li class="nav-item">
-						<a class="nav-link" target="_blank" href="/knowledgesheer/index.php">Home Page</a>
+						<a class="nav-link" target="_blank" href="../index.php">Home Page</a>
 					</li>
 				</ul>
 				<span class="copyright ml-auto my-auto mr-2">Copyright © 2019

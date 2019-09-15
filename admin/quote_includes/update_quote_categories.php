@@ -16,20 +16,32 @@ if(isset($_POST['update_quote_category'])) {
     $quote_cat_desc 		= $_POST['quote_cat_desc'];
     $quote_cat_slug			= trim($_POST['quote_cat_slug']);
     $quote_cat_image        = escape($_FILES['quote_cat_image']['name']);
-    $quote_cat_image_temp   = escape($_FILES['quote_cat_image']['tmp_name']);
-    move_uploaded_file($quote_cat_image_temp, "../assets/images/quote-cat-images/$cat_image");
+	$quote_cat_image_temp   = escape($_FILES['quote_cat_image']['tmp_name']);
+	
+	$date = date('m-d-Y');
+	$microtime = round(microtime(true));
+	$actual_name = pathinfo($quote_cat_image, PATHINFO_FILENAME);
+	$ext = pathinfo($quote_cat_image, PATHINFO_EXTENSION);
+	$image_path = "../assets/images/quote-cat-images/";
+	$prepend_name = 'Img_quote_cat_' . $date . "_" . $microtime;
+	$full_img_name = $prepend_name . '_' . $actual_name . '.' . $ext;
+	$dest_file = $image_path . $full_img_name;
+
+	move_uploaded_file($quote_cat_image_temp, $dest_file);
+
+    // move_uploaded_file($quote_cat_image_temp, "../assets/images/quote-cat-images/$cat_image");
 
 	if(empty($quote_cat_image)) {
 		$query = "SELECT quote_cat_image FROM quote_categories WHERE quote_cat_id = " . $the_cat_id;
 		$select_image = query($query);
 		confirmQuery($select_image);
 		while($row = mysqli_fetch_array($select_image)) {
-			$quote_cat_image = $row['quote_cat_image'];
+			$full_img_name = $row['quote_cat_image'];
 		}
 	}
 	$update_query = "UPDATE quote_categories SET quote_cat_title = ?, quote_cat_desc = ?, quote_cat_image = ?, quote_cat_slug = ? WHERE quote_cat_id = ? ";
 	$stmt = mysqli_prepare($connection, $update_query);
-	mysqli_stmt_bind_param($stmt, 'ssssi', $quote_cat_title, $quote_cat_desc, $quote_cat_image, $quote_cat_slug, $the_cat_id);
+	mysqli_stmt_bind_param($stmt, 'ssssi', $quote_cat_title, $quote_cat_desc, $full_img_name, $quote_cat_slug, $the_cat_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 	redirect("quote_categories.php");

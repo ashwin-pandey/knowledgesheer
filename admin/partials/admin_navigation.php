@@ -13,7 +13,7 @@
 			</a>
 		</nav>
 	</div>
-	<form action="#" class="main-sidebar__search w-100 border-right d-sm-flex d-md-none d-lg-none">
+	<!-- <form action="#" class="main-sidebar__search w-100 border-right d-sm-flex d-md-none d-lg-none">
 		<div class="input-group input-group-seamless ml-3">
 			<div class="input-group-prepend">
 				<div class="input-group-text">
@@ -22,7 +22,7 @@
 			</div>
 			<input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search"> 
 		</div>
-	</form>
+	</form> -->
 	<div class="nav-wrapper">
 		<ul class="nav flex-column">
 			<li class="nav-item">
@@ -86,7 +86,7 @@
 	<div class="main-navbar sticky-top bg-white">
 		<!-- Main Navbar -->
 		<nav class="navbar align-items-stretch navbar-light flex-md-nowrap p-0">
-			<form action="#" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
+			<!-- <form action="#" class="main-navbar__search w-100 d-none d-md-flex d-lg-flex">
 				<div class="input-group input-group-seamless ml-3">
 					<div class="input-group-prepend">
 						<div class="input-group-text">
@@ -95,8 +95,8 @@
 					</div>
 					<input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search">
 				</div>
-			</form>
-			<ul class="navbar-nav border-left flex-row">
+			</form> -->
+			<ul class="navbar-nav ml-auto border-left flex-row">
 				<li class="nav-item border-right dropdown notifications">
 					<a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<div class="nav-link-icon__wrapper">
@@ -149,7 +149,7 @@
 						</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-small">
-						<a class="dropdown-item" href="users.php?source=edit_user&edit_user=<?php echo $_SESSION['user_id']; ?>">
+						<a class="dropdown-item" href="user_profile.php?edit_user=<?php echo $_SESSION['user_id']; ?>">
 							<i class="material-icons">&#xE7FD;</i> Profile
 						</a>
 						<div class="dropdown-divider"></div>

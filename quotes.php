@@ -81,11 +81,7 @@ include 'partials/header.php';
 				<?php } ?>
 			</div>
 			<div class="col-md-4 col-12">
-				<div class="card">
-					<div class="card-body">
-						
-					</div>
-				</div>
+				<?php include "partials/quote_sidebar.php" ?>
 			</div>
 		</div>
 	</div>

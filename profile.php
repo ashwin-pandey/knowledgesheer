@@ -5,6 +5,39 @@ $page = 'profile';
 $header_title = 'Profile';
 include 'partials/header.php'; 
 
+if(isset($_POST['edit_user'])) {
+    $username           = $_POST['username'];
+    $user_firstname   	= $_POST['user_firstname'];
+    $user_lastname    	= $_POST['user_lastname'];
+    $user_description   = $_POST['user_description'];
+
+    $user_image = $_FILES['user_image']['name'];
+    $user_image_temp = $_FILES['user_image']['tmp_name'];
+
+    move_uploaded_file($user_image_temp, "../assets/images/profile/$user_image");
+
+    if(empty($user_image)) {
+        $query = "SELECT user_image FROM users WHERE user_id = $the_user_id ";
+        $select_image = mysqli_query($connection,$query);
+        while($row = mysqli_fetch_array($select_image)) {
+            $user_image = $row['user_image'];
+        }
+    }
+
+    $query = "UPDATE users SET ";
+    $query .="user_firstname  = ?, ";
+    $query .="user_lastname = ?, ";
+    $query .="user_image = ?, ";
+    $query .="user_description = ? " ;
+    $query .= "WHERE username = ? ";
+
+    $stmt = mysqli_prepare($connection, $query);
+    confirmQuery($stmt);
+    mysqli_stmt_bind_param($stmt, 'sssss', $user_firstname, $user_lastname, $user_image, $user_description, $username);
+    mysqli_stmt_execute($stmt);
+
+}
+
 $query = "SELECT username, user_firstname, user_lastname, user_email, user_image, user_role, user_description FROM users WHERE username = ? ";
 $stmt = mysqli_prepare($connection, $query);
 mysqli_stmt_bind_param($stmt, 's', $_SESSION['username']);

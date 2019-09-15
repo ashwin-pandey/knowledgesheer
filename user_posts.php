@@ -114,8 +114,8 @@ include 'partials/header.php';
 								mysqli_stmt_bind_result($user_quote, $quote_id, $quote_image, $quote_content, $quote_date);
 								while (mysqli_stmt_fetch($user_quote)) {
 								?>
-								<div class="col-md-6 col-lg-4 item">
-									<img class="img-fluid image scale-on-hover" src="assets/images/quote-images/<?php echo $quote_image ?>">
+								<div class="col-md-6 item mt-3">
+									<a href="quote_page.php?q_id=<?php echo $quote_id; ?>"><img class="img-fluid image scale-on-hover" src="assets/images/quote-images/<?php echo $quote_image ?>"></a>
 								</div>
 								<?php } ?>
 							</div>

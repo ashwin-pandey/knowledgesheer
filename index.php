@@ -9,7 +9,14 @@ include 'partials/header.php';
 		<!-- Main Content -->
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2 col-xs-12 mx-auto col-12">
-				<h4>Quotes <small class="float-right"><a href="quotes.php">(View All)</a></small></h4>
+				<?php 
+				$query = "SELECT quote_id FROM quotes ";
+				$count_query = query($query);
+				$quote_count = mysqli_num_rows($count_query);
+				
+				if ($quote_count > 0) {
+				?>
+				<h4>Quotes <small class="float-right"><a style="font-size: 15px;" href="quotes.php">(View All)</a></small></h4>
 				<hr>
 				<div class="owl-carousel owl-theme">
 					<?php  
@@ -26,6 +33,7 @@ include 'partials/header.php';
 					<?php } ?>
 				</div>
 				<hr>
+				<?php } ?>
 				<h4>Blog Posts</h4>
 				<hr>
 

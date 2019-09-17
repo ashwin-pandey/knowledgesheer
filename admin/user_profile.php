@@ -84,7 +84,7 @@ if(isset($_GET['edit_user'])){
 				<h4 class="mb-0"><?php echo $user_firstname . " " . $user_lastname; ?></h4>
 				<span class="text-muted d-block mb-2"><?php echo $user_role; ?></span>
 				<span class="text-muted d-block mb-2"><?php echo $user_email; ?></span>
-				<span class="text-left d-block mb-2"><?php echo $user_description; ?></span>
+				<span class="text-left d-block mb-2"><?php echo stripslashes($user_description); ?></span>
 			</div>
 		</div>
 	</div>
@@ -142,7 +142,7 @@ if(isset($_GET['edit_user'])){
 								</div>
 								<div class="form-row">
 									<div class="form-group col-12">
-										<textarea name="user_description" class="form-control" cols="30" rows="5"><?php echo $user_description; ?></textarea>
+										<textarea name="user_description" class="form-control" cols="30" rows="5"><?php echo stripslashes($user_description); ?></textarea>
 									</div>
 								</div>
 								<button type="submit" name="update_user" class="btn btn-accent">Update Account</button>

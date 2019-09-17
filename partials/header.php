@@ -80,6 +80,11 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- ===================== -->
+<!-- Google Analytics Link -->
+<!-- ===================== -->
+
 	<?php include 'navigation.php'; ?>
 	<div class="container">
 		<a class="top-link hide" style="cursor: pointer;" id="js-top">

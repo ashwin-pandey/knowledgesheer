@@ -24,7 +24,7 @@ include 'partials/header.php';
 					$q_search = '';
 				}
 				?>
-				<h5 class="mb-0">Search results for <b>"#<?php echo $q_search; ?>"</b></h5>
+				<h5 class="mb-0">Search results for <b>"<?php echo $q_search; ?>"</b></h5>
 				<hr>
 				<?php
 				$query = "SELECT quote_id, quote_image, quote_content, quote_author, quote_date, quote_hashtags FROM quotes WHERE quote_hashtags LIKE '%$q_search%' ORDER BY quote_id DESC ";

@@ -10,24 +10,3 @@
 		</form>
 	</div>
 </div>
-<!-- Categories -->
-<div class="card card-small sidebar-categories border-1 mb-3">
-	<div class="m-0 p-2 card-title border-bottom mb-2">All Categories</div>
-	<div class="card-body p-2">
-		<?php 
-		$query = 'SELECT quote_cat_id, quote_cat_title FROM quote_categories';
-		$categories = query($query);
-		confirmQuery($categories);
-		while ($row = mysqli_fetch_assoc($categories)) {
-			$quote_cat_id = $row['quote_cat_id'];
-			$quote_cat_title = $row['quote_cat_title'];
-			?>
-			<h5 class="mb-2 cat-title">
-				<a href="quote_category.php?q_cat_id=<?php echo $quote_cat_id; ?>">
-					<?php echo $quote_cat_title; ?>
-				</a>
-			</h5>
-			<hr class="mt-2">
-		<?php } ?>
-	</div>
-</div>

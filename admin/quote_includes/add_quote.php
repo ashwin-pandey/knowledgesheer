@@ -31,13 +31,11 @@ if (isset($_POST['create_quote'])) {
 		$i++;
 	}
 	$quote_content = implode(" ", $arr);
-	// echo $quote_content;
-	$quote_category = $_POST['quote_category'];
 	$quote_author = $_SESSION['username'];
 
-	$query = "INSERT INTO quotes(quote_category, quote_image, quote_hashtags, quote_content, quote_author, quote_date) VALUES (?, ?, ?, ?, ?, now())";
+	$query = "INSERT INTO quotes(quote_image, quote_hashtags, quote_content, quote_author, quote_date) VALUES (?, ?, ?, ?, ?, now())";
 	$stmt = mysqli_prepare($connection, $query);
-	mysqli_stmt_bind_param($stmt, 'sssss', $quote_category, $full_img_name, $tags, $quote_content, $quote_author);
+	mysqli_stmt_bind_param($stmt, 'ssss', $full_img_name, $tags, $quote_content, $quote_author);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 	redirect("/admin/quotes.php?source=view_all_quotes");
@@ -69,25 +67,6 @@ if (isset($_POST['create_quote'])) {
 		<div class="col-md-6">
 			<div class="card card-small">
 				<div class="card-body">
-					<div class="form-group">
-						<select name="quote_category" class="form-control">
-							<option value="">select category</option>
-							<?php 
-
-								$query = 'SELECT quote_cat_id, quote_cat_title FROM quote_categories';
-								$select_categories = query($query);
-								
-								confirmQuery($select_categories);
-
-								while ($row = mysqli_fetch_assoc($select_categories)) {
-									$quote_cat_id = $row['quote_cat_id'];
-									$quote_cat_title = $row['quote_cat_title'];
-									echo "<option value='$quote_cat_id'>{$quote_cat_title}</option>";
-								}
-
-							?>
-						</select>
-					</div>
 					<div class="form-group">
 						<textarea name="quote_content" cols="30" rows="5" class="form-control" placeholder="Keep #calm and #write something..."></textarea>
 					</div>

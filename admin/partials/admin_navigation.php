@@ -67,16 +67,12 @@
 						<a class="dropdown-item" href="users.php?source=add_user">Add New</a>
 					</div>
 				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle <?php if($current_page == 'categories') {echo 'active';} ?>" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
-						<i class="material-icons">category</i>
-						<span>Categories</span>
-					</a>
-					<div class="dropdown-menu dropdown-menu-small">
-						<a class="dropdown-item" href="categories.php">Blog Categories</a>
-						<a class="dropdown-item" href="quote_categories.php">Quote Categories</a>
-					</div>
-				</li>
+				<li class="nav-item">
+				<a class="nav-link <?php if($current_page == 'categories') {echo 'active';} ?>" href="categories.php">
+					<i class="material-icons">category</i>
+					<span>Blog Categories</span>
+				</a>
+			</li>
 			<?php } ?>
 		</ul>
 	</div>

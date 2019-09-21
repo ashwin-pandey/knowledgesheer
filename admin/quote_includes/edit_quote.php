@@ -3,13 +3,13 @@
 if (isset($_GET['q_id'])) {
     $the_quote_id = $_GET['q_id'];
 
-    $query = "SELECT quote_id, quote_image, quote_content, quote_author, quote_category FROM quotes WHERE quote_id = ?";
+    $query = "SELECT quote_id, quote_image, quote_content, quote_author FROM quotes WHERE quote_id = ?";
     $stmt = mysqli_prepare($connection, $query);
     mysqli_stmt_bind_param($stmt, 'i', $the_quote_id);
     mysqli_stmt_execute($stmt);
     confirmQuery($stmt);
     mysqli_stmt_store_result($stmt);
-    mysqli_stmt_bind_result($stmt, $quote_id, $quote_image, $quote_content, $quote_author, $quote_category);
+    mysqli_stmt_bind_result($stmt, $quote_id, $quote_image, $quote_content, $quote_author);
     mysqli_stmt_fetch($stmt);
 
 }
@@ -61,7 +61,6 @@ if (isset($_POST['update_quote'])) {
 	$query  = "UPDATE quotes SET ";
 	$query .= "quote_image = ?, ";
 	$query .= "quote_content = ?, ";
-	$query .= "quote_category = ?, ";
 	$query .= "quote_hashtags = ? ";
 	$query .= "WHERE quote_id = ? ";
 		
@@ -69,7 +68,7 @@ if (isset($_POST['update_quote'])) {
 	if (!$stmt) {
 		die("Query Failed! - " . mysqli_error($connection));
 	}
-	mysqli_stmt_bind_param($stmt, 'ssisi', $full_img_name, $quote_content, $quote_category, $tags, $the_quote_id);
+	mysqli_stmt_bind_param($stmt, 'ssisi', $full_img_name, $quote_content, $tags, $the_quote_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 	redirect("/admin/quotes.php?source=view_all_quotes");
@@ -89,7 +88,7 @@ if (isset($_POST['update_quote'])) {
 <form method="POST" action="" enctype="multipart/form-data">
 	<div class="row">
 		<div class="col-md-6">
-			<div class="card card-small">
+			<div class="card card-small mb-3">
 				<div class="card-body">
 					<div class="form-group">
                         <img class="img-fluid" src="../assets/images/quote-images/<?php echo $quote_image; ?>" alt="">
@@ -102,30 +101,6 @@ if (isset($_POST['update_quote'])) {
 		<div class="col-md-6">
 			<div class="card card-small">
 				<div class="card-body">
-					<div class="form-group">
-						<select name="quote_category" class="form-control">
-							<option value="">select category</option>
-							<?php
-
-								$query = "SELECT quote_cat_id, quote_cat_title FROM quote_categories ";
-								$select_categories = query($query);
-
-								confirmQuery($select_categories);
-
-								while($row = mysqli_fetch_assoc($select_categories )) {
-									$quote_cat_id = $row['quote_cat_id'];
-									$quote_cat_title = $row['quote_cat_title'];
-
-									if($quote_cat_id == $quote_category) {
-										echo "<option selected value='{$quote_cat_id}'>{$quote_cat_title}</option>";
-									} else {
-										echo "<option value='{$quote_cat_id}'>{$quote_cat_title}</option>";
-									}
-								}
-
-							?>
-						</select>
-					</div>
 					<div class="form-group">
 						<textarea name="quote_content" cols="30" rows="5" class="form-control"><?php echo strip_tags($quote_content); ?></textarea>
 					</div>

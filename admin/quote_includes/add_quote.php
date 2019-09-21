@@ -33,7 +33,7 @@ if (isset($_POST['create_quote'])) {
 	$quote_content = implode(" ", $arr);
 	$quote_author = $_SESSION['username'];
 
-	$query = "INSERT INTO quotes(quote_image, quote_hashtags, quote_content, quote_author, quote_date) VALUES (?, ?, ?, ?, ?, now())";
+	$query = "INSERT INTO quotes(quote_image, quote_hashtags, quote_content, quote_author, quote_date) VALUES (?, ?, ?, ?, now())";
 	$stmt = mysqli_prepare($connection, $query);
 	mysqli_stmt_bind_param($stmt, 'ssss', $full_img_name, $tags, $quote_content, $quote_author);
 	mysqli_stmt_execute($stmt);

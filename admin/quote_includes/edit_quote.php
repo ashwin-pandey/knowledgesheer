@@ -68,7 +68,7 @@ if (isset($_POST['update_quote'])) {
 	if (!$stmt) {
 		die("Query Failed! - " . mysqli_error($connection));
 	}
-	mysqli_stmt_bind_param($stmt, 'ssisi', $full_img_name, $quote_content, $tags, $the_quote_id);
+	mysqli_stmt_bind_param($stmt, 'sssi', $full_img_name, $quote_content, $tags, $the_quote_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 	redirect("/admin/quotes.php?source=view_all_quotes");

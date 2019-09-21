@@ -54,20 +54,12 @@ if(!empty($_POST["id"])){
             <a style="cursor: pointer;" href="quote_page.php?q_id=<?php echo $quote_id; ?>"><img src="assets/images/quote-images/<?php echo $quote_image; ?>" class="img-fluid quote-image" alt="<?php echo $quote_hashtags; ?>"></a>
             </div>
             <div class="card-footer border-0 quote-content">
-                <a style="cursor: pointer;" class="btn btn-md btn-social-icon btn-facebook" style="background-color: #ccc;">
-                    <i class="fab fa-facebook-f" style="color: #fff;"></i>
+                <a href="assets/images/quote-images/<?php echo $quote_image; ?>" style="color: #fff;" class="btn btn-md btn-success" download>
+                    <i class="fas fa-download"></i>
                 </a>
-                <a style="cursor: pointer;" class="btn btn-md btn-social-icon btn-twitter" style="background-color: #ccc;">
-                    <i class="fab fa-twitter" style="color: #fff;"></i>
+                <a href="quote_page.php?q_id=<?php echo $quote_id; ?>" style="color: #fff;" class="btn btn-md btn-primary">
+                    <i class="fa fa-arrow-right"></i>
                 </a>
-                <a style="cursor: pointer;" class="btn btn-md btn-social-icon btn-instagram" style="background-color: #ccc;">
-                    <i class="fab fa-instagram" style="color: #fff;"></i>
-                </a>
-                <a style="cursor: pointer;" class="btn btn-md btn-social-icon btn-linkedin" style="background-color: #ccc;">
-                    <i class="fab fa-linkedin-in" style="color: #fff;"></i>
-                </a>
-                <a href="assets/images/quote-images/<?php echo $quote_image; ?>" style="color: #fff;" class="btn btn-md btn-success" download><i class="fas fa-download"></i></a>
-                <a href="quote_page.php?q_id=<?php echo $quote_id; ?>" style="color: #fff;" class="btn btn-md btn-primary"><i class="fa fa-arrow-right"></i></a>
                 <br>
                 <br>
                 <?php echo $quote_content; ?>

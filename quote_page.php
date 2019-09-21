@@ -54,19 +54,10 @@ include 'partials/header.php';
 						<img src="assets/images/quote-images/<?php echo $quote_image; ?>" class="img-fluid quote-image" alt="">
 					</div>
 					<div class="card-footer border-0 quote-content">
-						<a style="cursor: pointer;" class="btn btn-social-icon btn-facebook" style="background-color: #ccc;">
-							<i class="fab fa-facebook-f" style="color: #fff;"></i>
+						<a href="assets/images/quote-images/<?php echo $quote_image; ?>" style="color: #fff;" class="btn btn-md btn-success" download>
+							<i class="fas fa-download"></i>
 						</a>
-						<a style="cursor: pointer;" class="btn btn-social-icon btn-twitter" style="background-color: #ccc;">
-							<i class="fab fa-twitter" style="color: #fff;"></i>
-						</a>
-						<a style="cursor: pointer;" class="btn btn-social-icon btn-instagram" style="background-color: #ccc;">
-							<i class="fab fa-instagram" style="color: #fff;"></i>
-						</a>
-						<a style="cursor: pointer;" class="btn btn-social-icon btn-linkedin" style="background-color: #ccc;">
-							<i class="fab fa-linkedin-in" style="color: #fff;"></i>
-						</a>
-						<a href="assets/images/quote-images/<?php echo $quote_image; ?>" style="color: #fff;" class="btn btn-md btn-success" download><i class="fas fa-download"></i></a><br>
+						<br>
 						<br>
 						<?php echo $quote_content; ?>
 					</div>

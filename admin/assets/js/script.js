@@ -4,7 +4,7 @@ $(function () {
 });
 
 // CKEditor 4
-CKEDITOR.replace('editor');
+// CKEDITOR.replace('editor');
 
 // Data Tables
 $(document).ready(function() {

@@ -42,9 +42,9 @@ include 'partials/header.php';
 				<img class="align-self-start rounded-circle float-left" src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $username; ?>">
 				<?php } ?>
 				<div class="media-body username align-self-start">
-					<h1><?php echo $user_firstname . " " . $user_lastname; ?></h1>
+					<h1><?php echo $user_firstname . " " . $user_lastname; ?><small>(<?php echo $username; ?>)</small></h1>
 					<div class="description mb-3">
-						<p class="m-0"><?php echo $user_description; ?></p>
+						<p class="m-0"><?php echo stripslashes($user_description); ?></p>
 					</div>
 				</div>
 			</li>

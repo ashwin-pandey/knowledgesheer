@@ -29,9 +29,9 @@ if (isset($_GET['u_id'])) {
 	$full_name = $user_firstname . " " . $user_lastname;
 
 $title = $full_name; 
-$page = 'category';
+$page = 'user_posts';
 $header_title = 'Knowledge Sheer';
-include 'partials/header.php'; 
+include 'partials/header.php';
 ?>
 
 <div class="row">
@@ -42,7 +42,7 @@ include 'partials/header.php';
 				<img class="align-self-start rounded-circle float-left" src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $username; ?>">
 				<?php } ?>
 				<div class="media-body username align-self-start">
-					<h1><?php echo $user_firstname . " " . $user_lastname; ?><small>(<?php echo $username; ?>)</small></h1>
+					<h1><?php echo $user_firstname . " " . $user_lastname; ?>&nbsp;<small style="color: gray;">&nbsp;(<?php echo $username; ?>&nbsp;)</small></h1>
 					<div class="description mb-3">
 						<p class="m-0"><?php echo stripslashes($user_description); ?></p>
 					</div>

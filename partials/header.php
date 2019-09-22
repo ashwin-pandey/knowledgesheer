@@ -25,6 +25,13 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta property="og:title" content="Knowledge Sheer">
 	<meta property="og:url" content="http://knowledgesheer.com" />
 	<meta property="og:description" content="" />
+	<?php } if($page == 'user_posts') { ?>
+	<title><?php echo $full_name; ?> ( <?php echo $username; ?> )| Knowledge Sheer</title>
+	<meta name="keywords" content="Knowledgesheer, knowledge, <?php echo $full_name; ?>, <?php echo $username; ?> "/>
+	<meta name="description" content="<?php echo $user_description; ?>"/>
+	<meta property="og:title" content="<?php echo $full_name; ?> ( <?php echo $username; ?> )| Knowledge Sheer">
+	<meta property="og:url" content="http://knowledgesheer.com/user_posts.php?u_id=<?php echo $user_id; ?>" />
+	<meta property="og:description" content="<?php echo $user_description; ?>" />
 	<?php } if ($page == 'quotes') { ?>
 	<title>Quotes | Knowledge Sheer</title>
 	<meta name="keywords" content="Knowledgesheer, knowledge, share, quotes"/>

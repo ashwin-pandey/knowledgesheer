@@ -23,10 +23,10 @@
 <script src="assets/js/datatables.bootstrap4.min.js"></script>
 <script src="assets/js/shards.min.js"></script>
 <script src="assets/js/jquery.sharrre.min.js"></script>
-<!-- <script src="assets/js/app-blog-new-post.1.1.0.min.js"></script>
+<script src="assets/js/app-blog-new-post.1.1.0.min.js"></script>
 <script src="assets/js/app-blog-overview.1.1.0.min.js"></script>
 <script src="assets/js/app-components-overview.1.1.0.min.js"></script>
-<script src="assets/js/quill.min.js"></script> -->
+<script src="assets/js/quill.min.js"></script>
 <script src="assets/js/extras.1.1.0.min.js"></script>
 <script src="assets/js/shards-dashboards.1.1.0.min.js"></script>
 <script src="assets/js/script.js"></script>

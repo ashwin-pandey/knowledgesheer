@@ -19,7 +19,7 @@
 					<a class="nav-link <?php if($page == 'all_categories' || $page == 'category' || $page == 'sub_category'){ echo 'active-nav'; } else { echo ''; } ?>" href="all_categories.php">Categories</a>
 				</li>
 				<?php if (isLoggedIn()) { ?>
-					<?php if (is_admin($_SESSION['username'])) { ?>
+					<?php if (is_admin($_SESSION['username']) || is_editor($_SESSION['username'])) { ?>
 						<li class="nav-item"><a class="nav-link" href="/admin/">Dashboard</a></li>
 					<?php } ?>
 					<li class="nav-item">

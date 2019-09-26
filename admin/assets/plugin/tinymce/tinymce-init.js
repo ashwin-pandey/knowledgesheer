@@ -66,9 +66,13 @@ tinymce.init({
 	// image_advtab: true,
 	
 	// without images_upload_url set, Upload tab won't show up
-	images_upload_url: '/knowledgesheer/admin/upload.php',
+	images_upload_url: '/admin/upload.php',
 	
 	automatic_uploads : false,
+	
+	image_class_list: [
+	    {title: 'Responsive', value: 'img-fluid'}
+	]
     
     // override default upload handler to simulate successful upload
     images_upload_handler: function (blobInfo, success, failure) {

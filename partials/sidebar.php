@@ -21,9 +21,10 @@
 		while ($row = mysqli_fetch_assoc($categories)) {
 			$cat_id = $row['cat_id'];
 			$cat_title = $row['cat_title'];
+			$cat_slug = $row['cat_slug'];
 			?>
 			<h5 class="mb-2 cat-title">
-				<a href="category.php?category=<?php echo $cat_id; ?>">
+				<a href="<?php echo $baseURL; ?>/category<?php echo $cat_id; ?>/<?php echo $cat_slug; ?>">
 					<?php echo $cat_title; ?>
 				</a>
 			</h5>

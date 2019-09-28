@@ -39,10 +39,10 @@ include 'partials/header.php';
 				<div class="card card-small mb-4">
 					<div class="card-header border-0 pb-0">
 						<div class="media post-author m-0 mb-2 align-self-center">
-							<img style="height: 40px; width: 40px;" src="assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $full_name; ?>" class="img-fluid mr-3 mt-0 rounded-circle">
+							<img style="height: 40px; width: 40px;" src="<?php echo $baseURL; ?>/assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $full_name; ?>" class="img-fluid mr-3 mt-0 rounded-circle">
 							<div class="media-body align-self-center">
 								<div class="user-name">
-									<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $full_name; ?></a>
+									<a href="<?php echo $baseURL; ?>/user_posts/<?php echo $username; ?>"><?php echo $full_name; ?></a>
 								</div>
 								<div class="date">
 									<small style="font-size: 12px;"><?php echo date('F j, Y', strtotime($quote_date)); ?></small>
@@ -51,10 +51,10 @@ include 'partials/header.php';
 						</div>
 					</div>
 					<div class="card-body text-center p-0">
-						<img src="assets/images/quote-images/<?php echo $quote_image; ?>" class="img-fluid quote-image" alt="">
+						<img src="<?php echo $baseURL; ?>/assets/images/quote-images/<?php echo $quote_image; ?>" class="img-fluid quote-image" alt="">
 					</div>
 					<div class="card-footer border-0 quote-content">
-						<a href="assets/images/quote-images/<?php echo $quote_image; ?>" style="color: #fff;" class="btn btn-md btn-success" download>
+						<a href="<?php echo $baseURL; ?>/assets/images/quote-images/<?php echo $quote_image; ?>" style="color: #fff;" class="btn btn-md btn-success" download>
 							<i class="fas fa-download"></i>
 						</a>
 						<br>

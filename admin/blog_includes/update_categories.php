@@ -34,7 +34,7 @@ if(isset($_POST['update_category'])) {
 		$select_image = query($query);
 		confirmQuery($select_image);
 		while($row = mysqli_fetch_array($select_image)) {
-			$cat_image = $row['cat_image'];
+			$full_img_name = $row['cat_image'];
 		}
 	}
 	$update_query = "UPDATE categories SET cat_title = ?, cat_description = ?, cat_image = ?, cat_slug = ? WHERE cat_id = ? ";
@@ -42,7 +42,7 @@ if(isset($_POST['update_category'])) {
 	mysqli_stmt_bind_param($stmt, 'ssssi', $cat_title, $cat_description, $full_img_name, $cat_slug, $the_cat_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
-	redirect("categories.php");
+	redirect("<?php echo $baseURL; ?>/admin/categories.php");
 }
 ?>
 <div class="card p-3 mb-3">

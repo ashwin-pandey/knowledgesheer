@@ -53,7 +53,7 @@ if(isset($_POST['add_user'])) {
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 
-	redirect("users.php?source=view_all_users");
+	redirect("<?php echo $baseURL; ?>/admin/users.php?source=view_all_users");
 
 }
 

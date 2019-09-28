@@ -12,7 +12,7 @@
 if (is_admin($_SESSION['username']) || is_editor($_SESSION['username'])) {
 	
 } else {
-	redirect("../index.php");
+	redirect("<?php echo $baseURL; ?>/index");
 }
 
 ?>
@@ -24,17 +24,17 @@ if (is_admin($_SESSION['username']) || is_editor($_SESSION['username'])) {
 	<meta name="robots" content="noindex, nofollow">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="../assets/images/favicon/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="<?php echo $baseURL; ?>/assets/images/favicon/favicon.ico" type="image/x-icon">
 </head>
-	<link href="assets/css/fontawesome-5.css" rel="stylesheet">
+	<link href="<?php echo $baseURL; ?>/admin/assets/css/fontawesome-5.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-	<link href="../assets/css/open-sans-font.css" rel="stylesheet">
-	<link href="assets/css/quicksand-font.css" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/extras.1.1.0.min.css">
-	<link rel="stylesheet" href="assets/css/shards-dashboards.1.1.0.min.css">
-	<link href="assets/css/datatables.bootstrap4.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link href="<?php echo $baseURL; ?>/admin/assets/css/bootstrap.min.css" rel="stylesheet" >
+	<link href="<?php echo $baseURL; ?>/assets/css/open-sans-font.css" rel="stylesheet">
+	<link href="<?php echo $baseURL; ?>/admin/assets/css/quicksand-font.css" rel="stylesheet">
+	<link href="<?php echo $baseURL; ?>/admin/assets/css/extras.1.1.0.min.css" rel="stylesheet" >
+	<link href="<?php echo $baseURL; ?>/admin/assets/css/shards-dashboards.1.1.0.min.css" rel="stylesheet" >
+	<link href="<?php echo $baseURL; ?>/admin/assets/css/datatables.bootstrap4.min.css" rel="stylesheet">
+	<link href="<?php echo $baseURL; ?>/admin/assets/css/style.css" rel="stylesheet">
 <body>
 
 <!-- complete page -->

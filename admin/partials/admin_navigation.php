@@ -26,7 +26,7 @@
 	<div class="nav-wrapper">
 		<ul class="nav flex-column">
 			<li class="nav-item">
-				<a class="nav-link <?php if($current_page == 'index') {echo 'active';} ?>" href="index.php">
+				<a class="nav-link <?php if($current_page == 'index') {echo 'active';} ?>" href="<?php echo $baseURL; ?>/admin/index.php">
 					<i class="material-icons">dashboard</i>
 					<span>Main Dashboard</span>
 				</a>
@@ -38,9 +38,9 @@
 					<span>Blog</span>
 				</a>
 				<div class="dropdown-menu dropdown-menu-small">
-					<a class="dropdown-item" href="blog.php">Dashboard</a>
-					<a class="dropdown-item" href="blog.php?source=view_all_posts">View All Posts</a>
-					<a class="dropdown-item" href="blog.php?source=add_post">Add New Post</a>
+					<a class="dropdown-item" href="<?php echo $baseURL; ?>/admin/blog.php">Dashboard</a>
+					<a class="dropdown-item" href="<?php echo $baseURL; ?>/admin/blog.php?source=view_all_posts">View All Posts</a>
+					<a class="dropdown-item" href="<?php echo $baseURL; ?>/admin/blog.php?source=add_post">Add New Post</a>
 					<!-- <a class="dropdown-item" href="comments.php">Comments</a> -->
 				</div>
 			</li>
@@ -50,9 +50,9 @@
 					<span>Quotes</span>
 				</a>
 				<div class="dropdown-menu dropdown-menu-small">
-					<a class="dropdown-item" href="quotes.php">Dashboard</a>
-					<a class="dropdown-item" href="quotes.php?source=view_all_quotes">View All Quotes</a>
-					<a class="dropdown-item" href="quotes.php?source=add_quote">Add New</a>
+					<a class="dropdown-item" href="<?php echo $baseURL; ?>/admin/quotes.php">Dashboard</a>
+					<a class="dropdown-item" href="<?php echo $baseURL; ?>/admin/quotes.php?source=view_all_quotes">View All Quotes</a>
+					<a class="dropdown-item" href="<?php echo $baseURL; ?>/admin/quotes.php?source=add_quote">Add New</a>
 				</div>
 			</li>
 			<?php if (is_admin($_SESSION['username'])) { ?>
@@ -62,13 +62,13 @@
 						<span>Users</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-small">
-						<a class="dropdown-item" href="users.php">Dashboard</a>
-						<a class="dropdown-item" href="users.php?source=view_all_users">View All Users</a>
-						<a class="dropdown-item" href="users.php?source=add_user">Add New</a>
+						<a class="dropdown-item" href="<?php echo $baseURL; ?>/admin/users.php">Dashboard</a>
+						<a class="dropdown-item" href="<?php echo $baseURL; ?>/admin/users.php?source=view_all_users">View All Users</a>
+						<a class="dropdown-item" href="<?php echo $baseURL; ?>/admin/users.php?source=add_user">Add New</a>
 					</div>
 				</li>
 				<li class="nav-item">
-				<a class="nav-link <?php if($current_page == 'categories') {echo 'active';} ?>" href="categories.php">
+				<a class="nav-link <?php if($current_page == 'categories') {echo 'active';} ?>" href="<?php echo $baseURL; ?>/admin/categories.php">
 					<i class="material-icons">category</i>
 					<span>Blog Categories</span>
 				</a>
@@ -131,9 +131,9 @@
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
 						<?php if (empty($_SESSION['user_image'])) { ?>
-							<img class="user-avatar rounded-circle mr-2" src="../assets/images/profile/user.png" alt="">
+							<img class="user-avatar rounded-circle mr-2" src="<?php echo $baseURL; ?>/assets/images/profile/user.png" alt="">
 						<?php } else { ?>
-							<img class="user-avatar rounded-circle mr-2" src="../assets/images/profile/<?php echo $_SESSION['user_image']; ?>">
+							<img class="user-avatar rounded-circle mr-2" src="<?php echo $baseURL; ?>/assets/images/profile/<?php echo $_SESSION['user_image']; ?>">
 						<?php } ?>
 						<span class="d-none d-md-inline-block">
 						<?php 
@@ -145,11 +145,11 @@
 						</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-small">
-						<a class="dropdown-item" href="user_profile.php?edit_user=<?php echo $_SESSION['user_id']; ?>">
+						<a class="dropdown-item" href="<?php echo $baseURL; ?>/admin/user_profile.php?edit_user=<?php echo $_SESSION['user_id']; ?>">
 							<i class="material-icons">&#xE7FD;</i> Profile
 						</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item text-danger" href="../includes/logout.php">
+						<a class="dropdown-item text-danger" href="<?php echo $baseURL; ?>/includes/logout.php">
 							<i class="material-icons text-danger">&#xE879;</i> Logout
 						</a>
 					</div>

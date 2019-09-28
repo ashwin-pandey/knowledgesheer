@@ -56,7 +56,7 @@ if(isset($_POST['edit_user'])) {
     mysqli_stmt_bind_param($stmt, 'sssss', $user_firstname, $user_lastname, $full_img_name, $user_description, $_SESSION['user_id']);
     mysqli_stmt_execute($stmt);
 
-    redirect("profile.php");
+    redirect("<?php echo $baseURL; ?>/admin/profile.php");
 
 
 }
@@ -69,9 +69,9 @@ if(isset($_POST['edit_user'])) {
 			<div class="card-body text-center">
 				<div class="mb-3 mx-auto">
 				<?php if (empty($user_image)) { ?>
-					<img class="rounded-circle" src="./assets/images/profile/user.png" alt="<?php echo $user_firstname . " " . $user_lastname; ?>" width="110">
+					<img class="rounded-circle" src="<?php echo $baseURL; ?>/assets/images/profile/user.png" alt="<?php echo $user_firstname . " " . $user_lastname; ?>" width="110">
 				<?php } else { ?>
-					<img class="rounded-circle" src="./assets/images/profile/<?php echo($user_image); ?>" alt="<?php echo $user_firstname . " " . $user_lastname; ?>" width="110">
+					<img class="rounded-circle" src="<?php echo $baseURL; ?>/assets/images/profile/<?php echo($user_image); ?>" alt="<?php echo $user_firstname . " " . $user_lastname; ?>" width="110">
 				<?php } ?>
 				</div>
 				<h4 class="mb-0"><?php echo $user_firstname . " " . $user_lastname; ?></h4>

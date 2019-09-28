@@ -16,7 +16,11 @@ include 'partials/header.php';
 				
 				if ($quote_count > 5) {
 				?>
-				<h4>Quotes <small class="float-right"><a style="font-size: 15px;" href="quotes.php">(View All)</a></small></h4>
+				<h4>Quotes 
+					<small class="float-right">
+						<a style="font-size: 15px;" href="<?php echo $baseURL; ?>/quotes.php">(View All)</a>
+					</small>
+				</h4>
 				<hr>
 				<div class="owl-carousel owl-theme">
 					<?php  
@@ -29,7 +33,9 @@ include 'partials/header.php';
 						$quote_image = $row['quote_image'];
 						$quote_hashtags = $row['quote_hashtags'];
 					?>
-					<div class="item"><img class="img-fluid" src="assets/images/quote-images/<?php echo $quote_image; ?>" alt="<?php echo $quote_hashtags; ?>"></div>
+					<div class="item">
+						<img class="img-fluid" src="<?php echo $baseURL; ?>/assets/images/quote-images/<?php echo $quote_image; ?>" alt="<?php echo $quote_hashtags; ?>">
+					</div>
 					<?php } ?>
 				</div>
 				<hr>
@@ -63,23 +69,23 @@ include 'partials/header.php';
 				} else {
 					$count  = ceil($count /$per_page);
 
-					$query = "SELECT post_id, post_title, post_description, post_date, post_author, post_content, post_image, post_category_id FROM blog_posts ORDER BY post_id DESC LIMIT ?, ? ";
+					$query = "SELECT post_id, post_title, post_description, post_date, post_author, post_content, post_image, post_category_id, post_slug FROM blog_posts ORDER BY post_id DESC LIMIT ?, ? ";
 					$blog_query = mysqli_prepare($connection, $query);
 					mysqli_stmt_bind_param($blog_query, 'ii', $page_1, $per_page);
 					mysqli_stmt_execute($blog_query);
 					confirmQuery($blog_query);
 					mysqli_stmt_store_result($blog_query);
-					mysqli_stmt_bind_result($blog_query, $post_id, $post_title, $post_description, $post_date, $post_author, $post_content, $post_image, $post_category_id);
+					mysqli_stmt_bind_result($blog_query, $post_id, $post_title, $post_description, $post_date, $post_author, $post_content, $post_image, $post_category_id, $post_slug);
 
 					while (mysqli_stmt_fetch($blog_query)) {
 						// Author Query
-						$query = "SELECT user_id, user_firstname, user_lastname FROM users WHERE username = ? ";
+						$query = "SELECT user_id, username, user_firstname, user_lastname FROM users WHERE username = ? ";
 						$user_stmt = mysqli_prepare($connection, $query);
 						mysqli_stmt_bind_param($user_stmt, 's', $post_author);
 						mysqli_stmt_execute($user_stmt);
 						confirmQuery($user_stmt);
 						mysqli_stmt_store_result($user_stmt);
-						mysqli_stmt_bind_result($user_stmt, $user_id, $user_firstname, $user_lastname);
+						mysqli_stmt_bind_result($user_stmt, $user_id, $username, $user_firstname, $user_lastname);
 						mysqli_stmt_fetch($user_stmt);
 						$user_full_name = $user_firstname . " " . $user_lastname;
 				?>
@@ -90,7 +96,7 @@ include 'partials/header.php';
 							<?php echo findCategoryTitle($post_category_id); ?>		
 						</div>
 						<h2 class="post-title">
-							<a href="blog_post.php?p_id=<?php echo $post_id; ?>">
+							<a href="<?php echo $baseURL; ?>/blog_post/<?php echo $post_id; ?>/<?php echo $post_slug; ?>">
 							<?php echo $post_title; ?>
 							</a>
 						</h2>
@@ -101,7 +107,7 @@ include 'partials/header.php';
 							<div class="media post-author m-0 mb-3 align-self-center">
 								<div class="media-body align-self-center">
 									<div class="user-name">
-										<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $user_full_name; ?></a>
+										<a href="<?php echo $baseURL; ?>/user_posts/<?php echo $username; ?>"><?php echo $user_full_name; ?></a>
 									</div>
 									<div class="date">
 										<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
@@ -112,7 +118,7 @@ include 'partials/header.php';
 						</div>
 					</div>
 					<div class="blog-post-image align-self-start">
-						<img class="img-fluid" src="assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
+						<img class="img-fluid" src="<?php echo $baseURL; ?>/assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
 					</div>
 				</div>
 				<hr>

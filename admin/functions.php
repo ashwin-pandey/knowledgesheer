@@ -1,5 +1,7 @@
 <?php 
 
+$baseURL = "/knowledgesheer";
+
 /*======================================================*/
 /* COMMON REPETITIVE FUNCTIONS */
 /*======================================================*/
@@ -82,6 +84,7 @@ function email_exists($email){
 
 function register_user($username, $email, $password){
 	global $connection;
+	global $baseURL;
 
 	$username = mysqli_real_escape_string($connection, $username);
 	$email    = mysqli_real_escape_string($connection, $email);
@@ -104,7 +107,7 @@ function register_user($username, $email, $password){
 
 	confirmQuery($register_user_query);
 
-	redirect("/index.php");
+	redirect("<?php echo $baseURL; ?>/index");
 
 }
 
@@ -116,6 +119,7 @@ function register_user($username, $email, $password){
 // Login User
 function login_user($username, $password) {
 	global $connection;
+	global $baseURL;
 
 	$username = $_POST['username'];
 	$password = $_POST['password'];
@@ -140,7 +144,7 @@ function login_user($username, $password) {
 	$password = crypt($password, $db_user_password);
 
 	if ($username !== $db_username && $password !== $db_user_password) {
-		redirect("/index.php");
+		redirect("<?php echo $baseURL; ?>/index");
 	} else if ($username === $db_username && $password === $db_user_password) {
 		$_SESSION['user_id'] = $db_user_id;
 		$_SESSION['username'] = $db_username;
@@ -149,9 +153,9 @@ function login_user($username, $password) {
 		$_SESSION['user_role'] = $db_user_role;
 		$_SESSION['user_image'] = $db_user_image;
 
-		redirect("/admin/");
+		redirect("<?php echo $baseURL; ?>/admin/");
 	} else {
-		redirect("/index.php");
+		redirect("<?php echo $baseURL; ?>/index");
 	}
 }
 
@@ -305,6 +309,19 @@ function findCategoryTitle($post_category_id) {
 	mysqli_stmt_bind_result($cat, $cat_title);
 	mysqli_stmt_fetch($cat);
 	return $cat_title;
+}
+
+function getCatSlug($the_cat_id) {
+	global $connection;
+	$query = "SELECT cat_slug FROM categories WHERE cat_id = ? ";
+	$cat = mysqli_prepare($connection, $query);
+	mysqli_stmt_bind_param($cat, 'i', $the_cat_id);
+	mysqli_stmt_execute($cat);
+	confirmQuery($cat);
+	mysqli_stmt_store_result($cat);
+	mysqli_stmt_bind_result($cat, $cat_slug);
+	mysqli_stmt_fetch($cat);
+	return $cat_slug;
 }
 
 function findSubCategoryTitle($post_sub_cat_id) {

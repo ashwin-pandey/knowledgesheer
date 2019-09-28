@@ -2,8 +2,9 @@
 include 'includes/db.php';
 include './admin/functions.php';
 
-if (isset($_GET['category'])) {
+if (isset($_GET['category']) && isset($_GET['cat_slug'])) {
 	$post_category_id = $_GET['category'];
+	$the_cat_slug = $_GET['cat_slug'];
 	$query = "SELECT * FROM categories WHERE cat_id = ? ";
 	$cat_stmt = mysqli_prepare($connection, $query);
 	mysqli_stmt_bind_param($cat_stmt, "i", $post_category_id);
@@ -13,8 +14,10 @@ if (isset($_GET['category'])) {
 	mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description, $cat_image, $cat_slug);
 	mysqli_stmt_fetch($cat_stmt);
 
-	$cat_url = "http://knowledgesheer.com/category.php?category=" . $post_category_id;
-
+/*
+	$cat_url = $baseURL . "/category/" . $post_category_id . "/" . $cat_slug;
+	$sub_cat_url = "<?php echo $baseURL; ?>/sub_cat/<?php echo $cat_slug; ?>/<?php echo $sub_cat_id ?>/<?php echo $sub_cat_slug; ?>";
+*/
 $page = 'category';
 include 'partials/header.php';
 
@@ -26,9 +29,9 @@ include 'partials/header.php';
 		<div class="card cat-card border-1 mb-4">
 			<div class="card-body">
 				<?php if (!empty($cat_image)) { ?>
-					<img class="img-fluid rounded mb-3" src="assets/images/cat-images/<?php echo $cat_image; ?>" alt="<?php $cat_title; ?>">
+					<img class="img-fluid rounded mb-3" src="<?php echo $baseURL; ?>/assets/images/cat-images/<?php echo $cat_image; ?>" alt="<?php $cat_title; ?>">
 				<?php } else { ?>
-					<img class="img-fluid mb-3 rounded" src="assets/images/cat-images/ph-100x100.png" alt="<?php $cat_title; ?>">
+					<img class="img-fluid mb-3 rounded" src="<?php echo $baseURL; ?>/assets/images/cat-images/ph-100x100.png" alt="<?php $cat_title; ?>">
 				<?php } ?>
 				<div class="cat-title">
 					<h2><?php echo $cat_title; ?></h2>
@@ -57,17 +60,18 @@ include 'partials/header.php';
 				$post_date = $row['post_date'];
 				$post_author = $row['post_author'];
 				$post_content = $row['post_content'];
+				$post_slug = $row['post_slug'];
 				$post_image = $row['post_image'];
 				$post_category_id = $row['post_category_id'];
 
 				// User Query
-				$query = "SELECT user_id, user_firstname, user_lastname FROM users WHERE username = ? ";
+				$query = "SELECT user_id, username, user_firstname, user_lastname FROM users WHERE username = ? ";
 				$user_stmt = mysqli_prepare($connection, $query);
 				mysqli_stmt_bind_param($user_stmt, 's', $post_author);
 				mysqli_stmt_execute($user_stmt);
 				confirmQuery($user_stmt);
 				mysqli_stmt_store_result($user_stmt);
-				mysqli_stmt_bind_result($user_stmt, $user_id, $user_firstname, $user_lastname);
+				mysqli_stmt_bind_result($user_stmt, $user_id, $username, $user_firstname, $user_lastname);
 				mysqli_stmt_fetch($user_stmt);
 				$user_full_name = $user_firstname . " " . $user_lastname;
 		?>
@@ -77,7 +81,7 @@ include 'partials/header.php';
 					<?php echo findCategoryTitle($post_category_id); ?>		
 				</div>
 				<h2 class="post-title">
-					<a href="blog_post.php?p_id=<?php echo $post_id; ?>">
+					<a href="<?php echo $baseURL; ?>/blog_post/<?php echo $post_id; ?>/<?php echo $post_slug; ?>">
 					<?php echo $post_title; ?>
 					</a>
 				</h2>
@@ -89,7 +93,7 @@ include 'partials/header.php';
 					<div class="media post-author m-0 mb-3 align-self-center">
 						<div class="media-body align-self-center">
 							<div class="user-name">
-								<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $user_full_name; ?></a>
+								<a href="<?php echo $baseURL; ?>/user_posts/<?php echo $username; ?>"><?php echo $user_full_name; ?></a>
 							</div>
 							<div class="date">
 								<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
@@ -101,7 +105,7 @@ include 'partials/header.php';
 			</div>
 			<?php if (!empty($post_image)) { ?>
 			<div class="blog-post-image align-self-start">
-				<img class="img-fluid" src="assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
+				<img class="img-fluid" src="<?php echo $baseURL; ?>/assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
 			</div>
 			<?php } ?>
 		</div>
@@ -114,8 +118,10 @@ include 'partials/header.php';
 </div>
 <?php 
 } 
-if (isset($_GET['sub_category'])) {
+if (isset($_GET['sub_category']) && isset($_GET['sub_cat_slug'])) {
 	$post_sub_cat_id = $_GET['sub_category'];
+	$the_sub_slug = $_GET['sub_cat_slug'];
+
 	$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image, parent_cat_id FROM sub_categories WHERE sub_cat_id = ? ";
 	$cat_stmt = mysqli_prepare($connection, $query);
 	mysqli_stmt_bind_param($cat_stmt, "i", $post_sub_cat_id);
@@ -124,8 +130,6 @@ if (isset($_GET['sub_category'])) {
 	mysqli_stmt_store_result($cat_stmt);
 	mysqli_stmt_bind_result($cat_stmt, $sub_cat_id, $sub_cat_title, $sub_cat_description, $sub_cat_image, $parent_cat_id);
 	mysqli_stmt_fetch($cat_stmt);
-
-	$sub_cat_url = "http://knowledgesheer.com/category.php?sub_category=" . $post_sub_cat_id;
 
 $page = 'sub_category';
 include 'partials/header.php';
@@ -138,9 +142,9 @@ include 'partials/header.php';
 		<div class="card cat-card border-1 mb-4">
 			<div class="card-body">
 				<?php if (!empty($sub_cat_image)) { ?>
-					<img class="img-fluid rounded mb-3" src="assets/images/cat-images/<?php echo $sub_cat_image; ?>" alt="<?php $sub_cat_title; ?>">
+					<img class="img-fluid rounded mb-3" src="<?php echo $baseURL; ?>/assets/images/cat-images/<?php echo $sub_cat_image; ?>" alt="<?php $sub_cat_title; ?>">
 				<?php } else { ?>
-					<img class="img-fluid mb-3 rounded" src="assets/images/cat-images/ph-100x100.png" alt="<?php $sub_cat_title; ?>">
+					<img class="img-fluid mb-3 rounded" src="<?php echo $baseURL; ?>/assets/images/cat-images/ph-100x100.png" alt="<?php $sub_cat_title; ?>">
 				<?php } ?>
 				<div class="cat-title">
 					<h2><?php echo $sub_cat_title; ?></h2>
@@ -170,16 +174,17 @@ include 'partials/header.php';
 				$post_author = $row['post_author'];
 				$post_content = $row['post_content'];
 				$post_image = $row['post_image'];
+				$post_slug = $row['post_slug'];
 				$post_category_id = $row['post_category_id'];
 
 				// User Query
-				$query = "SELECT user_id, user_firstname, user_lastname FROM users WHERE username = ? ";
+				$query = "SELECT user_id, username, user_firstname, user_lastname FROM users WHERE username = ? ";
 				$user_stmt = mysqli_prepare($connection, $query);
 				mysqli_stmt_bind_param($user_stmt, 's', $post_author);
 				mysqli_stmt_execute($user_stmt);
 				confirmQuery($user_stmt);
 				mysqli_stmt_store_result($user_stmt);
-				mysqli_stmt_bind_result($user_stmt, $user_id, $user_firstname, $user_lastname);
+				mysqli_stmt_bind_result($user_stmt, $user_id, $username, $user_firstname, $user_lastname);
 				mysqli_stmt_fetch($user_stmt);
 				$user_full_name = $user_firstname . " " . $user_lastname;
 		?>
@@ -189,7 +194,7 @@ include 'partials/header.php';
 					<?php echo findCategoryTitle($post_category_id); ?>		
 				</div>
 				<h2 class="post-title">
-					<a href="blog_post.php?p_id=<?php echo $post_id; ?>">
+					<a href="<?php echo $baseURL; ?>/blog_post/<?php echo $post_id; ?>/<?php echo $post_slug; ?>">
 					<?php echo $post_title; ?>
 					</a>
 				</h2>
@@ -201,7 +206,7 @@ include 'partials/header.php';
 					<div class="media post-author m-0 mb-3 align-self-center">
 						<div class="media-body align-self-center">
 							<div class="user-name">
-								<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $user_full_name; ?></a>
+								<a href="<?php echo $baseURL; ?>/user_posts/<?php echo $username; ?>"><?php echo $user_full_name; ?></a>
 							</div>
 							<div class="date">
 								<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
@@ -213,7 +218,7 @@ include 'partials/header.php';
 			</div>
 			<?php if (!empty($post_image)) { ?>
 			<div class="blog-post-image align-self-start">
-				<img class="img-fluid" src="assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
+				<img class="img-fluid" src="<?php echo $baseURL; ?>/assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
 			</div>
 			<?php } ?>
 		</div>
@@ -248,15 +253,19 @@ include 'partials/header.php';
 			<div class="m-0 p-2 card-title border-bottom mb-2"><?php echo $side_cat_title; ?></div>
 			<div class="card-body p-2">
 			<?php
-				$query = "SELECT sub_cat_id, sub_cat_title FROM sub_categories WHERE parent_cat_id = " . $side_cat_id;
+				$query = "SELECT * FROM sub_categories WHERE parent_cat_id = " . $side_cat_id;
 				$sub_cat = query($query);
 				confirmQuery($sub_cat);
 				while ($row = mysqli_fetch_assoc($sub_cat)) {
 					$sub_id = $row['sub_cat_id'];
 					$sub_title = $row['sub_cat_title'];
+					$sub_cat_slug = $row['sub_cat_slug'];
+					$parent_cat_id = $row['parent_cat_id'];
+
+					$cat_slug = getCatSlug($parent_cat_id);
 			?>
 				<h5 class="mb-2 cat-title">
-					<a href="category.php?sub_category=<?php echo $sub_id; ?>">
+					<a href="<?php echo $baseURL; ?>/sub_cat/<?php echo $cat_slug; ?>/<?php echo $sub_cat_id ?>/<?php echo $sub_cat_slug; ?>">
 						<?php echo $sub_title; ?>
 					</a>
 				</h5>
@@ -276,9 +285,12 @@ include 'partials/header.php';
 				while ($row = mysqli_fetch_assoc($categories)) {
 					$cat_id = $row['cat_id'];
 					$cat_title = $row['cat_title'];
+					$cat_slug = $row['cat_slug'];
+
+					$cat_url = $baseURL . "/category/" . $cat_id . "/" . $cat_slug;
 					?>
 					<h5 class="mb-2 cat-title">
-						<a href="category.php?category=<?php echo $cat_id; ?>">
+						<a href="<?php echo $cat_url; ?>">
 							<?php echo $cat_title; ?>
 						</a>
 					</h5>

@@ -9,7 +9,7 @@ include 'partials/header.php';
 
 <?php
 
-checkIfUserIsLoggedInAndRedirect('/admin/');
+checkIfUserIsLoggedInAndRedirect('<?php echo $baseURL; ?>/admin/');
 
 // if(ifItIsMethod('POST')){
 

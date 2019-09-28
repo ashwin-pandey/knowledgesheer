@@ -31,16 +31,17 @@ include 'partials/header.php';
 						$post_author = $row['post_author'];
 						$post_content = $row['post_content'];
 						$post_image = $row['post_image'];
+						$post_slug = $row['post_slug'];
 						$post_date = $row['post_date'];
 
 						// Author Query
-						$query = "SELECT user_id, user_firstname, user_lastname FROM users WHERE username = ? ";
+						$query = "SELECT user_id, username, user_firstname, user_lastname FROM users WHERE username = ? ";
 						$user_stmt = mysqli_prepare($connection, $query);
 						mysqli_stmt_bind_param($user_stmt, 's', $post_author);
 						mysqli_stmt_execute($user_stmt);
 						confirmQuery($user_stmt);
 						mysqli_stmt_store_result($user_stmt);
-						mysqli_stmt_bind_result($user_stmt, $user_id, $user_firstname, $user_lastname);
+						mysqli_stmt_bind_result($user_stmt, $user_id, $username, $user_firstname, $user_lastname);
 						mysqli_stmt_fetch($user_stmt);
 						$user_full_name = $user_firstname . " " . $user_lastname;
 
@@ -51,7 +52,7 @@ include 'partials/header.php';
 							<?php echo findCategoryTitle($post_category_id); ?>		
 						</div>
 						<h2 class="post-title">
-							<a href="blog_post.php?p_id=<?php echo $post_id; ?>">
+							<a href="<?php echo $baseURL; ?>/blog_post/<?php echo $post_id; ?>/<?php echo $post_slug; ?>">
 							<?php echo $post_title; ?>
 							</a>
 						</h2>
@@ -62,7 +63,7 @@ include 'partials/header.php';
 							<div class="media post-author m-0 mb-3 align-self-center">
 								<div class="media-body align-self-center">
 									<div class="user-name">
-										<a href="user_posts.php?u_id=<?php echo $user_id ?>"><?php echo $user_full_name; ?></a>
+										<a href="<?php echo $baseURL; ?>/user_posts/<?php echo $username ?>"><?php echo $user_full_name; ?></a>
 									</div>
 									<div class="date">
 										<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
@@ -73,7 +74,7 @@ include 'partials/header.php';
 						</div>
 					</div>
 					<div class="blog-post-image align-self-start">
-						<img class="img-fluid" src="assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
+						<img class="img-fluid" src="<?php echo $baseURL; ?>/assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
 					</div>
 				</div>
 				<hr>

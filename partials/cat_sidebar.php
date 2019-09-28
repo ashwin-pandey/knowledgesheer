@@ -22,9 +22,14 @@
 		while ($row = mysqli_fetch_assoc($sub_categories)) {
 			$sub_cat_id = $row['sub_cat_id'];
 			$sub_cat_title = $row['sub_cat_title'];
+			$sub_cat_slug = $row['sub_cat_slug'];
+			$parent_cat_id = $row['parent_cat_id'];
+
+			$cat_slug = getCatSlug($parent_cat_id);
+
 			?>
 			<h5 class="mb-2 cat-title">
-				<a href="category.php?sub_category=<?php echo $sub_cat_id; ?>">
+				<a href="<?php echo $baseURL; ?>/sub_cat/<?php echo $cat_slug; ?>/<?php echo $sub_cat_id ?>/<?php echo $sub_cat_slug; ?>">
 					<?php echo $sub_cat_title; ?>
 				</a>
 			</h5>
@@ -43,9 +48,12 @@
 		while ($row = mysqli_fetch_assoc($categories)) {
 			$cat_id = $row['cat_id'];
 			$cat_title = $row['cat_title'];
+			$cat_slug = $row['cat_slug'];
+			
+			$cat_url = $baseURL . "/category/" . $cat_id . "/" . $cat_slug;
 			?>
 			<h5 class="mb-2 cat-title">
-				<a href="category.php?category=<?php echo $cat_id; ?>">
+				<a href="<?php echo $cat_url; ?>">
 					<?php echo $cat_title; ?>
 				</a>
 			</h5>

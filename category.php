@@ -13,6 +13,8 @@ if (isset($_GET['category'])) {
 	mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description, $cat_image, $cat_slug);
 	mysqli_stmt_fetch($cat_stmt);
 
+	$cat_url = "http://knowledgesheer.com/category.php?category=" . $post_category_id;
+
 $page = 'category';
 include 'partials/header.php';
 
@@ -122,6 +124,8 @@ if (isset($_GET['sub_category'])) {
 	mysqli_stmt_store_result($cat_stmt);
 	mysqli_stmt_bind_result($cat_stmt, $sub_cat_id, $sub_cat_title, $sub_cat_description, $sub_cat_image, $parent_cat_id);
 	mysqli_stmt_fetch($cat_stmt);
+
+	$sub_cat_url = "http://knowledgesheer.com/category.php?sub_category=" . $post_sub_cat_id;
 
 $page = 'sub_category';
 include 'partials/header.php';

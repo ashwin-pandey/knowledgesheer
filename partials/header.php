@@ -30,7 +30,7 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta name="keywords" content="Knowledgesheer, knowledge, <?php echo $full_name; ?>, <?php echo $username; ?> "/>
 	<meta name="description" content="<?php echo $user_description; ?>"/>
 	<meta property="og:title" content="<?php echo $full_name; ?> ( <?php echo $username; ?> )| Knowledge Sheer">
-	<meta property="og:url" content="http://knowledgesheer.com/user_posts.php?u_id=<?php echo $user_id; ?>" />
+	<meta property="og:url" content="<?php echo $user_url; ?>" />
 	<meta property="og:description" content="<?php echo $user_description; ?>" />
 	<?php } if ($page == 'quotes') { ?>
 	<title>Quotes | Knowledge Sheer</title>
@@ -44,7 +44,7 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta name="keywords" content="Knowledgesheer, knowledge, share, <?php echo $post_tags; ?>"/>
 	<meta name="description" content="<?php echo $post_description; ?>"/>
 	<meta property="og:title" content="<?php echo $post_title; ?> | Knowledge Sheer">
-	<meta property="og:url" content="http://knowledgesheer.com/blog_post.php?p_id=<?php echo $the_post_id; ?>" />
+	<meta property="og:url" content="<?php echo $post_url; ?>" />
 	<meta property="og:description" content="<?php echo $post_description; ?>" />
 	<meta property="og:image" content="http://knowledgesheer.com/assets/images/blog-images/<?php echo $post_image; ?>" />
 	<?php } if ($page == 'category') { ?>
@@ -52,7 +52,7 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta name="keywords" content="Knowledgesheer, knowledge, share, <?php echo $cat_title; ?>"/>
 	<meta name="description" content="<?php echo $cat_description; ?>"/>
 	<meta property="og:title" content="<?php echo $cat_title; ?> | Knowledge Sheer">
-	<meta property="og:url" content="http://knowledgesheer.com/category.php?category=<?php echo $post_category_id; ?>" />
+	<meta property="og:url" content="<?php echo $cat_url; ?>" />
 	<meta property="og:description" content="<?php echo $cat_description; ?>" />
 	<meta property="og:image" content="http://knowledgesheer.com/assets/images/cat-images/<?php echo $cat_image; ?>" />
 	<?php } if ($page == 'sub_category') { ?>
@@ -60,7 +60,7 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta name="keywords" content="Knowledgesheer, knowledge, share, <?php echo $cat_title; ?>"/>
 	<meta name="description" content="<?php echo $sub_cat_description; ?>"/>
 	<meta property="og:title" content="<?php echo $sub_cat_title; ?> | Knowledge Sheer">
-	<meta property="og:url" content="http://knowledgesheer.com/category.php?sub_category=<?php echo $post_category_id; ?>" />
+	<meta property="og:url" content="<?php echo $sub_cat_url; ?>" />
 	<meta property="og:description" content="<?php echo $sub_cat_description; ?>" />
 	<meta property="og:image" content="http://knowledgesheer.com/assets/images/cat-images/<?php echo $sub_cat_image; ?>" />
 	<?php } if ($page == 'all_categories') { ?>

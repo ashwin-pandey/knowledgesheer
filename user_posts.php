@@ -27,10 +27,10 @@ if (isset($_GET['u_id'])) {
 	mysqli_stmt_bind_result($stmt1, $post_id, $post_title, $post_author, $post_date, $post_category_id, $post_sub_cat_id, $post_image, $post_content, $post_tags, $post_description);
 
 	$full_name = $user_firstname . " " . $user_lastname;
+	$user_url = "http://knowledgesheer.com/user_posts.php?u_id=" . $user_id;
 
 $title = $full_name; 
 $page = 'user_posts';
-$header_title = 'Knowledge Sheer';
 include 'partials/header.php';
 ?>
 

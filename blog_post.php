@@ -27,6 +27,8 @@ if (isset($_GET['p_id'])) {
 	mysqli_stmt_bind_result($user_stmt, $user_id, $username, $user_firstname, $user_lastname, $user_email, $user_image, $user_role, $user_description);
 	mysqli_stmt_fetch($user_stmt);
 
+	$post_url = "http://knowledgesheer.com/blog_post.php?p_id=" . $the_post_id;
+
 	$page = 'blog_post';
 	include 'partials/header.php'; 
 
@@ -38,17 +40,17 @@ if (isset($_GET['p_id'])) {
 				<div class="heading mb-1">Share this Article</div> <hr class="mb-2 mt-1">
 				<ul>
 					<li>
-						<a target="_blank" class="social-link facebook-social-link" href="https://www.facebook.com/sharer/sharer.php?u=http://knowledgesheer.com/blog_post.php?p_id=<?php echo $post_id; ?>/" title="Share on Facebook">
+						<a target="_blank" class="social-link facebook-social-link" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $post_url; ?>/" title="Share on Facebook">
 							<span class="facebook-social-img">Share</span>
 						</a>
 					</li>
 					<li>
-						<a target="_blank" class="social-link twitter-social-link" href="https://twitter.com/intent/tweet?original_referer=http://knowledgesheer.com&amp;source=tweetbutton&amp;text=<?php echo $post_title; ?>;url=http://knowledgesheer.com/blog_post.php?p_id=<?php echo $post_id; ?>/&amp;via=Knowledge Sheer" title="Share on Twitter">
+						<a target="_blank" class="social-link twitter-social-link" href="https://twitter.com/intent/tweet?original_referer=http://knowledgesheer.com&amp;source=tweetbutton&amp;text=<?php echo $post_title; ?>;url=<?php echo $post_url; ?>/&amp;via=Knowledge Sheer" title="Share on Twitter">
 							<span class="twitter-social-img">Share</span>
 						</a>
 					</li>
 					<li>
-						<a target="_blank" class="social-link linkedin-social-link" href="https://www.linkedin.com/shareArticle?mini=true&url=http://knowledgesheer.com/blog_post.php?p_id=<?php echo $post_id; ?>/&media=<?php echo $post_title; ?>" title="Share on Linkedin">
+						<a target="_blank" class="social-link linkedin-social-link" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $post_url; ?>/&media=<?php echo $post_title; ?>" title="Share on Linkedin">
 							<span class="linkedin-social-img">Share</span>
 						</a>
 					</li>
@@ -103,26 +105,6 @@ if (isset($_GET['p_id'])) {
 					Please <a href="login.php">Login</a> to like.
 				</div>
 				<?php } ?>
-				<!-- <div id="social-icon">
-					<div class="heading">Share this Article</div>
-					<ul>
-						<li>
-							<a class="social-link facebook-social-link" href="https://www.facebook.comsharer/sharer.php?u=<?php // echo $post_link; ?>/" title="Share on Facebook">
-								<span class="facebook-social-img">Share</span>
-							</a>
-						</li>
-						<li>
-							<a class="social-link twitter-social-link" href="https://twitter.com/intent/tweet?original_referer=https://example.com&amp;source=tweetbutton&amp;text=Title of the Post;url=<?php // echo $post_link; ?>/&amp;via=example" title="Share on Twitter">
-								<span class="twitter-social-img">Tweet</span>
-							</a>
-						</li>
-						<li>
-							<a class="social-link linkedin-social-link" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php // echo $post_link; ?>/&media=Title of the Post" title="Share on Linkedin">
-								<span class="linkedin-social-img">Share</span>
-							</a>
-						</li>
-					</ul>
-				</div> -->
 			</div>
 
 			<hr>

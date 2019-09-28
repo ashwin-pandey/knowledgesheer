@@ -1,0 +1,17 @@
+# Options +FollowSymLinks
+RewriteEngine on
+
+# Static URL
+RewriteRule ^(index|login|logout|registration|all_categories|profile|quotes)$ $1.php [NC,L]
+
+# User posts
+RewriteRule user_posts/(.*) user_posts.php?u_name=$1 [NC,L]
+
+# Blog post
+RewriteRule blog_post/(\d+)/(.*) blog_post.php?p_id=$1&post_slug=$2 [NC,L]
+
+# Category
+RewriteRule category/(\d+)/(.*) category.php?category=$1&cat_slug=$2 [NC,L]
+
+# Sub Category
+RewriteRule sub_cat/(.*)/(\d+)/(.*) category.php?cat_slug=$1&sub_category=$2&sub_cat_slug=$3 [NC,L]

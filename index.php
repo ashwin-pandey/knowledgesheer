@@ -2,6 +2,8 @@
 
 $title = 'Home'; 
 $page = 'home'; 
+$home_title = "Home";
+$home_description = "Knowledge Sheer is a place to share and spread sheer knowledge on various topics, be it technology, tutorials, pholosophy, management, writing, poems, quotes and many more...";
 $header_title = 'Knowledge Sheer';
 include 'partials/header.php'; 
 

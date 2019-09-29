@@ -12,19 +12,19 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php if($page == 'home') { ?>
-	<title>Home | Knowledge Sheer</title>
+	<title><?php echo $home_title; ?> | Knowledge Sheer</title>
 	<meta name="keywords" content="Knowledgesheer, knowledge, share"/>
-	<meta name="description" content=""/>
+	<meta name="description" content="<?php echo $home_description; ?>"/>
 	<meta property="og:title" content="Knowledge Sheer">
 	<meta property="og:url" content="<?php echo $baseURL; ?>" />
 	<meta property="og:description" content="" />
 	<?php } if($page == 'profile') { ?>
 	<title>Profile | Knowledge Sheer</title>
 	<meta name="keywords" content="Knowledgesheer, knowledge, share"/>
-	<meta name="description" content=""/>
+	<!-- <meta name="description" content=""/>
 	<meta property="og:title" content="Knowledge Sheer">
-	<meta property="og:url" content="<?php echo $baseURL; ?>" />
-	<meta property="og:description" content="" />
+	<meta property="og:url" content="<?php // echo $baseURL; ?>" />
+	<meta property="og:description" content="" /> -->
 	<?php } if($page == 'user_posts') { ?>
 	<title><?php echo $full_name; ?> ( <?php echo $username; ?> )| Knowledge Sheer</title>
 	<meta name="keywords" content="Knowledgesheer, knowledge, <?php echo $full_name; ?>, <?php echo $username; ?> "/>
@@ -37,7 +37,7 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta name="keywords" content="Knowledgesheer, knowledge, share, quotes"/>
 	<meta name="description" content=""/>
 	<meta property="og:title" content="Quotes | Knowledge Sheer">
-	<meta property="og:url" content="<?php echo $baseURL; ?>/quotes.php" />
+	<meta property="og:url" content="<?php echo $baseURL; ?>/quotes" />
 	<meta property="og:description" content="" />
 	<?php } if ($page == 'blog_post') { ?>
 	<title><?php echo $post_title; ?> | Knowledge Sheer</title>
@@ -68,7 +68,7 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta name="keywords" content="Knowledgesheer, knowledge, share, categories"/>
 	<meta name="description" content=""/>
 	<meta property="og:title" content="Categories | Knowledge Sheer">
-	<meta property="og:url" content="<?php echo $baseURL; ?>/all_categories.php" />
+	<meta property="og:url" content="<?php echo $baseURL; ?>/all_categories" />
 	<meta property="og:description" content="" />" />
 	<?php } ?>
 	<meta property="og:site_name" content="Knowledge Sheer" />

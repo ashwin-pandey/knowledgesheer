@@ -26,7 +26,7 @@
 						<a class="nav-link" style="text-transform: none;" href="<?php echo $baseURL; ?>/profile"><?php echo $_SESSION['username']; ?></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<?php echo $baseURL; ?>/includes/logout">Logout</a>
+						<a class="nav-link" href="<?php echo $baseURL; ?>/includes/logout.php">Logout</a>
 					</li>
 				<?php } else { ?>
 					<li class="nav-item"><a class="nav-link" href="<?php echo $baseURL; ?>/login">Login</a></li>

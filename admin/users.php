@@ -4,7 +4,7 @@ $current_page = 'users';
 include 'partials/admin_header.php'; 
 
 if (!is_admin($_SESSION['username'])) {
-	redirect("<?php echo $baseURL; ?>/admin/index.php");
+	redirect($baseURL . "/admin/index.php");
 } else {
 
 if (isset($_GET['source'])) {

@@ -2,7 +2,7 @@
 RewriteEngine on
 
 # Static URL
-RewriteRule ^(index|login|logout|registration|all_categories|profile|quotes)$ $1.php [NC,L]
+RewriteRule ^(index|login|registration|all_categories|profile|quotes)$ $1.php [NC,L]
 
 # User posts
 RewriteRule user_posts/(.*) user_posts.php?u_name=$1 [NC,L]

@@ -44,7 +44,7 @@ if(isset($_POST['update_quote_category'])) {
 	mysqli_stmt_bind_param($stmt, 'ssssi', $quote_cat_title, $quote_cat_desc, $full_img_name, $quote_cat_slug, $the_cat_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
-	redirect("<?php echo $baseURL; ?>/admin/quote_categories.php");
+	redirect($baseURL . "/admin/quote_categories.php");
 }
 ?>
 <div class="card p-3 mb-3">

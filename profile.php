@@ -56,7 +56,7 @@ if(isset($_POST['edit_user'])) {
     mysqli_stmt_bind_param($stmt, 'sssss', $user_firstname, $user_lastname, $full_img_name, $user_description, $_SESSION['user_id']);
     mysqli_stmt_execute($stmt);
 
-    redirect("<?php echo $baseURL; ?>/admin/profile.php");
+    redirect($baseURL . "/admin/profile.php");
 
 
 }

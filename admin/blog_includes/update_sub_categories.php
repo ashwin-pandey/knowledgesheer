@@ -44,7 +44,7 @@ if(isset($_POST['update_sub_category'])) {
 	mysqli_stmt_bind_param($stmt, 'ssssii', $sub_cat_title, $sub_cat_description, $full_img_name, $sub_cat_slug, $parent_cat_id, $the_cat_id);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
-	redirect("<?php echo $baseURL; ?>/admin/categories.php");
+	redirect($baseURL . "/admin/categories.php");
 }
 ?>
 <div class="card p-3 mb-3">

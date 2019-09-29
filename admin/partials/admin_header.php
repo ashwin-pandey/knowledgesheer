@@ -12,7 +12,7 @@
 if (is_admin($_SESSION['username']) || is_editor($_SESSION['username'])) {
 	
 } else {
-	redirect("<?php echo $baseURL; ?>/index");
+	redirect($baseURL . "/index");
 }
 
 ?>

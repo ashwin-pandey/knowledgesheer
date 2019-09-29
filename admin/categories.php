@@ -5,7 +5,7 @@ $current_page = 'categories';
 include 'partials/admin_header.php'; 
 
 if (!is_admin($_SESSION['username'])) {
-	redirect("<?php echo $baseURL; ?>/admin/index.php");
+	redirect($baseURL . "/admin/index.php");
 } else {
 
 ?>

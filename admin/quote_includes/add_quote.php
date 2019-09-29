@@ -38,7 +38,7 @@ if (isset($_POST['create_quote'])) {
 	mysqli_stmt_bind_param($stmt, 'ssss', $full_img_name, $tags, $quote_content, $quote_author);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
-	redirect("<?php echo $baseURL; ?>/admin/quotes.php?source=view_all_quotes");
+	redirect($baseURL . "/admin/quotes.php?source=view_all_quotes");
 }
 
 ?>

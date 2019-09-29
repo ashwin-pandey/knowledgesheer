@@ -95,7 +95,7 @@ if(isset($_GET['delete'])){
 			$the_user_id = escape($_GET['delete']);
 			$query = "DELETE FROM users WHERE user_id = {$the_user_id} ";
 			$delete_user_query = query($query);
-			redirect("<?php echo $baseURL; ?>/admin/users.php?source=view_all_users");
+			redirect($baseURL . "/admin/users.php?source=view_all_users");
 		}
 	}
 }

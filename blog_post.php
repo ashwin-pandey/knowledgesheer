@@ -7,11 +7,11 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 	$the_post_slug = $_GET['post_slug'];
 
 	// Post query
-	$query = "SELECT post_id, post_title, post_author, post_date, post_category_id, post_sub_cat_id, post_image, post_content, post_tags, post_description, likes, post_slug FROM blog_posts WHERE post_id = ? AND post_status = ? ";
+	$query = "SELECT post_id, post_title, post_author, post_date, post_category_id, post_sub_cat_id, post_image, post_content, post_tags, post_description, likes, post_slug FROM blog_posts WHERE post_id = ? AND post_status = ? AND post_slug = ? ";
 	$stmt1 = mysqli_prepare($connection , $query);
 	$published = 'public';
 
-	mysqli_stmt_bind_param($stmt1, "is", $the_post_id, $published);
+	mysqli_stmt_bind_param($stmt1, "iss", $the_post_id, $published, $the_post_slug);
 	mysqli_stmt_execute($stmt1);
 	mysqli_stmt_store_result($stmt1);
 	mysqli_stmt_bind_result($stmt1, $post_id, $post_title, $post_author, $post_date, $post_category_id, $post_sub_cat_id, $post_image, $post_content, $post_tags, $post_description, $likes, $post_slug);

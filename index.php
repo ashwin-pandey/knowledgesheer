@@ -132,13 +132,6 @@ include 'partials/header.php';
 				<ul class="pagination justify-content-md-center">
 				<?php 
 				$number_list = array();
-				// if ($page > 1 && $page <= $count) {
-				// 	$p_page = $page - 1;
-				// 	echo "<li class='page-item'><a class='page-link' href='index.php?page={$p_page}'><<</a></li>";
-				// } else {
-				// 	$p_page = $page;
-				// 	echo "<li class='page-item disabled'><a class='page-link' href='index.php?page={$p_page}'><<</a></li>";
-				// }
 				
 				for($i = 1; $i <= $count; $i++) {
 					if($i == $page) {
@@ -147,14 +140,6 @@ include 'partials/header.php';
 						echo "<li class='page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
 					}
 				}
-
-				// if ($page < $count && $page >= 1) {
-				// 	$p_page = $page + 1;
-				// 	echo "<li class='page-item'><a class='page-link' href='index.php?page={$p_page}'>>></a></li>";
-				// } else {
-				// 	$p_page = $page;
-				// 	echo "<li class='page-item disabled'><a class='page-link' href='index.php?page={$p_page}'>>></a></li>";
-				// }
 
 				?>
 				</ul>

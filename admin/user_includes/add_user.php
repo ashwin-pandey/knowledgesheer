@@ -2,13 +2,13 @@
 
 if(isset($_POST['add_user'])) {
 
-	$user_firstname    = escape($_POST['user_firstname']);
-	$user_lastname     = escape($_POST['user_lastname']);
-	$user_role         = escape($_POST['user_role']);
-	$username          = escape($_POST['username']);
-	$user_email        = escape($_POST['user_email']);
-	$user_password     = escape($_POST['user_password']);
-	$user_description  = escape($_POST['user_description']);
+	$user_firstname    = $_POST['user_firstname'];
+	$user_lastname     = $_POST['user_lastname'];
+	$user_role         = $_POST['user_role'];
+	$username          = $_POST['username'];
+	$user_email        = $_POST['user_email'];
+	$user_password     = $_POST['user_password'];
+	$user_description  = $_POST['user_description'];
 
 	$query = 'SELECT randSalt FROM users';
 	$select_randsalt = query($query);
@@ -19,8 +19,8 @@ if(isset($_POST['add_user'])) {
 
 	$user_password = crypt($user_password, $salt);
 
-	$user_image 		= escape($_FILES['user_image']['name']);
-	$user_image_temp	= escape($_FILES['user_image']['tmp_name']);
+	$user_image 		= $_FILES['user_image']['name'];
+	$user_image_temp	= $_FILES['user_image']['tmp_name'];
 
 	$date = date('m-d-Y');
 	$microtime = round(microtime(true));

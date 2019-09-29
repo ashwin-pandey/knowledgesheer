@@ -107,7 +107,7 @@ function register_user($username, $email, $password){
 
 	confirmQuery($register_user_query);
 
-	redirect("<?php echo $baseURL; ?>/index");
+	redirect($baseURL . "/index");
 
 }
 
@@ -144,7 +144,7 @@ function login_user($username, $password) {
 	$password = crypt($password, $db_user_password);
 
 	if ($username !== $db_username && $password !== $db_user_password) {
-		redirect("<?php echo $baseURL; ?>/index");
+		redirect($baseURL . "/index");
 	} else if ($username === $db_username && $password === $db_user_password) {
 		$_SESSION['user_id'] = $db_user_id;
 		$_SESSION['username'] = $db_username;
@@ -153,9 +153,9 @@ function login_user($username, $password) {
 		$_SESSION['user_role'] = $db_user_role;
 		$_SESSION['user_image'] = $db_user_image;
 
-		redirect("<?php echo $baseURL; ?>/admin/");
+		redirect($baseURL . "/admin/");
 	} else {
-		redirect("<?php echo $baseURL; ?>/index");
+		redirect($baseURL . "/index");
 	}
 }
 
@@ -184,6 +184,10 @@ function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
 	}
 }
 
+/** 
+ * @param: $username 
+ * @Desc: Returns "user role"
+ */
 function getUserRole($username) {
 	global $connection;
 	$query = "SELECT user_role FROM users WHERE username = '$username'";
@@ -193,27 +197,9 @@ function getUserRole($username) {
 	return $row['user_role'];
 }
 
-/* 	Old Version
- *	Check if user is admin
- *	@param $username
- */
-// function is_admin($username) {
-// 	global $connection; 
-// 	$query = "SELECT user_role FROM users WHERE username = '$username'";
-// 	$result = mysqli_query($connection, $query);
-// 	confirmQuery($result);
-
-// 	$row = mysqli_fetch_array($result);
-
-// 	if($row['user_role'] == 'admin'){
-// 		return true;
-// 	} else {
-// 		return false;
-// 	}
-// }
-
-/* 	Check if user is an admin
- *	@param $username
+/** 
+ * @param: username 
+ * @Desc: Returns boolean
  */
 function is_admin($username) {
 	if(getUserRole($username) == 'admin'){
@@ -223,8 +209,9 @@ function is_admin($username) {
 	}
 }
 
-/* 	Check if user is an editor
- *	@param $username
+/** 
+ * @param: username 
+ * @Desc: Returns boolean
  */
 function is_editor($username) {
 	if(getUserRole($username) == 'editor'){
@@ -311,19 +298,6 @@ function findCategoryTitle($post_category_id) {
 	return $cat_title;
 }
 
-function getCatSlug($the_cat_id) {
-	global $connection;
-	$query = "SELECT cat_slug FROM categories WHERE cat_id = ? ";
-	$cat = mysqli_prepare($connection, $query);
-	mysqli_stmt_bind_param($cat, 'i', $the_cat_id);
-	mysqli_stmt_execute($cat);
-	confirmQuery($cat);
-	mysqli_stmt_store_result($cat);
-	mysqli_stmt_bind_result($cat, $cat_slug);
-	mysqli_stmt_fetch($cat);
-	return $cat_slug;
-}
-
 function findSubCategoryTitle($post_sub_cat_id) {
 	global $connection;
 	$query = "SELECT * FROM sub_categories WHERE sub_cat_id = ? ";
@@ -335,6 +309,23 @@ function findSubCategoryTitle($post_sub_cat_id) {
 	mysqli_stmt_bind_result($cat, $sub_cat_id, $sub_cat_title, $sub_cat_description, $sub_cat_image);
 	mysqli_stmt_fetch($cat);
 	return $sub_cat_title;
+}
+
+/** 
+ * @param: category id 
+ * @Desc: Returns cat_slug
+ */
+function getCatSlug($the_cat_id) {
+	global $connection;
+	$query = "SELECT cat_slug FROM categories WHERE cat_id = ? ";
+	$cat = mysqli_prepare($connection, $query);
+	mysqli_stmt_bind_param($cat, 'i', $the_cat_id);
+	mysqli_stmt_execute($cat);
+	confirmQuery($cat);
+	mysqli_stmt_store_result($cat);
+	mysqli_stmt_bind_result($cat, $cat_slug);
+	mysqli_stmt_fetch($cat);
+	return $cat_slug;
 }
 
 /*======================================================*/

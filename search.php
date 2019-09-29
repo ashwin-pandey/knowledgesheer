@@ -82,18 +82,6 @@ include 'partials/header.php';
 					}
 				} }
 				?>
-				<!-- PAGINATION -->
-				<ul class="pagination justify-content-md-center">
-				<?php 
-				// for($i = 1; $i <= $count; $i++) {
-				// 	if($i == $page) {
-				// 		echo "<li class='page-item active'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
-				// 	} else {
-				// 		echo "<li class='page-item'><a class='page-link' href='index.php?page={$i}'>{$i}</a></li>";
-				// 	}
-				// }
-				?>
-				</ul>
 			</div>
 			<div class="col-lg-4 col-md-4 col-12">
 				<?php include 'partials/sidebar.php'; ?>

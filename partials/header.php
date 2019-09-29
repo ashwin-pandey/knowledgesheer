@@ -55,6 +55,8 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta property="og:url" content="<?php echo $cat_url; ?>" />
 	<meta property="og:description" content="<?php echo $cat_description; ?>" />
 	<meta property="og:image" content="<?php echo $baseURL; ?>/assets/images/cat-images/<?php echo $cat_image; ?>" />
+	<?php } if ($page == 'search_category') { ?>
+	<title><?php echo $search_title; ?> | Knowledge Sheer</title>]
 	<?php } if ($page == 'sub_category') { ?>
 	<title><?php echo $sub_cat_title; ?> | Knowledge Sheer</title>
 	<meta name="keywords" content="Knowledgesheer, knowledge, share, <?php echo $cat_title; ?>"/>

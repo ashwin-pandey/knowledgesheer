@@ -14,7 +14,8 @@ if (isset($_POST['cat_search'])) {
 	mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description, $cat_image);
 	mysqli_stmt_fetch($cat_stmt);
 
-$page = 'category';
+$page = 'search_category';
+$search_title = $_POST['cat_search'];
 include 'partials/header.php';
 
 ?>

@@ -2,11 +2,13 @@
 include 'includes/db.php';
 include './admin/functions.php';
 
-if (isset($_GET['category'])) {
+if (isset($_GET['category']) && isset($_GET['cat_slug'])) {
 	$post_category_id = $_GET['category'];
-	$query = "SELECT * FROM categories WHERE cat_id = ? ";
+	$the_cat_slug = $_GET['cat_slug'];
+
+	$query = "SELECT * FROM categories WHERE cat_id = ? AND cat_slug = ? ";
 	$cat_stmt = mysqli_prepare($connection, $query);
-	mysqli_stmt_bind_param($cat_stmt, "i", $post_category_id);
+	mysqli_stmt_bind_param($cat_stmt, "is", $post_category_id, $the_cat_slug);
 	mysqli_stmt_execute($cat_stmt);
 	confirmQuery($cat_stmt);
 	mysqli_stmt_store_result($cat_stmt);
@@ -117,12 +119,13 @@ include 'partials/header.php';
 </div>
 <?php 
 } 
-if (isset($_GET['sub_category'])) {
+if (isset($_GET['sub_category']) && isset($_GET['sub_cat_slug'])) {
 	$post_sub_cat_id = $_GET['sub_category'];
+	$the_sub_slug = $_GET['sub_cat_slug'];
 
-	$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image, parent_cat_id, sub_cat_slug FROM sub_categories WHERE sub_cat_id = ? ";
+	$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image, parent_cat_id, sub_cat_slug FROM sub_categories WHERE sub_cat_id = ? AND sub_cat_slug = ? ";
 	$cat_stmt = mysqli_prepare($connection, $query);
-	mysqli_stmt_bind_param($cat_stmt, "i", $post_sub_cat_id);
+	mysqli_stmt_bind_param($cat_stmt, "is", $post_sub_cat_id, $the_sub_slug);
 	mysqli_stmt_execute($cat_stmt);
 	confirmQuery($cat_stmt);
 	mysqli_stmt_store_result($cat_stmt);

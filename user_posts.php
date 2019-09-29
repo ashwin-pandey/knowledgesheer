@@ -9,7 +9,7 @@ if (isset($_GET['u_name'])) {
 	// User Query
 	$query = "SELECT user_id, username, user_firstname, user_lastname, user_image, user_description FROM users WHERE username = ? ";
 	$stmt = mysqli_prepare($connection, $query);
-	mysqli_stmt_bind_param($stmt, 'i', $post_user_name);
+	mysqli_stmt_bind_param($stmt, 's', $post_user_name);
 	mysqli_stmt_execute($stmt);
 	confirmQuery($stmt);
 	mysqli_stmt_store_result($stmt);

@@ -12,7 +12,7 @@ include 'partials/header.php';
 				<?php
 				if(isset($_POST['search'])){
 				$search = $_POST['search_input'];
-				$query = "SELECT * FROM blog_posts WHERE post_tags LIKE '%$search%' ";
+				$query = "SELECT * FROM blog_posts WHERE post_tags LIKE '%$search%' AND post_status = 'public' ";
 				$search_query = query($query);
 				confirmQuery($search_query);
 				$count = mysqli_num_rows($search_query);

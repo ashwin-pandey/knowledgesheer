@@ -5,17 +5,17 @@ include './admin/functions.php';
 if (isset($_GET['category']) && isset($_GET['cat_slug'])) {
 	$post_category_id = $_GET['category'];
 	$the_cat_slug = $_GET['cat_slug'];
-	$query = "SELECT * FROM categories WHERE cat_id = ? ";
+	$query = "SELECT * FROM categories WHERE cat_id = ? AND cat_slug = ? ";
 	$cat_stmt = mysqli_prepare($connection, $query);
-	mysqli_stmt_bind_param($cat_stmt, "i", $post_category_id);
+	mysqli_stmt_bind_param($cat_stmt, "i", $post_category_id, $the_cat_slug);
 	mysqli_stmt_execute($cat_stmt);
 	confirmQuery($cat_stmt);
 	mysqli_stmt_store_result($cat_stmt);
 	mysqli_stmt_bind_result($cat_stmt, $cat_id, $cat_title, $cat_description, $cat_image, $cat_slug);
 	mysqli_stmt_fetch($cat_stmt);
 
+	$cat_url = $baseURL . "/category/" . $post_category_id . "/" . $the_cat_slug;
 /*
-	$cat_url = $baseURL . "/category/" . $post_category_id . "/" . $cat_slug;
 	$sub_cat_url = "<?php echo $baseURL; ?>/sub_cat/<?php echo $cat_slug; ?>/<?php echo $sub_cat_id ?>/<?php echo $sub_cat_slug; ?>";
 */
 $page = 'category';
@@ -122,14 +122,17 @@ if (isset($_GET['sub_category']) && isset($_GET['sub_cat_slug'])) {
 	$post_sub_cat_id = $_GET['sub_category'];
 	$the_sub_slug = $_GET['sub_cat_slug'];
 
-	$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image, parent_cat_id FROM sub_categories WHERE sub_cat_id = ? ";
+	$query = "SELECT sub_cat_id, sub_cat_title, sub_cat_description, sub_cat_image, parent_cat_id FROM sub_categories WHERE sub_cat_id = ? AND sub_cat_slug = ? ";
 	$cat_stmt = mysqli_prepare($connection, $query);
-	mysqli_stmt_bind_param($cat_stmt, "i", $post_sub_cat_id);
+	mysqli_stmt_bind_param($cat_stmt, "i", $post_sub_cat_id, $the_sub_slug);
 	mysqli_stmt_execute($cat_stmt);
 	confirmQuery($cat_stmt);
 	mysqli_stmt_store_result($cat_stmt);
 	mysqli_stmt_bind_result($cat_stmt, $sub_cat_id, $sub_cat_title, $sub_cat_description, $sub_cat_image, $parent_cat_id);
 	mysqli_stmt_fetch($cat_stmt);
+
+	$cat_slug = getCatSlug($parent_cat_id);
+	$sub_cat_url = $baseURL . "/sub_cat/" . $cat_slug . "/" . $post_sub_cat_id . "/" . $sub_cat_slug;
 
 $page = 'sub_category';
 include 'partials/header.php';

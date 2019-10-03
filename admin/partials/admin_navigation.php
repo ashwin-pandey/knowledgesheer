@@ -4,11 +4,11 @@
 		<nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
 			<a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
 				<div class="d-table m-auto">
-				<!-- <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/shards-dashboards-logo.svg" alt="Shards Dashboard"> -->
-				<span class="d-none d-md-inline ml-1">Dashboard</span>
+				<img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 100px;" src="../assets/images/logo/logo-1.png" alt="Dashboard">
+				<!-- <span class="d-none d-md-inline ml-1">Dashboard</span> -->
 				</div>
 			</a>
-			<a class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
+			<a id="closeSidebarMenuButton" class="toggle-sidebar d-sm-inline d-md-none d-lg-none">
 				<i class="material-icons">&#xE5C4;</i>
 			</a>
 		</nav>
@@ -135,7 +135,8 @@
 						<?php } else { ?>
 							<img class="user-avatar rounded-circle mr-2" src="<?php echo $baseURL; ?>/assets/images/profile/<?php echo $_SESSION['user_image']; ?>">
 						<?php } ?>
-						<span class="d-none d-md-inline-block">
+						<!-- <span class="d-none d-md-inline-block"> -->
+						<span class="d-md-inline-block">
 						<?php 
 							if (isset($_SESSION['username'])) {
 								echo $_SESSION['firstname'] . " " . $_SESSION['lastname'];
@@ -156,7 +157,8 @@
 				</li>
 			</ul>
 			<nav class="nav">
-			<a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
+			<!-- <a href="#" id="openSidebarMenuButton" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar"> -->
+			<a href="#" id="openSidebarMenuButton" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left">
 			<i class="material-icons">&#xE5D2;</i>
 			</a>
 			</nav>

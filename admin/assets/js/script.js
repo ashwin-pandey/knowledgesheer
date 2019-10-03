@@ -50,3 +50,13 @@ function convertToSlug(title, page) {
 		document.getElementById('sub-cat-slug').value = slug;
 	}
 }
+
+// Toggle side menu in mobile devices
+$(document).ready(function() {
+	$('#openSidebarMenuButton').on('click', function() {
+		$(".main-sidebar").addClass("open");
+	});
+	$('#closeSidebarMenuButton').on('click', function() {
+		$(".main-sidebar").removeClass("open");
+	});
+});

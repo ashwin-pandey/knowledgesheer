@@ -32,7 +32,9 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 	$user_url = $baseURL . "/user_posts/" . $username;
 	
 	$facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=' . $post_url;
-
+	$twitterURL = 'https://twitter.com/intent/tweet?original_referer=' . $baseURL . '&amp;source=tweetbutton&amp;text=<?php echo $post_title; ?>;url=<?php echo $post_url; ?>/&amp;via=Knowledge Sheer';
+	$linkedinURL = 'https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $post_url; ?>/&media=<?php echo $post_title; ?>';
+	
 	$page = 'blog_post';
 	include 'partials/header.php'; 
 
@@ -49,12 +51,12 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 						</a>
 					</li>
 					<li>
-						<a target="_blank" class="social-link twitter-social-link" href="https://twitter.com/intent/tweet?original_referer=http://knowledgesheer.com&amp;source=tweetbutton&amp;text=<?php echo $post_title; ?>;url=<?php echo $post_url; ?>/&amp;via=Knowledge Sheer" title="Share on Twitter">
+						<a target="_blank" class="social-link twitter-social-link" href="<?php echo $twitterURL; ?>" title="Share on Twitter">
 							<span class="twitter-social-img">Share</span>
 						</a>
 					</li>
 					<li>
-						<a target="_blank" class="social-link linkedin-social-link" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $post_url; ?>/&media=<?php echo $post_title; ?>" title="Share on Linkedin">
+						<a target="_blank" class="social-link linkedin-social-link" href="<?php echo $linkedinURL; ?>" title="Share on Linkedin">
 							<span class="linkedin-social-img">Share</span>
 						</a>
 					</li>

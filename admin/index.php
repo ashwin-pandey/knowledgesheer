@@ -71,4 +71,8 @@ $sub_cat_count = mysqli_num_rows($select_all_sub_categories);
 	</div>
 </div>
 
+<div class="row">
+    <?php include "partials/analytics_report.php"; ?>
+</div>
+
 <?php include 'partials/admin_footer.php'; ?>

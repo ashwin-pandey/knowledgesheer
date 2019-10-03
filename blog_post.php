@@ -30,6 +30,8 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 
 	$post_url = $baseURL . "/blog_post/" . $the_post_id . "/" . $post_slug;
 	$user_url = $baseURL . "/user_posts/" . $username;
+	
+	$facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=' . $post_url;
 
 	$page = 'blog_post';
 	include 'partials/header.php'; 
@@ -42,7 +44,7 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 				<div class="heading mb-1">Share this Article</div> <hr class="mb-2 mt-1">
 				<ul>
 					<li>
-						<a target="_blank" class="social-link facebook-social-link" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $post_url; ?>/" title="Share on Facebook">
+						<a target="_blank" class="social-link facebook-social-link" href="<?php echo $facebookURL; ?>" title="Share on Facebook">
 							<span class="facebook-social-img">Share</span>
 						</a>
 					</li>

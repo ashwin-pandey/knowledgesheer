@@ -29,7 +29,6 @@ scrollToTopButton.onclick = function(e) {
 $(document).ready(function(){
   // OWL Carousel
   $("#quote-carousel").owlCarousel({
-    loop:true,
     margin:10,
     dots:true,
     responsiveClass:true,
@@ -45,7 +44,6 @@ $(document).ready(function(){
 			1000:{
 					items:3,
 					nav:false,
-					loop:true
 			}
 		}
 	});
@@ -54,24 +52,20 @@ $(document).ready(function(){
 	$("#news-carousel").owlCarousel({
 		items:5,
 		margin:10,
-		loop:true,
 		dots:true,
     responsiveClass:true,
     responsive:{
         0:{
 					items:1,
 					nav:true,
-					loop:true
         },
         600:{
 					items:3,
-					loop:true,
 					nav:false
         },
         1000:{
 					items:3,
 					nav:false,
-					loop:true
         }
 		}
 	});

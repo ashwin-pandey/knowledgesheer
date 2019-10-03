@@ -174,7 +174,7 @@
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item px-3 pb-2">
 
-							<select class="form-control" name="post_sub_category" required>
+							<select class="form-control" name="post_sub_category">
 							<?php
 
 							$query = "SELECT * FROM sub_categories ";
@@ -223,7 +223,7 @@
 			<!-- Post Image -->
 			<div class='card card-small mb-3'>
 				<div class="card-header border-bottom">
-					<h6 class="m-0">Short Description</h6>
+					<h6 class="m-0">Featured Image</h6>
 				</div>
 				<div class='card-body p-0 text-center'>
 					<label>Previous Image</label>

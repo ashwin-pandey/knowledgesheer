@@ -141,7 +141,7 @@ if(isset($_POST['public'])) {
 				<div class="card-body p-0">
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item px-3 pb-2">
-							<select class="form-control" name="post_sub_category" required>
+							<select class="form-control" name="post_sub_category">
 								<option>Select sub category</option>
 								<?php 
 								$query = "SELECT sub_cat_id, sub_cat_title FROM sub_categories";
@@ -181,7 +181,7 @@ if(isset($_POST['public'])) {
 			<!-- Post Image -->
 			<div class='card card-small mb-3'>
 				<div class="card-header border-bottom">
-					<h6 class="m-0">Short Description</h6>
+					<h6 class="m-0">Featured Image</h6>
 				</div>
 				<div class='card-body p-0'>
 					<input  type="file" class="form-control" id="file-input" name="post_image" required>

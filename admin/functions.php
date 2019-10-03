@@ -1,6 +1,7 @@
 <?php 
 
 $baseURL = "/knowledgesheer";
+// $baseURL = "http://knowledgesheer.com";
 
 /*======================================================*/
 /* COMMON REPETITIVE FUNCTIONS */

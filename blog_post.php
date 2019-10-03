@@ -120,24 +120,25 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 				<h2 class="mb-4">More from me</h2>
 				<?php  
 
-				$query = "SELECT post_id, post_title, post_description, post_image FROM blog_posts WHERE post_author = ? ORDER BY post_id DESC LIMIT 3";
+				$query = "SELECT post_id, post_title, post_description, post_image, post_slug FROM blog_posts WHERE post_author = ? ORDER BY post_id DESC LIMIT 3";
 				$more_stmt = mysqli_prepare($connection, $query);
 				mysqli_stmt_bind_param($more_stmt, 's', $post_author);
 				mysqli_stmt_execute($more_stmt);
 				mysqli_stmt_store_result($more_stmt);
-				mysqli_stmt_bind_result($more_stmt, $more_post_id, $more_post_title, $more_post_description, $more_post_image);
+				mysqli_stmt_bind_result($more_stmt, $more_post_id, $more_post_title, $more_post_description, $more_post_image, $more_post_slug);
 				while(mysqli_stmt_fetch($more_stmt)) {
 					if ($more_post_id != $the_post_id) {
-					
+					$more_post_url = $baseURL . "/blog_post/" . $more_post_id . "/" . $more_post_slug;
+					$more_img_url = $baseURL . "/assets/images/blog-images/" . $more_post_image;
 					?>
 
 					<div class="row card-body border p-0 mb-4">
 						<div class="col-md-4 col-sm-4 col-12 p-0">
-							<img class="img-fluid" src="<?php echo $baseURL; ?>/assets/images/blog-images/<?php echo $more_post_image; ?>" alt="<?php echo $more_post_title; ?>">
+							<img class="img-fluid" src="<?php echo $more_img_url; ?>" alt="<?php echo $more_post_title; ?>">
 						</div>
 						<div class="col-md-8 col-sm-8 col-12 p-3">
-							<h4><a href="<?php echo $baseURL; ?>/blog_post.php?p_id=<?php echo $more_post_id; ?>"><?php echo $more_post_title; ?></a></h4>
-							<p><?php echo substr($more_post_description, 0, 30); ?> ...</p>
+							<h4><a href="<?php echo $more_post_url; ?>"><?php echo $more_post_title; ?></a></h4>
+							<p><?php echo substr($more_post_description, 0, 50); ?>...</p>
 						</div>
 					</div>
 
@@ -153,13 +154,12 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 						<p class="mt-0 mb-0 written-by">WRITTEN BY</p>
 						<a href="<?php echo $user_url; ?>" class="mb-0 mt-0 user-name"><?php echo $user_firstname . " " . $user_lastname; ?></a>
 						<?php if (!empty($user_description)) { ?>
-						<p class="mb-0 mt-0 user-description"><?php echo substr($user_description, 0, 50); ?> ...</p>
+						<p class="mb-0 mt-0 user-description"><?php echo substr($user_description, 0, 50); ?>...</p>
 						<?php } ?>
 					</div>
 				</li>
 				<li class="mt-4 media">
 					<?php 
-
 					$query = "SELECT cat_id, cat_title, cat_description, cat_image, cat_slug FROM categories WHERE cat_id = ? ";
 					$cat_stmt = mysqli_prepare($connection, $query);
 					confirmQuery($cat_stmt);
@@ -185,6 +185,11 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 						<?php } ?>
 					</div>
 				</li>
+
+				<!-- Show sub category only if not empty -->
+				<?php 
+				if (!empty($post_sub_cat_id)) {
+				?>
 				<li class="mt-4 media">
 					<?php 
 
@@ -212,6 +217,8 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 						<?php } ?>
 					</div>
 				</li>
+				<?php } ?>
+
 			</ul>
 		</div>
 	</div>

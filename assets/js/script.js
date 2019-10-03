@@ -28,27 +28,54 @@ scrollToTopButton.onclick = function(e) {
 
 $(document).ready(function(){
   // OWL Carousel
-  $(".owl-carousel").owlCarousel({
+  $("#quote-carousel").owlCarousel({
     loop:true,
     margin:10,
     dots:true,
     responsiveClass:true,
     responsive:{
+			0:{
+					items:1,
+					nav:true
+			},
+			600:{
+					items:3,
+					nav:true
+			},
+			1000:{
+					items:3,
+					nav:false,
+					loop:true
+			}
+		}
+	});
+
+	// News Carousel
+	$("#news-carousel").owlCarousel({
+		items:5,
+		margin:10,
+		loop:true,
+		dots:true,
+    responsiveClass:true,
+    responsive:{
         0:{
-            items:1,
-            nav:true
+					items:1,
+					nav:true,
+					loop:true
         },
         600:{
-            items:3,
-            nav:true
+					items:3,
+					loop:true,
+					nav:false
         },
         1000:{
-            items:3,
-            nav:false,
-            loop:true
+					items:3,
+					nav:false,
+					loop:true
         }
-    }
-  });
+		}
+	});
+
 
 	// Lazy Loading in quote section
   $(window).scroll(function(){

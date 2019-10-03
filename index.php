@@ -11,6 +11,8 @@ include 'partials/header.php';
 		<!-- Main Content -->
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2 col-xs-12 mx-auto col-12">
+				
+				<!-- Quotes Carousel Section -->
 				<?php 
 				$query = "SELECT quote_id FROM quotes ";
 				$count_query = query($query);
@@ -18,31 +20,75 @@ include 'partials/header.php';
 				
 				if ($quote_count > 5) {
 				?>
-				<h4>Quotes 
-					<small class="float-right">
-						<a style="font-size: 15px;" href="<?php echo $baseURL; ?>/quotes.php">(View All)</a>
-					</small>
-				</h4>
-				<hr>
-				<div class="owl-carousel owl-theme">
-					<?php  
-					$query = "SELECT quote_id, quote_author, quote_image, quote_hashtags FROM quotes ORDER BY quote_id DESC LIMIT 5 ";
-					$quote_query = query($query);
-					confirmQuery($quote_query);
-					while ($row = mysqli_fetch_assoc($quote_query)) {
-						$quote_id = $row['quote_id'];
-						$quote_author = $row['quote_author'];
-						$quote_image = $row['quote_image'];
-						$quote_hashtags = $row['quote_hashtags'];
-					?>
-					<div class="item">
-						<img class="img-fluid" src="<?php echo $baseURL; ?>/assets/images/quote-images/<?php echo $quote_image; ?>" alt="<?php echo $quote_hashtags; ?>">
+				<div class="quote-section">
+					<h4>Quotes 
+						<small class="float-right">
+							<a style="font-size: 15px;" href="<?php echo $baseURL; ?>/quotes.php">(View All)</a>
+						</small>
+					</h4>
+					<hr>
+					<div id="quote-carousel" class="owl-carousel owl-theme">
+						<?php  
+						$query = "SELECT quote_id, quote_author, quote_image, quote_hashtags FROM quotes ORDER BY quote_id DESC LIMIT 5 ";
+						$quote_query = query($query);
+						confirmQuery($quote_query);
+						while ($row = mysqli_fetch_assoc($quote_query)) {
+							$quote_id = $row['quote_id'];
+							$quote_author = $row['quote_author'];
+							$quote_image = $row['quote_image'];
+							$quote_hashtags = $row['quote_hashtags'];
+						?>
+						<div class="item">
+							<img class="img-fluid" src="<?php echo $baseURL; ?>/assets/images/quote-images/<?php echo $quote_image; ?>" alt="<?php echo $quote_hashtags; ?>">
+						</div>
+						<?php } ?>
 					</div>
-					<?php } ?>
 				</div>
-				<hr>
 				<?php } ?>
-				<h4>Blog Posts</h4>
+				
+				<!-- News Carousel Section -->
+				<?php 
+				$query = "SELECT post_id, post_title, post_image, post_slug, post_author FROM blog_posts WHERE post_category_id = 5 ORDER BY post_id DESC";
+				$news_stmt = mysqli_prepare($connection, $query);
+				mysqli_stmt_execute($news_stmt);
+				confirmQuery($news_stmt);
+				mysqli_stmt_store_result($news_stmt);
+				mysqli_stmt_bind_result($news_stmt, $news_post_id, $news_post_title, $news_post_image, $news_post_slug, $news_post_author);
+				$news_count = mysqli_stmt_num_rows($news_stmt);
+
+				if($news_count > 0) {
+				?>
+
+				<div class="news-section mt-3">
+					<h4>Latest News
+						<small class="float-right">
+							<a style="font-size: 15px;" href="<?php echo $baseURL; ?>/quotes.php">(View All)</a>
+						</small>
+					</h4>
+					<hr>
+					<div id="news-carousel" class="owl-carousel owl-theme">
+						<?php 
+						while(mysqli_stmt_fetch($news_stmt)) {
+							$news_post_url = $baseURL . "/blog_post/" . $news_post_id . "/" . $news_post_slug;
+							$news_img_url = $baseURL . "/assets/images/blog-images/" . $news_post_image;
+						?>
+
+						<div class="item">
+							<div class="card p-0">
+								<img class="card-img-top img-fluid" src="<?php $news_img_url; ?>" alt="<?php echo $news_post_title; ?>">
+								<div class="card-body">
+									<a href="<?php echo $news_post_url; ?>"><h5 class="card-title"><?php echo $news_post_title; ?></h5></a>
+								</div>
+							</div>
+						</div>
+
+						<?php } ?>
+					</div>
+				</div>
+
+				<?php } ?>
+
+				<h4 class="mt-4">Blog Posts</h4>
 				<hr>
 
 				<?php
@@ -90,6 +136,10 @@ include 'partials/header.php';
 						mysqli_stmt_bind_result($user_stmt, $user_id, $username, $user_firstname, $user_lastname);
 						mysqli_stmt_fetch($user_stmt);
 						$user_full_name = $user_firstname . " " . $user_lastname;
+
+						$post_url = $baseURL . "/blog_post/" . $post_id . "/" . $post_slug;
+						$user_url = $baseURL . "/user_posts/" . $username;
+						$img_url = $baseURL . "/assets/images/blog-images/" . $post_image;
 				?>
 	
 				<div class="post-preview media">
@@ -98,18 +148,18 @@ include 'partials/header.php';
 							<?php echo findCategoryTitle($post_category_id); ?>		
 						</div>
 						<h2 class="post-title">
-							<a href="<?php echo $baseURL; ?>/blog_post/<?php echo $post_id; ?>/<?php echo $post_slug; ?>">
-							<?php echo $post_title; ?>
+							<a href="<?php echo $post_url; ?>">
+								<?php echo $post_title; ?>
 							</a>
 						</h2>
 						<h3 class="post-subtitle">
-						<?php echo substr($post_description, 0, 30) ?>
+						<?php echo substr($post_description, 0, 50) ?>
 						</h3>
 						<div class="user-post mt-3">
 							<div class="media post-author m-0 mb-3 align-self-center">
 								<div class="media-body align-self-center">
 									<div class="user-name">
-										<a href="<?php echo $baseURL; ?>/user_posts/<?php echo $username; ?>"><?php echo $user_full_name; ?></a>
+										<a href="<?php echo $user_url; ?>"><?php echo $user_full_name; ?></a>
 									</div>
 									<div class="date">
 										<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
@@ -120,7 +170,7 @@ include 'partials/header.php';
 						</div>
 					</div>
 					<div class="blog-post-image align-self-start">
-						<img class="img-fluid" src="<?php echo $baseURL; ?>/assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
+						<img class="img-fluid" src="<?php echo $img_url; ?>" alt="<?php echo $post_title; ?>">
 					</div>
 				</div>
 				<hr>

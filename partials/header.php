@@ -44,6 +44,7 @@ if ($page == 'blog_post' || $page == 'category' || $page == 'sub_category' || $p
 	<meta name="keywords" content="Knowledgesheer, knowledge, share, <?php echo $post_tags; ?>"/>
 	<meta name="description" content="<?php echo $post_description; ?>"/>
 	<meta property="og:title" content="<?php echo $post_title; ?> | Knowledge Sheer">
+	<meta property="og:type" content="article" />
 	<meta property="og:url" content="<?php echo $post_url; ?>" />
 	<meta property="og:description" content="<?php echo $post_description; ?>" />
 	<meta property="og:image" content="<?php echo $baseURL; ?>/assets/images/blog-images/<?php echo $post_image; ?>" />

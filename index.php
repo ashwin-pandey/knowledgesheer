@@ -48,12 +48,12 @@ include 'partials/header.php';
 				
 				<!-- News Carousel Section -->
 				<?php 
-				$query = "SELECT post_id, post_title, post_image, post_slug, post_author FROM blog_posts WHERE post_category_id = 5 ORDER BY post_id DESC";
+				$query = "SELECT post_id, post_title, post_image, post_slug, post_author, post_date, post_content FROM blog_posts WHERE post_category_id = 5 ORDER BY post_id DESC";
 				$news_stmt = mysqli_prepare($connection, $query);
 				mysqli_stmt_execute($news_stmt);
 				confirmQuery($news_stmt);
 				mysqli_stmt_store_result($news_stmt);
-				mysqli_stmt_bind_result($news_stmt, $news_post_id, $news_post_title, $news_post_image, $news_post_slug, $news_post_author);
+				mysqli_stmt_bind_result($news_stmt, $news_post_id, $news_post_title, $news_post_image, $news_post_slug, $news_post_author, $news_post_date, $news_post_content);
 				$news_count = mysqli_stmt_num_rows($news_stmt);
 
 				if($news_count > 0) {
@@ -69,15 +69,44 @@ include 'partials/header.php';
 					<div id="news-carousel" class="owl-carousel owl-theme">
 						<?php 
 						while(mysqli_stmt_fetch($news_stmt)) {
+
+							$read_time = read_time($news_post_content);
+
 							$news_post_url = $baseURL . "/blog_post/" . $news_post_id . "/" . $news_post_slug;
 							$news_img_url = $baseURL . "/assets/images/blog-images/" . $news_post_image;
+
+							$query = "SELECT user_id, username, user_firstname, user_lastname FROM users WHERE username = ? ";
+							$author_stmt = mysqli_prepare($connection, $query);
+							mysqli_stmt_bind_param($author_stmt, 's', $news_post_author);
+							mysqli_stmt_execute($author_stmt);
+							confirmQuery($author_stmt);
+							mysqli_stmt_store_result($author_stmt);
+							mysqli_stmt_bind_result($author_stmt, $news_user_id, $news_username, $news_firstname, $news_lastname);
+							mysqli_stmt_fetch($author_stmt);
+
+							$author_url = $baseURL . "/user_posts/" . $news_username;
+							$news_fullname = $news_firstname . " " . $news_lastname;
+						
 						?>
 
 						<div class="item">
 							<div class="card p-0">
-								<img class="card-img-top img-fluid" src="<?php $news_img_url; ?>" alt="<?php echo $news_post_title; ?>">
-								<div class="card-body">
-									<a href="<?php echo $news_post_url; ?>"><h5 class="card-title"><?php echo $news_post_title; ?></h5></a>
+								<a href="<?php echo $news_post_url; ?>"><img class="card-img-top img-fluid" src="<?php echo $news_img_url; ?>" alt="<?php echo $news_post_title; ?>"></a>
+								<div class="card-body p-2">
+									<h5 class="card-title"><a href="<?php echo $news_post_url; ?>"><?php echo substr($news_post_title, 0, 50); ?>...</a></h5>
+									<div class="user-post mt-3">
+										<div class="media post-author m-0 align-self-center">
+											<div class="media-body align-self-center">
+												<div class="user-name">
+													<a href="<?php echo $author_url; ?>"><?php echo $news_fullname; ?></a>
+												</div>
+												<div class="date">
+													<small><?php echo date('F j, Y', strtotime($news_post_date)); ?> - 
+														<?php echo $read_time; ?> min read</small>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

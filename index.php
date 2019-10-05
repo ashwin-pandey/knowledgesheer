@@ -70,8 +70,6 @@ include 'partials/header.php';
 						<?php 
 						while(mysqli_stmt_fetch($news_stmt)) {
 
-							$read_time = read_time($news_post_content);
-
 							$news_post_url = $baseURL . "/blog_post/" . $news_post_id . "/" . $news_post_slug;
 							$news_img_url = $baseURL . "/assets/images/blog-images/" . $news_post_image;
 
@@ -102,7 +100,7 @@ include 'partials/header.php';
 												</div>
 												<div class="date">
 													<small><?php echo date('F j, Y', strtotime($news_post_date)); ?> - 
-														<?php echo $read_time; ?> min read</small>
+														<?php echo read_time($news_post_content); ?> min read</small>
 												</div>
 											</div>
 										</div>

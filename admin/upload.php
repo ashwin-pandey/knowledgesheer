@@ -1,9 +1,9 @@
 <?php
 // Allowed origins to upload images
-$accepted_origins = array("http://localhost", "http://knowledgesheer.com");
+$accepted_origins = array("http://localhost", "http://knowledgesheer.com", "*");
 
 // Images upload path
-$imageFolder = "../assets/images/post-images/";
+$imageFolder = "/knowledgesheer/assets/images/post-images/";
 
 reset($_FILES);
 $temp = current($_FILES);

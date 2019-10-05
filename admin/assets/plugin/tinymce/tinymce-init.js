@@ -23,7 +23,7 @@ tinymce.init({
 	],
 
 	/* toolbar */
-	toolbar: "insertfile undo redo | styleselect | bold italic underline strikethrough superscript subscript code blockquote | alignleft aligncenter alignright alignjustify | forecolor backcolor emoticons | bullist numlist | outdent indent | link image media | print preview fullscreen",
+	toolbar: "insertfile undo redo | styleselect | bold italic underline strikethrough superscript subscript code blockquote | alignleft aligncenter alignright alignjustify | forecolor backcolor emoticons | bullist numlist | outdent indent | fontsizeselect | link image media | print preview fullscreen",
 	
 	/* style */
 	style_formats: [
@@ -66,7 +66,7 @@ tinymce.init({
 	// image_advtab: true,
 	
 	// without images_upload_url set, Upload tab won't show up
-	images_upload_url: '/admin/upload.php',
+	images_upload_url: '/knowledgesheer/admin/upload.php',
 	
 	automatic_uploads : false,
 	

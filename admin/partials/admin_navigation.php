@@ -72,7 +72,13 @@
 					<i class="material-icons">category</i>
 					<span>Blog Categories</span>
 				</a>
-			</li>
+				</li>
+				<li class="nav-item">
+				<a class="nav-link <?php if($current_page == 'dictionary') {echo 'active';} ?>" href="<?php echo $baseURL; ?>/admin/dictionary.php">
+					<i class="material-icons">font_download</i>
+					<span>Dictionary</span>
+				</a>
+				</li>
 			<?php } ?>
 		</ul>
 	</div>

@@ -49,9 +49,6 @@ if(isset($_POST['public'])) {
 ?>
 
 <style>
-.ck-editor__editable {
-	min-height: 412px;
-}
 .hide {
 	display: none;
 }

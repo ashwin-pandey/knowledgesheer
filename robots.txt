@@ -1,3 +1,7 @@
+Sitemap: http://knowledgesheer.com/sitemap.xml
+Sitemap: http://knowledgesheer.com/blog-sitemap.xml
+Sitemap: http://knowledgesheer.com/quote-sitemap.xml
+Sitemap: http://knowledgesheer.com/cat-sitemap.xml
 User-agent: * 
 Disallow: /admin/*
 Disallow: /*?page=

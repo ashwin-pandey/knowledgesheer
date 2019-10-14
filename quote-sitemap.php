@@ -6,7 +6,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 include './includes/db.php';
 include './admin/functions.php';
 
-echo '<urlset xmlns="https://sitemaps.org/schemas/sitemap/0.9">';
+echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
 $quote_query = "SELECT quote_id FROM quotes";
 $quote_stmt = mysqli_prepare($connection, $quote_query);

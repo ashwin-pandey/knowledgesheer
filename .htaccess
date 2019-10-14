@@ -15,3 +15,19 @@ RewriteRule category/(\d+)/(.*) category.php?category=$1&cat_slug=$2 [NC,L]
 
 # Sub Category
 RewriteRule sub_cat/(.*)/(\d+)/(.*) category.php?cat_slug=$1&sub_category=$2&sub_cat_slug=$3 [NC,L]
+
+# ==========================================================
+# SITEMAPS
+# ==========================================================
+
+# Static sitemap
+RewriteRule ^sitemap\.xml$ sitemap.php [NC,L]
+
+# Blog sitemap
+RewriteRule ^blog-sitemap\.xml$ blog-sitemap.php [NC,L]
+
+# Category sitemap
+RewriteRule ^cat-sitemap\.xml$ cat-sitemap.php [NC,L]
+
+# Quotes sitemap
+RewriteRule ^quote-sitemap\.xml$ quote-sitemap.php [NC,L]

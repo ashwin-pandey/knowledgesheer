@@ -176,23 +176,28 @@
 
 							<select class="form-control" name="post_sub_category">
 							<?php
-
 							$query = "SELECT * FROM sub_categories ";
 							$select_categories = query($query);
-
 							confirmQuery($select_categories);
+							if (!empty($post_sub_cat_id)) {
+								while($row = mysqli_fetch_assoc($select_categories )) {
+									$sub_cat_id = $row['sub_cat_id'];
+									$sub_cat_title = $row['sub_cat_title'];
 
-							while($row = mysqli_fetch_assoc($select_categories )) {
-								$sub_cat_id = $row['sub_cat_id'];
-								$sub_cat_title = $row['sub_cat_title'];
-
-								if($sub_cat_id == $post_sub_cat_id) {
-									echo "<option selected value='{$sub_cat_id}'>{$sub_cat_title}</option>";
-								} else {
+									if($sub_cat_id == $post_sub_cat_id) {
+										echo "<option selected value='{$sub_cat_id}'>{$sub_cat_title}</option>";
+									} else {
+										echo "<option value='{$sub_cat_id}'>{$sub_cat_title}</option>";
+									}
+								}
+							} else {
+								echo "<option value=''>Select Sub Category</option>";
+								while($row = mysqli_fetch_assoc($select_categories )) {
+									$sub_cat_id = $row['sub_cat_id'];
+									$sub_cat_title = $row['sub_cat_title'];
 									echo "<option value='{$sub_cat_id}'>{$sub_cat_title}</option>";
 								}
 							}
-
 							?>
 							</select>
 							

@@ -438,20 +438,24 @@ blockquote {
 	height: 40px;
 	width: 40px;
 }
-.user-post .user-post-card-body {
+/*.user-post .user-post-card-body {*/
+.user-post-card-body {
 	padding: 10px 20px 15px;
 }
-.user-post .user-blog-posts .post-image {
-	height: 180px;
+/*.user-post .user-blog-posts .post-image {*/
+.user-blog-posts .post-image {
+	height: 200px;
 	width: 100%;
 	overflow: hidden;
 	border-radius: 2px;
 }
 @media (max-width: 551.98px) {
-	.user-post .user-blog-posts .post-image {
+	/*.user-post .user-blog-posts .post-image {*/
+	.user-blog-posts .post-image {
 		height: 84px;
 	}
-	.user-post .user-post-card-body {
+	/*.user-post .user-post-card-body {*/
+	.user-post-card-body {
 		padding: 0;
 	}
 }
@@ -691,4 +695,50 @@ blockquote {
 	#social-icon {
 		display: none;
 	}
+}
+
+#share {
+	width: 100%;
+  	/*margin: 100px auto;*/
+  	text-align: center;
+}
+
+/* buttons */
+
+#share a {
+	width: 50px;
+  	height: 50px;
+  	display: inline-block;
+  	margin: 8px;
+  	border-radius: 50%;
+  	font-size: 24px;
+  	color: #fff;
+	opacity: 0.75;
+	transition: opacity 0.15s linear;
+}
+
+#share a:hover {
+	opacity: 1;
+}
+
+/* icons */
+
+#share i {
+  	position: relative;
+  	top: 40%;
+  	transform: translateY(-50%);
+}
+
+/* colors */
+
+.facebook {
+ 	background: #3b5998;
+}
+
+.twitter {
+  	background: #55acee;
+}
+
+.linkedin {
+  	background: #0077b5;
 }

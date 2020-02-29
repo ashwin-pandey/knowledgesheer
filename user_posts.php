@@ -64,7 +64,7 @@ include 'partials/header.php';
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 				<?php while (mysqli_stmt_fetch($stmt1)) { ?>
-				<div class="card row user-post-card-body" style="margin-top: 20px;">
+				<div class="card user-post-card-body" style="margin-top: 20px;">
 					<div class="card-body">
 						<div class="media post-author m-0 mb-3 align-self-center">
 							<img src="<?php echo $baseURL; ?>/assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $post_author; ?>" class="mr-3 mt-0 rounded-circle">

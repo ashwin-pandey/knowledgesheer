@@ -32,8 +32,8 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 	$user_url = $baseURL . "/user_posts/" . $username;
 	
 	$facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=' . $post_url;
-	$twitterURL = 'https://twitter.com/intent/tweet?original_referer=' . $baseURL . '&amp;source=tweetbutton&amp;text=<?php echo $post_title; ?>;url=<?php echo $post_url; ?>/&amp;via=Knowledge Sheer';
-	$linkedinURL = 'https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $post_url; ?>/&media=<?php echo $post_title; ?>';
+	$twitterURL = 'https://twitter.com/intent/tweet?original_referer=' . $baseURL . '&amp;source=tweetbutton&amp;text=' . $post_title . ';url=' . $post_url . '/&amp;via=Knowledge Sheer';
+	$linkedinURL = 'https://www.linkedin.com/shareArticle?mini=true&url=' . $post_url . '/&media=' . $post_title . '/';
 	
 	$page = 'blog_post';
 	include 'partials/header.php'; 
@@ -89,28 +89,21 @@ if (isset($_GET['p_id']) && isset($_GET['post_slug'])) {
 				<?php echo stripcslashes($post_content); ?>
 			</div>
 
-			<div class="blog-likes m-0">
-				<?php if (isLoggedIn()) { 
-				$current_user_id = $_SESSION['user_id'];
-				// determine if user has already liked this post
-				$results = query("SELECT id FROM blog_likes WHERE user_id = $current_user_id AND post_id = " . $the_post_id . "");
+			<hr>
+			
+			<div id="share">
+			
+				<h6>Share this on:</h6>
 
-				if (mysqli_num_rows($results) == 0 ): ?>
-					<!-- user has not yet liked post -->
-					<span style="cursor: pointer;" class="like far fa-thumbs-up" data-id="<?php echo $the_post_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
-					<span style="cursor: pointer;" class="unlike hide fas fa-thumbs-up" data-id="<?php echo $the_post_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
-				<?php else: ?>
-					<!-- user already likes post -->
-					<span style="cursor: pointer;" class="unlike fas fa-thumbs-up" data-id="<?php echo $the_post_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span> 
-					<span style="cursor: pointer;" class="like hide far fa-thumbs-up" data-id="<?php echo $the_post_id; ?>" data-user-id="<?php echo $current_user_id; ?>"></span>
-				<?php endif ?>
-
-				<span class="likes_count"><?php echo $likes ?> likes</span>
-				<?php } else { ?>
-				<div class="default-login-msg">
-					Please <a href="login.php">Login</a> to like.
-				</div>
-				<?php } ?>
+				<!-- facebook -->
+				<a class="facebook" href="<?php echo $facebookURL; ?>" target="blank"><i class="fab fa-facebook-f"></i></a>
+				
+				<!-- twitter -->
+				<a class="twitter" href="<?php echo $twitterURL; ?>" target="blank"><i class="fab fa-twitter"></i></a>
+				
+				<!-- linkedin -->
+				<a class="linkedin" href="<?php echo $linkedinURL; ?>" target="blank"><i class="fab fa-linkedin-in"></i></a>
+			
 			</div>
 
 			<hr>

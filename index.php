@@ -154,13 +154,13 @@ include 'partials/header.php';
 
 					while (mysqli_stmt_fetch($blog_query)) {
 						// Author Query
-						$query = "SELECT user_id, username, user_firstname, user_lastname FROM users WHERE username = ? ";
+						$query = "SELECT user_id, username, user_firstname, user_lastname, user_image FROM users WHERE username = ? ";
 						$user_stmt = mysqli_prepare($connection, $query);
 						mysqli_stmt_bind_param($user_stmt, 's', $post_author);
 						mysqli_stmt_execute($user_stmt);
 						confirmQuery($user_stmt);
 						mysqli_stmt_store_result($user_stmt);
-						mysqli_stmt_bind_result($user_stmt, $user_id, $username, $user_firstname, $user_lastname);
+						mysqli_stmt_bind_result($user_stmt, $user_id, $username, $user_firstname, $user_lastname, $user_image);
 						mysqli_stmt_fetch($user_stmt);
 						$user_full_name = $user_firstname . " " . $user_lastname;
 
@@ -169,7 +169,7 @@ include 'partials/header.php';
 						$img_url = $baseURL . "/assets/images/blog-images/" . $post_image;
 				?>
 	
-				<div class="post-preview media">
+				<!-- <div class="post-preview media">
 					<div class="media-body post-body">
 						<div class="post-category">
 							<?php echo findCategoryTitle($post_category_id); ?>		
@@ -199,12 +199,45 @@ include 'partials/header.php';
 					<div class="blog-post-image align-self-start">
 						<img class="img-fluid" src="<?php echo $img_url; ?>" alt="<?php echo $post_title; ?>">
 					</div>
+				</div> -->
+
+				<div class="card user-post-card-body" style="margin-top: 20px;">
+					<div class="card-body">
+						<div class="media post-author m-0 mb-3 align-self-center">
+							<img src="<?php echo $baseURL; ?>/assets/images/profile/<?php echo $user_image; ?>" alt="<?php echo $post_author; ?>" class="mr-3 mt-0 rounded-circle">
+							<div class="media-body align-self-center">
+								<div class="user-name">
+									<a href="<?php echo $user_url; ?>"><?php echo $user_full_name; ?></a>
+								</div>
+								<div class="date">
+									<small><?php echo date('F j, Y', strtotime($post_date)); ?> - 
+										<?php echo read_time($post_content); ?> min read</small>
+								</div>
+							</div>
+						</div>
+						<div class="user-blog-posts">
+							<div class="post-image m-0">
+								<img class="img-fluid" src="<?php echo $baseURL; ?>/assets/images/blog-images/<?php echo $post_image; ?>" alt="<?php echo $post_title; ?>">
+							</div>
+							<div class="post-title mt-4">
+								<a href="<?php echo $baseURL; ?>/blog_post/<?php echo $post_id; ?>/<?php echo $post_slug; ?>"><h1 class="m-0"><?php echo $post_title; ?></h1></a>
+							</div>
+							<div class="post-description">
+								<?php echo substr($post_description, 0, 50); ?>
+							</div>
+							<div class="read-more">
+								<a href="<?php echo $baseURL; ?>/blog_post/<?php echo $post_id; ?>/<?php echo $post_slug; ?>">Read More...</a>
+							</div>
+						</div>
+					</div>
 				</div>
-				<hr>
+
+				
 				<?php 
 					}
 				} 
 				?>
+				<hr>
 				<!-- PAGINATION -->
 				<ul class="pagination justify-content-md-center">
 				<?php 
